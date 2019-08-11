@@ -1,19 +1,17 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 
-class RedirectWhenAuthenticated extends Component {
-    render() {
-        const {isAuthenticated, component: Component} = this.props;
+const RedirectWhenAuthenticated = (props) => {
+    const {isAuthenticated, component: Component, to} = props;
 
-        if(isAuthenticated)
-            return <Redirect to={"/"} />;
+    if (isAuthenticated)
+        return <Redirect to={to ? to : "/"}/>;
 
-        return <Component/>;
-    }
-}
+    return <Component/>;
+};
 
 const mapStateWithProps = (state) => ({
     isAuthenticated: state.auth.authenticated

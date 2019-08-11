@@ -12,7 +12,7 @@ const DashboardScreen = lazy(() => import('./screens/dashboard'));
 const NotFound404Screen = lazy(() => import('./screens/notFound404'));
 
 
-const MainF = (props) => {
+const Main = (props) => {
 
     useEffect(() => {
         props.checkUser()
@@ -42,4 +42,4 @@ const mapDispatchToProps = (dispatch) => ({
     checkUser: () => dispatch(checkUser())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainF);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

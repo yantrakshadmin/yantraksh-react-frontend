@@ -1,17 +1,15 @@
-import React, {Component} from 'react';
-
+import React from 'react';
 import {connect} from "react-redux";
 
 
-class AuthSwitch extends Component {
-    render() {
-        const {public: PublicComp, private: PrivateComp, isAuthenticated} = this.props;
+const AuthSwitch = (props) => {
+        const {public: PublicComp, private: PrivateComp, isAuthenticated} = props;
 
         if(isAuthenticated)
             return <PrivateComp />;
+
         return <PublicComp />;
-    }
-}
+};
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.authenticated

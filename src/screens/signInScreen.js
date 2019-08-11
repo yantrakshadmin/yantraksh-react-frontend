@@ -1,67 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
+import GuestScreen from "./guestScreen";
+import SignInCard from "../components/signInCard";
+import RedirectWhenAuthenticated from "../helpers/redirectWhenAuthenticated";
 
-import ToHome from "../helpers/redirectWhenAuthenticated";
-import {signIn} from "../actions/auth";
-import {connect} from "react-redux";
+const SignInScreen = () => (
+    <GuestScreen>
+        <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            height: '100vh'
+        }}>
+            <SignInCard/>
+        </div>
+    </GuestScreen>
+);
 
-
-class SignInScreen extends Component {
-    constructor(props, context) {
-        super(props, context);
-
-        this.state = {
-            username: '',
-            password: ''
-        }
-    }
-
-    onSubmit = (e) => {
-        e.preventDefault();
-        this.props.signInAction(this.state.username, this.state.password);
-    };
-
-
-    handleChange = (event) => {
-
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        })
-    };
-
-    render() {
-        return (
-            <div>
-                <h2>
-                    Sign IN
-                </h2>
-
-                <form onSubmit={this.onSubmit}>
-                    username:
-                    <input type="text" name={"username"} onChange={this.handleChange} />
-                    <br/><br/>
-
-                    Password:
-                    <input type="password" name={"password"} onChange={this.handleChange} />
-                    <br/><br/>
-
-                    <button type={"submit"}>
-                        Sign In
-                    </button>
-                </form>
-            </div>
-        );
-    }
-}
-
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = (dispatch) => ({
-    signInAction: (username, password) => dispatch(signIn(username, password)),
-});
-
-const ScreenWrapper = connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
-export default () => <ToHome component={ScreenWrapper}/>;
+export default () => (
+    <RedirectWhenAuthenticated component={SignInScreen} />
+);
