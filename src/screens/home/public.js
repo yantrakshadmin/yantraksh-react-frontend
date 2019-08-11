@@ -1,25 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Link} from "react-router-dom";
 
-class Home extends Component {
-    render() {
-        return (
-            <div>
-                <Link to={'/sign-in/'}>
-                    Sign IN
-                </Link>
+export default () => (
+    <div>
+        <h1>
+            Welcome,
+        </h1>
+        <Link to={'/sign-in/'}>
+            Sign IN
+        </Link>
 
-                <br/>
-                <br/>
-                <br/>
+        <br/>
+        <br/>
+        <br/>
 
-                or &nbsp;
-                <Link to={'/sign-up/'}>
-                    Create a new account to access our awesome new services.
-                </Link>
-            </div>
-        );
-    }
-}
-
-export default Home;
+        or &nbsp;
+        <Link to={'/sign-up/'}>
+            Create a new account to access our awesome new services.
+        </Link>
+    </div>
+)

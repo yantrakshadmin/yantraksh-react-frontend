@@ -1,37 +1,40 @@
-import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import React, {lazy, Suspense, useEffect} from 'react';
+import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 
-import Home from "./screens/home";
-import SignInScreen from "./screens/signInScreen";
-import SignUpScreen from "./screens/signUpScreen";
 import {checkUser} from "./actions/auth";
 
 
-class Main extends Component {
+const HomeScreen = lazy(() => import('./screens/home'));
+const SignInScreen = lazy(() => import('./screens/signInScreen'));
+const SignUpScreen = lazy(() => import('./screens/signUpScreen'));
+const DashboardScreen = lazy(() => import('./screens/dashboard'));
+const NotFound404Screen = lazy(() => import('./screens/notFound404'));
 
-    componentDidMount() {
-        this.props.checkUser();
-    }
 
-    render() {
-        return (
-            <Router>
-                <div className="App">
-                    <Link to={"/"}>
-                        <h1>
-                            Welcome to Yantraksh React APP
-                        </h1>
-                    </Link>
+const MainF = (props) => {
 
-                    <Route exact path={"/"} component={Home}/>
-                    <Route exact path="/sign-in/" component={SignInScreen}/>
-                    <Route exact path="/sign-up/" component={SignUpScreen}/>
-                </div>
-            </Router>
-        );
-    }
-}
+    useEffect(() => {
+        props.checkUser()
+    });
+
+    return (
+        <Router>
+            <div className="App">
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Switch>
+                        <Route exact path={"/"} component={HomeScreen}/>
+                        <Route exact path="/sign-in/" component={SignInScreen}/>
+                        <Route exact path="/sign-up/" component={SignUpScreen}/>
+                        <Route path={'/dashboard/'} component={DashboardScreen} />
+                        <Route component={NotFound404Screen} />
+                    </Switch>
+                </Suspense>
+            </div>
+        </Router>
+    );
+};
+
 const mapStateToProps = (state) => ({
 });
 
@@ -39,4 +42,4 @@ const mapDispatchToProps = (dispatch) => ({
     checkUser: () => dispatch(checkUser())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(MainF);

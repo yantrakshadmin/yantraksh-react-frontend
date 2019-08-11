@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import Main from "./main";
 
+import './scss/App.scss';
 
 export const store = createStore(
     rootReducer,

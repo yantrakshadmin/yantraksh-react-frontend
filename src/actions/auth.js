@@ -34,7 +34,9 @@ export const signIn = (username, password) => (async (dispatch, getState) => {
     }
 });
 
+
 export const checkUser = () => (async (dispatch, getState) => {
+
     if (reactLocalStorage.get(API_TOKENS))
         getUser()(dispatch, getState)
             .catch(() => {
