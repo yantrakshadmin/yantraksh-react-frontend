@@ -5,12 +5,12 @@ import {
     CardBody,
 } from 'reactstrap';
 
-export default ({data, options, type: CartType = Line}) => (
-    <Card className="text-white bg-info">
+export default ({data, title, options, type: CartType = Line, bg='primary', container=true}) => (
+    <Card className={`text-white bg-${bg}`}>
         <CardBody className="pb-0">
-            <div>Total Orders</div>
+            <div>{title}</div>
         </CardBody>
-        <div className="chart-wrapper mx-3" style={{height: '70px'}}>
+        <div className={`chart-wrapper ${container? 'mx-3' : ''}`} style={{height: '70px'}}>
             <CartType data={data} options={options} height={70}/>
         </div>
     </Card>

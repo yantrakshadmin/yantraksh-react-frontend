@@ -19,6 +19,7 @@ const USERNAME_AVAILABLE = '/auth/username/available/';
 const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 const USER_DETAILS = "/auth/user/meta/";
 
+const TRUCK_CHART_DATA = '/dashboard/data/';
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -134,3 +135,5 @@ export const signUpUser = async (data) => {
         data: data
     })
 };
+
+export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
