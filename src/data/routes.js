@@ -13,6 +13,70 @@ const supplierNavigation = [
             text: 'NEW',
         },
     },
+
+    {
+        title: true,
+        name: 'Orders Management',
+        wrapper: {
+            element: '',
+            attributes: {},
+        },
+
+
+    },
+
+    {
+
+        name: 'Orders',
+        url: '/shipper/myitems/',
+        icon: 'icon-puzzle',
+        children: [
+            {
+                name: 'Upload',
+                component: lazy(() => import('../screens/supplier/orderManagement/upload')),
+                url: '/upload/',
+                icon: 'icon-puzzle',
+            },
+
+            {
+                name: 'All Orders',
+                component: lazy(() => import('../screens/supplier/orderManagement/allOrders')),
+
+                url: '/all-orders',
+                icon: 'icon-puzzle',
+            },
+
+            {
+                name: 'Orders on hold',
+                component: lazy(() => import('../screens/supplier/orderManagement/holdOrders')),
+
+                url: '/hold-orders',
+                icon: 'icon-puzzle',
+            },
+
+
+
+            {
+                name: 'Ready to Dispatch',
+                component: lazy(() => import('../screens/supplier/orderManagement/rtdOrders')),
+
+                url: '/rtd-orders',
+                icon: 'icon-puzzle',
+            },
+            {
+                name: 'Dispatched',
+                component: lazy(() => import('../screens/supplier/orderManagement/dispatchedOrders')),
+
+                url: '/dispatched-orders',
+                icon: 'icon-puzzle',
+            },
+
+        ],
+    },
+
+
+
+
 ];
 const supplierRoutes = navToRoutes(supplierNavigation);
 
