@@ -16,11 +16,7 @@ import {
     AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
 
-// sidebar nav config
-import navigation from './_nav';
-
-// routes config
-import routes from './_routes';
+import {connect} from "react-redux";
 
 const DefaultHeader = React.lazy(() => import('../../components/dashboard/header'));
 const DefaultAside = React.lazy(() => import('../../components/dashboard/aside'));
@@ -38,8 +34,8 @@ class DefaultLayout extends Component {
     }
 
     render() {
-
-        console.log(this.props);
+        const {routes, navigation} = this.props;
+        console.log(routes);
 
         return (
             <BrowserRouter basename={"/#/dashboard"}>
@@ -54,7 +50,7 @@ class DefaultLayout extends Component {
                             <AppSidebarHeader />
                             <AppSidebarForm />
                             <Suspense>
-                                <AppSidebarNav navConfig={navigation} {...this.props} router={router}/>
+                                <AppSidebarNav navConfig={{items: navigation}} {...this.props} router={router}/>
                                 {/*<AppSidebarNav navConfig={{items: []}} {...this.props} router={router}/>*/}
                             </Suspense>
                             <AppSidebarFooter />
@@ -100,4 +96,11 @@ class DefaultLayout extends Component {
     }
 }
 
-export default router.withRouter(DefaultLayout);
+const DashboardWithRouter = router.withRouter(DefaultLayout);
+
+const mapStateToProps = (state) => ({
+    routes: state.navigation.routes,
+    navigation: state.navigation.navs
+});
+
+export default connect(mapStateToProps)(DashboardWithRouter);

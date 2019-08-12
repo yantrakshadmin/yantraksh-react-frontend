@@ -26,9 +26,11 @@ export const signIn = (username, password) => (async (dispatch, getState) => {
         await getUser()(dispatch, getState);
         welcomeUserNotification(getState().auth.user.name);
     } catch (e) {
+        console.log(e);
         try {
             errorSigningNotification(e.data.detail);
         } catch (e) {
+            console.log(e);
             errorSigningNotification("Some unknown error occurred. Please Check your network connection.")
         }
     }
