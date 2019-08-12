@@ -7,14 +7,22 @@ export default () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-       setOrders([
-           {
-               name: 'Naeme1'
-           },
-           {
-               name: 'name2'
-           }
-       ])
+        setOrders([
+            {
+                name: 'Naeme',
+                pid: 'pid',
+                quantity: 'quantity',
+                dimensions: 'pic',
+                weight: 'weight',
+                volume: 'volume',
+                origin: 'origin',
+                destination: 'destination',
+                time: 'time',
+
+            },
+
+
+        ])
     });
     return (
         <OrderTable data={orders} />
