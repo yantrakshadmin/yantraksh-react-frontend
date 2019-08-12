@@ -4,8 +4,9 @@ export const navToRoutes = (navigation) => {
         console.log('ITEM', item.url, item.component);
 
         routes.push({
-            url: item.url,
+            path: item.url,
             component: item.component,
+            name: item.name,
             exact: true
         });
 
