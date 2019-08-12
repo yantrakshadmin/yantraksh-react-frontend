@@ -4,7 +4,7 @@ import {navToRoutes} from "../helpers/getRoutes";
 
 const supplierNavigation = [
     {
-        url: '/',
+        url: '/dashboard',
         component: lazy(() => import('../screens/supplier/dashboard')),
         name: 'Dashboard',
         icon: 'cui-dashboard',
@@ -13,7 +13,6 @@ const supplierNavigation = [
             text: 'NEW',
         },
     },
-
     {
         title: true,
         name: 'Orders Management',
@@ -73,10 +72,6 @@ const supplierNavigation = [
 
         ],
     },
-
-
-
-
 ];
 const supplierRoutes = navToRoutes(supplierNavigation);
 
