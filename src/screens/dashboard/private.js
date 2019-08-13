@@ -35,7 +35,6 @@ class DefaultLayout extends Component {
 
     render() {
         const {routes, navigation} = this.props;
-        console.log(routes);
 
         return (
             <BrowserRouter basename={"/#/dashboard"}>

@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import LoadingScreen from "./screens/loadingScreen";
 
 import {checkUser} from "./actions/auth";
+import {ToastContainer} from "react-toastify";
 
 
 const HomeScreen = lazy(() => import('./screens/home'));

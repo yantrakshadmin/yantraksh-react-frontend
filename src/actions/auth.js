@@ -1,9 +1,14 @@
 import {getAPITokens, getUserDetails} from "../helpers/api";
-import {USER_SIGN_IN_SUCCESS, USER_SIGN_OUT} from "./index";
+import {HIDE_LOADER, USER_SIGN_IN_SUCCESS, USER_SIGN_OUT} from "./index";
 
 import {reactLocalStorage} from 'reactjs-localstorage';
 import {API_TOKENS} from "../data/storage";
-import {errorSigningNotification, welcomeUserNotification, signInRequestNotification} from "../helpers/notifications";
+import {
+    errorSigningNotification,
+    welcomeUserNotification,
+    signInRequestNotification,
+    signINAgainNotification
+} from "../helpers/notifications";
 
 
 export const getUser = () => (async (dispatch, getState) => {
@@ -41,10 +46,15 @@ export const checkUser = () => (async (dispatch, getState) => {
 
     if (reactLocalStorage.get(API_TOKENS))
         getUser()(dispatch, getState)
+            .then(() => {
+                dispatch({type: HIDE_LOADER});
+            })
             .catch(() => {
                 dispatch({type: USER_SIGN_OUT});
-                alert("Please sign-in again");
+                signINAgainNotification();
             });
-    else
+    else{
+        dispatch({type: HIDE_LOADER});
         signInRequestNotification();
+    }
 });

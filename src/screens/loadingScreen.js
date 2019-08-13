@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {BeatLoader} from "react-spinners";
 
 
 const LoadingScreen =  ({loading}) => {
@@ -13,14 +14,12 @@ const LoadingScreen =  ({loading}) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            opacity: 0.5,
+            opacity: 1,
             position: 'absolute',
             zIndex: 1050,
-            backgroundColor: '#000000'
+            backgroundColor: '#FFFFFF'
         }}>
-            <h1>
-                Faisal
-            </h1>
+            <BeatLoader	 size={40} color={'#076af2'} />
         </div>
     );
 };

@@ -22,7 +22,7 @@ const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 
 const TRUCK_CHART_DATA = '/dashboard/data/';
 
-const SHIPPER_ALL_ORDER = '/shipper/allorders/';
+const SHIPPER_ALL_ORDER = '/api/allordes/';
 const SHIPPER_HELD = '/shipper/held/';
 const SHIPPER_DISPATCHED = '/shipper/dispatched/';
 const SHIPPER_RTD = '/shipper/rtd/';
@@ -144,4 +144,8 @@ export const signUpUser = async (data) => {
 };
 
 export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
-export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);
+export const getShipperAllOrderDetails = () => {
+    const data = loadSecureUrl(SHIPPER_ALL_ORDER);
+    console.log('ALL ORDERS', data);
+    return data
+};

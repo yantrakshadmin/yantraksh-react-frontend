@@ -1,2 +1,6 @@
 export const USER_SIGN_IN_SUCCESS = "USER_SIGN_IN_SUCCESS";
 export const USER_SIGN_OUT = "USER_SIGN_OUT";
+
+export const SHOW_LOADER = "SHOW_LOADER";
+export const HIDE_LOADER = "HIDE_LOADER";
+export const SET_REDIRECT_TO = "SET_REDIRECT_TO";
