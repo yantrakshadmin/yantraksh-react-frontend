@@ -144,8 +144,4 @@ export const signUpUser = async (data) => {
 };
 
 export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
-export const getShipperAllOrderDetails = () => {
-    const data = loadSecureUrl(SHIPPER_ALL_ORDER);
-    console.log('ALL ORDERS', data);
-    return data
-};
+export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);
