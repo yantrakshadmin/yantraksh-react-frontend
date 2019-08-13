@@ -24,7 +24,6 @@ const Main = (props) => {
         <Router>
             <div className="App">
                 <LoadingScreen/>
-
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
                         <Route exact path={"/"} component={HomeScreen}/>

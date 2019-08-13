@@ -15,7 +15,7 @@ const LoadingScreen =  ({loading}) => {
             alignItems: 'center',
             opacity: 0.5,
             position: 'absolute',
-            zIndex: 100,
+            zIndex: 1050,
             backgroundColor: '#000000'
         }}>
             <h1>
