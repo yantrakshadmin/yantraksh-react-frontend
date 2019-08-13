@@ -29,7 +29,7 @@ const shipperNavigation = [
     },
 
     {
-        name: 'Orders',
+        name: 'Orders Management',
         url: '/orders',
         icon: 'icon-puzzle',
         component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
@@ -70,6 +70,38 @@ const shipperNavigation = [
                 url: '/orders/dispatched',
                 icon: 'icon-puzzle',
             },
+
+        ],
+    },
+    {
+        name: 'Freight Management',
+        url: '/orders',
+        icon: 'icon-puzzle',
+
+        children: [
+            {
+                name: 'Live Available Loads',
+                component: lazy(() => import('../screens/shipper/freightManagement/liveAvailableTrucks')),
+
+                url: '/loads',
+                icon: 'icon-puzzle',
+            },
+
+            {
+                name: 'Active Loads',
+                component: lazy(() => import('../screens/shipper/freightManagement/RFQ')),
+                url: '/freight/active-loads',
+                icon: 'icon-puzzle',
+            },
+
+            {
+                name: 'My Bids',
+                component: lazy(() => import('../screens/shipper/freightManagement/assignedTrucks')),
+
+                url: '/orders/my-bids',
+                icon: 'icon-puzzle',
+            },
+
 
         ],
     }
