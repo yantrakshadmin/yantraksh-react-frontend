@@ -7,7 +7,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://192.168.0.128:8000";
+const BASE_URL = "http://192.168.0.128:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -15,11 +15,18 @@ axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
 
 const GET_TOKEN_PAIR = '/auth/token/';
 const CREATE_ACCOUNT = '/auth/sign-up/';
-const USERNAME_AVAILABLE = '/auth/username/available/';
-const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 const USER_DETAILS = "/auth/user/meta/";
 
+const USERNAME_AVAILABLE = '/auth/username/available/';
+const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
+
 const TRUCK_CHART_DATA = '/dashboard/data/';
+
+const SHIPPER_ALL_ORDER = '/shipper/allorders/';
+const SHIPPER_HELD = '/shipper/held/';
+const SHIPPER_DISPATCHED = '/shipper/dispatched/';
+const SHIPPER_RTD = '/shipper/rtd/';
+
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -137,3 +144,4 @@ export const signUpUser = async (data) => {
 };
 
 export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
+export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);

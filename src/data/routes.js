@@ -2,10 +2,14 @@ import {lazy} from "react";
 import {navToRoutes} from "../helpers/getRoutes";
 
 
-const supplierNavigation = [
+const supplierNavigation = [];
+const supplierRoutes = navToRoutes(supplierNavigation);
+
+
+const shipperNavigation = [
     {
         url: '/dashboard',
-        component: lazy(() => import('../screens/supplier/dashboard')),
+        component: lazy(() => import('../screens/shipper/dashboard')),
         name: 'Dashboard',
         icon: 'cui-dashboard',
         badge: {
@@ -25,58 +29,51 @@ const supplierNavigation = [
     },
 
     {
-
         name: 'Orders',
-        url: '/shipper/myitems/',
+        url: '/orders',
         icon: 'icon-puzzle',
+        component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
         children: [
             {
-                name: 'Upload',
-                component: lazy(() => import('../screens/supplier/orderManagement/upload')),
-                url: '/upload/',
+                name: 'All Orders',
+                component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
+
+                url: '/orders',
                 icon: 'icon-puzzle',
             },
 
             {
-                name: 'All Orders',
-                component: lazy(() => import('../screens/supplier/orderManagement/allOrders')),
-
-                url: '/all-orders',
+                name: 'Upload',
+                component: lazy(() => import('../screens/shipper/orderManagement/upload')),
+                url: '/orders/upload',
                 icon: 'icon-puzzle',
             },
 
             {
                 name: 'Orders on hold',
-                component: lazy(() => import('../screens/supplier/orderManagement/holdOrders')),
+                component: lazy(() => import('../screens/shipper/orderManagement/holdOrders')),
 
-                url: '/hold-orders',
+                url: '/orders/hold-orders',
                 icon: 'icon-puzzle',
             },
-
-
-
             {
                 name: 'Ready to Dispatch',
-                component: lazy(() => import('../screens/supplier/orderManagement/rtdOrders')),
+                component: lazy(() => import('../screens/shipper/orderManagement/rtdOrders')),
 
-                url: '/rtd-orders',
+                url: '/orders/rtd-orders',
                 icon: 'icon-puzzle',
             },
             {
                 name: 'Dispatched',
-                component: lazy(() => import('../screens/supplier/orderManagement/dispatchedOrders')),
+                component: lazy(() => import('../screens/shipper/orderManagement/dispatchedOrders')),
 
-                url: '/dispatched-orders',
+                url: '/orders/dispatched-orders',
                 icon: 'icon-puzzle',
             },
 
         ],
-    },
+    }
 ];
-const supplierRoutes = navToRoutes(supplierNavigation);
-
-
-const shipperNavigation = [];
 const shipperRoutes = navToRoutes(shipperNavigation);
 
 
