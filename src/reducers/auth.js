@@ -7,13 +7,12 @@ const initialState = {
     user: {
         username: 'faisal_manzer',
         name: 'Faisal manzer',
-        category:'shipper',
-
+        category: 'shipper',
+        dp: 'https://api.adorable.io/avatars/50/faisal_manzer',
+        email: 'faisal@aria16.in',
+        pro: true
     }
 };
-
-
-
 
 export const auth = (state = initialState, action) => {
 
@@ -35,6 +34,3 @@ export const auth = (state = initialState, action) => {
     }
 
 };
-
-
-

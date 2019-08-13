@@ -9,6 +9,9 @@ import rootReducer from './reducers';
 import Main from "./main";
 
 import './scss/App.scss';
+import 'react-toastify/dist/ReactToastify.min.css';
+import {ToastContainer} from "react-toastify";
+
 
 export const store = createStore(
     rootReducer,
@@ -26,6 +29,7 @@ class App extends Component {
                 <Router>
                     <Main/>
                 </Router>
+                <ToastContainer />
             </Provider>
         );
     }

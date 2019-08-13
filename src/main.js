@@ -11,7 +11,6 @@ const SignInScreen = lazy(() => import('./screens/signInScreen'));
 const SignUpScreen = lazy(() => import('./screens/signUpScreen'));
 const DashboardScreen = lazy(() => import('./screens/dashboard'));
 const NotFound404Screen = lazy(() => import('./screens/notFound404'));
-// const LoadingScreen = lazy(() => import('./screens/loadingScreen'));
 
 
 const Main = (props) => {
@@ -23,8 +22,7 @@ const Main = (props) => {
     return (
         <Router>
             <div className="App">
-                {/*<LoadingScreen/>*/}
-
+                <LoadingScreen/>
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
                         <Route exact path={"/"} component={HomeScreen}/>

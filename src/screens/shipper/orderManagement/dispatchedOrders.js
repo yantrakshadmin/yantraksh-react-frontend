@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import OrderTable from "../../../components/orderTable";
 import {getShipperAllOrderDetails} from "../../../helpers/api";
+import {errorFetchingData} from "../../../helpers/notifications";
 
 
 export default () => {
@@ -9,7 +10,7 @@ export default () => {
     useEffect(() => {
         getShipperAllOrderDetails()
             .then(data => setOrders(data))
-            .catch(() => alert('Problem loading data'))
+            .catch(() => errorFetchingData())
     }, []);
 
     return (

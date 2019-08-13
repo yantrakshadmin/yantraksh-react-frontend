@@ -1,4 +1,4 @@
-import {USER_SIGN_IN_SUCCESS, USER_SIGN_OUT} from "../actions";
+import {HIDE_LOADER, SET_REDIRECT_TO, SHOW_LOADER, USER_SIGN_IN_SUCCESS, USER_SIGN_OUT} from "../actions";
 import {getNavigations, getRoutes} from "../data/routes";
 
 const initialState = {
@@ -6,7 +6,8 @@ const initialState = {
     // navs: [],
     routes: getRoutes('shipper'),
     navs: getNavigations('shipper'),
-    loading: true
+    loading: true,
+    redirectTo: '/#/dashboard/dashboard'
 };
 
 
@@ -23,6 +24,21 @@ export const navigation = (state = initialState, action) => {
         case USER_SIGN_OUT:
             return {
                 ...initialState
+            };
+        case SHOW_LOADER:
+            return {
+                ...state,
+                loading: true
+            };
+        case HIDE_LOADER:
+            return {
+                ...state,
+                loading: false
+            };
+        case SET_REDIRECT_TO:
+            return {
+                ...state,
+                redirectTo: action.redirectTo
             };
         default:
             return state
