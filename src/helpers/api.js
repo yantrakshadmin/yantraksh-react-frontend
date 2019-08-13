@@ -22,6 +22,12 @@ const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 
 const TRUCK_CHART_DATA = '/dashboard/data/';
 
+
+//freight exchange for shipper
+const ACTIVE_LOADS= '/dashboard/active-loads/';
+const LIVE_AVAILABLE_LOADS = '/dashboard/live-loads/';
+const MY_BIDS = '/dashboard/my-bids/';
+
 const SHIPPER_ALL_ORDER = '/api/allorders/';
 // const SHIPPER_HELD = '/shipper/held/';
 // const SHIPPER_DISPATCHED = '/shipper/dispatched/';
@@ -149,3 +155,7 @@ export const getShipperAllOrderDetails = () => {
     console.log('ALL ORDERS', data);
     return data
 };
+export const liveAvailableLoads = () => loadSecureUrl(LIVE_AVAILABLE_LOADS);
+export const activeLoads = () => loadSecureUrl(ACTIVE_LOADS);
+export const myBids = () => loadSecureUrl(MY_BIDS);
+
