@@ -22,7 +22,7 @@ const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 
 const TRUCK_CHART_DATA = '/dashboard/data/';
 
-const SHIPPER_ALL_ORDER = '/shipper/allorders/';
+const SHIPPER_ALL_ORDER = '/api/allorders/';
 const SHIPPER_HELD = '/shipper/held/';
 const SHIPPER_DISPATCHED = '/shipper/dispatched/';
 const SHIPPER_RTD = '/shipper/rtd/';

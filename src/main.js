@@ -23,7 +23,7 @@ const Main = (props) => {
     return (
         <Router>
             <div className="App">
-                <LoadingScreen/>
+                {/*<LoadingScreen/>*/}
 
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
