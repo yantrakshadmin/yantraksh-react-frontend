@@ -1,6 +1,6 @@
 import {toast} from "react-toastify";
 
-const {info, success, warn, error} = toast;
+const {info, success, error} = toast;
 
 export const signINAgainNotification = () => info("Please, SignIn Again\nWe SignOut user after 24hr of login");
 export const errorGettingUserInfoNotification = () => error("Please, SignIn Again\nWe are having error in getting your info");

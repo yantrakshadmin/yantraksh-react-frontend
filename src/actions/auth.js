@@ -51,6 +51,7 @@ export const checkUser = () => (async (dispatch, getState) => {
             })
             .catch(() => {
                 dispatch({type: USER_SIGN_OUT});
+                dispatch({type: HIDE_LOADER});
                 signINAgainNotification();
             });
     else{

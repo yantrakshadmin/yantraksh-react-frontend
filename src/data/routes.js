@@ -53,21 +53,21 @@ const shipperNavigation = [
                 name: 'Orders on hold',
                 component: lazy(() => import('../screens/shipper/orderManagement/holdOrders')),
 
-                url: '/orders/hold-orders',
+                url: '/orders/on-hold',
                 icon: 'icon-puzzle',
             },
             {
                 name: 'Ready to Dispatch',
                 component: lazy(() => import('../screens/shipper/orderManagement/rtdOrders')),
 
-                url: '/orders/rtd-orders',
+                url: '/orders/ready-to-dispatch',
                 icon: 'icon-puzzle',
             },
             {
                 name: 'Dispatched',
                 component: lazy(() => import('../screens/shipper/orderManagement/dispatchedOrders')),
 
-                url: '/orders/dispatched-orders',
+                url: '/orders/dispatched',
                 icon: 'icon-puzzle',
             },
 

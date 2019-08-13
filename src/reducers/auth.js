@@ -28,6 +28,8 @@ export const auth = (state = initialState, action) => {
             reactLocalStorage.remove(API_TOKENS);
             return {
                 ...initialState,
+                authenticated: false,
+                user: {}
             };
         default:
             return state

@@ -23,7 +23,7 @@ const Main = (props) => {
         <Router>
             <div className="App">
                 <LoadingScreen/>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<LoadingScreen />}>
                     <Switch>
                         <Route exact path={"/"} component={HomeScreen}/>
                         <Route exact path="/sign-in/" component={SignInScreen}/>

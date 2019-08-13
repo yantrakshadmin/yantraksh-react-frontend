@@ -10,6 +10,8 @@ import Main from "./main";
 
 import './scss/App.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
+// import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+
 import {ToastContainer} from "react-toastify";
 
 
