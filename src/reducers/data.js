@@ -12,6 +12,7 @@ export const data = (state = initialState, action) => {
 
     switch (action.type) {
         case ORDERS_LOADED:
+            console.log(state.orders.data !== action.orders, 'CHANGED?');
             return {
                 ...state,
                 orders: {

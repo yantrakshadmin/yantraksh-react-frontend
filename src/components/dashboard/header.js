@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import {UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav} from 'reactstrap';
+import {UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, Badge} from 'reactstrap';
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 
 import {USER_SIGN_OUT} from "../../actions";
@@ -15,7 +15,7 @@ class DefaultHeader extends Component {
 
         // eslint-disable-next-line
         const {user, signOut} = this.props;
-        const {email, dp} = user;
+        const {email, dp, username} = user;
 
         return (
             <React.Fragment>
@@ -33,21 +33,22 @@ class DefaultHeader extends Component {
 
                     <UncontrolledDropdown nav direction="down">
                         <DropdownToggle nav>
+                            {username}
                             <img src={dp} className="img-avatar" alt={email} />
                         </DropdownToggle>
                         <DropdownMenu right>
                             <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>
-                            {/*<DropdownItem><i className="fa fa-bell-o"></i> Updates<Badge color="info">42</Badge></DropdownItem>*/}
-                            {/*<DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>*/}
-                            {/*<DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>*/}
-                            {/*<DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>*/}
-                            {/*<DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>*/}
+                            <DropdownItem><i className="fa fa-bell-o"></i> Updates<Badge color="info">42</Badge></DropdownItem>
+                            <DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>
+                            <DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>
+                            <DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>
+                            <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
                             <DropdownItem href="/base/edit-profile"><i className="fa fa-user"></i><a href="/base/edit-profile">Edit Profile</a></DropdownItem>
-                            {/*<DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>*/}
-                            {/*<DropdownItem><i className="fa fa-usd"></i> Payments<Badge color="secondary">42</Badge></DropdownItem>*/}
-                            {/*<DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>*/}
-                            {/*<DropdownItem divider />*/}
-                            {/*<DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>*/}
+                            <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
+                            <DropdownItem><i className="fa fa-usd"></i> Payments<Badge color="secondary">42</Badge></DropdownItem>
+                            <DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
                             <DropdownItem onClick={signOut}><i className="fa fa-lock"></i> Logout</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>

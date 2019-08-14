@@ -33,6 +33,8 @@ const SHIPPER_ALL_ORDER = '/api/all-orders/';
 // const SHIPPER_DISPATCHED = '/shipper/dispatched/';
 // const SHIPPER_RTD = '/shipper/rtd/';
 
+const CHANGE_ORDERS_STATUS = '/shipper/myitems/';
+
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {

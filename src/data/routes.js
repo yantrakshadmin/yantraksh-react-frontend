@@ -17,36 +17,26 @@ const shipperNavigation = [
             text: 'NEW',
         },
     },
-    {
-        title: true,
-        name: 'Orders Management',
-        wrapper: {
-            element: '',
-            attributes: {},
-        },
-
-
-    },
 
     {
         name: 'Orders Management',
         url: '/orders',
-        icon: 'icon-puzzle',
+        icon: 'icon-layers',
         component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
         children: [
-            {
-                name: 'All Orders',
-                component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
-
-                url: '/orders',
-                icon: 'icon-puzzle',
-            },
-
             {
                 name: 'Upload',
                 component: lazy(() => import('../screens/shipper/orderManagement/upload')),
                 url: '/orders/upload',
-                icon: 'icon-puzzle',
+                icon: 'icon-cloud-upload',
+            },
+
+            {
+                name: 'All Orders',
+                component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
+
+                url: '/orders/all',
+                icon: 'icon-list',
             },
 
             {
@@ -54,43 +44,45 @@ const shipperNavigation = [
                 component: lazy(() => import('../screens/shipper/orderManagement/holdOrders')),
 
                 url: '/orders/on-hold',
-                icon: 'icon-puzzle',
+                icon: 'fa fa-pause-circle',
             },
             {
                 name: 'Ready to Dispatch',
                 component: lazy(() => import('../screens/shipper/orderManagement/rtdOrders')),
 
                 url: '/orders/ready-to-dispatch',
-                icon: 'icon-puzzle',
+                icon: 'fa fa-share',
             },
             {
                 name: 'Dispatched',
                 component: lazy(() => import('../screens/shipper/orderManagement/dispatchedOrders')),
 
                 url: '/orders/dispatched',
-                icon: 'icon-puzzle',
+                icon: 'fa fa-rocket',
             },
-
+            {
+                divider: true
+            }
         ],
     },
     {
         name: 'Freight Management',
         url: '/freight',
-        icon: 'icon-puzzle',
+        icon: 'fa fa-truck',
 
         children: [
             {
-                name: 'Live Available Trucks',
+                name: 'Live Trucks',
                 component: lazy(() => import('../screens/shipper/freightManagement/liveAvailableTrucks')),
 
                 url: '/freight/live-available-trucks',
-                icon: 'icon-puzzle',
+                icon: 'fa fa-road',
             },
             {
                 name: 'Assigned Trucks',
                 component: lazy(() => import('../screens/shipper/freightManagement/assignedTrucks')),
                 url: '/freight/assigned-trucks',
-                icon: 'icon-puzzle',
+                icon: 'fa fa-circle',
             },
 
             {
@@ -98,7 +90,7 @@ const shipperNavigation = [
                 component: lazy(() => import('../screens/shipper/freightManagement/RFQ')),
 
                 url: '/freight/request-for-quotation',
-                icon: 'icon-puzzle',
+                icon: 'fa fa-money',
             },
 
 
