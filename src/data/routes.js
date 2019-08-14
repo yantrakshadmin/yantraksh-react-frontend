@@ -26,7 +26,7 @@ const shipperNavigation = [
         children: [
             {
                 name: 'Upload',
-                component: lazy(() => import('../screens/shipper/orderManagement/upload')),
+                component: lazy(() => import('../components/upload')),
                 url: '/orders/upload',
                 icon: 'icon-cloud-upload',
             },

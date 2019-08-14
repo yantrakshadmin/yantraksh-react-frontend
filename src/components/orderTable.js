@@ -9,7 +9,7 @@ import {connect} from "react-redux";
 import {ALL_ORDERS, DISPATCHED_ORDERS, ON_HOLD_ORDERS, RTD_ORDERS} from "../data/orderTitles";
 import {refreshing} from "../helpers/notifications";
 import {withRouter} from 'react-router-dom'
-
+import Upload from "./upload";
 
 const getStatus = (row) => {
     if (row.is_dispatched)
@@ -140,16 +140,11 @@ class OrderTable extends Component {
     }
 
     render() {
-        const {orders = [], title, rtd = false, hold = false, dispatched = false, loading, loaded, getOrders, markHold} = this.props;
+        const {orders = [], title, rtd = false, hold = false, dispatched = false, loading, loaded, getOrders} = this.props;
 
         return (
             (
                 <div>
-                    <Button color={"success"}>
-                        <i className={"fa fa-rocket"}/> &nbsp;
-                        Plan Vehicle
-                    </Button>
-
                     <Card>
                         <CardHeader>
                             <i className="fa fa-align-justify"/>{title}
@@ -209,21 +204,24 @@ class OrderTable extends Component {
                                                         Plan Vehicle
                                                     </Button>
                                                 ) : null}
-                                                <span style={{float: 'right'}}>
-                                        <NCSVButton {...props.csvProps} />
+                                                <div style={{float: 'right', display: 'inline-block'}}>
+                                                    <Upload/>
+
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <NCSVButton {...props.csvProps} />
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                                                     <Button color={"link"} onClick={() => {
                                                         refreshing();
                                                         getOrders();
                                                     }}>
-                                            <i className={"fa fa-refresh"}/> &nbsp;
+                                                        <i className={"fa fa-refresh"}/> &nbsp;
                                                         Refresh
-                                        </Button>
+                                                    </Button>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                                                     <Search.SearchBar {...props.searchProps} />
-                                    </span>
+                                                </div>
                                             </div>
                                             <BootstrapTable
                                                 {...props.baseProps}

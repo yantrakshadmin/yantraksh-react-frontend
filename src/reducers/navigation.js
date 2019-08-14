@@ -13,7 +13,7 @@ const initialState = {
     // navs: [],
     routes: getRoutes('shipper'),
     navs: getNavigations('shipper'),
-    loading: true,
+    loading: false,
     redirectTo: '/#/dashboard/dashboard',
     online: navigator.onLine
 };
