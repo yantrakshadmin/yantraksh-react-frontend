@@ -144,7 +144,12 @@ class OrderTable extends Component {
 
         return (
             (
-                <div className="animated fadeIn">
+                <div>
+                    <Button color={"success"}>
+                        <i className={"fa fa-rocket"}/> &nbsp;
+                        Plan Vehicle
+                    </Button>
+
                     <Card>
                         <CardHeader>
                             <i className="fa fa-align-justify"/>{title}
