@@ -189,6 +189,7 @@ const OrderTable = ({orders, title, rtd = false, hold = false, dispatched = fals
                                     <BootstrapTable
                                         {...props.baseProps}
                                         hover
+
                                         condensed
                                         bordered={false}
                                         pagination={paginationFactory()}

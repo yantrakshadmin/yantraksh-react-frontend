@@ -22,25 +22,21 @@ const columns = [{
     text: 'Destination',
     sort: true
 }, {
-    dataField: 'total_truck',
+    dataField: 'total_trucks',
     text: 'NO. of trucks',
 
 }, {
     dataField: 'weight',
     text: 'Weight',
     sort: true
-}, {
-    dataField: 'posted_on',
-    text: 'Date',
-    sort: true,
-}, {
+},  {
     dataField: 'total_bid',
     text: 'Total Bids',
     sort: true
 },
     {
-        dataField: 'Date',
-        text: 'date',
+        dataField: 'posted_on',
+        text: 'Date',
         sort: true
     },
 
@@ -102,6 +98,7 @@ export default () => {
                                         striped
                                         hover
                                         condensed
+                                        bordered={false}
                                         pagination={paginationFactory()}
                                         noDataIndication={() => (<div style={{textAlign: 'center'}}><BeatLoader/></div>)}
                                     />
