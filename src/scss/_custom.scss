@@ -4,10 +4,7 @@
 }
 
 .shipper-logo{
-
     height: 100px !important;
-
-
 }
 img.navbar-brand-full {
     height: 221%;
@@ -24,4 +21,8 @@ img.navbar-brand-full {
 
 .user-profile-form {
     padding: 0 152px;
+}
+
+.offline{
+    filter: grayscale(100%);
 }

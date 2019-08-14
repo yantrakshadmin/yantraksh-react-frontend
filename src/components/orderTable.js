@@ -8,8 +8,17 @@ import {loadOrders} from "../actions/orders";
 import {connect} from "react-redux";
 import {ALL_ORDERS, DISPATCHED_ORDERS, ON_HOLD_ORDERS, RTD_ORDERS} from "../data/orderTitles";
 import {refreshing} from "../helpers/notifications";
-import filterFactory, {selectFilter} from 'react-bootstrap-table2-filter';
 
+
+const getStatus = (row) => {
+    if (row.is_dispatched)
+        return 'DISPATCHED';
+
+    if (row.rtd)
+        return 'RTD';
+
+    return 'HOLD'
+};
 
 const columns = [{
     dataField: 'name',
@@ -160,29 +169,7 @@ const OrderTable = ({orders, title, rtd = false, hold = false, dispatched = fals
                                                     Plan Vehicle
                                                 </Button>
                                             ) : null}
-
-                                            {/*{title === ALL_ORDERS || title === RTD_ORDERS || title === DISPATCHED_ORDERS ? (*/}
-                                            {/*    <Button color={"warning"}>*/}
-                                            {/*        <i className={"fa fa-pause-circle"}/> &nbsp;*/}
-                                            {/*        Mark Hold*/}
-                                            {/*    </Button>*/}
-                                            {/*) : null}*/}
-                                            {/*{title === ALL_ORDERS || title === ON_HOLD_ORDERS || title === DISPATCHED_ORDERS ? (*/}
-                                            {/*    <Button color="primary">*/}
-                                            {/*        <i className={"fa fa-share"}/> &nbsp;*/}
-                                            {/*        Ready to Dispatch*/}
-                                            {/*    </Button>*/}
-                                            {/*) : null}*/}
-
-                                            {/*{title !== DISPATCHED_ORDERS ? (*/}
-                                            {/*    <Button color={"success"}>*/}
-                                            {/*        <i className={"fa fa-truck"}/> &nbsp;*/}
-                                            {/*        Plan Vehicle*/}
-                                            {/*    </Button>*/}
-                                            {/*) : null}*/}
-
                                         </ButtonGroup>
-
                                         <span style={{float: 'right'}}>
                                         <NCSVButton {...props.csvProps} />
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -209,7 +196,6 @@ const OrderTable = ({orders, title, rtd = false, hold = false, dispatched = fals
                                         loading={loading}
                                         noDataIndication={() => (
                                             <div style={{textAlign: 'center'}}><BeatLoader/></div>)}
-                                        filter={filterFactory()}
                                     />
                                 </div>
                             )

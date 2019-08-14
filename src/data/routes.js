@@ -75,30 +75,29 @@ const shipperNavigation = [
     },
     {
         name: 'Freight Management',
-        url: '/orders',
+        url: '/freight',
         icon: 'icon-puzzle',
 
         children: [
             {
-                name: 'Live Available Loads',
+                name: 'Live Available Trucks',
                 component: lazy(() => import('../screens/shipper/freightManagement/liveAvailableTrucks')),
 
-                url: '/loads',
+                url: '/freight/live-available-trucks',
                 icon: 'icon-puzzle',
             },
-
             {
-                name: 'Active Loads',
-                component: lazy(() => import('../screens/shipper/freightManagement/RFQ')),
-                url: '/freight/active-loads',
-                icon: 'icon-puzzle',
-            },
-
-            {
-                name: 'My Bids',
+                name: 'Assigned Trucks',
                 component: lazy(() => import('../screens/shipper/freightManagement/assignedTrucks')),
+                url: '/freight/assigned-trucks',
+                icon: 'icon-puzzle',
+            },
 
-                url: '/orders/my-bids',
+            {
+                name: 'RFQ',
+                component: lazy(() => import('../screens/shipper/freightManagement/RFQ')),
+
+                url: '/freight/request-for-quotation',
                 icon: 'icon-puzzle',
             },
 

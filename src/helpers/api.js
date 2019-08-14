@@ -23,12 +23,12 @@ const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 const TRUCK_CHART_DATA = '/dashboard/data/';
 
 
-//freight exchange for shipper
-const ACTIVE_LOADS= '/dashboard/active-loads/';
-const LIVE_AVAILABLE_LOADS = '/dashboard/live-loads/';
-const MY_BIDS = '/dashboard/my-bids/';
+//freight exchange for shipper: dashboard
+const ASSIGNED_TRUCKS = '/api/assignedtrucks/';
+const LIVE_AVAILABLE_TRUCKS = '/api/liveavailabletrucks/';
+const RFQ = '/api/rfq/';
 
-const SHIPPER_ALL_ORDER = '/api/allorders/';
+const SHIPPER_ALL_ORDER = '/api/all-orders/';
 // const SHIPPER_HELD = '/shipper/held/';
 // const SHIPPER_DISPATCHED = '/shipper/dispatched/';
 // const SHIPPER_RTD = '/shipper/rtd/';
@@ -151,6 +151,6 @@ export const signUpUser = async (data) => {
 
 export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
 export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);
-export const liveAvailableLoads = () => loadSecureUrl(LIVE_AVAILABLE_LOADS);
-export const activeLoads = () => loadSecureUrl(ACTIVE_LOADS);
-export const myBids = () => loadSecureUrl(MY_BIDS);
+export const liveAvailableTrucks = () => loadSecureUrl(LIVE_AVAILABLE_TRUCKS);
+export const assignedTrucks = () => loadSecureUrl(ASSIGNED_TRUCKS);
+export const rfq = () => loadSecureUrl(RFQ);

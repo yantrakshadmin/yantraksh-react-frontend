@@ -4,6 +4,7 @@ import {errorFetchingData, orderLoadedSuccessfully} from "../helpers/notificatio
 
 export const loadOrders = () => (async (dispatch, getState) => {
     try{
+        console.log('LOADING ORDERS');
         const orders = await getShipperAllOrderDetails();
         console.log(orders);
         dispatch({type: ORDERS_LOADED, orders: orders});

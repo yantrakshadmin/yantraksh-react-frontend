@@ -9,7 +9,7 @@ const DashboardPublic =  (props) => {
 
     return (
         <div>
-            <Redirect to={`/sign-in/?redirect=${window.location.hash}`} />
+            <Redirect to={`/sign-in/`} />
         </div>
     )
 };

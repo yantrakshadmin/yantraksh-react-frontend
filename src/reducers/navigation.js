@@ -1,4 +1,11 @@
-import {HIDE_LOADER, SET_REDIRECT_TO, SHOW_LOADER, USER_SIGN_IN_SUCCESS, USER_SIGN_OUT} from "../actions";
+import {
+    CONNECTION_STATUS_CHANGED,
+    HIDE_LOADER,
+    SET_REDIRECT_TO,
+    SHOW_LOADER,
+    USER_SIGN_IN_SUCCESS,
+    USER_SIGN_OUT
+} from "../actions";
 import {getNavigations, getRoutes} from "../data/routes";
 
 const initialState = {
@@ -7,7 +14,8 @@ const initialState = {
     routes: getRoutes('shipper'),
     navs: getNavigations('shipper'),
     loading: true,
-    redirectTo: '/#/dashboard/dashboard'
+    redirectTo: '/#/dashboard/dashboard',
+    online: navigator.onLine
 };
 
 
@@ -23,7 +31,8 @@ export const navigation = (state = initialState, action) => {
             };
         case USER_SIGN_OUT:
             return {
-                ...initialState
+                ...initialState,
+                loading: false
             };
         case SHOW_LOADER:
             return {
@@ -40,8 +49,12 @@ export const navigation = (state = initialState, action) => {
                 ...state,
                 redirectTo: action.redirectTo
             };
+        case CONNECTION_STATUS_CHANGED:
+            return {
+                ...state,
+                online: navigator.onLine
+            };
         default:
             return state
     }
-
 };

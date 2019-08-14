@@ -56,6 +56,6 @@ export const checkUser = () => (async (dispatch, getState) => {
             });
     else{
         dispatch({type: HIDE_LOADER});
-        signInRequestNotification();
+        // signInRequestNotification();
     }
 });

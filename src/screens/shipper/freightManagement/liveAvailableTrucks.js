@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Card, NavLink, Nav, NavItem, CardBody, CardHeader, Button, ButtonGroup} from 'reactstrap';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {BeatLoader} from "react-spinners";
+import {refreshing} from "../../../helpers/notifications";
+import {liveAvailableTrucks} from "../../../helpers/api";
 
 
 const columns = [
@@ -46,8 +48,19 @@ const columns = [
 }, ];
 
 
-export default ({data=[]}) => {
+export default () => {
 
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const loadApiData = async () => {
+            refreshing();
+            const trucks = await liveAvailableTrucks();
+            setData(trucks)
+        };
+
+        loadApiData();
+    }, [liveAvailableTrucks]);
 
     return (
         <div className="animated fadeIn">
@@ -56,22 +69,6 @@ export default ({data=[]}) => {
                     <i className="fa fa-align-justify"/> Live Trucks <small className="text-muted"/>
                 </CardHeader>
                 <CardBody>
-                    {/*<Nav tabs>*/}
-                    {/*    <NavItem>*/}
-                    {/*        <NavLink href="#" active={active === 'all'}>All Orders</NavLink>*/}
-                    {/*    </NavItem>*/}
-                    {/*    <NavItem>*/}
-                    {/*        <NavLink href="/#/dashboard/orders/on-hold" active={active === 'hold'}>On Hold</NavLink>*/}
-                    {/*    </NavItem>*/}
-                    {/*    <NavItem>*/}
-                    {/*        <NavLink href="/#/dashboard/orders/ready-to-dispatch" active={active === 'rtd'}>Ready To*/}
-                    {/*            Dispatched</NavLink>*/}
-                    {/*    </NavItem>*/}
-                    {/*    <NavItem>*/}
-                    {/*        <NavLink href="/#/dashboard/orders/dispatched"*/}
-                    {/*                 active={active === 'dispatched'}>Dispatched</NavLink>*/}
-                    {/*    </NavItem>*/}
-                    {/*</Nav>*/}
                     <ToolkitProvider
                         keyField="id"
                         data={data}
@@ -96,7 +93,6 @@ export default ({data=[]}) => {
                                         hover
                                         condensed
                                         pagination={paginationFactory()}
-                                        selectRow={{mode: 'checkbox'}}
                                         noDataIndication={() => (<div style={{textAlign: 'center'}}><BeatLoader/></div>)}
 
 
