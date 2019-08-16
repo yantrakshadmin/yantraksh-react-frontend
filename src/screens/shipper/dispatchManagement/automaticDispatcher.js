@@ -8,19 +8,22 @@ import {refreshing} from "../../../helpers/notifications";
 import {liveAvailableTrucks} from "../../../helpers/api";
 
 
+
+
+
 const columns = [
 
 
 
     {
         dataField: 'name',
-        text: 'Origin',
+        text: 'ID',
         sort: true
 
     },
     {
     dataField: 'truck_type',
-    text: 'Truck Type',
+    text: ' Vehicles',
     sort: true,
         formatter: (cell, row) => {
             if (row.truck_type==1)
@@ -33,26 +36,63 @@ const columns = [
 
 }, {
     dataField: 'origin',
-    text: 'Origin',
+    text: 'Gross Weight',
     sort: true
 
 }, {
     dataField: 'destination',
-    text: 'Destination',
+    text: 'Volume',
     sort: true
 }, {
     dataField: 'total_trucks',
-    text: 'NO. of trucks',
+    text: 'Utilization',
 
 },  {
     dataField: 'scheduled_date',
-    text: 'Date',
+    text: 'Route',
     sort: true,
 }, {
     dataField: 'offered_price',
-    text: 'Offered Price',
+    text: 'Route Distance',
     sort: true
-}, ];
+},
+
+    {
+        dataField: 'offered_price',
+        text: 'Route TAT',
+        sort: true
+    },
+
+
+    {
+        dataField: 'offered_price',
+        text: 'Dispatch Time',
+        sort: true
+    },
+    {
+        dataField: 'offered_price',
+        text: 'Loading Plan',
+        sort: true
+    },
+    {
+        dataField: 'offered_price',
+        text: 'Action',
+        sort: true,
+        formatter: (row, cell) => (
+            <Button color="primary">Raise RFQ</Button>
+        )
+    },
+
+
+
+
+
+
+
+
+
+
+];
 
 
 export default () => {

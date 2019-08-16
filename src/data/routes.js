@@ -72,6 +72,13 @@ const shipperNavigation = [
 
         children: [
             {
+                name: 'RFQ',
+                component: lazy(() => import('../screens/shipper/freightManagement/RFQ')),
+
+                url: '/freight/request-for-quotation',
+                icon: 'fa fa-money',
+            },
+            {
                 name: 'Live Trucks',
                 component: lazy(() => import('../screens/shipper/freightManagement/liveAvailableTrucks')),
 
@@ -85,17 +92,37 @@ const shipperNavigation = [
                 icon: 'fa fa-circle',
             },
 
-            {
-                name: 'RFQ',
-                component: lazy(() => import('../screens/shipper/freightManagement/RFQ')),
 
-                url: '/freight/request-for-quotation',
-                icon: 'fa fa-money',
-            },
+
 
 
         ],
+
+    },
+
+    {
+        name: 'Dispatcher ',
+        url: '/freight',
+        icon: 'fa fa-truck',
+
+        children: [
+            {
+                name: 'Manual Dispatch',
+                component: lazy(() => import('../screens/shipper/dispatchManagement/manualDispatcher')),
+
+                url: '/freight/manual-dispatcher',
+                icon: 'fa fa-money',
+            },
+            {
+                name: 'Automatic Dispatcher',
+                component: lazy(() => import('../screens/shipper/dispatchManagement/automaticDispatcher')),
+                url: '/freight/automatic-dispatcher',
+                icon: 'fa fa-money',
+            }
+    ]
+
     }
+
 ];
 const shipperRoutes = navToRoutes(shipperNavigation);
 

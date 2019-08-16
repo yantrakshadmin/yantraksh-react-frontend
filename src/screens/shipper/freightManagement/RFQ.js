@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Card, NavLink, Nav, NavItem, CardBody, CardHeader, Button, ButtonGroup} from 'reactstrap';
+import {Card, NavLink, Nav, NavItem, CardBody, CardHeader, Button, ButtonGroup, Badge} from 'reactstrap';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -25,7 +25,27 @@ const columns = [{
     dataField: 'total_trucks',
     text: 'NO. of trucks',
 
-}, {
+},{
+    dataField: 'truck_name',
+    text: 'Truck Name',
+
+},
+    {
+        dataField: 'truck_type',
+        text: 'Truck Type',
+        formatter: (cell, row) => {
+            if (row.truck_type==1)
+                return (<Badge color="success" style={{width: '100%'}}>Open</Badge>);
+            if (row.truck_type==2)
+                return (<Badge color="primary" style={{width: '100%'}}>Container</Badge>);
+            if (row.truck_type==3)
+                return (<Badge color="warning" style={{width: '100%'}}>Trailer</Badge>)
+        },
+
+    },
+
+
+    {
     dataField: 'weight',
     text: 'Weight',
     sort: true

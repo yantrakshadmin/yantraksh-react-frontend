@@ -7,7 +7,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://192.168.0.128:8000/";
+const BASE_URL = "http://192.168.0.121:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';

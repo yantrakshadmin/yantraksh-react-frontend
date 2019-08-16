@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Card, NavLink, Nav, NavItem, CardBody, CardHeader, Button, ButtonGroup, Badge} from 'reactstrap';
+import {Card, NavLink, Nav, NavItem, CardBody, CardHeader, Button, ButtonGroup, Badge, Modal} from 'reactstrap';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -56,6 +56,16 @@ const columns = [{
 
 },];
 
+const expandRow = {
+    renderer: row => (
+        <div>....</div>
+    )
+};
+
+const [show, setShow] = useState(false);
+
+const handleClose = () => setShow(false);
+const handleShow = () => setShow(true);
 
 export default () => {
     const [data, setData] = useState([]);
@@ -72,6 +82,26 @@ export default () => {
 
 
     return (
+
+        <>
+            <Button variant="primary" onClick={handleShow}>
+                Launch demo modal
+            </Button>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                    </Button>
+
+
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
@@ -82,6 +112,7 @@ export default () => {
                         keyField="id"
                         data={data}
                         columns={columns}
+                        expandRow={ expandRow }
                         search
                         exportCSV={{onlyExportSelection: true, exportAll: true}}
                     >
@@ -97,6 +128,7 @@ export default () => {
                                         <Search.SearchBar {...props.searchProps} />
                                     </div>
                                     <BootstrapTable
+
                                         {...props.baseProps}
                                         striped
 
@@ -121,6 +153,9 @@ export default () => {
                 </CardBody>
             </Card>
         </div>
+                </Modal.Footer>
+            </Modal>
+        </>
 
     );
 }
