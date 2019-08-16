@@ -22,6 +22,8 @@ export const markOrdersOnHold = (selected) => (async (dispatch, getState) => {
             data[index].rtd = false;
             data[index].is_dispatched = false;
         }
+
+        return null;
     });
 
     dispatch({type: ORDERS_LOADED, orders: data});
@@ -36,6 +38,8 @@ export const markOrdersRTD = (selected) => (async (dispatch, getState) => {
             data[index].rtd = true;
             data[index].is_dispatched = false;
         }
+
+        return null;
     });
 
     dispatch({type: ORDERS_LOADED, orders: data});
@@ -50,9 +54,9 @@ export const planVehiclesForOrders = (selected) => (async (dispatch, getState) =
             data[index].rtd = true;
             data[index].is_dispatched = true;
         }
+
+        return null;
     });
 
     dispatch({type: ORDERS_LOADED, orders: data});
 });
-
-

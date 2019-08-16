@@ -6,6 +6,11 @@ const initialState = {
         loading: true,
         data: []
     },
+    freight: {
+        loading: true,
+        loaded: false,
+        data: []
+    }
 };
 
 export const data = (state = initialState, action) => {
@@ -26,11 +31,11 @@ export const data = (state = initialState, action) => {
                 ...state,
                 orders: {
                     ...state.orders,
-                    loading: true
+                    loading: true,
+                    loaded: false
                 }
             };
         default:
             return state
     }
-
 };

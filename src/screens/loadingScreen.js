@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {BeatLoader} from "react-spinners";
+import Loader from "../components/loader"
 
 
 const LoadingScreen =  ({loading}) => {
@@ -19,7 +19,7 @@ const LoadingScreen =  ({loading}) => {
             zIndex: 1050,
             backgroundColor: '#FFFFFF'
         }}>
-            <BeatLoader	 size={40} color={'#076af2'} />
+            <Loader size={40} />
         </div>
     );
 };
