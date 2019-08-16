@@ -1,10 +1,11 @@
-import {ORDERS_LOADED, ORDERS_LOADING_START} from "../actions";
+import {ORDERS_LOADED, ORDERS_CHANGING, ORDERS_LOADING_START} from "../actions";
 
 const initialState = {
     orders: {
         loaded: false,
         loading: true,
-        data: []
+        data: [],
+        changing: true
     },
     freight: {
         loading: true,
@@ -32,7 +33,16 @@ export const data = (state = initialState, action) => {
                 orders: {
                     ...state.orders,
                     loading: true,
-                    loaded: false
+                    loaded: false,
+                    changing: true
+                }
+            };
+        case ORDERS_CHANGING:
+            return {
+                ...state,
+                orders: {
+                    ...state.orders,
+                    changing: true
                 }
             };
         default:

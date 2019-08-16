@@ -1,5 +1,5 @@
-import {getShipperAllOrderDetails} from "../helpers/api";
-import {ORDERS_LOADED} from "./index";
+import {getShipperAllOrderDetails, markHoldItemsApi, markItemsForDispatchApi} from "../helpers/api";
+import {ORDERS_CHANGING, ORDERS_LOADED} from "./index";
 import {errorFetchingData, orderLoadedSuccessfully} from "../helpers/notifications";
 
 export const loadOrders = () => (async (dispatch, getState) => {
@@ -13,9 +13,12 @@ export const loadOrders = () => (async (dispatch, getState) => {
 });
 
 
-export const markOrdersOnHold = (selected) => (async (dispatch, getState) => {
+export const markOrdersOnHold = (selected, redirect) => (async (dispatch, getState) => {
     const orders = getState().data.orders.data;
     let data = orders.slice();
+
+    dispatch({type: ORDERS_CHANGING});
+    await markHoldItemsApi(selected);
 
     orders.map((item, index) => {
         if (selected.includes(item.id)) {
@@ -27,11 +30,15 @@ export const markOrdersOnHold = (selected) => (async (dispatch, getState) => {
     });
 
     dispatch({type: ORDERS_LOADED, orders: data});
+    redirect('/orders/on-hold');
 });
 
-export const markOrdersRTD = (selected) => (async (dispatch, getState) => {
+export const markOrdersRTD = (selected, redirect) => (async (dispatch, getState) => {
     const orders = getState().data.orders.data;
     let data = orders.slice();
+
+    dispatch({type: ORDERS_CHANGING});
+    await markItemsForDispatchApi(selected);
 
     orders.map((item, index) => {
         if (selected.includes(item.id)) {
@@ -43,6 +50,7 @@ export const markOrdersRTD = (selected) => (async (dispatch, getState) => {
     });
 
     dispatch({type: ORDERS_LOADED, orders: data});
+    redirect('/orders/ready-to-dispatch')
 });
 
 export const planVehiclesForOrders = (selected) => (async (dispatch, getState) => {

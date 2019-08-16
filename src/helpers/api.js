@@ -7,7 +7,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://localhost:8000/";
+const BASE_URL = "http://192.168.0.121:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -33,7 +33,8 @@ const SHIPPER_ALL_ORDER = '/api/all-orders/';
 // const SHIPPER_DISPATCHED = '/shipper/dispatched/';
 // const SHIPPER_RTD = '/shipper/rtd/';
 
-// const CHANGE_ORDERS_STATUS = '/shipper/myitems/';
+const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
+const UPLOAD_ORDERS = 'shipper/uploadapi/';
 
 
 const getAccessToken = () => {
@@ -156,3 +157,32 @@ export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);
 export const liveAvailableTrucks = () => loadSecureUrl(LIVE_AVAILABLE_TRUCKS);
 export const assignedTrucks = () => loadSecureUrl(ASSIGNED_TRUCKS);
 export const rfq = () => loadSecureUrl(RFQ);
+
+export const markHoldItemsApi = (ids) => loadSecureUrl(CHANGE_ORDERS_STATUS, {
+    method: 'post',
+    data: {
+        'undispatch_items': 1,
+        'quiz-pids': ids
+    }
+});
+
+export const markItemsForDispatchApi = (ids) => loadSecureUrl(CHANGE_ORDERS_STATUS, {
+    method: 'post',
+    data: {
+        'select_items': 1,
+        'quiz-pids': ids
+    }
+});
+
+export const uploadOrders = (file) => {
+    let formData = new FormData();
+    formData.append('file', file);
+
+    return loadSecureUrl(UPLOAD_ORDERS, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+        data: formData,
+        method: 'post'
+    });
+};

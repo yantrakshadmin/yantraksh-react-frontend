@@ -8,6 +8,7 @@ import {withRouter} from 'react-router-dom'
 import Upload from "./upload";
 import DataTable from "../components/dataTable";
 import columns from "../data/columns/orders";
+import {BeatLoader} from "react-spinners";
 
 
 const filterData = (data, hold, rtd, dispatched) => {
@@ -35,21 +36,17 @@ class OrderTable extends Component {
     };
 
     getSelectedData = () => {
-        const selected = this.tableNode.selectionContext.selected;
-        this.props.markHold(selected);
         return this.tableNode.selectionContext.selected;
     };
 
-    markHold() {
+    async markHold() {
         const selected = this.getSelectedData();
-        this.props.markHold(selected);
-        this.props.history.push('/orders/on-hold')
+        await this.props.markHold(selected, this.props.history.push);
     }
 
-    markRTD() {
+    async markRTD() {
         const selected = this.getSelectedData();
-        this.props.markRTD(selected);
-        this.props.history.push('/orders/ready-to-dispatch')
+        await this.props.markRTD(selected, this.props.history.push);
     }
 
     planVehicle() {
@@ -64,7 +61,18 @@ class OrderTable extends Component {
     }
 
     render() {
-        const {orders = [], title, rtd = false, hold = false, dispatched = false, loading, loaded, getOrders, props} = this.props;
+        const {
+            orders = [],
+            title,
+            rtd = false,
+            hold = false,
+            dispatched = false,
+            loading,
+            loaded,
+            getOrders,
+            changing,
+            props
+        } = this.props;
 
         const leftButtons = (props) => (
             <div style={{display: 'inline-block'}}>
@@ -117,6 +125,9 @@ class OrderTable extends Component {
                         <CardHeader>
                             <i className="fa fa-align-justify"/>{title}
                             <small className="text-muted"/>
+                            <span style={{float: 'right'}}>
+                                {changing ? <BeatLoader/> : null}
+                            </span>
                         </CardHeader>
                         <CardBody>
                             <Nav tabs>
@@ -160,12 +171,13 @@ class OrderTable extends Component {
 const mapStateToProps = (state) => ({
     loading: state.data.orders.loading,
     loaded: state.data.orders.loaded,
+    changing: state.data.orders.changing,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     getOrders: () => dispatch(loadOrders()),
-    markHold: (selected) => dispatch(markOrdersOnHold(selected)),
-    markRTD: (selected) => dispatch(markOrdersRTD(selected)),
+    markHold: (selected, redirect) => dispatch(markOrdersOnHold(selected, redirect)),
+    markRTD: (selected, redirect) => dispatch(markOrdersRTD(selected, redirect)),
     planVehicle: (selected) => dispatch(planVehiclesForOrders(selected))
 });
 
