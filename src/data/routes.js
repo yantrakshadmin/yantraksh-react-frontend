@@ -23,13 +23,6 @@ const shipperNavigation = [
         component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
         children: [
             {
-                name: 'Upload',
-                component: lazy(() => import('../components/upload')),
-                url: '/orders/upload',
-                icon: 'icon-cloud-upload',
-            },
-
-            {
                 name: 'All Orders',
                 component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
 

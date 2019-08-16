@@ -3,7 +3,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 
 const initialState = {
-    authenticated: true,
+    authenticated: false,
     user: {
         username: 'faisal_manzer',
         name: 'Faisal manzer',
