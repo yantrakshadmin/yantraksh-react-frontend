@@ -6,7 +6,6 @@ import LoadingScreen from "./screens/loadingScreen";
 import {checkUser} from "./actions/auth";
 import {connectionStatusChanged} from "./actions/navigation";
 
-
 const HomeScreen = lazy(() => import('./screens/home'));
 const SignInScreen = lazy(() => import('./screens/signInScreen'));
 const SignUpScreen = lazy(() => import('./screens/signUpScreen'));
@@ -15,25 +14,25 @@ const NotFound404Screen = lazy(() => import('./screens/notFound404'));
 
 
 const Main = (props) => {
+    const {connectionChangeHandler, checkUser} = props;
 
     useEffect(() => {
-        props.checkUser();
-        window.addEventListener("offline", props.connectionChangeHandler);
-        window.addEventListener("online", props.connectionChangeHandler)
-    }, []);
+        checkUser();
+        window.addEventListener("offline", connectionChangeHandler);
+        window.addEventListener("online", connectionChangeHandler)
+    }, [connectionChangeHandler, checkUser]);
 
     return (
         <Router>
             <div className={props.online ? 'online' : 'offline'}>
                 <div className="App">
                     <LoadingScreen/>
-                    <Suspense fallback={<div>Loading</div>}>
+                    <Suspense fallback={<LoadingScreen/>}>
                         <Switch>
                             <Route exact path={"/"} component={HomeScreen}/>
                             <Route exact path="/sign-in/" component={SignInScreen}/>
                             <Route exact path="/sign-up/" component={SignUpScreen}/>
                             <Route path={'/dashboard/'} component={DashboardScreen}/>
-                            {/*<Route path={'/loading/'} component={LoadingScreen} />*/}
                             <Route component={NotFound404Screen}/>
                         </Switch>
                     </Suspense>

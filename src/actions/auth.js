@@ -6,12 +6,11 @@ import {API_TOKENS} from "../data/storage";
 import {
     errorSigningNotification,
     welcomeUserNotification,
-    signInRequestNotification,
     signINAgainNotification
 } from "../helpers/notifications";
 
 
-export const getUser = () => (async (dispatch, getState) => {
+export const getUser = () => (async (dispatch) => {
     const user = await getUserDetails();
 
     dispatch({

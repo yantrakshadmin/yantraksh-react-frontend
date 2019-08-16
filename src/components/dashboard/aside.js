@@ -308,4 +308,10 @@ class DefaultAside extends Component {
 
 DefaultAside.defaultProps = defaultProps;
 
-export default DefaultAside;
+export default () => (
+    <h1>
+        test
+    </h1>
+)
+
+// export default DefaultAside;

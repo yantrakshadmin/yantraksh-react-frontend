@@ -1,10 +1,8 @@
 import {lazy} from "react";
 import {navToRoutes} from "../helpers/getRoutes";
 
-
 const supplierNavigation = [];
 const supplierRoutes = navToRoutes(supplierNavigation);
-
 
 const shipperNavigation = [
     {
@@ -66,11 +64,24 @@ const shipperNavigation = [
         ],
     },
     {
-        name: 'Freight Management',
+        name: 'Freight Exchange',
         url: '/freight',
         icon: 'fa fa-truck',
 
         children: [
+            {
+                name: 'RFQ',
+                component: lazy(() => import('../screens/shipper/freightManagement/RFQ')),
+
+                url: '/freight/request-for-quotation',
+                icon: 'fa fa-money',
+            },
+            {
+                name: 'Assigned Trucks',
+                component: lazy(() => import('../screens/shipper/freightManagement/assignedTrucks')),
+                url: '/freight/assigned-trucks',
+                icon: 'fa fa-circle',
+            },
             {
                 name: 'Live Trucks',
                 component: lazy(() => import('../screens/shipper/freightManagement/liveAvailableTrucks')),
@@ -79,26 +90,32 @@ const shipperNavigation = [
                 icon: 'fa fa-road',
             },
             {
-                name: 'Assigned Trucks',
-                component: lazy(() => import('../screens/shipper/freightManagement/assignedTrucks')),
-                url: '/freight/assigned-trucks',
-                icon: 'fa fa-circle',
-            },
-
-            {
-                name: 'RFQ',
-                component: lazy(() => import('../screens/shipper/freightManagement/RFQ')),
-
-                url: '/freight/request-for-quotation',
-                icon: 'fa fa-money',
-            },
-
-
+                divider: true
+            }
         ],
+    },
+    {
+        name: 'Dispatcher',
+        url: '/dispatcher',
+        icon: 'fa fa-compass',
+        component: lazy(() => import('../screens/shipper/dispatcher')),
     }
 ];
-const shipperRoutes = navToRoutes(shipperNavigation);
-
+const shipperExtraRoutes = [
+    {
+        path: '/freight/request-for-quotation/bids/:id',
+        component: lazy(() => import('../screens/shipper/freightManagement/bids')),
+        name: 'View Bids',
+        exact: true
+    },
+    {
+        path: '/supplier/profile/:id',
+        component: lazy(() => import('../screens/supplier/profile')),
+        name: 'Supplier Profile',
+        exact: true
+    },
+];
+const shipperRoutes = [...shipperExtraRoutes, ...navToRoutes(shipperNavigation)];
 
 export const getNavigations = category => {
     switch (category) {

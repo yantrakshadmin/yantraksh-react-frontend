@@ -49,8 +49,7 @@ class DefaultLayout extends Component {
                             <AppSidebarHeader />
                             <AppSidebarForm />
                             <Suspense>
-                                <AppSidebarNav navConfig={{items: navigation}} {...this.props} router={router}/>
-                                {/*<AppSidebarNav navConfig={{items: []}} {...this.props} router={router}/>*/}
+                                <AppSidebarNav compact={true} navConfig={{items: navigation}} {...this.props} router={router}/>
                             </Suspense>
                             <AppSidebarFooter />
                             <AppSidebarMinimizer />
@@ -72,7 +71,6 @@ class DefaultLayout extends Component {
                                                     )} />
                                             ) : (null);
                                         })}
-                                        <Redirect from="/" to="/dashboard" />
                                         <Route component={NotFound404Screen} />
                                     </Switch>
                                 </Suspense>
