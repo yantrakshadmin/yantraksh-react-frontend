@@ -169,14 +169,17 @@ export default (props) => {
 
     return (
         <Row>
-            <Card lg={12}>
+            <Col lg={12}>
+                <Card>
                 <CardHeader>
                     <b>Dispatch Plan</b>
                 </CardHeader>
                 <CardBody>
                     <DataTable columns={dispatchPlanColumns} data={data} expandRow={expandRow}/>
                 </CardBody>
-            </Card>
+                </Card>
+
+            </Col>
         </Row>
     )
 }
