@@ -32,7 +32,8 @@ const UPLOAD_ORDERS = 'shipper/uploadapi/';
 const PLAN_VEHICLE = 'shipper/packit-api/';
 const DISPATCH_HISTORY = 'shipper/dispatcherhistory-api/';
 
-const CREATE_NEW_RFQ = '/shipper/quiz/add/';
+const CREATE_NEW_RFQ = 'createrfq/';
+const LOADING_PLAN = 'api/dispatchhistoryitem/';
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -178,3 +179,4 @@ export const createNewRFQ = (data) => loadSecureUrl(CREATE_NEW_RFQ, {
     data: data,
     method: 'post'
 });
+export const getLoadingPlan = (id) => loadSecureUrl(`${LOADING_PLAN}/${id}/`);

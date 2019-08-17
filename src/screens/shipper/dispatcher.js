@@ -121,11 +121,42 @@ const dispatchListColumns = [
     }
 ];
 
+const LoadingPlan = ({row}) => {
+
+    const [plan, setPlan] = useState([]);
+
+    useEffect(() => {
+        const getNetwork = async () => {
+            const data = await getDispatchHistory();
+            setPlan(data)
+        };
+
+        getNetwork();
+    }, [setPlan]);
+
+    return (
+        <div className={"animated slideInDown lightSpeedIn"} style={{backgroundColor: '#f1f1f1'}}>
+            <Row>
+                <Col lg={7}>
+                    <DataTable columns={dispatchListColumns} data={[]}/>
+                </Col>
+                <Col lg={4}>
+                    <DispatchMapWrapper/>
+                </Col>
+            </Row>
+        </div>
+    )
+};
+
+const expandRow = {
+    renderer: row => (
+        <LoadingPlan row={row}/>
+    )
+};
 
 export default (props) => {
 
     const [data, setData] = useState([]);
-    const [plan, setPlan] = useState([]);
 
     useEffect(() => {
         const getNetwork = async () => {
@@ -134,49 +165,60 @@ export default (props) => {
         };
 
         getNetwork();
-    }, [setData, setPlan]);
+    }, [setData]);
 
     return (
-        <Row style={{position: 'relative',flexWrap: 'nowrap', padding:'0'}}>
-            {/*<DispatchMapWrapper/>*/}
-
-                <Card sm={"6"} lg={"6"}>
-                    <CardHeader>
-                        <b>Dispatch Plan</b>
-                    </CardHeader>
-                    <CardBody sm={"6"} lg={"6"} md={"6"} xs={"6"} style={{ padding:'0'}} >
-                        <DataTable columns={dispatchPlanColumns} data={data}/>
-                    </CardBody>
-                </Card>
-
-
-                <Col sm={"6"} lg={"6"} xs={"6"} xl={"6"} style={{padding:'0'}}>
-
-                        <Card sm={"6"} lg={"6"} style={{padding:0,marginBottom:'0'}}>
-                            <CardHeader>
-                                <b>Loading Plan</b>
-                            </CardHeader>
-                            <div>
-                                <DataTable columns={dispatchListColumns} data={plan}/>
-                            </div>
-
-                        </Card>
-
-
-                        <Card >
-
-                            <CardHeader>
-                                <b>Route</b>
-                            </CardHeader>
-                            <CardBody  sm={"6"} lg={"6"}  style={{ padding:'0',height:'20vw'}}>
-                                <DispatchMapWrapper/>
-                            </CardBody>
-
-                        </Card>
-                </Col>
-
-
-
+        <Row>
+            <Card lg={12}>
+                <CardHeader>
+                    <b>Dispatch Plan</b>
+                </CardHeader>
+                <CardBody>
+                    <DataTable columns={dispatchPlanColumns} data={data} expandRow={expandRow}/>
+                </CardBody>
+            </Card>
         </Row>
     )
+}
+
+{/*<Col>*/
+}
+
+{/*    <Card>*/
+}
+{/*        <CardHeader>*/
+}
+{/*            <b>Loading Plan</b>*/
+}
+{/*        </CardHeader>*/
+}
+{/*        <div>*/
+}
+{/*            <DataTable columns={dispatchListColumns} data={plan}/>*/
+}
+{/*        </div>*/
+}
+
+{/*    </Card>*/
+}
+
+{/*    <Card>*/
+}
+
+{/*        <CardHeader>*/
+}
+{/*            <b>Route</b>*/
+}
+{/*        </CardHeader>*/
+}
+{/*        <CardBody>*/
+}
+{/*            <DispatchMapWrapper/>*/
+}
+{/*        </CardBody>*/
+}
+
+{/*    </Card>*/
+}
+{/*</Col>*/
 }

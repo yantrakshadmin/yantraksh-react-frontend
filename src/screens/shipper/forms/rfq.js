@@ -18,7 +18,7 @@ export default () => {
         'scheduled_date': '',
         'truck_type': '',
         'truck_name': '',
-        'total_truck': 0,
+        'total_trucks': 0,
         'offered_price': 0,
         'weight': 0,
         'id_comments': ''
@@ -44,8 +44,6 @@ export default () => {
             alert('error')
         }
     };
-
-    console.log(form);
 
     return (
         <Card>
@@ -107,8 +105,8 @@ export default () => {
                         </Col>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="total_truck">Number of Trucks</Label>
-                                <Input type="number" name="total_trucks" id="total_trucks" value={form.total_truck}
+                                <Label for="total_trucks">Number of Trucks</Label>
+                                <Input type="number" name="total_trucks" id="total_trucks" value={form.total_trucks}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
@@ -126,8 +124,8 @@ export default () => {
                                 <Label for="material_type">Material Type</Label>
                                 <Input type="select" name="material_type" id="material_type" onChange={handleInputChange}>
                                     <option selected disabled>---- Select ----</option>
-                                    <option value="1">Fragile</option>
-                                    <option value="2">Non Fragile</option>
+                                    <option value="Fragile">Fragile</option>
+                                    <option value="Non-Fragile">Non Fragile</option>
                                 </Input>
                             </FormGroup>
                         </Col>
