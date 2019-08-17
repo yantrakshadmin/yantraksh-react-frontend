@@ -107,6 +107,12 @@ const shipperExtraRoutes = [
         name: 'Supplier Profile',
         exact: true
     },
+    {
+        path: '/freight/request-for-quotation/new',
+        component: lazy(() => import('../screens/shipper/forms/rfq')),
+        name: 'New Request For Quotation',
+        exact: true
+    },
 ];
 const shipperRoutes = [...shipperExtraRoutes, ...navToRoutes(shipperNavigation)];
 

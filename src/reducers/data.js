@@ -1,4 +1,4 @@
-import {ORDERS_LOADED, ORDERS_CHANGING, ORDERS_LOADING_START} from "../actions";
+import {ORDERS_LOADED, ORDERS_CHANGING, ORDERS_LOADING_START, USER_SIGN_OUT} from "../actions";
 
 const initialState = {
     orders: {
@@ -18,7 +18,6 @@ export const data = (state = initialState, action) => {
 
     switch (action.type) {
         case ORDERS_LOADED:
-            console.log(state.orders.data !== action.orders, 'CHANGED?');
             return {
                 ...state,
                 orders: {
@@ -45,6 +44,8 @@ export const data = (state = initialState, action) => {
                     changing: true
                 }
             };
+        case USER_SIGN_OUT:
+            return initialState;
         default:
             return state
     }

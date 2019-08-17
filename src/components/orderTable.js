@@ -50,9 +50,8 @@ class OrderTable extends Component {
     }
 
     planVehicle() {
-        const selected = this.getSelectedData();
-        this.props.planVehicle(selected);
-        this.props.history.push('/orders/dispatched')
+        this.props.planVehicle(this.props.history.push);
+        // this.props.history.push('/orders/dispatched')
     }
 
     componentDidMount() {
@@ -178,7 +177,7 @@ const mapDispatchToProps = (dispatch) => ({
     getOrders: () => dispatch(loadOrders()),
     markHold: (selected, redirect) => dispatch(markOrdersOnHold(selected, redirect)),
     markRTD: (selected, redirect) => dispatch(markOrdersRTD(selected, redirect)),
-    planVehicle: (selected) => dispatch(planVehiclesForOrders(selected))
+    planVehicle: (redirect) => dispatch(planVehiclesForOrders(redirect))
 });
 
 

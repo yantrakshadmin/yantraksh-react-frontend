@@ -3,6 +3,7 @@ import DataTable from "../../components/dataTable";
 import {Col, Row, Card, CardBody, Button} from "reactstrap";
 import {Map, GoogleApiWrapper} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
+import {getDispatchHistory} from "../../helpers/api";
 
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 
@@ -24,34 +25,52 @@ const DispatchMapWrapper = GoogleApiWrapper({
 const dispatchPlanColumns = [
     {
         dataField: 'id',
-        text: 'Destination',
+        text: 'ID',
+        sort: true
+    },
+    {
+        dataField: 'truck_name',
+        text: 'Truck',
+        sort: true,
+        isDummyField: true,
+        formatter: (cell, row) => (
+            <span>{row.truck_type} {row.truck_name}</span>
+        )
+    },
+    {
+        dataField: 'total_trucks',
+        text: 'NO. of trucks',
         sort: true
     }, {
-        dataField: 'Vehicle',
-        text: 'NO. of trucks',
-
-    }, {
-        dataField: 'Gross_Weight',
+        dataField: 'weight',
         text: 'Weight',
         sort: true
     },
     {
-        dataField: 'Route',
-        text: 'Route',
-        sort: true,
+        dataField: 'percent_filled',
+        text: 'Volume utilisation',
+        sort: true
     },
     {
-        dataField: 'Route_Distance',
+        dataField: 'origin',
+        text: 'Route',
+        isDummyField: true,
+        formatter: (cell, row) => (
+            <span>{row.origin} -> {row.destination}</span>
+        )
+    },
+    {
+        dataField: 'distance',
         text: 'Route Distance',
         sort: true,
     },
     {
-        dataField: 'Route_TAT',
+        dataField: 'route_tat',
         text: 'Date',
         sort: true,
     },
     {
-        dataField: 'Dispatch_Time',
+        dataField: 'time',
         text: 'Dispatch Time',
         sort: true,
     },
@@ -105,77 +124,17 @@ const dispatchListColumns = [
 
 
 export default (props) => {
-    // "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8"
 
     const [data, setData] = useState([]);
     const [plan, setPlan] = useState([]);
 
     useEffect(() => {
-        setData([
-            {
-                'id': 'YNT1151',
-                'Vehicle': 'Container 20ft sxl 7 TON',
-                'Gross_Weight': '7878700 KG',
-                'Volume_Utilization': '778787%',
-                'Route': 'Delhi-Mumbai',
-                'Route_Distance': '665656km',
-                'Route_TAT': '76 HOURS',
-                'Dispatch_Time': 'July 30, 2019, 4:48 p.m.',
-            },
-            {
-                'id': 'YNT1151',
-                'Vehicle': 'Container 20ft sxl 7 TON',
-                'Gross_Weight': '7878700 KG',
-                'Volume_Utilization': '778787%',
-                'Route': 'Delhi-Mumbai',
-                'Route_Distance': '665656km',
-                'Route_TAT': '76 HOURS',
-                'Dispatch_Time': 'July 30, 2019, 4:48 p.m.',
-            },
-            {
-                'id': 'YNT1151',
-                'Vehicle': 'Container 20ft sxl 7 TON',
-                'Gross_Weight': '7878700 KG',
-                'Volume_Utilization': '778787%',
-                'Route': 'Delhi-Mumbai',
-                'Route_Distance': '665656km',
-                'Route_TAT': '76 HOURS',
-                'Dispatch_Time': 'July 30, 2019, 4:48 p.m.',
-            },
-            {
-                'id': 'YNT1151',
-                'Vehicle': 'Container 20ft sxl 7 TON',
-                'Gross_Weight': '7878700 KG',
-                'Volume_Utilization': '778787%',
-                'Route': 'Delhi-Mumbai',
-                'Route_Distance': '665656km',
-                'Route_TAT': '76 HOURS',
-                'Dispatch_Time': 'July 30, 2019, 4:48 p.m.',
-            },
-        ]);
+        const getNetwork = async () => {
+            const data = await getDispatchHistory();
+            setData(data)
+        };
 
-
-        setPlan([
-            {
-                'SKU_ID': '8787787',
-                'Quantity': '433',
-                'Name': 'Anchor Bolts',
-                'Weight': '343'
-            },
-            {
-                'SKU_ID': '8787787',
-                'Quantity': '433',
-                'Name': 'Anchor Bolts',
-                'Weight': '343'
-            },
-            {
-                'SKU_ID': '8787787',
-                'Quantity': '433',
-                'Name': 'Anchor Bolts',
-                'Weight': '343'
-            },
-
-        ]);
+        getNetwork();
     }, [setData, setPlan]);
 
     return (

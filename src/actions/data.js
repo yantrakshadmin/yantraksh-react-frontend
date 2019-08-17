@@ -1,4 +1,4 @@
-import {getShipperAllOrderDetails, markHoldItemsApi, markItemsForDispatchApi} from "../helpers/api";
+import {getShipperAllOrderDetails, markHoldItemsApi, markItemsForDispatchApi, planVehicle} from "../helpers/api";
 import {ORDERS_CHANGING, ORDERS_LOADED} from "./index";
 import {errorFetchingData, orderLoadedSuccessfully} from "../helpers/notifications";
 
@@ -53,12 +53,15 @@ export const markOrdersRTD = (selected, redirect) => (async (dispatch, getState)
     redirect('/orders/ready-to-dispatch')
 });
 
-export const planVehiclesForOrders = (selected) => (async (dispatch, getState) => {
+export const planVehiclesForOrders = (redirect) => (async (dispatch, getState) => {
     const orders = getState().data.orders.data;
     let data = orders.slice();
 
+    dispatch({type: ORDERS_CHANGING});
+    await planVehicle();
+
     orders.map((item, index) => {
-        if (selected.includes(item.id)) {
+        if (data[index.rtd]) {
             data[index].rtd = true;
             data[index].is_dispatched = true;
         }
@@ -67,4 +70,5 @@ export const planVehiclesForOrders = (selected) => (async (dispatch, getState) =
     });
 
     dispatch({type: ORDERS_LOADED, orders: data});
+    redirect('/dispatcher')
 });

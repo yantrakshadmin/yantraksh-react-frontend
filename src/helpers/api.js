@@ -20,22 +20,19 @@ const USER_DETAILS = "/auth/user/meta/";
 const USERNAME_AVAILABLE = '/auth/username/available/';
 const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 
-const TRUCK_CHART_DATA = '/dashboard/data/';
-
-
 //freight exchange for shipper: dashboard
 const ASSIGNED_TRUCKS = '/api/assignedtrucks/';
 const LIVE_AVAILABLE_TRUCKS = '/api/liveavailabletrucks/';
 const RFQ = '/api/rfq/';
 
 const SHIPPER_ALL_ORDER = '/api/all-orders/';
-// const SHIPPER_HELD = '/shipper/held/';
-// const SHIPPER_DISPATCHED = '/shipper/dispatched/';
-// const SHIPPER_RTD = '/shipper/rtd/';
 
 const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
 const UPLOAD_ORDERS = 'shipper/uploadapi/';
+const PLAN_VEHICLE = 'shipper/packit-api/';
+const DISPATCH_HISTORY = 'shipper/dispatcherhistory-api/';
 
+const CREATE_NEW_RFQ = '/shipper/quiz/add/';
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -86,7 +83,6 @@ const getAccessToken = () => {
         return resolve(access_token);
     });
 };
-
 export const loadOpenUrl = async (url, config = {}) => {
     return new Promise((resolve, reject) => {
         axios(url, config)
@@ -94,7 +90,6 @@ export const loadOpenUrl = async (url, config = {}) => {
             .catch(err => reject(err.response))
     });
 };
-
 export const loadSecureUrl = (url, config) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -110,7 +105,6 @@ export const loadSecureUrl = (url, config) => {
         }
     })
 };
-
 export const getAPITokens = async (username, password) => {
     return loadOpenUrl(GET_TOKEN_PAIR, {
         data: {
@@ -120,7 +114,6 @@ export const getAPITokens = async (username, password) => {
         method: "post"
     })
 };
-
 export const getUserDetails = () => {
 
     //TODO: Show loading screen
@@ -129,8 +122,6 @@ export const getUserDetails = () => {
     //TODO: hide loading screen
     return data;
 };
-
-
 export const isUsernameAvailable = async (username) => {
     try {
         return await loadOpenUrl(USERNAME_AVAILABLE, {
@@ -144,20 +135,17 @@ export const isUsernameAvailable = async (username) => {
     }
 
 };
-
 export const signUpUser = async (data) => {
     return loadOpenUrl(CREATE_ACCOUNT, {
         method: 'post',
         data: data
     })
 };
-
-export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
+// export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
 export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);
 export const liveAvailableTrucks = () => loadSecureUrl(LIVE_AVAILABLE_TRUCKS);
 export const assignedTrucks = () => loadSecureUrl(ASSIGNED_TRUCKS);
 export const rfq = () => loadSecureUrl(RFQ);
-
 export const markHoldItemsApi = (ids) => loadSecureUrl(CHANGE_ORDERS_STATUS, {
     method: 'post',
     data: {
@@ -165,7 +153,6 @@ export const markHoldItemsApi = (ids) => loadSecureUrl(CHANGE_ORDERS_STATUS, {
         'quiz-pids': ids
     }
 });
-
 export const markItemsForDispatchApi = (ids) => loadSecureUrl(CHANGE_ORDERS_STATUS, {
     method: 'post',
     data: {
@@ -173,7 +160,6 @@ export const markItemsForDispatchApi = (ids) => loadSecureUrl(CHANGE_ORDERS_STAT
         'quiz-pids': ids
     }
 });
-
 export const uploadOrders = (file) => {
     let formData = new FormData();
     formData.append('file', file);
@@ -186,3 +172,9 @@ export const uploadOrders = (file) => {
         method: 'post'
     });
 };
+export const planVehicle = () => loadSecureUrl(PLAN_VEHICLE);
+export const getDispatchHistory = () => loadSecureUrl(DISPATCH_HISTORY);
+export const createNewRFQ = (data) => loadSecureUrl(CREATE_NEW_RFQ, {
+    data: data,
+    method: 'post'
+});

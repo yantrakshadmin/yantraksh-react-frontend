@@ -9,10 +9,8 @@ import {
 import {getNavigations, getRoutes} from "../data/routes";
 
 const initialState = {
-    // routes: [],
-    // navs: [],
-    routes: getRoutes('shipper'),
-    navs: getNavigations('shipper'),
+    routes: [],
+    navs: [],
     loading: true,
     redirectTo: '/#/dashboard/dashboard',
     online: navigator.onLine
