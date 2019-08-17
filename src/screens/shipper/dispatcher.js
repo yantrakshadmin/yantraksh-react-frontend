@@ -135,7 +135,7 @@ const LoadingPlan = ({row}) => {
     }, [setPlan]);
 
     return (
-        <div className={"animated slideInDown lightSpeedIn"} style={{backgroundColor: '#f1f1f1'}}>
+        <div className={"animated slideInDown lightSpeedIn"} style={{marginBottom: 60, marginTop: 20}}>
             <Row>
                 <Col lg={7}>
                     <DataTable columns={dispatchListColumns} data={[]}/>
@@ -148,11 +148,9 @@ const LoadingPlan = ({row}) => {
     )
 };
 
-const expandRow = {
-    renderer: row => (
-        <LoadingPlan row={row}/>
-    )
-};
+const expandRow = row => (
+    <LoadingPlan row={row}/>
+);
 
 export default (props) => {
 
@@ -171,14 +169,14 @@ export default (props) => {
         <Row>
             <Col lg={12}>
                 <Card>
-                <CardHeader>
-                    <b>Dispatch Plan</b>
-                </CardHeader>
-                <CardBody>
-                    <DataTable columns={dispatchPlanColumns} data={data} expandRow={expandRow}/>
-                </CardBody>
-                </Card>
+                    <CardHeader>
+                        <b>Dispatch Plan</b>
+                    </CardHeader>
 
+                    <CardBody>
+                        <DataTable columns={dispatchPlanColumns} data={data} expandRow={{renderer: expandRow}}/>
+                    </CardBody>
+                </Card>
             </Col>
         </Row>
     )
