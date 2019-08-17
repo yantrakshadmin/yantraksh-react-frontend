@@ -23,6 +23,7 @@ export default (props) => {
         }, refPass = () => {
         }, loading = false, loaded = true, keyField = "id",
         select,
+        expandRow={},
         ...unusedprops
     } = props;
 
@@ -58,6 +59,7 @@ export default (props) => {
                             pagination={paginationFactory()}
                             selectRow={select}
                             loading={loading}
+                            expandRow={expandRow}
                             noDataIndication={() => !loaded ? <Loader/> : 'No orders here'}
                             {...unusedprops}
                         />

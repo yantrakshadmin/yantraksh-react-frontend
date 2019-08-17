@@ -15,7 +15,6 @@ const shipperNavigation = [
             text: 'NEW',
         },
     },
-
     {
         name: 'Orders Management',
         url: '/orders',
@@ -88,11 +87,24 @@ const shipperNavigation = [
         ],
     },
     {
-        name: 'Dispatcher',
+        name: 'Auto-Dispatcher',
         url: '/dispatcher',
         icon: 'fa fa-compass',
         component: lazy(() => import('../screens/shipper/dispatcher')),
-    }
+    },
+
+    {
+        name: 'Manual-Dispatcher',
+        url: '/dispatcher',
+        icon: 'fa fa-compass',
+        component: lazy(() => import('../screens/shipper/dispatcher')),
+    },
+    {
+        name: 'Shipping',
+        url: '/shipping',
+        icon: 'fa fa-compass',
+        component: lazy(() => import('../screens/shipper/shipping/tracking')),
+    },
 ];
 const shipperExtraRoutes = [
     {
