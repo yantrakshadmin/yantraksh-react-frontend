@@ -130,7 +130,9 @@ export default (props) => {
     useEffect(() => {
         const getNetwork = async () => {
             const data = await getDispatchHistory();
+            const plan = await getDispatchHistory();
             setData(data)
+            setData(plan)
         };
 
         getNetwork();

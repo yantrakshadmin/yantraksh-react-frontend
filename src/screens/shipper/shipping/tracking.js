@@ -118,6 +118,61 @@ export default (props) => {
                 'date': 'Container 20ft sxl 7 TON',
                 'bidAmount': '7878700 KG',
                 'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
+            }, {
+                'supplier': 'YNT1151',
+                'date': 'Container 20ft sxl 7 TON',
+                'bidAmount': '7878700 KG',
+                'name': '778787%',
             },
 
         ]);
@@ -183,7 +238,7 @@ export default (props) => {
                     <CardHeader>
                         <b>Route</b>
                     </CardHeader>
-                    <CardBody  sm={"6"} lg={"6"}  style={{ padding:'0',height:'20vw'}}>
+                    <CardBody  sm={"6"} lg={"6"}  style={{ padding:'0',height:'15vw'}}>
                         <DispatchMapWrapper/>
                     </CardBody>
 
