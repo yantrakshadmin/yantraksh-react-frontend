@@ -125,6 +125,12 @@ const shipperExtraRoutes = [
         name: 'New Request For Quotation',
         exact: true
     },
+    {
+        path: '/card',
+        component: lazy(() => import('../screens/signInCard')),
+        name: 'New Request For Quotation',
+        exact: true
+    },
 ];
 const shipperRoutes = [...shipperExtraRoutes, ...navToRoutes(shipperNavigation)];
 

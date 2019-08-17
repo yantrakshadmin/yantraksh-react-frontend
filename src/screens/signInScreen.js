@@ -1,25 +1,23 @@
 import React from 'react';
-import GuestScreen from "./guestScreen";
-import SignInCard from "../components/signInCard";
+import SignInCard from "../components/signInCard2";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
+import {Col, Container, Row} from "reactstrap";
 
 const SignInScreen = (props) => {
     if(props.isAuthenticated)
         return <Redirect to={`${props.redirectTo.split('#')[1]}`}/>;
 
     return (
-        <GuestScreen>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-                height: '100vh'
-            }}>
-                <SignInCard/>
-            </div>
-        </GuestScreen>
+        <div className="app flex-row align-items-center">
+            <Container>
+                <Row className="justify-content-center">
+                    <Col md="8">
+                        <SignInCard/>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     );
 };
 

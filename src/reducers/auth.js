@@ -3,9 +3,9 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 
 const initialState = {
-    authenticated: true,
+    authenticated: false,
     user: {
-        username: 'faisal_manzr',
+        username: 'faisal_manzer',
         category: 'shipper',
         dp: 'https://api.adorable.io/avatars/50/faisal_manzer',
         email: 'faisal@aria16.in',
