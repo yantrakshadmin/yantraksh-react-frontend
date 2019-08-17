@@ -1,5 +1,5 @@
 import React, {Component, lazy, Suspense} from 'react';
-import {Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
+import {Route, Switch, BrowserRouter } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
 

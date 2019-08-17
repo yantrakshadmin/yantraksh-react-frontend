@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from "react";
 import DataTable from "../../components/dataTable";
-import {Col, Row, Card, CardBody, Badge, Button} from "reactstrap";
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react'
+import {Col, Row, Card, CardBody, Button} from "reactstrap";
+import {Map, GoogleApiWrapper} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
 
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
-// const [data, setData] = useState(false);
 
 const DispatchMap = (props) => (
     <Map google={props.google}
@@ -177,11 +176,9 @@ export default (props) => {
             },
 
         ]);
-    });
+    }, [setData, setPlan]);
 
     return (
-
-
         <Row style={{position: 'relative', top: -30, left: -30}}>
             <DispatchMapWrapper/>
             <Col sm="12" lg="6" style={{position: 'absolute',top:'5'}}>
@@ -220,6 +217,5 @@ export default (props) => {
                 </Row>
             </Col>
         </Row>
-
     )
 }

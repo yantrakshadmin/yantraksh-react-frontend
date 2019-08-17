@@ -17,7 +17,7 @@ export default (props) => {
             'services': '0',
             'id': props.match.params.id
         })
-    }, []);
+    }, [props.match.params.id]);
 
     if (!data)
         return <Loaded/>;
