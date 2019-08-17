@@ -42,7 +42,7 @@ const dispatchPlanColumns = [
     },
     {
         dataField: 'Route_Distance',
-        text: 'Route Distance',
+        text: 'Distance',
         sort: true,
     },
     {
@@ -179,32 +179,22 @@ export default (props) => {
     }, [setData, setPlan]);
 
     return (
-        <Row style={{position: 'relative', top: -30, left: -30}}>
-            <DispatchMapWrapper/>
-            <Col sm="12" lg="6" style={{position: 'absolute',top:'5'}}>
-                <Card>
+        <Row style={{position: 'relative',flexWrap: 'nowrap', padding:'0'}}>
+            {/*<DispatchMapWrapper/>*/}
+
+                <Card sm={"6"} lg={"6"}>
                     <CardHeader>
                         <b>Dispatch Plan</b>
                     </CardHeader>
-                    <CardBody>
+                    <CardBody sm={"6"} lg={"6"} md={"6"} xs={"6"} style={{ padding:'0'}} >
                         <DataTable columns={dispatchPlanColumns} data={data}/>
                     </CardBody>
                 </Card>
-            </Col>
-            <Col sm="12" lg="6" style={{position: 'absolute', right: 0}}>
-                <Row>
-                    <Col sm={"12"} lg={"12"}>
-                        <Card style={{height: '40vh', padding:'0'}}>
-                            <CardHeader>
-                                <b>Route</b>
-                            </CardHeader>
-                            <CardBody style={{ padding:'0'}}>
-                                <DispatchMapWrapper/>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col sm={"12"} lg={"12"}>
-                        <Card >
+
+
+                <Col sm={"6"} lg={"6"} xs={"6"} xl={"6"} style={{padding:'0'}}>
+
+                        <Card sm={"6"} lg={"6"} style={{padding:0,marginBottom:'0'}}>
                             <CardHeader>
                                 <b>Loading Plan</b>
                             </CardHeader>
@@ -213,9 +203,22 @@ export default (props) => {
                             </div>
 
                         </Card>
-                    </Col>
-                </Row>
-            </Col>
+
+
+                        <Card >
+
+                            <CardHeader>
+                                <b>Route</b>
+                            </CardHeader>
+                            <CardBody  sm={"6"} lg={"6"}  style={{ padding:'0',height:'20vw'}}>
+                                <DispatchMapWrapper/>
+                            </CardBody>
+
+                        </Card>
+                </Col>
+
+
+
         </Row>
     )
 }
