@@ -128,6 +128,7 @@ const LoadingPlan = ({row}) => {
     useEffect(() => {
         const getNetwork = async () => {
             const data = await getDispatchHistory();
+            console.log("data", data);
             setPlan(data)
         };
 

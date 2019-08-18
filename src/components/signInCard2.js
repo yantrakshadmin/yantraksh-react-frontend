@@ -83,11 +83,18 @@ const SignInCard = (props) => {
                             tempor incididunt ut
                             labore et dolore magna aliqua.</p>
                         <Link to="/sign-up/supplier/">
-                            <Button color="primary" className="mt-3" active tabIndex={-1}>Register
+                            <Button color="primary" className="mt-3" active tabIndex={-1}>
+                                &nbsp;
+                                <i className="fa fa-truck"></i>
+                               &nbsp;&nbsp;
+                                Register
                                 as supplier!</Button>
                         </Link>
                         <Link to="/sign-up/shipper/">
-                        <Button color="primary" className="mt-3" active tabIndex={-1}>Register
+                        <Button color="primary" className="mt-3" active tabIndex={-1}>
+                            &nbsp;
+                            <i className="fa fa-shopping-cart"></i>&nbsp;&nbsp;
+                            Register
                                 as shipper!</Button>
                         </Link>
                     </div>

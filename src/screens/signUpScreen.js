@@ -14,7 +14,79 @@ import {
     Row
 } from 'reactstrap';
 
-class Register extends Component {
+import {isUsernameAvailable, signUpUser} from "../helpers/api";
+import {signIn} from "../actions/auth";
+import {connect} from "react-redux";
+
+const NAME_REGEX = '^[A-Z a-z]+$';
+const USERNAME_REGEX = '^[\\w.@+-]+$';
+const PASSWORD_REGEX = '^.{6}.+$';
+
+class SignUpScreen extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            first_name: '',
+            username: '',
+            email: '',
+            password: '',
+            confirmpass: ''
+        };
+    }
+
+    handleChange = (event) => {
+
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        })
+    };
+
+    onSubmit = async (e) => {
+        e.preventDefault();
+        console.log(this.state);
+
+        let errors = [];
+
+        if (!this.state.first_name.match(NAME_REGEX))
+            errors.push('Name is not valid.');
+
+        if (!this.state.password.match(PASSWORD_REGEX))
+            errors.push('Password not valid');
+
+        if (!this.state.username.match(USERNAME_REGEX))
+            errors.push('Username not valid');
+
+        else {
+            const data = await isUsernameAvailable(this.state.username);
+            if (!data.available)
+                errors.push(`Username '${data.username}' not available`);
+        }
+
+        if (this.state.confirmpass !== this.state.password)
+            errors.push('Password and confirm password is not same');
+
+        if (errors.length !== 0)
+            alert(errors.join('\n'));
+        else {
+            try {
+                await signUpUser(this.state);
+                alert('User created successful');
+                this.props.signInAction(this.state.username, this.state.password)
+
+            } catch (e) {
+                alert('Problem creating user');
+                console.log(e)
+            }
+        }
+    };
+
+
     render() {
         return (
             <div className="app flex-row align-items-center">
@@ -23,7 +95,7 @@ class Register extends Component {
                         <Col md="9" lg="7" xl="6">
                             <Card className="mx-4">
                                 <CardBody className="p-4">
-                                    <Form>
+                                    <Form onSubmit={this.onSubmit}>
                                         <input type="hidden"  name="user-type" value={this.props.type}/>
                                         <h1>Register for {this.props.type}</h1>
                                         <p className="text-muted">Create your account</p>
@@ -33,13 +105,13 @@ class Register extends Component {
                                                     <i className="icon-user"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="text" placeholder="Username" autoComplete="username"/>
+                                            <input type="text" name={"username"} onChange={this.handleChange} value={this.state.username}/>
                                         </InputGroup>
                                         <InputGroup className="mb-3">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>@</InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="text" placeholder="Email" autoComplete="email"/>
+                                            <input type="email" name={"email"} onChange={this.handleChange} value={this.state.email}/>
                                         </InputGroup>
                                         <InputGroup className="mb-3">
                                             <InputGroupAddon addonType="prepend">
@@ -47,7 +119,7 @@ class Register extends Component {
                                                     <i className="icon-lock"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="password" placeholder="Password" autoComplete="new-password"/>
+                                            <input type="password" name={"password"} onChange={this.handleChange} value={this.state.password}/>
                                         </InputGroup>
                                         <InputGroup className="mb-4">
                                             <InputGroupAddon addonType="prepend">
@@ -55,8 +127,9 @@ class Register extends Component {
                                                     <i className="icon-lock"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="password" placeholder="Repeat password"
-                                                   autoComplete="new-password"/>
+                                            <input type="password" name={"confirmpass"} onChange={this.handleChange}
+                                                   value={this.state.confirmpass}/>
+                                            {this.state.password !== this.state.confPass ? "Password and confirm password should be same" : ""}
                                         </InputGroup>
                                         <Button color="success" block>Create Account</Button>
                                     </Form>
@@ -64,10 +137,10 @@ class Register extends Component {
                                 <CardFooter className="p-4">
                                     <Row>
                                         <Col xs="12" sm="6">
-                                            <Button className="btn-facebook mb-1" block><span>facebook</span></Button>
+                                            <Button className="btn-facebook mb-1" block><span>LinkedIn</span></Button>
                                         </Col>
                                         <Col xs="12" sm="6">
-                                            <Button className="btn-twitter mb-1" block><span>twitter</span></Button>
+                                            <Button className="btn-twitter mb-1" block><span>Gmail</span></Button>
                                         </Col>
                                     </Row>
                                 </CardFooter>
@@ -79,5 +152,10 @@ class Register extends Component {
         );
     }
 }
+const mapStateToProps = (state) => ({});
 
-export default Register;
+const mapDispatchToProps = (dispatch) => ({
+    signInAction: (username, password) => dispatch(signIn(username, password)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);
