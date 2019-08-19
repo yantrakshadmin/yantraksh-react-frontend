@@ -29,7 +29,7 @@ const dispatchPlanColumns = [
         sort: true
     },
     {
-        dataField: 'truck_name',
+        dataField: 'name',
         text: 'Truck',
         sort: true,
         isDummyField: true,
@@ -62,6 +62,7 @@ const dispatchPlanColumns = [
     {
         dataField: 'distance',
         text: 'Route Distance',
+        sort: true,
     },
     {
         dataField: 'route_tat',
@@ -88,37 +89,25 @@ const dispatchPlanColumns = [
 ];
 const dispatchListColumns = [
     {
-        dataField: 'SKU_ID',
+        dataField: 'id',
         text: 'SKU ID',
         sort: true
     },
     {
-        dataField: 'Name',
+        dataField: 'name',
         text: 'Name',
-        sort: true
+        sort: true,
     },
-
-
     {
-        dataField: 'Quantity',
+        dataField: 'quantity',
         text: 'Quantity',
         sort: true,
     }, {
 
-        dataField: 'Weight',
+        dataField: 'weight',
         text: 'Weight',
         sort: true
     },
-    {
-        dataField: 'Action',
-        text: 'Action',
-        sort: true,
-        formatter: (row, cell) => (
-            <Button color="primary">Route Map</Button>
-        )
-
-
-    }
 ];
 
 const LoadingPlan = ({row}) => {
@@ -128,8 +117,9 @@ const LoadingPlan = ({row}) => {
     useEffect(() => {
         const getNetwork = async () => {
             const data = await getDispatchHistory();
-            console.log("data", data);
-            setPlan(data)
+            const plan = await getDispatchHistory();
+            setPlan(data);
+            setPlan(plan)
         };
 
         getNetwork();
@@ -139,7 +129,7 @@ const LoadingPlan = ({row}) => {
         <div className={"animated slideInDown lightSpeedIn"} style={{marginBottom: 60, marginTop: 20}}>
             <Row>
                 <Col lg={7}>
-                    <DataTable columns={dispatchListColumns} data={[]}/>
+                    <DataTable columns={dispatchListColumns} data={plan}/>
                 </Col>
                 <Col lg={4}>
                     <DispatchMapWrapper/>
@@ -181,46 +171,4 @@ export default (props) => {
             </Col>
         </Row>
     )
-}
-
-{/*<Col>*/
-}
-
-{/*    <Card>*/
-}
-{/*        <CardHeader>*/
-}
-{/*            <b>Loading Plan</b>*/
-}
-{/*        </CardHeader>*/
-}
-{/*        <div>*/
-}
-{/*            <DataTable columns={dispatchListColumns} data={plan}/>*/
-}
-{/*        </div>*/
-}
-
-{/*    </Card>*/
-}
-
-{/*    <Card>*/
-}
-
-{/*        <CardHeader>*/
-}
-{/*            <b>Route</b>*/
-}
-{/*        </CardHeader>*/
-}
-{/*        <CardBody>*/
-}
-{/*            <DispatchMapWrapper/>*/
-}
-{/*        </CardBody>*/
-}
-
-{/*    </Card>*/
-}
-{/*</Col>*/
 }

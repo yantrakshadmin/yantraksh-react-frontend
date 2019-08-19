@@ -14,15 +14,15 @@ import {
     Row
 } from 'reactstrap';
 
-import {isUsernameAvailable, signUpUser} from "../helpers/api";
+import {isUsernameAvailable, signUpUserShipper, signUpUserSupplier} from "../helpers/api";
 import {signIn} from "../actions/auth";
 import {connect} from "react-redux";
 
-const NAME_REGEX = '^[A-Z a-z]+$';
+const NAME_REGEX = '^[A-Z a-z]';
 const USERNAME_REGEX = '^[\\w.@+-]+$';
 const PASSWORD_REGEX = '^.{6}.+$';
 
-class SignUpScreen extends Component {
+class SignUpScreenSupplier extends Component {
 
     constructor(props) {
         super(props);
@@ -53,11 +53,11 @@ class SignUpScreen extends Component {
 
         let errors = [];
 
-        if (!this.state.first_name.match(NAME_REGEX))
-            errors.push('Name is not valid.');
-
-        if (!this.state.password.match(PASSWORD_REGEX))
-            errors.push('Password not valid');
+        // if (!this.state.first_name)
+        //     errors.push('Name is not valid.');
+        //
+        // if (!this.state.password.match(PASSWORD_REGEX))
+        //     errors.push('Password not valid');
 
         if (!this.state.username.match(USERNAME_REGEX))
             errors.push('Username not valid');
@@ -74,20 +74,39 @@ class SignUpScreen extends Component {
         if (errors.length !== 0)
             alert(errors.join('\n'));
         else {
-            try {
-                await signUpUser(this.state);
-                alert('User created successful');
-                this.props.signInAction(this.state.username, this.state.password)
 
-            } catch (e) {
-                alert('Problem creating user');
-                console.log(e)
+            if (this.props.type === "Supplier") {
+                try {
+                    await signUpUserSupplier(this.state);
+                    alert('User created successful');
+                    this.props.signInAction(this.state.username, this.state.password)
+
+                } catch (e) {
+                    alert('Problem creating user');
+                    console.log(e)
+                }
+
             }
+
+            if (this.props.type === "Shipper") {
+                try {
+                    await signUpUserShipper(this.state);
+                    alert('User created successful');
+                    this.props.signInAction(this.state.username, this.state.password)
+
+                } catch (e) {
+                    alert('Problem creating user');
+                    console.log(e)
+                }
+
+            }
+
+
         }
     };
 
 
-    render() {
+    render(){
         return (
             <div className="app flex-row align-items-center">
                 <Container>
@@ -158,4 +177,4 @@ const mapDispatchToProps = (dispatch) => ({
     signInAction: (username, password) => dispatch(signIn(username, password)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreenSupplier);

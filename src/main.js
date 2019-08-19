@@ -8,7 +8,7 @@ import {connectionStatusChanged} from "./actions/navigation";
 
 const HomeScreen = lazy(() => import('./screens/home'));
 const SignInScreen = lazy(() => import('./screens/signInScreen'));
-const SignUpScreen = lazy(() => import('./screens/signUpScreen'));
+const SignUpScreen = lazy(() => import('./screens/signUpScreenShipper'));
 const ShipperSignUpScreen = lazy(() => import('./screens/shipper/signUpScreen'));
 const SupplierSignUpScreen = lazy(() => import('./screens/supplier/signUpScreen'));
 const DashboardScreen = lazy(() => import('./screens/dashboard'));

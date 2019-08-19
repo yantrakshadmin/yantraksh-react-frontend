@@ -14,7 +14,8 @@ axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
 
 
 const GET_TOKEN_PAIR = '/auth/token/';
-const CREATE_ACCOUNT = '/auth/sign-up/';
+const CREATE_ACCOUNT_SHIPPER = 'shippercreateapi/';
+const CREATE_ACCOUNT_SUPPLIER = 'suppliercreateapi/';
 const USER_DETAILS = "/auth/user/meta/";
 
 const USERNAME_AVAILABLE = '/auth/username/available/';
@@ -30,7 +31,7 @@ const SHIPPER_ALL_ORDER = '/api/all-orders/';
 const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
 const UPLOAD_ORDERS = 'shipper/uploadapi/';
 const PLAN_VEHICLE = 'shipper/packit-api/';
-const DISPATCH_HISTORY = 'shipper/dispatcherhistory-api/';
+const DISPATCH_HISTORY = 'api/dispatcherhistory/';
 
 const CREATE_NEW_RFQ = 'createrfq/';
 const LOADING_PLAN = 'api/dispatchhistoryitem/';
@@ -136,8 +137,14 @@ export const isUsernameAvailable = async (username) => {
     }
 
 };
-export const signUpUser = async (data) => {
-    return loadOpenUrl(CREATE_ACCOUNT, {
+export const signUpUserShipper = async (data) => {
+    return loadOpenUrl(CREATE_ACCOUNT_SHIPPER, {
+        method: 'post',
+        data: data
+    })
+};
+export const signUpUserSupplier = async (data) => {
+    return loadOpenUrl(CREATE_ACCOUNT_SUPPLIER, {
         method: 'post',
         data: data
     })
