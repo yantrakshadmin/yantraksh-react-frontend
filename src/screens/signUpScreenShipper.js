@@ -7,7 +7,6 @@ import {
     Col,
     Container,
     Form,
-    Input,
     InputGroup,
     InputGroupAddon,
     InputGroupText,
@@ -18,9 +17,10 @@ import {isUsernameAvailable, signUpUserShipper, signUpUserSupplier} from "../hel
 import {signIn} from "../actions/auth";
 import {connect} from "react-redux";
 
-const NAME_REGEX = '^[A-Z a-z]';
+// const NAME_REGEX = '^[A-Z a-z]';
 const USERNAME_REGEX = '^[\\w.@+-]+$';
-const PASSWORD_REGEX = '^.{6}.+$';
+
+// const PASSWORD_REGEX = '^.{6}.+$';
 
 class SignUpScreenSupplier extends Component {
 
@@ -106,7 +106,7 @@ class SignUpScreenSupplier extends Component {
     };
 
 
-    render(){
+    render() {
         return (
             <div className="app flex-row align-items-center">
                 <Container>
@@ -115,7 +115,7 @@ class SignUpScreenSupplier extends Component {
                             <Card className="mx-4">
                                 <CardBody className="p-4">
                                     <Form onSubmit={this.onSubmit}>
-                                        <input type="hidden"  name="user-type" value={this.props.type}/>
+                                        <input type="hidden" name="user-type" value={this.props.type}/>
                                         <h1>Register for {this.props.type}</h1>
                                         <p className="text-muted">Create your account</p>
                                         <InputGroup className="mb-3">
@@ -124,13 +124,15 @@ class SignUpScreenSupplier extends Component {
                                                     <i className="icon-user"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <input type="text" name={"username"} onChange={this.handleChange} value={this.state.username}/>
+                                            <input type="text" name={"username"} onChange={this.handleChange}
+                                                   value={this.state.username}/>
                                         </InputGroup>
                                         <InputGroup className="mb-3">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>@</InputGroupText>
                                             </InputGroupAddon>
-                                            <input type="email" name={"email"} onChange={this.handleChange} value={this.state.email}/>
+                                            <input type="email" name={"email"} onChange={this.handleChange}
+                                                   value={this.state.email}/>
                                         </InputGroup>
                                         <InputGroup className="mb-3">
                                             <InputGroupAddon addonType="prepend">
@@ -138,7 +140,8 @@ class SignUpScreenSupplier extends Component {
                                                     <i className="icon-lock"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <input type="password" name={"password"} onChange={this.handleChange} value={this.state.password}/>
+                                            <input type="password" name={"password"} onChange={this.handleChange}
+                                                   value={this.state.password}/>
                                         </InputGroup>
                                         <InputGroup className="mb-4">
                                             <InputGroupAddon addonType="prepend">
@@ -171,6 +174,7 @@ class SignUpScreenSupplier extends Component {
         );
     }
 }
+
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
