@@ -7,7 +7,8 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://192.168.0.121:8000/";
+// const BASE_URL = "http://192.168.0.121:8000/";
+const BASE_URL = "http://localhost:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -27,6 +28,7 @@ const LIVE_AVAILABLE_TRUCKS = '/api/liveavailabletrucks/';
 const RFQ = '/api/rfq/';
 
 const SHIPPER_ALL_ORDER = '/api/all-orders/';
+const SHIPPER_GET_PROFILE = 'editprofileshipper/';
 
 const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
 const UPLOAD_ORDERS = 'shipper/uploadapi/';
@@ -45,7 +47,7 @@ const getAccessToken = () => {
             return resolve('No User found');
 
         let access_token = '';
-        const expires = new Date(data.expires * 1000);
+        const expires = new Date(data.expires + 1000000);
         const currentTime = new Date();
 
         if (expires > currentTime) {
@@ -150,6 +152,10 @@ export const signUpUserSupplier = async (data) => {
         data: data
     })
 };
+
+export const getShipperProfileDetails = () => loadSecureUrl(SHIPPER_GET_PROFILE);
+
+
 // export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
 export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);
 export const liveAvailableTrucks = () => loadSecureUrl(LIVE_AVAILABLE_TRUCKS);

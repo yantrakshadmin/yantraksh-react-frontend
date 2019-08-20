@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Modal} from 'reactstrap';
 import {useDropzone} from 'react-dropzone';
 import {uploadOrders} from "../helpers/api";
+import Link from "react-router-dom/es/Link";
 
 
 function Basic(props) {
@@ -24,7 +25,7 @@ function Basic(props) {
                     {acceptedFiles[0] ? (
                         <div>
                             <h5>
-                                {acceptedFiles[0].path} ({acceptedFiles[0].size} bytes)
+                                {acceptedFiles[0].path} ({acceptedFiles[0].size / 1000} Kbytes)
                             </h5>
                             <br/>
 
@@ -32,25 +33,30 @@ function Basic(props) {
                                 try {
                                     await uploadOrders(acceptedFiles[0]);
                                     alert('Done')
+
+
                                 } catch (e) {
                                     console.log(e);
-                                    alert('error')
+                                    alert('Error in uploading. Please ensure file type is csv.')
                                 }
                             }}>
                                 <i className={"icon-cloud-upload"}/> &nbsp;
                                 Upload
                             </Button>
 
-                            <Button color={"error"}>
-                                Cancel
-                            </Button>
+                            <Link to={'/orders/all'}>
+                                <Button color={"error"} onClick={(e) => this.closeModal(e)}>
+                                    Cancel
+                                </Button>
+                            </Link>
+
                         </div>
                     ) : (
                         <div>
                             <i className={"icon-cloud-upload"} style={{fontSize: '5rem'}}/>
                             <br/>
                             <input {...getInputProps()} />
-                            <h3>Drag 'n' drop some files here, or click to select files</h3>
+                            <h3>Drag & drop csv files here, or click to select files</h3>
                         </div>
                     )}
                 </div>
@@ -99,6 +105,7 @@ class Upload extends React.Component {
                         padding: 0,
                         height: '50vh',
                         width: '50vw',
+                        top: '25%',
                     }}
                 >
                     <Basic/>
