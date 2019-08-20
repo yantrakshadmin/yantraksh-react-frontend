@@ -124,6 +124,21 @@ const shipperExtraRoutes = [
         component: lazy(() => import('../screens/shipper/forms/rfq')),
         name: 'New Request For Quotation',
         exact: true
+
+
+    },
+    {
+        path: '/freight/edit-profile/new',
+        component: lazy(() => import('../screens/shipper/forms/editProfile')),
+        name: 'Edit Profile',
+        exact: true
+
+    },
+    {
+        path: '/edit-profile',
+        component: lazy(() => import('../screens/shipper/forms/editProfile')),
+        name: 'Edit Profile',
+        exact: true
     },
     {
         path: '/card',

@@ -14,7 +14,7 @@ import {
     Row
 } from 'reactstrap';
 
-import {isUsernameAvailable, signUpUserShipper} from "../helpers/api";
+import {isUsernameAvailable, signUpUserShipper, signUpUserSupplier} from "../helpers/api";
 import {signIn} from "../actions/auth";
 import {connect} from "react-redux";
 
@@ -22,7 +22,7 @@ const NAME_REGEX = '^[A-Z a-z]';
 const USERNAME_REGEX = '^[\\w.@+-]+$';
 const PASSWORD_REGEX = '^.{6}.+$';
 
-class SignUpScreenShipper extends Component {
+class SignUpScreenSupplier extends Component {
 
     constructor(props) {
         super(props);
@@ -74,20 +74,39 @@ class SignUpScreenShipper extends Component {
         if (errors.length !== 0)
             alert(errors.join('\n'));
         else {
-            try {
-                await signUpUserShipper(this.state);
-                alert('User created successful');
-                this.props.signInAction(this.state.username, this.state.password)
 
-            } catch (e) {
-                alert('Problem creating user');
-                console.log(e)
+            if (this.props.type === "Supplier") {
+                try {
+                    await signUpUserSupplier(this.state);
+                    alert('User created successful');
+                    this.props.signInAction(this.state.username, this.state.password)
+
+                } catch (e) {
+                    alert('Problem creating user');
+                    console.log(e)
+                }
+
             }
+
+            if (this.props.type === "Shipper") {
+                try {
+                    await signUpUserShipper(this.state);
+                    alert('User created successful');
+                    this.props.signInAction(this.state.username, this.state.password)
+
+                } catch (e) {
+                    alert('Problem creating user');
+                    console.log(e)
+                }
+
+            }
+
+
         }
     };
 
 
-    render() {
+    render(){
         return (
             <div className="app flex-row align-items-center">
                 <Container>
@@ -158,4 +177,4 @@ const mapDispatchToProps = (dispatch) => ({
     signInAction: (username, password) => dispatch(signIn(username, password)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreenShipper);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreenSupplier);

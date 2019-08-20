@@ -7,6 +7,7 @@ import {USER_SIGN_OUT} from "../../actions";
 
 import logo from '../../assets/img/brand/Yantraksh Logo.png'
 import sygnet from '../../assets/img/brand/sygnet.svg'
+import {Link} from "react-router-dom";
 
 
 const defaultProps = {};
@@ -43,7 +44,16 @@ class DefaultHeader extends Component {
                             <DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>
                             <DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>
                             <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
-                            <DropdownItem href="/base/edit-profile"><i className="fa fa-user"></i><a href="/base/edit-profile">Edit Profile</a></DropdownItem>
+                            <DropdownItem href="freight/edit-profile/new">
+
+
+                                <i className="fa fa-user"></i><a href="freight/edit-profile/new">Edit Profile</a>
+
+                                <Link to={"/freight/edit-profile"}>
+                                </Link>
+
+
+                            </DropdownItem>
                             <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
                             <DropdownItem><i className="fa fa-usd"></i> Payments<Badge color="secondary">42</Badge></DropdownItem>
                             <DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>

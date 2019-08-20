@@ -34,6 +34,7 @@ const PLAN_VEHICLE = 'shipper/packit-api/';
 const DISPATCH_HISTORY = 'api/dispatcherhistory/';
 
 const CREATE_NEW_RFQ = 'createrfq/';
+const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
 const LOADING_PLAN = 'api/dispatchhistoryitem/';
 
 const getAccessToken = () => {
@@ -185,5 +186,9 @@ export const getDispatchHistory = () => loadSecureUrl(DISPATCH_HISTORY);
 export const createNewRFQ = (data) => loadSecureUrl(CREATE_NEW_RFQ, {
     data: data,
     method: 'post'
+});
+export const editProfileShipper = (data) => loadSecureUrl(EDIT_PROFILE_SHIPPER, {
+    data: data,
+    method: 'patch'
 });
 export const getLoadingPlan = (id) => loadSecureUrl(`${LOADING_PLAN}/${id}/`);
