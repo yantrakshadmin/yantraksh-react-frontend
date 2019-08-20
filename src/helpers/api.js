@@ -26,6 +26,19 @@ const ASSIGNED_TRUCKS = '/api/assignedtrucks/';
 const LIVE_AVAILABLE_TRUCKS = '/api/liveavailabletrucks/';
 const RFQ = '/api/rfq/';
 
+
+
+//API for shipper
+const LIVE_AVAILABLE_LOADS = '/api/liveavailableloads/';
+
+
+
+
+
+
+
+
+
 const SHIPPER_ALL_ORDER = '/api/all-orders/';
 
 const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
@@ -150,6 +163,17 @@ export const signUpUserSupplier = async (data) => {
         data: data
     })
 };
+
+//API's for supplier:
+export const liveAvailableLoads = () => loadSecureUrl(LIVE_AVAILABLE_LOADS);
+
+
+
+
+
+
+
+
 // export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
 export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);
 export const liveAvailableTrucks = () => loadSecureUrl(LIVE_AVAILABLE_TRUCKS);

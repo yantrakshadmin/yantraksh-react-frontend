@@ -1,8 +1,48 @@
 import {lazy} from "react";
 import {navToRoutes} from "../helpers/getRoutes";
 
-const supplierNavigation = [];
-const supplierRoutes = navToRoutes(supplierNavigation);
+const supplierNavigation = [
+
+    {
+        name: 'Available Loads',
+        component: lazy(() => import('../screens/supplier/freightManagement/availableLoads')),
+        url: '/freight/available-loads',
+        icon: 'fa fa-money',
+    },
+    {
+        name: 'Post new Trucks',
+        component: lazy(() => import('../screens/supplier/forms/postTruck')),
+        url: '/freight/post-truck',
+        icon: 'fa fa-money',
+    },
+
+    {
+        name: 'Active Trucks',
+        component: lazy(() => import('../screens/supplier/freightManagement/activeTrucks')),
+        url: '/freight/active-trucks',
+        icon: 'fa fa-money',
+    },
+    {
+        name: 'My Bids',
+        component: lazy(() => import('../screens/supplier/freightManagement/myBids')),
+        url: '/freight/my-bids',
+        icon: 'fa fa-money',
+    },
+    {
+        name: 'Trips',
+        component: lazy(() => import('../screens/supplier/freightManagement/trips')),
+        url: '/freight/trips',
+        icon: 'fa fa-money',
+    }, {
+        name: 'Financial',
+        component: lazy(() => import('../screens/supplier/freightManagement/financials')),
+        url: '/freight/financial',
+        icon: 'fa fa-money',
+    },
+
+
+
+];
 
 const shipperNavigation = [
     {
@@ -147,7 +187,51 @@ const shipperExtraRoutes = [
         exact: true
     },
 ];
+const supplierExtraRoutes = [
+    {
+        path: '/freight/request-for-quotation/bids/:id',
+        component: lazy(() => import('../screens/shipper/freightManagement/bids')),
+        name: 'View Bids',
+        exact: true
+    },
+    {
+        path: '/supplier/profile/:id',
+        component: lazy(() => import('../screens/supplier/profile')),
+        name: 'Supplier Profile',
+        exact: true
+    },
+    {
+        path: '/freight/request-for-quotation/new',
+        component: lazy(() => import('../screens/shipper/forms/rfq')),
+        name: 'New Request For Quotation',
+        exact: true
+
+
+    },
+    {
+        path: '/freight/edit-profile/new',
+        component: lazy(() => import('../screens/shipper/forms/editProfile')),
+        name: 'Edit Profile',
+        exact: true
+
+    },
+    {
+        path: '/edit-profile',
+        component: lazy(() => import('../screens/shipper/forms/editProfile')),
+        name: 'Edit Profile',
+        exact: true
+    },
+    {
+        path: '/card',
+        component: lazy(() => import('../screens/signInCard')),
+        name: 'New Request For Quotation',
+        exact: true
+    },
+];
+
 const shipperRoutes = [...shipperExtraRoutes, ...navToRoutes(shipperNavigation)];
+const supplierRoutes = [...supplierExtraRoutes, ...navToRoutes(supplierNavigation)];
+
 
 export const getNavigations = category => {
     switch (category) {
