@@ -40,12 +40,12 @@ export default () => {
 
 
         'shipper_email' : '',
-        'shipper_company_name; : '',
+        'shipper_company_name' : '',
         'shipper_gst' : '',
         'shipper_number' : '',
-        shipper_address : '',
-        shipper_street : '',
-        shipper_city : '',
+        // shipper_address : '',
+        // shipper_street : '',
+        // shipper_city : '',
         // shipper_pin : '',
         // shipper_state : '',
         // total_weight : '',
