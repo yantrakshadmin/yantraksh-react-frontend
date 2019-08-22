@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Button, Card,
     CardBody,
@@ -7,19 +7,20 @@ import {
     Label, Row,
 } from 'reactstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import {createNewRFQ, editInvoice} from "../../../helpers/api";
+import {editInvoice, getInvoiceDetails} from "../../../helpers/api";
 
 
 export default () => {
 
+
+    var len = window.location.href.length;
+    var id = window.location.href[len-1];
+
+
+    //TODO THIS IS NOT THE REACT METHOD TO FETCH ID FROM THE URLTT
+
     const [form, setForm] = useState({
-
-
-
-
-
-
-        'id': '',
+        'id': id,
         'invoice_number': '',
         'invoice_date': '',
         'invoice_due_date': '',
@@ -28,7 +29,6 @@ export default () => {
         'invoice_destination_address': '',
         'invoice_destination_pincode': '',
         'invoice_gst': '',
-
 
 
         'invoice_salesperson': '',
@@ -46,9 +46,6 @@ export default () => {
         'invoice_quantity': '',
 
 
-
-
-
         'lr_number': '',
         'billing_party_name': '',
         'origin_address': '',
@@ -61,6 +58,16 @@ export default () => {
         'tax': '',
 
     });
+
+
+    useEffect(() => {
+        const getNetwork = async () => {
+            const invoice_details = await getInvoiceDetails(form.id);
+            setForm(invoice_details);
+        };
+        getNetwork();
+    }, [setForm]);
+
 
     const handleInputChange = (event) => {
         const target = event.target;
@@ -76,10 +83,11 @@ export default () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await editInvoice(form);
+            alert(JSON.stringify(form));
+            await editInvoice(form, form.id);
             alert('done')
         } catch (e) {
-            alert(e)
+            alert(JSON.stringify(e))
         }
     };
 
@@ -111,7 +119,8 @@ export default () => {
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="scheduled_date">Invoice Date</Label>
-                                <Input type="datetime-local" name="invoice_date" id="invoice_date" value={form.invoice_date}
+                                <Input type="datetime-local" name="invoice_date" id="invoice_date"
+                                       value={form.invoice_date}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
@@ -121,7 +130,8 @@ export default () => {
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="truck_type">Invoice Due Date</Label>
-                                <Input type="select" name="invoice_due_date" id="invoice_due_date" onChange={handleInputChange} valid={form.invoice_due_date}>
+                                <Input type="select" name="invoice_due_date" id="invoice_due_date"
+                                       onChange={handleInputChange} valid={form.invoice_due_date}>
 
                                 </Input>
                             </FormGroup>
@@ -129,7 +139,8 @@ export default () => {
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="total_trucks">Place of Supply</Label>
-                                <Input type="number" name="invoice_place_of_supply" id="invoice_place_of_supply" value={form.invoice_place_of_supply}
+                                <Input type="number" name="invoice_place_of_supply" id="invoice_place_of_supply"
+                                       value={form.invoice_place_of_supply}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
@@ -137,7 +148,8 @@ export default () => {
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="offered_price">Invoice Destination</Label>
-                                <Input type="test" name="invoice_destination" id="invoice_destination" value={form.invoice_destination}
+                                <Input type="test" name="invoice_destination" id="invoice_destination"
+                                       value={form.invoice_destination}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
@@ -148,7 +160,8 @@ export default () => {
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="truck_type">Destination Address</Label>
-                                <Input type="select" name="invoice_destination_address" id="invoice_destination_address" onChange={handleInputChange} value={form.invoice_destination_address}>
+                                <Input type="select" name="invoice_destination_address" id="invoice_destination_address"
+                                       onChange={handleInputChange} value={form.invoice_destination_address}>
 
                                 </Input>
                             </FormGroup>
@@ -156,7 +169,8 @@ export default () => {
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="total_trucks">Destination PINCODE</Label>
-                                <Input type="number" name="invoice_destination_pincode" id="invoice_destination_pincode" value={form.invoice_destination_pincode}
+                                <Input type="number" name="invoice_destination_pincode" id="invoice_destination_pincode"
+                                       value={form.invoice_destination_pincode}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
@@ -174,7 +188,8 @@ export default () => {
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="truck_type">Billing party</Label>
-                                <Input type="select" name="invoice_salesperson" id="invoice_salesperson" onChange={handleInputChange} value={form.invoice_salesperson}>
+                                <Input type="select" name="invoice_salesperson" id="invoice_salesperson"
+                                       onChange={handleInputChange} value={form.invoice_salesperson}>
 
                                 </Input>
                             </FormGroup>
@@ -182,7 +197,8 @@ export default () => {
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="total_trucks">LR number</Label>
-                                <Input type="number" name="invoice_lr_number" id="invoice_lr_number" value={form.invoice_lr_number}
+                                <Input type="number" name="invoice_lr_number" id="invoice_lr_number"
+                                       value={form.invoice_lr_number}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
@@ -190,7 +206,8 @@ export default () => {
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="offered_price">Vehicle Placement Date</Label>
-                                <Input type="number" name="invoice_vehicle_placement_date" id="invoice_vehicle_placement_date" value={form.invoice_vehicle_placement_date}
+                                <Input type="number" name="invoice_vehicle_placement_date"
+                                       id="invoice_vehicle_placement_date" value={form.invoice_vehicle_placement_date}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
@@ -199,7 +216,8 @@ export default () => {
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="truck_type">Vehicle Number</Label>
-                                <Input type="select" name="invoice_vehicle_number" id="invoice_vehicle_number" onChange={handleInputChange} value={form.invoice_vehicle_number}>
+                                <Input type="select" name="invoice_vehicle_number" id="invoice_vehicle_number"
+                                       onChange={handleInputChange} value={form.invoice_vehicle_number}>
 
                                 </Input>
                             </FormGroup>
@@ -207,7 +225,8 @@ export default () => {
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="total_trucks">Invoice service Month</Label>
-                                <Input type="number" name="invoice_service_month" id="invoice_service_month" value={form.invoice_service_month}
+                                <Input type="number" name="invoice_service_month" id="invoice_service_month"
+                                       value={form.invoice_service_month}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
@@ -215,20 +234,20 @@ export default () => {
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="offered_price">invoice Item Details</Label>
-                                <Input type="text" name="invoice_item_details" id="invoice_item_details" value={form.invoice_item_details}
+                                <Input type="text" name="invoice_item_details" id="invoice_item_details"
+                                       value={form.invoice_item_details}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
                     </Row>
 
 
-
-
                     <Row>
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="truck_type">Invoice Amount</Label>
-                                <Input type="select" name="invoice_rate" id="invoice_rate" onChange={handleInputChange} value={form.invoice_rate}>
+                                <Input type="select" name="invoice_rate" id="invoice_rate" onChange={handleInputChange}
+                                       value={form.invoice_rate}>
 
                                 </Input>
                             </FormGroup>
@@ -244,12 +263,12 @@ export default () => {
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="offered_price">Total Amount</Label>
-                                <Input type="number" name="invoice_amount" id="invoice_amount" value={form.invoice_amount}
+                                <Input type="number" name="invoice_amount" id="invoice_amount"
+                                       value={form.invoice_amount}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
                     </Row>
-
 
 
                     <br/><br/><br/>

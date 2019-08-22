@@ -34,8 +34,6 @@ export default () => {
     }, [setForm]);
 
 
-
-
     const handleInputChange = (event) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;

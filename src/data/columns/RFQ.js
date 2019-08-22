@@ -30,7 +30,7 @@ export default [
         text: 'Weight',
         sort: true
     }, {
-        dataField: 'total_bid',
+        dataField: 'bid_count',
         text: 'Total Bids',
         sort: true
     }, {

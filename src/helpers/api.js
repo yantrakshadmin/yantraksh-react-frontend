@@ -28,19 +28,11 @@ const MY_BIDS = '/suppliers/mybidsapi/';
 const RFQ = '/api/rfq/';
 
 
-
 //API for shipper
 const LIVE_AVAILABLE_LOADS = '/api/liveavailableloads/';
 
 
 const RFQ_RESULTS = 'rfqresultsapi/';
-
-
-
-
-
-
-
 
 
 const SHIPPER_ALL_ORDER = '/api/all-orders/';
@@ -51,10 +43,11 @@ const PLAN_VEHICLE = 'shipper/packit-api/';
 const DISPATCH_HISTORY = 'api/dispatcherhistory/';
 
 const CREATE_NEW_RFQ = 'createrfq/';
-const EDIT_INVOICE = 'api/invoice/<int:pk>';
+const EDIT_INVOICE = 'api/invoice/';
 
 
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
+const GET_INVOICE = '/api/invoice/';
 const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
 const LOADING_PLAN = 'api/dispatchhistoryitem/';
 
@@ -182,13 +175,10 @@ export const rfqresults = () => loadSecureUrl(RFQ_RESULTS);
 
 export const getShipperProfileDetails = () => loadSecureUrl(EDIT_PROFILE_SHIPPER);
 export const getSupplierProfileDetails = () => loadSecureUrl(EDIT_PROFILE_SUPPLIER);
-
+export const getInvoiceDetails = (id) => loadSecureUrl(`${GET_INVOICE}${id}/`);
 
 
 export const invoiceView = () => loadSecureUrl(INVOICE_TABLE_VIEW);
-
-
-
 
 
 // export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
@@ -231,11 +221,11 @@ export const createNewRFQ = (data) => loadSecureUrl(CREATE_NEW_RFQ, {
     method: 'post'
 });
 
-export const editInvoice = (data) => loadSecureUrl(EDIT_INVOICE, {
+export const editProfileShipper = (data) => loadSecureUrl(EDIT_PROFILE_SHIPPER, {
     data: data,
     method: 'post'
 });
-export const editProfileShipper = (data) => loadSecureUrl(EDIT_PROFILE_SHIPPER, {
+export const editInvoice = (data,id) => loadSecureUrl(`${EDIT_INVOICE}${id}/`, {
     data: data,
     method: 'patch'
 });

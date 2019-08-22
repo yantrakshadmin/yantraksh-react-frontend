@@ -97,6 +97,26 @@ const dispatchListColumns = [
         dataField: 'items',
         text: 'Name',
         sort: true,
+        formatter: (cell, row) => {
+            console.log(row.props);
+            return row.items[0].name;
+            // for (var i = 0; i < row.items.length; i++) {
+            //     var parent_id = row.id;
+            //     var item = row.items[i];
+            //
+            //     for (var j = 0; j < item.length; j++) {
+            //         var itemname = item[j];
+            //
+            //         console.log(item,parent_id);
+            //         return item["name"];
+            //     }
+            // }
+
+
+        }
+    },
+    {
+        dataField: 'quantity',
 
         formatter: (cell, row) => {
 
@@ -156,7 +176,7 @@ const LoadingPlan = ({row}) => {
             const data = await getDispatchHistory();
             const plan = await getDispatchHistory();
             setPlan(data);
-            setPlan(plan)
+            setPlan(plan);
         };
 
         getNetwork();
@@ -187,7 +207,8 @@ export default (props) => {
     useEffect(() => {
         const getNetwork = async () => {
             const data = await getDispatchHistory();
-            setData(data)
+            setData(data);
+            console.log(data);
         };
 
         getNetwork();
