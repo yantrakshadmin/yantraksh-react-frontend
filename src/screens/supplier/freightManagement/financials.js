@@ -4,7 +4,7 @@ import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {refreshing} from "../../../helpers/notifications";
-import {liveAvailableTrucks} from "../../../helpers/api";
+import {invoiceView} from "../../../helpers/api";
 import Loader from "../../../components/loader";
 import {Link} from "react-router-dom";
 import Button from "reactstrap/es/Button";
@@ -23,7 +23,7 @@ const columns = [
         sort: true,
 
     }, {
-        dataField: 'billing_party',
+        dataField: 'invoice_salesperson',
         text: 'Billing Party',
         sort: true
 
@@ -31,13 +31,13 @@ const columns = [
 
     },
     {
-        dataField: 'total_amount',
+        dataField: 'invoice_amount',
         text: 'Total Amount',
         sort: true
 
     },
     {
-        dataField: 'gst_number',
+        dataField: 'invoice_gst',
         text: 'GST Number',
         sort: true
 
@@ -48,7 +48,7 @@ const columns = [
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
+                <Link to={`/freight/edit-invoice/${row.id}`}>
                     <Button color="primary">
                         Edit Invoice
                     </Button>
@@ -100,7 +100,7 @@ export default () => {
     useEffect(() => {
         const loadApiData = async () => {
             refreshing();
-            const trucks = await liveAvailableTrucks();
+            const trucks = await invoiceView();
             setData(trucks)
         };
 
@@ -111,7 +111,7 @@ export default () => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> Live Trucks <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/>Financial<small className="text-muted"/>
                 </CardHeader>
                 <CardBody>
                     <ToolkitProvider

@@ -4,7 +4,7 @@ import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {refreshing} from "../../../helpers/notifications";
-import {liveAvailableTrucks} from "../../../helpers/api";
+import {myBids} from "../../../helpers/api";
 import Loader from "../../../components/loader";
 import {Link} from "react-router-dom";
 import Button from "reactstrap/es/Button";
@@ -12,10 +12,34 @@ import Button from "reactstrap/es/Button";
 
 const columns = [
     {
-        dataField: 'truck_type',
-        text: 'Truck Type',
+        dataField: 'id',
+        text: 'ID',
         sort: true
 
+    }, {
+        dataField: 'quiz',
+        text: 'Truck Type',
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.quiz.truck_name)
+
+        }
+    },{
+        dataField: 'quiz',
+        text: 'Truck Type',
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.quiz.truck_name)
+
+        }
+    },{
+        dataField: 'quiz',
+        text: 'Truck Type',
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.quiz.truck_type)
+
+        }
     },
     {
         dataField: 'your_bids',
@@ -23,21 +47,30 @@ const columns = [
         sort: true,
 
     }, {
-        dataField: 'Status',
-        text: 'Origin',
+        dataField: 'confirmed',
+        text: 'Status',
         sort: true
 
     },
     {
-        dataField: 'Origin',
+        dataField: 'quiz',
         text: 'Origin',
-        sort: true
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.quiz.origin)
+
+        }
+
 
     },
     {
-        dataField: 'destination',
+        dataField: 'date',
         text: 'Destination',
-        sort: true
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.quiz.destination)
+
+        }
 
     },
 
@@ -68,7 +101,7 @@ export default () => {
     useEffect(() => {
         const loadApiData = async () => {
             refreshing();
-            const trucks = await liveAvailableTrucks();
+            const trucks = await myBids();
             setData(trucks)
         };
 

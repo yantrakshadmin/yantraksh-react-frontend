@@ -41,7 +41,7 @@ export default () => {
             await createNewRFQ(form);
             alert('done')
         } catch (e) {
-            alert('error')
+            alert(e)
         }
     };
 

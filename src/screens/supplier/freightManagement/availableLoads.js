@@ -59,21 +59,6 @@ export default () => {
             dataField: 'comments',
             text: 'Comments',
             sort: true,
-        },{
-            dataField: 'action',
-            text: 'Name',
-            sort: true,
-            isDummyField:true,
-            formatter: (cell, row) => (
-                <div>
-                    <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
-                        <Button color="primary">
-                            Bid Now
-                        </Button>
-                    </Link>
-                </div>
-            )
-
         },
 
 
@@ -84,7 +69,7 @@ export default () => {
         <div>
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/>Request For Quotation
+                    <i className="fa fa-align-justify"/>Available Loads
                     <small className="text-muted"/>
                     <leftButton/>
                 </CardHeader>

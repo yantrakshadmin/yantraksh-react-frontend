@@ -7,7 +7,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://192.168.0.121:8000/";
+const BASE_URL = "http://192.168.0.125:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -24,12 +24,16 @@ const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 //freight exchange for shipper: dashboard
 const ASSIGNED_TRUCKS = '/api/assignedtrucks/';
 const LIVE_AVAILABLE_TRUCKS = '/api/liveavailabletrucks/';
+const MY_BIDS = '/suppliers/mybidsapi/';
 const RFQ = '/api/rfq/';
 
 
 
 //API for shipper
 const LIVE_AVAILABLE_LOADS = '/api/liveavailableloads/';
+
+
+const RFQ_RESULTS = 'rfqresultsapi/';
 
 
 
@@ -47,8 +51,15 @@ const PLAN_VEHICLE = 'shipper/packit-api/';
 const DISPATCH_HISTORY = 'api/dispatcherhistory/';
 
 const CREATE_NEW_RFQ = 'createrfq/';
+const EDIT_INVOICE = 'api/invoice/<int:pk>/';
+
+
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
+const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
 const LOADING_PLAN = 'api/dispatchhistoryitem/';
+
+
+const INVOICE_TABLE_VIEW = '/api/invoices/';
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -166,9 +177,15 @@ export const signUpUserSupplier = async (data) => {
 
 //API's for supplier:
 export const liveAvailableLoads = () => loadSecureUrl(LIVE_AVAILABLE_LOADS);
+export const rfqresults = () => loadSecureUrl(RFQ_RESULTS);
+
+
+export const getShipperProfileDetails = () => loadSecureUrl(EDIT_PROFILE_SHIPPER);
+export const getSupplierProfileDetails = () => loadSecureUrl(EDIT_PROFILE_SUPPLIER);
 
 
 
+export const invoiceView = () => loadSecureUrl(INVOICE_TABLE_VIEW);
 
 
 
@@ -177,6 +194,8 @@ export const liveAvailableLoads = () => loadSecureUrl(LIVE_AVAILABLE_LOADS);
 // export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
 export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);
 export const liveAvailableTrucks = () => loadSecureUrl(LIVE_AVAILABLE_TRUCKS);
+export const myBids = () => loadSecureUrl(MY_BIDS);
+
 export const assignedTrucks = () => loadSecureUrl(ASSIGNED_TRUCKS);
 export const rfq = () => loadSecureUrl(RFQ);
 export const markHoldItemsApi = (ids) => loadSecureUrl(CHANGE_ORDERS_STATUS, {
@@ -211,7 +230,17 @@ export const createNewRFQ = (data) => loadSecureUrl(CREATE_NEW_RFQ, {
     data: data,
     method: 'post'
 });
+
+export const editInvoice = (data) => loadSecureUrl(EDIT_INVOICE, {
+    data: data,
+    method: 'post'
+});
 export const editProfileShipper = (data) => loadSecureUrl(EDIT_PROFILE_SHIPPER, {
+    data: data,
+    method: 'patch'
+});
+
+export const editProfileSupplier = (data) => loadSecureUrl(EDIT_PROFILE_SUPPLIER, {
     data: data,
     method: 'patch'
 });

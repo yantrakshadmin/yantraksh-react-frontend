@@ -94,20 +94,57 @@ const dispatchListColumns = [
         sort: true
     },
     {
-        dataField: 'name',
+        dataField: 'items',
         text: 'Name',
         sort: true,
-    },
-    {
-        dataField: 'quantity',
+
+        formatter: (cell, row) => {
+
+                row.items.forEach(row.id)
+            {
+                {
+                    for (var i = 0; i < row.items.length; i++) {
+                        return (row.items[i].name);
+                    }
+                }
+            }
+        }
+
+
+
+    },{
+        dataField: 'items',
+        text: 'ID',
+        sort: true,
+        formatter: (cell, row) => {
+            for(var i = 0; i < row.items.length; i++)
+            {
+                return(row.items[i].id);
+            }
+
+
+            }
+
+    },{
+        dataField: 'items',
         text: 'Quantity',
         sort: true,
-    }, {
+        formatter: (cell, row) => {
 
-        dataField: 'weight',
-        text: 'Weight',
-        sort: true
+
+               for (var i = 0; i < row.items.length; i++) {
+
+                   return (row.items[i].quantity);
+
+           }
+
+
+
+        }
+
+
     },
+
 ];
 
 const LoadingPlan = ({row}) => {
