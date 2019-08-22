@@ -39,6 +39,13 @@ const supplierNavigation = [
         url: '/freight/financial',
         icon: 'fa fa-money',
     },
+    {
+        name: 'Edit Invoice',
+        component: lazy(() => import('../screens/supplier/forms/editInvoice')),
+        url: '/freight/edit-invoice/:id',
+        icon: 'fa fa-money',
+        exact: true
+    },
 
 ];
 
@@ -187,13 +194,6 @@ const shipperExtraRoutes = [
 ];
 const supplierExtraRoutes = [
 
-    {
-        name: 'Edit Invoice',
-        component: lazy(() => import('../screens/supplier/forms/editInvoice')),
-        url: '/freight/edit-invoice/:id',
-        icon: 'fa fa-money',
-        exact: true
-    },
     {
         path: '/freight/request-for-quotation/bids/:id',
         component: lazy(() => import('../screens/shipper/freightManagement/bids')),

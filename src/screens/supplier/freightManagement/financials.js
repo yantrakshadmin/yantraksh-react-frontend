@@ -8,6 +8,7 @@ import {invoiceView} from "../../../helpers/api";
 import Loader from "../../../components/loader";
 import {Link} from "react-router-dom";
 import Button from "reactstrap/es/Button";
+import Upload from '../../../components/upload'
 
 
 const columns = [
@@ -81,11 +82,10 @@ const columns = [
         isDummyField:true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
-                    <Button color="primary">
-                        Upload POD
-                    </Button>
-                </Link>
+                <Upload to={`/freight/request-for-quotation/bids/${row.id}`}>
+                </Upload>
+
+
             </div>
         )
 

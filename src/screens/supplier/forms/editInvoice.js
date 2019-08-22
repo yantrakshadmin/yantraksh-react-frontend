@@ -79,7 +79,7 @@ export default () => {
             await editInvoice(form);
             alert('done')
         } catch (e) {
-            alert('error')
+            alert(e)
         }
     };
 
@@ -120,7 +120,7 @@ export default () => {
                     <Row>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="truck_type">Truck Type</Label>
+                                <Label for="truck_type">Invoice Due Date</Label>
                                 <Input type="select" name="invoice_due_date" id="invoice_due_date" onChange={handleInputChange} valid={form.invoice_due_date}>
 
                                 </Input>
@@ -128,16 +128,16 @@ export default () => {
                         </Col>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="total_trucks">Number of Trucks</Label>
-                                <Input type="number" name="total_trucks" id="total_trucks" value={form.invoice_place_of_supply}
+                                <Label for="total_trucks">Place of Supply</Label>
+                                <Input type="number" name="invoice_place_of_supply" id="invoice_place_of_supply" value={form.invoice_place_of_supply}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
 
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="offered_price">Offered Price</Label>
-                                <Input type="number" name="offered_price" id="offered_price" value={form.invoice_destination}
+                                <Label for="offered_price">Invoice Destination</Label>
+                                <Input type="test" name="invoice_destination" id="invoice_destination" value={form.invoice_destination}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
@@ -147,69 +147,50 @@ export default () => {
                     <Row>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="truck_type">Truck Type</Label>
-                                <Input type="select" name="truck_type" id="truck_type" onChange={handleInputChange} value={form.invoice_destination_address}>
+                                <Label for="truck_type">Destination Address</Label>
+                                <Input type="select" name="invoice_destination_address" id="invoice_destination_address" onChange={handleInputChange} value={form.invoice_destination_address}>
 
                                 </Input>
                             </FormGroup>
                         </Col>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="total_trucks">Number of Trucks</Label>
-                                <Input type="number" name="total_trucks" id="total_trucks" value={form.invoice_destination_pincode}
+                                <Label for="total_trucks">Destination PINCODE</Label>
+                                <Input type="number" name="invoice_destination_pincode" id="invoice_destination_pincode" value={form.invoice_destination_pincode}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
 
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="offered_price">Offered Price</Label>
-                                <Input type="number" name="offered_price" id="offered_price" value={form.invoice_gst}
+                                <Label for="offered_price">Invoice GST</Label>
+                                <Input type="number" name="invoice_gst" id="invoice_gst" value={form.invoice_gst}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
                     </Row>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <Row>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="truck_type">Truck Type</Label>
-                                <Input type="select" name="truck_type" id="truck_type" onChange={handleInputChange} value={form.invoice_salesperson}>
+                                <Label for="truck_type">Billing party</Label>
+                                <Input type="select" name="invoice_salesperson" id="invoice_salesperson" onChange={handleInputChange} value={form.invoice_salesperson}>
 
                                 </Input>
                             </FormGroup>
                         </Col>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="total_trucks">Number of Trucks</Label>
-                                <Input type="number" name="total_trucks" id="total_trucks" value={form.invoice_lr_number}
+                                <Label for="total_trucks">LR number</Label>
+                                <Input type="number" name="invoice_lr_number" id="invoice_lr_number" value={form.invoice_lr_number}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
 
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="offered_price">Offered Price</Label>
-                                <Input type="number" name="offered_price" id="offered_price" value={form.invoice_vehicle_placement_date}
+                                <Label for="offered_price">Vehicle Placement Date</Label>
+                                <Input type="number" name="invoice_vehicle_placement_date" id="invoice_vehicle_placement_date" value={form.invoice_vehicle_placement_date}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
@@ -217,109 +198,59 @@ export default () => {
                     <Row>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="truck_type">Truck Type</Label>
-                                <Input type="select" name="truck_type" id="truck_type" onChange={handleInputChange} value={form.invoice_vehicle_number}>
+                                <Label for="truck_type">Vehicle Number</Label>
+                                <Input type="select" name="invoice_vehicle_number" id="invoice_vehicle_number" onChange={handleInputChange} value={form.invoice_vehicle_number}>
 
                                 </Input>
                             </FormGroup>
                         </Col>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="total_trucks">Number of Trucks</Label>
-                                <Input type="number" name="total_trucks" id="total_trucks" value={form.invoice_service_month}
+                                <Label for="total_trucks">Invoice service Month</Label>
+                                <Input type="number" name="invoice_service_month" id="invoice_service_month" value={form.invoice_service_month}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
 
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="offered_price">Offered Price</Label>
-                                <Input type="number" name="offered_price" id="offered_price" value={form.invoice_item_details}
+                                <Label for="offered_price">invoice Item Details</Label>
+                                <Input type="text" name="invoice_item_details" id="invoice_item_details" value={form.invoice_item_details}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
                     </Row>
+
+
 
 
                     <Row>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="truck_type">Truck Type</Label>
-                                <Input type="select" name="truck_type" id="truck_type" onChange={handleInputChange} value={form.invoice_vehicle_number}>
+                                <Label for="truck_type">Invoice Amount</Label>
+                                <Input type="select" name="invoice_rate" id="invoice_rate" onChange={handleInputChange} value={form.invoice_rate}>
 
                                 </Input>
                             </FormGroup>
                         </Col>
                         <Col lg={4}>
                             <FormGroup>
-                                <Label for="total_trucks">Number of Trucks</Label>
-                                <Input type="number" name="total_trucks" id="total_trucks" value={form.invoice_service_month}
+                                <Label for="total_trucks">TAX</Label>
+                                <Input type="number" name="invoice_tax" id="invoice_tax" value={form.invoice_tax}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
 
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="offered_price">Offered Price</Label>
-                                <Input type="number" name="offered_price" id="offered_price" value={form.invoice_item_details}
+                                <Label for="offered_price">Total Amount</Label>
+                                <Input type="number" name="invoice_amount" id="invoice_amount" value={form.invoice_amount}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
                     </Row>
 
 
-                    <Row>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="truck_type">Truck Type</Label>
-                                <Input type="select" name="truck_type" id="truck_type" onChange={handleInputChange} value={form.invoice_rate}>
-
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="total_trucks">Number of Trucks</Label>
-                                <Input type="number" name="total_trucks" id="total_trucks" value={form.invoice_tax}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="offered_price">Offered Price</Label>
-                                <Input type="number" name="offered_price" id="offered_price" value={form.invoice_amount}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-
-
-                    <Row>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="truck_type">Truck Type</Label>
-                                <Input type="select" name="truck_type" id="truck_type" onChange={handleInputChange} value={form.invoice_quiz}>
-
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="total_trucks">Number of Trucks</Label>
-                                <Input type="number" name="total_trucks" id="total_trucks" value={form.invoice_owner}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="offered_price">Offered Price</Label>
-                                <Input type="number" name="offered_price" id="offered_price" value={form.invoice_quantity}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                    </Row>
 
                     <br/><br/><br/>
                     <Button color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;

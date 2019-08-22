@@ -51,7 +51,7 @@ const PLAN_VEHICLE = 'shipper/packit-api/';
 const DISPATCH_HISTORY = 'api/dispatcherhistory/';
 
 const CREATE_NEW_RFQ = 'createrfq/';
-const EDIT_INVOICE = 'api/invoice/<int:pk>/';
+const EDIT_INVOICE = 'api/invoice/<int:pk>';
 
 
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
