@@ -59,6 +59,20 @@ export default () => {
             dataField: 'comments',
             text: 'Comments',
             sort: true,
+        },{
+            dataField: 'Action ',
+            text: 'Bid Now',
+            sort: true,
+            isDummyField:true,
+            formatter: (cell, row) => (
+            <div>
+                <Link to={`/freight/bidonrfq/${row.id}`}>
+                    <Button color="primary">
+                        Bid Now
+                    </Button>
+                </Link>
+            </div>
+        )
         },
         {
             dataField: 'Bid Now',
