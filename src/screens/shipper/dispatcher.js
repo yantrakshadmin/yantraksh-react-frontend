@@ -3,7 +3,7 @@ import DataTable from "../../components/dataTable";
 import {Col, Row, Card, CardBody, Button} from "reactstrap";
 import {Map, GoogleApiWrapper} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
-import {getDispatchHistory} from "../../helpers/api";
+import {getDispatchHistory, getLoadingPlan} from "../../helpers/api";
 
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 
@@ -120,14 +120,8 @@ const dispatchListColumns = [
 
         formatter: (cell, row) => {
 
-                row.items.forEach(row.id)
-            {
-                {
-                    for (var i = 0; i < row.items.length; i++) {
-                        return (row.items[i].name);
-                    }
-                }
-            }
+            return(row.items.name);
+
         }
 
 
@@ -137,10 +131,10 @@ const dispatchListColumns = [
         text: 'ID',
         sort: true,
         formatter: (cell, row) => {
-            for(var i = 0; i < row.items.length; i++)
-            {
-                return(row.items[i].id);
-            }
+
+
+                return(row.items.id);
+
 
 
             }
@@ -152,11 +146,11 @@ const dispatchListColumns = [
         formatter: (cell, row) => {
 
 
-               for (var i = 0; i < row.items.length; i++) {
 
-                   return (row.items[i].quantity);
 
-           }
+                   return (row.items.quantity);
+
+
 
 
 
@@ -174,7 +168,7 @@ const LoadingPlan = ({row}) => {
     useEffect(() => {
         const getNetwork = async () => {
             const data = await getDispatchHistory();
-            const plan = await getDispatchHistory();
+            const plan = await getLoadingPlan();
             setPlan(data);
             setPlan(plan);
         };

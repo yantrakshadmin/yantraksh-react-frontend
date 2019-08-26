@@ -12,15 +12,15 @@ import {editInvoice, getInvoiceDetails} from "../../../helpers/api";
 
 export default () => {
 
-
-    var len = window.location.href.length;
-    var id = window.location.href[len-1];
+    //
+    // var len = window.location.href.length;
+    // var id = window.location.href[len-1];
 
 
     //TODO THIS IS NOT THE REACT METHOD TO FETCH ID FROM THE URLT
 
     const [form, setForm] = useState({
-        'id': id,
+        'id': '',
         'invoice_number': '',
         'invoice_date': '',
         'invoice_due_date': '',

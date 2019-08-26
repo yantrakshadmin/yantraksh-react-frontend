@@ -1,13 +1,10 @@
-/*
-    Contains all URLs and ApiFunctions
- */
 import axios from "axios";
 import {reactLocalStorage} from "reactjs-localstorage";
 
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://192.168.0.125:8000/";
+const BASE_URL = "http://192.168.0.121:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -40,16 +37,19 @@ const SHIPPER_ALL_ORDER = '/api/all-orders/';
 const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
 const UPLOAD_ORDERS = 'shipper/uploadapi/';
 const PLAN_VEHICLE = 'shipper/packit-api/';
+
+
+//Dispatch plan and Items
 const DISPATCH_HISTORY = 'api/dispatcherhistory/';
+const LOADING_PLAN = 'api/dispatchhistoryitem/';
 
 const CREATE_NEW_RFQ = 'createrfq/';
-const EDIT_INVOICE = 'api/invoice/';
+const EDIT_INVOICE = 'api/invoice/1/';
 
 
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
 const GET_INVOICE = '/api/invoice/';
 const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
-const LOADING_PLAN = 'api/dispatchhistoryitem/';
 
 
 const INVOICE_TABLE_VIEW = '/api/invoices/';
@@ -215,23 +215,25 @@ export const uploadOrders = (file) => {
     });
 };
 export const planVehicle = () => loadSecureUrl(PLAN_VEHICLE);
+
+//Dispatch plan and Items
 export const getDispatchHistory = () => loadSecureUrl(DISPATCH_HISTORY);
+export const getLoadingPlan = (pk) => loadSecureUrl(`${LOADING_PLAN}${pk}`);
+
 export const createNewRFQ = (data) => loadSecureUrl(CREATE_NEW_RFQ, {
     data: data,
     method: 'post'
 });
-
 export const editProfileShipper = (data) => loadSecureUrl(EDIT_PROFILE_SHIPPER, {
     data: data,
     method: 'post'
 });
-export const editInvoice = (data,id) => loadSecureUrl(`${EDIT_INVOICE}${id}/`, {
+
+export const editInvoice = (data,id) => loadSecureUrl(`${EDIT_INVOICE}${id}`, {
     data: data,
     method: 'patch'
 });
-
 export const editProfileSupplier = (data) => loadSecureUrl(EDIT_PROFILE_SUPPLIER, {
     data: data,
     method: 'patch'
 });
-export const getLoadingPlan = (id) => loadSecureUrl(`${LOADING_PLAN}/${id}/`);

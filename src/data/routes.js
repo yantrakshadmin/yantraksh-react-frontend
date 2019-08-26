@@ -45,6 +45,12 @@ const supplierNavigation = [
         url: '/freight/edit-invoice/:id',
         icon: 'fa fa-money',
         exact: true
+    },{
+        name: 'Bid Now',
+        component: lazy(() => import('../screens/supplier/forms/bidNow')),
+        url: '/freight/bid-now/:id',
+        icon: 'fa fa-money',
+        exact: true
     },
 
 ];
@@ -193,6 +199,8 @@ const shipperExtraRoutes = [
     },
 ];
 const supplierExtraRoutes = [
+
+
 
     {
         path: '/freight/request-for-quotation/bids/:id',

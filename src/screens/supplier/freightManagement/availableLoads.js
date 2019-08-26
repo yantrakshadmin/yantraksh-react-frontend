@@ -60,6 +60,22 @@ export default () => {
             text: 'Comments',
             sort: true,
         },
+        {
+            dataField: 'Bid Now',
+            text: 'Track Now',
+            sort: true,
+            formatter: (cell, row) => (
+                <div>
+                    <Link to={`/freight/bid-now/${row.id}`}>
+                        <Button color="primary">
+                             Bids Now
+                        </Button>
+                    </Link>
+                </div>
+            )
+
+
+        },
 
 
     ];
