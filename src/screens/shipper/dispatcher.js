@@ -91,105 +91,34 @@ const dispatchListColumns = [
     {
         dataField: 'id',
         text: 'SKU ID',
-        sort: true
+        sort: true,
     },
     {
-        dataField: 'items',
+        dataField: 'name',
         text: 'Name',
+        sort: true
+    }, {
+        dataField: 'pid',
+        text: 'PID',
         sort: true,
-        formatter: (cell, row) => {
-            console.log(row.props);
-            return row.items[0].name;
-            // for (var i = 0; i < row.items.length; i++) {
-            //     var parent_id = row.id;
-            //     var item = row.items[i];
-            //
-            //     for (var j = 0; j < item.length; j++) {
-            //         var itemname = item[j];
-            //
-            //         console.log(item,parent_id);
-            //         return item["name"];
-            //     }
-            // }
-
-
-        }
-    },
-    {
+    }, {
         dataField: 'quantity',
-
-        formatter: (cell, row) => {
-
-                row.items.forEach(row.id)
-            {
-                {
-                    for (var i = 0; i < row.items.length; i++) {
-                        return (row.items[i].name);
-                    }
-                }
-            }
-        }
-
-
-
-    },{
-        dataField: 'items',
-        text: 'ID',
-        sort: true,
-        formatter: (cell, row) => {
-            for(var i = 0; i < row.items.length; i++)
-            {
-                return(row.items[i].id);
-            }
-
-
-            }
-
-    },{
-        dataField: 'items',
         text: 'Quantity',
         sort: true,
-        formatter: (cell, row) => {
-
-
-               for (var i = 0; i < row.items.length; i++) {
-
-                   return (row.items[i].quantity);
-
-           }
-
-
-
-        }
-
-
-    },
-
+    }
 ];
 
 const LoadingPlan = ({row}) => {
-
-    const [plan, setPlan] = useState([]);
-
-    useEffect(() => {
-        const getNetwork = async () => {
-            const data = await getDispatchHistory();
-            const plan = await getDispatchHistory();
-            setPlan(data);
-            setPlan(plan);
-        };
-
-        getNetwork();
-    }, [setPlan]);
 
     return (
         <div className={"animated slideInDown lightSpeedIn"} style={{marginBottom: 60, marginTop: 20}}>
             <Row>
                 <Col lg={7}>
-                    <DataTable columns={dispatchListColumns} data={plan}/>
+                    <DataTable columns={dispatchListColumns} data={row.items}/>
                 </Col>
                 <Col lg={4}>
-                    <DispatchMapWrapper/>
+                    <iframe src={row.route_link} frameBorder="0" style={{'height':'100%'}} />
+                    {/*<DispatchMapWrapper/>*/}
                 </Col>
             </Row>
         </div>
