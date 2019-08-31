@@ -2,11 +2,11 @@ import React from "react";
 import {Button} from "reactstrap";
 import {Link} from "react-router-dom";
 
-export default [{
+export default      [{
     dataField: 'name',
     text: 'Name',
     sort: true,
-    formatter: (cell, {name, id}) => {
+    formatter: (cell,{name, id}) => {
         return (
             <Link to={`/supplier/profile/${id}`}>
                 <img src={`https://api.adorable.io/avatars/25/${id}`} alt=""

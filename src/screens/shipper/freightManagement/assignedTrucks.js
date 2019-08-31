@@ -5,7 +5,6 @@ import {refreshing} from "../../../helpers/notifications";
 import DataTable from "../../../components/dataTable";
 import columns from "../../../data/columns/assignedTrucks";
 
-
 export default () => {
     const [data, setData] = useState([]);
 
