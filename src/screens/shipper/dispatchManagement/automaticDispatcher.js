@@ -17,6 +17,7 @@ export default () => {
         const loadApiData = async () => {
             refreshing();
             const trucks = await liveAvailableTrucks();
+            console.log(trucks, "hjdiewdgiewudeihdeodhoewhdoeid");
             setData(trucks)
         };
 

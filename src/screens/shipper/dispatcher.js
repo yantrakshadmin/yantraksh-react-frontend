@@ -6,7 +6,7 @@ import CardHeader from "reactstrap/es/CardHeader";
 import {getDispatchHistory} from "../../helpers/api";
 import {Line} from "react-chartjs-2";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
-
+import {rfqRaised} from '../../helpers/notifications';
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 
 const DispatchMap = (props) => (
@@ -62,17 +62,17 @@ const dispatchPlanColumns = [
         )
     },
     {
-        dataField: 'distance',
+        dataField: 'route_distance',
         text: 'Route Distance',
         sort: true,
     },
     {
-        dataField: 'route_tat',
+        dataField: 'scheduled_date',
         text: 'Date',
         sort: true,
     },
     {
-        dataField: 'time',
+        dataField: 'route_tat',
         text: 'Dispatch Time',
         sort: true,
     },
@@ -81,8 +81,11 @@ const dispatchPlanColumns = [
         text: 'Action',
         sort: true,
         formatter: (row, cell) => (
-            <Button color="primary">Raise RFQ</Button>
+            <Button color="primary" >Raise RFQ
+            </Button>
+
         )
+
 
 
     }
@@ -113,16 +116,22 @@ const dispatchListColumns = [
 const LoadingPlan = ({row}) => {
 
     return (
-        <div className={"animated slideInDown lightSpeedIn"} style={{marginBottom: 60, marginTop: 20}}>
+        <div className={"animated slideInDown lightSpeedIn"} style={{marginBottom: 60}}>
+            <Card>
+                <CardHeader>
+                    <i className="fa fa-align-justify"/>Loading Plan
+                    <small className="text-muted"/>
+                </CardHeader>
             <Row>
                 <Col lg={7}>
                     <DataTable columns={dispatchListColumns} data={row.items}/>
                 </Col>
-                <Col lg={4}>
+                <Col lg={5}>
                     <iframe src={row.route_link} frameBorder="0" style={{'height':'100%', 'width':'100%'}} />
                     {/*<DispatchMapWrapper/>*/}
                 </Col>
             </Row>
+            </Card>
         </div>
     )
 };
@@ -228,7 +237,9 @@ export default (props) => {
             <Col lg={12}>
                 <Card>
                     <CardHeader>
-                        <b>Dispatch Plan</b>
+                        <i className="fa fa-align-justify"/>Dispatch Plan
+                        <small className="text-muted"/>
+
                         <Row>
                             <Col sm="3">
                                 <div className="callout callout-info">

@@ -18,19 +18,19 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 export default () => {
     const [data, setData] = useState([]);
     const [kpiData, setKpiData] = useState([
-        // {total_time:""},
-        // {total_trucks:""},
-        // {total_orders:""},
-        // {total_orders_planned:""},
-        // {total_rfq:""},
-        // {total_bids:""},
-        // {total_orders_hold:""},
-        // {total_orders_delayed:""},
-        // {total_orders_pending:""},
-        // {total_trucks_assigned:""},
-        // {total_trucks_in_transit:""},
-        // {total_weight:""},
-        // {total_distance:""},
+        {total_time:""},
+        {total_trucks:""},
+        {total_orders:""},
+        {total_orders_planned:""},
+        {total_rfq:""},
+        {total_bids:""},
+        {total_orders_hold:""},
+        {total_orders_delayed:""},
+        {total_orders_pending:""},
+        {total_trucks_assigned:""},
+        {total_trucks_in_transit:""},
+        {total_weight:""},
+        {total_distance:""},
 
     ]);
 
@@ -45,7 +45,8 @@ export default () => {
             refreshing();
             const kpi = await getKPIData();
             setKpiData(kpi);
-        console.log(kpiData ,"wfnwdiacoaoashoasdosjdoasjdo", setKpiData)
+            console.log(kpi, "kpiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+        console.log(kpiData ,"wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
         };
 
         loadApiData();
@@ -140,9 +141,11 @@ export default () => {
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
-                                <small className="text-muted">New Clients</small>
+                                <small className="text-muted">Total Bids received</small>
                                 <br />
-                                <strong className="h4">{kpiData.total_trucks}</strong>
+                                {
+                                    kpiData.map(item=>(<strong className="h4">{item.total_bids}</strong>))}
+
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
                                 </div>
@@ -150,18 +153,22 @@ export default () => {
                         </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
-                                <small className="text-muted">Recurring Clients</small>
+                                <small className="text-muted">Total RFQ Raised</small>
                                 <br />
-                                <strong className="h4">22,643</strong>
+                                {
+                                    kpiData.map(item=>(<strong className="h4">{item.total_rfq}</strong>))}
+
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
                                 </div>
                             </div>
                         </Col><Col sm="3">
                         <div className="callout callout-info">
-                            <small className="text-muted">New Clients</small>
+                            <small className="text-muted">Total Trucks Assigned</small>
                             <br />
-                            <strong className="h4">9,123</strong>
+                            {
+                                kpiData.map(item=>(<strong className="h4">{item.total_trucks_assigned}</strong>))}
+
                             <div className="chart-wrapper">
                                 <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
                             </div>
@@ -169,9 +176,11 @@ export default () => {
                     </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
-                                <small className="text-muted">Recurring Clients</small>
+                                <small className="text-muted">Total Trucks In Transit</small>
                                 <br />
-                                <strong className="h4">22,643</strong>
+
+                                {
+                                    kpiData.map(item=>(<strong className="h4">{item.total_trucks}</strong>))}
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
                                 </div>
