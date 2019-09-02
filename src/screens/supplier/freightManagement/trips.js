@@ -8,6 +8,23 @@ import {liveAvailableTrucks} from "../../../helpers/api";
 import Loader from "../../../components/loader";
 import {Link} from "react-router-dom";
 import Button from "reactstrap/es/Button";
+import {uploadPOD} from "../../../helpers/api";
+import Upload from "../../../components/upload";
+
+const rightButtons = (props) => (
+    <div style={{display: 'inline-block'}}>
+        <Upload/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <Button color={"link"} onClick={() => {
+            refreshing();
+            uploadPOD();
+        }}>
+            <i className={"fa fa-refresh"}/> &nbsp;
+            Refresh
+        </Button>
+    </div>
+);
 
 const columns = [
     {
@@ -69,6 +86,23 @@ const columns = [
         )
 
     },
+
+    {
+        dataField: 'LR	',
+        text: 'Generate/Edit LR',
+        sort: true,
+        isDummyField: true,
+        formatter: (cell, row) => (
+            <div>
+                <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
+                    <Button color="primary">
+                       Generate LR
+                    </Button>
+                </Link>
+            </div>
+        )
+
+    },
 ];
 
 
@@ -112,6 +146,7 @@ export default () => {
                                         hover
                                         condensed
                                         striped
+                                        right={rightButtons}
 
                                         bordered={false}
                                         pagination={paginationFactory()}

@@ -8,6 +8,15 @@ import {
 } from 'reactstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import {createNewRFQ} from "../../../helpers/api";
+import SmallChartCard from "../../../components/smallChartCard";
+import {
+    cardChartData1, cardChartData2, cardChartData3, cardChartData4,
+    totalDistanceConfig,
+    totalOrdersConfig,
+    totalTruckConfig,
+    totalWeightConfig
+} from "../../../data/mockCharts";
+import {Bar} from "react-chartjs-2";
 
 
 export default () => {
@@ -34,6 +43,10 @@ export default () => {
             [name]: value
         });
     };
+    const [totalOrders] = useState(cardChartData1);
+    const [trucksDispatchedByMonth] = useState(cardChartData2);
+    const [totalWeight] = useState(cardChartData3);
+    const [totalDistance] = useState(cardChartData4);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -46,14 +59,17 @@ export default () => {
     };
 
     return (
-        <Card>
-            <CardHeader>
-                <strong>Post New RFQ</strong>
+        <Card className={"post-new-rfq-card"} style={{display: '-webkit-box'}}>
+           <Col md={4} style={{padding: '0',boxShadow: '1px 0px 1px #e6e6e6'}}>
+
+
+            <CardHeader style={{textAlign:'center' ,boxShadow: '1px 0px 1px #e6e6e6'}}>
+                <strong>Location Details</strong>
             </CardHeader>
             <CardBody>
                 <Form method={'post'} onSubmit={handleSubmit}>
                     <Row form>
-                        <Col md={4}>
+                        <Col md={12}>
                             <FormGroup>
                                 <Label for="origin">Origin</Label>
                                 {/*<Input type="text" name="origin" id="origin" placeholder="ex: Delhi"/>*/}
@@ -63,7 +79,7 @@ export default () => {
                                 />
                             </FormGroup>
                         </Col>
-                        <Col md={4}>
+                        <Col md={12}>
                             <FormGroup>
                                 <Label for="destination">Destination</Label>
                                 <GooglePlacesAutocomplete
@@ -72,7 +88,7 @@ export default () => {
                                 />
                             </FormGroup>
                         </Col>
-                        <Col md={4}>
+                        <Col md={12}>
                             <FormGroup>
                                 <Label for="scheduled_date">Departure Date and Time</Label>
                                 <Input type="datetime-local" name="scheduled_date" id="scheduled_date" valid={form.scheduled_date}
@@ -80,8 +96,21 @@ export default () => {
                             </FormGroup>
                         </Col>
                     </Row>
+
+                    <br/><br/><br/>
+                </Form>
+            </CardBody>
+            </Col>
+           <Col md={4} style={{padding: '0',boxShadow: '1px 0px 1px #e6e6e6'}}>
+
+            <CardHeader style={{textAlign:'center' ,boxShadow: '1px 0px 1px #e6e6e6'}}>
+                <strong>Vehicle Details</strong>
+            </CardHeader>
+            <CardBody>
+                <Form method={'post'} onSubmit={handleSubmit}>
+
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <FormGroup>
                                 <Label for="truck_type">Truck Type</Label>
                                 <Input type="select" name="truck_type" id="truck_type" onChange={handleInputChange}>
@@ -92,7 +121,7 @@ export default () => {
                                 </Input>
                             </FormGroup>
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <FormGroup>
                                 <Label for="truck_name">Truck Name</Label>
                                 <Input type="select" name="truck_name" id="truck_name" onChange={handleInputChange}>
@@ -103,7 +132,7 @@ export default () => {
                                 </Input>
                             </FormGroup>
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <FormGroup>
                                 <Label for="total_trucks">Number of Trucks</Label>
                                 <Input type="number" name="total_trucks" id="total_trucks" value={form.total_trucks}
@@ -111,15 +140,37 @@ export default () => {
                             </FormGroup>
                         </Col>
                     </Row>
+
+                    <br/><br/><br/>
+                </Form>
+            </CardBody>
+            </Col>
+           <Col md={4} style={{padding: '0',boxShadow: '1px 0px 1px #e6e6e6'}}>
+
+            <CardHeader style={{textAlign:'center' ,boxShadow: '1px 0px 1px #e6e6e6'}}>
+                <strong>Material Details</strong>
+            </CardHeader>
+            <CardBody>
+                <Form method={'post'} onSubmit={handleSubmit}>
+
                     <Row form>
-                        <Col lg={4}>
+                        <Col lg={8}>
                             <FormGroup>
                                 <Label for="weight">Weight</Label>
                                 <Input type="number" name="weight" id="weight" value={form['weight']}
                                        onChange={handleInputChange}/>
                             </FormGroup>
+                        </Col><Col lg={4}>
+                            <FormGroup>
+                                <Label for="weight">Unit</Label>
+                                <Input type="select" name="material_type" id="material_type" onChange={handleInputChange}>
+                                    <option selected disabled>---- Select ----</option>
+                                    <option value="Fragile">Ton</option>
+                                    <option value="Non-Fragile">KG</option>
+                                </Input>
+                            </FormGroup>
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <FormGroup>
                                 <Label for="material_type">Material Type</Label>
                                 <Input type="select" name="material_type" id="material_type" onChange={handleInputChange}>
@@ -129,26 +180,30 @@ export default () => {
                                 </Input>
                             </FormGroup>
                         </Col>
-                        <Col md={4}>
+                        <Col md={12}>
                             <FormGroup>
                                 <Label for="offered_price">Offered Price</Label>
                                 <Input type="number" name="offered_price" id="offered_price" value={form.offered_price}
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
-                    </Row>
-                    <Row form>
-                        <Col lg={12}>
-                            <Label for="id_comments">Comments</Label>
-                            <Input type="textarea" name="id_comments" id="id_comments" value={form.comments}
-                                   onChange={handleInputChange}/>
-                        </Col>
+
                     </Row>
                     <br/><br/><br/>
-                    <Button color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;
-                    <Button color={"link"} size={"lg"}>Cancel</Button>
                 </Form>
+
+                    <Button color={"primary"} size={"lg"} onClick={handleSubmit}>Create</Button> &nbsp;&nbsp;&nbsp;
+                    <Button color={"link"} size={"lg"}>Cancel</Button>
+                    <Col lg={12}>
+                        <Label for="id_comments">Comments</Label>
+                        <Input type="textarea" name="id_comments" id="id_comments" value={form.comments}
+                               onChange={handleInputChange}/>
+                    </Col>
             </CardBody>
+            </Col>
         </Card>
-    )
+
+
+
+ )
 }

@@ -39,13 +39,7 @@ const supplierNavigation = [
         url: '/freight/financial',
         icon: 'fa fa-money',
     },
-    {
-        name: 'Edit Invoice',
-        component: lazy(() => import('../screens/supplier/forms/editInvoice')),
-        url: '/freight/edit-invoice/:id',
-        icon: 'fa fa-money',
-        exact: true
-    },{
+    ,{
         name: 'Bid Now',
         component: lazy(() => import('../screens/supplier/forms/bidNow')),
         url: '/freight/bid-now/:id',
@@ -206,6 +200,11 @@ const supplierExtraRoutes = [
         path: '/freight/request-for-quotation/bids/:id',
         component: lazy(() => import('../screens/shipper/freightManagement/bids')),
         name: 'View Bids',
+        exact: true
+    },{
+        path: '/supplier/invoiceapi/:id',
+        component: lazy(() => import('../screens/supplier/forms/editInvoice')),
+        name: 'Invoices',
         exact: true
     },
     {

@@ -6,7 +6,7 @@ import {
 } from 'reactstrap';
 
 export default ({data, title,id ,vehicle,grossWeight,volumeUtilization,route,routeDistance,routeTAT,dispatchTime,options, type: CartType = Line, bg='primary', container=true}) => (
-    <Card className={`text-white bg-${bg}`} style={{height: '5vw', width:'5vw'}}>
+    <Card className={`text-white bg-${bg}`} >
         <CardBody className="pb-0">
             <b><div>{title}</div></b>
 

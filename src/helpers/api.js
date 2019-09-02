@@ -4,7 +4,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://192.168.0.121:8000/";
+const BASE_URL = "http://192.168.0.135:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -15,6 +15,7 @@ const CREATE_ACCOUNT_SHIPPER = 'shippercreateapi/';
 const CREATE_ACCOUNT_SUPPLIER = 'suppliercreateapi/';
 const USER_DETAILS = "/auth/user/meta/";
 
+const GET_INVOICE = '/suppliers/invoiceapi/';
 const USERNAME_AVAILABLE = '/auth/username/available/';
 const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 
@@ -29,7 +30,7 @@ const RFQ = '/api/rfq/';
 const LIVE_AVAILABLE_LOADS = '/api/liveavailableloads/';
 
 
-const RFQ_RESULTS = 'rfqresultsapi/';
+const RFQ_RESULTS = 'shipper/rfqresultsapi/';
 
 
 const SHIPPER_ALL_ORDER = '/api/all-orders/';
@@ -37,6 +38,7 @@ const SHIPPER_ALL_ORDER = '/api/all-orders/';
 const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
 const UPLOAD_ORDERS = 'shipper/uploadapi/';
 const PLAN_VEHICLE = 'shipper/packit-api/';
+const CONFIRM_RFQ = 'confirmapi/';
 
 
 //Dispatch plan and Items
@@ -44,15 +46,15 @@ const DISPATCH_HISTORY = 'api/dispatcherhistory/';
 const LOADING_PLAN = 'api/dispatchhistoryitem/';
 
 const CREATE_NEW_RFQ = 'createrfq/';
-const EDIT_INVOICE = 'api/invoice/1/';
+const EDIT_INVOICE = 'suppliers/invoiceapi/';
+
 
 
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
-const GET_INVOICE = '/api/invoice/';
 const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
 
 
-const INVOICE_TABLE_VIEW = '/api/invoices/';
+const INVOICE_TABLE_VIEW = '/suppliers/invoices/';
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -170,12 +172,14 @@ export const signUpUserSupplier = async (data) => {
 
 //API's for supplier:
 export const liveAvailableLoads = () => loadSecureUrl(LIVE_AVAILABLE_LOADS);
-export const rfqresults = () => loadSecureUrl(RFQ_RESULTS);
+export const rfqresults = (id) => loadSecureUrl(`${RFQ_RESULTS}${id}`);
 
 
 export const getShipperProfileDetails = () => loadSecureUrl(EDIT_PROFILE_SHIPPER);
 export const getSupplierProfileDetails = () => loadSecureUrl(EDIT_PROFILE_SUPPLIER);
-export const getInvoiceDetails = (id) => loadSecureUrl(`${GET_INVOICE}${id}/`);
+export const getInvoiceDetails = (id) => loadSecureUrl(`${GET_INVOICE}${id}/`,{
+    method: 'get'
+});
 
 
 export const invoiceView = () => loadSecureUrl(INVOICE_TABLE_VIEW);
@@ -215,6 +219,7 @@ export const uploadOrders = (file) => {
     });
 };
 export const planVehicle = () => loadSecureUrl(PLAN_VEHICLE);
+export const assignRFQs = (id, bi, owner_lr) => loadSecureUrl(`confirmapi/${id}/${bi}/${owner_lr}/`);
 
 //Dispatch plan and Items
 export const getDispatchHistory = () => loadSecureUrl(DISPATCH_HISTORY);
@@ -226,10 +231,10 @@ export const createNewRFQ = (data) => loadSecureUrl(CREATE_NEW_RFQ, {
 });
 export const editProfileShipper = (data) => loadSecureUrl(EDIT_PROFILE_SHIPPER, {
     data: data,
-    method: 'post'
+    method: 'patch'
 });
 
-export const editInvoice = (data,id) => loadSecureUrl(`${EDIT_INVOICE}${id}`, {
+export const editInvoice = (data,id) => loadSecureUrl(`${EDIT_INVOICE}${id}/`, {
     data: data,
     method: 'patch'
 });
@@ -237,3 +242,10 @@ export const editProfileSupplier = (data) => loadSecureUrl(EDIT_PROFILE_SUPPLIER
     data: data,
     method: 'patch'
 });
+
+export const getNumberOfWeightData = () => loadSecureUrl('weightvmonth/');
+export const getNumberOfTrucksData = () => loadSecureUrl('truckvmonth/');
+
+export const getKPIData =() => loadSecureUrl('api/kpi/')
+export const uploadPOD =() => loadSecureUrl('api/pod/')
+export const getMap =() => loadSecureUrl('map/')

@@ -7,7 +7,7 @@ import {
     FormGroup, Input,
     Label, Row,
 } from 'reactstrap';
-import {editProfileSupplier, getShipperProfileDetails, getSupplierProfileDetails} from "../../../helpers/api";
+import {editProfileSupplier, getSupplierProfileDetails} from "../../../helpers/api";
 
 
 export default () => {

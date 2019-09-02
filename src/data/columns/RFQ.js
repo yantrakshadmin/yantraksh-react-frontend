@@ -47,7 +47,9 @@ export default [
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
+                <Link to={{
+                    pathname:`/freight/request-for-quotation/bids/${row.id}`
+                }}>
                     <Button color="primary">
                         View Bids
                     </Button>

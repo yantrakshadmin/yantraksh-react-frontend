@@ -5,8 +5,8 @@ import {API_TOKENS} from "../data/storage";
 const initialState = {
     authenticated: false,
     user: {
-        username: 'Rohit_Kumar',
-        category: 'shipper',
+        username: '99',
+        category: 'Shipper',
         dp: 'https://api.adorable.io/avatars/50/faisal_manzer',
         email: 'trelos.in',
         pro: true

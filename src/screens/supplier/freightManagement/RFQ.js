@@ -2,9 +2,26 @@ import React, {useState, useEffect} from 'react';
 import {Card, CardBody, CardHeader} from 'reactstrap';
 import {rfq} from "../../../helpers/api";
 import DataTable from "../../../components/dataTable";
-import columns from "../../../data/columns/RFQ";
+
 import Button from "reactstrap/es/Button";
 import {Link} from "react-router-dom";
+
+const columns =[
+
+    {
+        'name':''
+
+    },{
+        'name':''
+
+    },{
+        'name':''
+
+    },{
+        'name':''
+
+    },
+]
 
 export default () => {
     const [data, setData] = useState([]);

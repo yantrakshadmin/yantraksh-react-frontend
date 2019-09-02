@@ -17,7 +17,7 @@ export default (props) => {
     // var id = window.location.href[len-1];
 
 
-    //TODO THIS IS NOT THE REACT METHOD TO FETCH ID FROM THE URLTT
+
 
     const [form, setForm] = useState({
         'id': '',

@@ -7,7 +7,7 @@ import {
     FormGroup, Input,
     Label, Row,
 } from 'reactstrap';
-import {getShipperProfileDetails} from "../../../helpers/api";
+import {editProfileShipper, getShipperProfileDetails} from "../../../helpers/api";
 
 
 export default () => {
@@ -48,7 +48,7 @@ export default () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await getShipperProfileDetails(ProfileForm);
+            await editProfileShipper(ProfileForm);
             alert('done')
         } catch (e) {
             alert(JSON.stringify(e));

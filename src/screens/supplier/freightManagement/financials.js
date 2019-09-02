@@ -44,12 +44,12 @@ const columns = [
 
     },
     {
-        dataField: 'Edit Invoice',
+        dataField: 'invoice_quiz',
         text: 'Edit Invoice',
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/freight/edit-invoice/${row.id}`}>
+                <Link to={`/supplier/invoiceapi/${row.invoice_quiz}/`}>
                     <Button color="primary">
                         Edit Invoice
                     </Button>
@@ -101,7 +101,7 @@ export default () => {
         const loadApiData = async () => {
             refreshing();
             const trucks = await invoiceView();
-            setData(trucks)
+            setData(trucks);
         };
 
         loadApiData();
