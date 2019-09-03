@@ -46,6 +46,13 @@ const supplierNavigation = [
         icon: 'fa fa-money',
         exact: true
     },
+    {
+        name: 'Edit LR',
+        component: lazy(() => import('../screens/supplier/forms/editLR')),
+        url: '/freight/edit-lr/:id',
+        icon: 'fa fa-money',
+        exact: true
+    },
 
 ];
 
