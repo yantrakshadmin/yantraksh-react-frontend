@@ -56,7 +56,7 @@ const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
 const GET_INVOICE = '/api/invoice/';
 const GET_LR = '/api/lr/';
 const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
-const LOADING_PLAN = 'api/dispatchhistoryitem/';
+
 
 
 const INVOICE_TABLE_VIEW = '/api/invoices/';
