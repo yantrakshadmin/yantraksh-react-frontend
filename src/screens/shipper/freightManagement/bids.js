@@ -5,7 +5,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import DataTable from "../../../components/dataTable";
 import {refreshing} from "../../../helpers/notifications";
-import {assignedTrucks, assignRFQs, liveAvailableTrucks, rfqresults} from "../../../helpers/api";
+import {assignRFQs, rfqresults} from "../../../helpers/api";
 import Loader from "../../../components/loader";
 import SmallChartCard from "../../../components/smallChartCard";
 import {
@@ -56,14 +56,14 @@ const columns = [
         text: 'Offered Price',
         sort: true
     }, {
-        dataField: 'offered_price',
+        dataField: 'taken_quizzes',
         text: 'Offered Price',
         sort: true,
         formatter: (cell, row) => (
             <div>
 
                     <Button color="primary" onClick={() =>
-                        assignRFQs(row.id, row.bi, row._owner) }>
+                        assignRFQs(row.quiz,row.id) }>
                         Assign Now!
 
                     </Button>

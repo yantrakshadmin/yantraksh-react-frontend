@@ -219,7 +219,9 @@ export const uploadOrders = (file) => {
     });
 };
 export const planVehicle = () => loadSecureUrl(PLAN_VEHICLE);
-export const assignRFQs = (id, bi, owner_lr) => loadSecureUrl(`confirmapi/${id}/${bi}/${owner_lr}/`);
+export const assignRFQs = (id, bi) => loadSecureUrl(`confirmapi/${id}/${bi}/`,{
+    method: 'post'
+});
 
 //Dispatch plan and Items
 export const getDispatchHistory = () => loadSecureUrl(DISPATCH_HISTORY);

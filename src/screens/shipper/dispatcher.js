@@ -9,6 +9,8 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 import {rfqRaised} from '../../helpers/notifications';
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 
+
+
 const DispatchMap = (props) => (
     <Map google={props.google}
          zoom={10}
@@ -288,6 +290,7 @@ export default (props) => {
                         <DataTable columns={dispatchPlanColumns} data={data} expandRow={{renderer: expandRow}}/>
                     </CardBody>
                 </Card>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"/>
             </Col>
         </Row>
     )
