@@ -4,82 +4,66 @@ import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {refreshing} from "../../../helpers/notifications";
-import {liveAvailableTrucks} from "../../../helpers/api";
+import {LRView} from "../../../helpers/api";
 import Loader from "../../../components/loader";
 import {Link} from "react-router-dom";
 import Button from "reactstrap/es/Button";
-import {uploadPOD} from "../../../helpers/api";
-import Upload from "../../../components/upload";
+import Upload from '../../../components/upload'
 
-const rightButtons = (props) => (
-    <div style={{display: 'inline-block'}}>
-        <Upload/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-        <Button color={"link"} onClick={() => {
-            refreshing();
-            uploadPOD();
-        }}>
-            <i className={"fa fa-refresh"}/> &nbsp;
-            Refresh
-        </Button>
-    </div>
-);
 
 const columns = [
     {
-        dataField: 'lr_number',
-        text: 'Truck Type',
+        dataField: 'lr_billingparty',
+        text: 'LR Billing Party',
         sort: true
 
     },
     {
-        dataField: 'lr_date',
-        text: 'Your Bids',
+        dataField: 'lr_declared',
+        text: 'LR Declared',
         sort: true,
 
     }, {
-        dataField: 'billing_party',
-        text: 'Origin',
+        dataField: 'lr_invoice_date',
+        text: 'LR Date',
+        sort: true
+    },
+    {
+        dataField: 'lr_consignor_name',
+        text: 'LR Consignor Name',
         sort: true
 
     },
     {
-        dataField: 'invoice_number',
-        text: 'Origin',
+        dataField: 'lr_consignee_name',
+        text: 'LR Consignee Name',
         sort: true
 
     },
     {
-        dataField: 'weight',
-        text: 'Destination',
-        sort: true
-
-    },
-    {
-        dataField: 'Quantity',
-        text: 'Destination',
-        sort: true
-
-    },
-    {
-        dataField: 'vehicle_type',
-        text: 'Destination',
-        sort: true
-
-    },
-
-
-    {
-        dataField: 'POD	',
-        text: 'Action',
+        dataField: 'Edit LR',
+        text: 'Edit LR',
         sort: true,
-        isDummyField: true,
+        formatter: (cell, row) => (
+            <div>
+                <Link to={`/freight/edit-lr/${row.id}`}>
+                    <Button color="primary">
+                        Edit LR
+                    </Button>
+                </Link>
+            </div>
+        )
+
+    },
+    {
+        dataField: 'Print LR',
+        text: 'Print LR',
+        sort: true,
         formatter: (cell, row) => (
             <div>
                 <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
                     <Button color="primary">
-                       Upload POD
+                        Print LR
                     </Button>
                 </Link>
             </div>
@@ -87,18 +71,18 @@ const columns = [
 
     },
 
+
     {
-        dataField: 'LR	',
-        text: 'Generate/Edit LR',
+        dataField: 'Upload POD',
+        text: 'Upload POD',
         sort: true,
-        isDummyField: true,
+        isDummyField:true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
-                    <Button color="primary">
-                       Generate LR
-                    </Button>
-                </Link>
+                <Upload to={`/freight/request-for-quotation/bids/${row.id}`}>
+                </Upload>
+
+
             </div>
         )
 
@@ -113,7 +97,7 @@ export default () => {
     useEffect(() => {
         const loadApiData = async () => {
             refreshing();
-            const trucks = await liveAvailableTrucks();
+            const trucks = await LRView();
             setData(trucks)
         };
 
@@ -124,7 +108,7 @@ export default () => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> Live Trucks <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/>Financial<small className="text-muted"/>
                 </CardHeader>
                 <CardBody>
                     <ToolkitProvider
@@ -146,7 +130,6 @@ export default () => {
                                         hover
                                         condensed
                                         striped
-                                        right={rightButtons}
 
                                         bordered={false}
                                         pagination={paginationFactory()}
