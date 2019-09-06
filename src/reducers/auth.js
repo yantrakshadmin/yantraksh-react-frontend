@@ -7,7 +7,7 @@ const initialState = {
     user: {
         username: '99',
         category: 'Shipper',
-        dp: 'https://api.adorable.io/avatars/50/faisal_manzer',
+        dp: 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjZk9P1rrfkAhUUinAKHYYxAucQjRx6BAgBEAQ&url=https%3A%2F%2Fstackoverflow.com%2Fq%2F38576264&psig=AOvVaw1D5ZWppv49EdbMMoL-q-I1&ust=1567693334854058',
         email: 'trelos.in',
         pro: true
     }

@@ -6,7 +6,7 @@ import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import {USER_SIGN_OUT} from "../../actions";
 
 import logo from '../../assets/img/brand/Yantraksh Logo.png'
-import sygnet from '../../assets/img/brand/sygnet.svg'
+import sygnet from '../../assets/img/brand/sygnet.png'
 import {Link} from "react-router-dom";
 
 
@@ -35,15 +35,15 @@ class DefaultHeader extends Component {
                     <UncontrolledDropdown nav direction="down">
                         <DropdownToggle nav>
                             {username}
-                            <img src={dp} className="img-avatar" alt={email} />
+                            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTevazNrV7CSpxiuD6JK9K0q9ZD9BkEfcqGd7_zOCGaOj-4vCCX"} className="img-avatar" alt={email} />
                         </DropdownToggle>
                         <DropdownMenu right>
                             <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>
-                            <DropdownItem><i className="fa fa-bell-o"></i> Updates<Badge color="info">42</Badge></DropdownItem>
-                            <DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>
-                            <DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>
-                            <DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>
-                            <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
+                            {/*<DropdownItem><i className="fa fa-bell-o"></i> Updates<Badge color="info">42</Badge></DropdownItem>*/}
+                            {/*<DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>*/}
+                            {/*<DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>*/}
+                            {/*<DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>*/}
+                            {/*<DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>*/}
                             <DropdownItem href="freight/edit-profile/new">
 
 
@@ -54,11 +54,11 @@ class DefaultHeader extends Component {
 
 
                             </DropdownItem>
-                            <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
-                            <DropdownItem><i className="fa fa-usd"></i> Payments<Badge color="secondary">42</Badge></DropdownItem>
-                            <DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
+                            {/*<DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>*/}
+                            <DropdownItem><i className="fa fa-usd"></i> Payments<Badge color="secondary">2</Badge></DropdownItem>
+                            {/*<DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>*/}
+                            {/*<DropdownItem divider />*/}
+                            {/*<DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>*/}
                             <DropdownItem onClick={signOut}><i className="fa fa-lock"></i> Logout</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>

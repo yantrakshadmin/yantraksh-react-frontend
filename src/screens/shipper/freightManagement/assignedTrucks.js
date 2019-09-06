@@ -46,7 +46,7 @@ export default () => {
             const kpi = await getKPIData();
             setKpiData(kpi);
             console.log(kpi, "kpiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-        console.log(kpiData ,"wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
+            console.log(kpiData ,"wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
         };
 
         loadApiData();

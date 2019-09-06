@@ -36,8 +36,10 @@ export default (props) => {
 
             <br/><br/><br/>
             <h1>
-                <img src={`https://api.adorable.io/avatars/50/${data.id}`} alt=""
-                     style={{height: 50, width: 50, borderRadius: 25, marginRight: 10}}/>
+                <img
+                    src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTevazNrV7CSpxiuD6JK9K0q9ZD9BkEfcqGd7_zOCGaOj-4vCCX`}
+                    alt="profile"
+                    style={{height: 50, width: 50, borderRadius: 25, marginRight: 10}}/>
                 {name}
             </h1>
             <b>Name:</b> {data.name} <br/>

@@ -12,27 +12,26 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 export default (props) => {
 
 
-    const KPI= useState([
-        {total_time:""},
-        {total_trucks:""},
-        {total_orders:""},
-        {total_orders_planned:""},
-        {total_rfq:""},
-        {total_bids:""},
-        {total_orders_hold:""},
-        {total_orders_delayed:""},
-        {total_orders_pending:""},
-        {total_trucks_assigned:""},
-        {total_trucks_in_transit:""},
-        {total_weight:""},
-        {total_distance:""},
+    const KPI = useState([
+        {total_time: ""},
+        {total_trucks: ""},
+        {total_orders: ""},
+        {total_orders_planned: ""},
+        {total_rfq: ""},
+        {total_bids: ""},
+        {total_orders_hold: ""},
+        {total_orders_delayed: ""},
+        {total_orders_pending: ""},
+        {total_trucks_assigned: ""},
+        {total_trucks_in_transit: ""},
+        {total_weight: ""},
+        {total_distance: ""},
 
     ]);
 
-    console.log(KPI, "hash")
 
     const [data, setData] = useState([]);
-    const [KPIdata, setKPIData] = useState([]);
+    const [kpiData, setKPIData] = useState([]);
 
     useEffect(() => {
         const loadApiData = async () => {
@@ -42,9 +41,9 @@ export default (props) => {
 
         const loadKPIData = async () => {
             const kpi = await getKPIData();
-            console.log("kpi data h ye",kpi)
+            console.log("kpi data h ye", kpi)
             setKPIData(kpi);
-            console.log(setKPIData,"<--KPI data");
+            console.log(setKPIData, "<--KPI data");
         };
 
         loadKPIData();
@@ -141,51 +140,60 @@ export default (props) => {
 
     return (
 
-        <div>
+        <div className="animated fadeIn">
             <Card>
+
                 <CardHeader>
-                    <i className="fa fa-align-justify"/>Request For Quotation
-                    <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/> All Orders <small className="text-muted"/>
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
-                                <small className="text-muted">New Clients</small>
-                                <br />
-                                <strong className="h4">9,123</strong>
+                                <small className="text-muted">Total Bids received</small>
+                                <br/>
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_bids}</strong>))}
+
                                 <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
                                 </div>
                             </div>
                         </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
-                                <small className="text-muted">Recurring Clients</small>
-                                <br />
-
-                                        <strong className="h4"></strong>
-
+                                <small className="text-muted">Total RFQ Raised</small>
+                                <br/>
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_rfq}</strong>))}
 
                                 <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
+                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
                                 </div>
                             </div>
                         </Col><Col sm="3">
                         <div className="callout callout-info">
-                            <small className="text-muted">New Clients</small>
-                            <br />
-                            <strong className="h4">9,123</strong>
+                            <small className="text-muted">Total Trucks Assigned</small>
+                            <br/>
+                            {
+                                kpiData.map(item => (<strong className="h4">{item.total_trucks_assigned}</strong>))}
+
                             <div className="chart-wrapper">
-                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100}
+                                      height={30}/>
                             </div>
                         </div>
                     </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
-                                <small className="text-muted">Recurring Clients</small>
-                                <br />
-                                <strong className="h4">8,878</strong>
+                                <small className="text-muted">Total Trucks In Transit</small>
+                                <br/>
+
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_trucks}</strong>))}
                                 <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
+                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
                                 </div>
                             </div>
                         </Col>

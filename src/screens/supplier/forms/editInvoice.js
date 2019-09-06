@@ -20,44 +20,44 @@ export default (props) => {
     //TODO THIS IS NOT THE REACT METHOD TO FETCH ID FROM THE URLTT
 
     const [form, setForm] = useState({
-        'id': '',
-        'invoice_number': '',
-        'invoice_date': '',
-        'invoice_due_date': '',
-        'invoice_place_of_supply': '',
-        'invoice_destination': '',
-        'invoice_destination_address': '',
-        'invoice_destination_pincode': '',
-        'invoice_gst': '',
-
-        'invoice_quiz_id':'',
-
-
-        'invoice_salesperson': '',
-        'invoice_lr_number': '',
-        'invoice_vehicle_placement_date': '',
-        'invoice_vehicle_number': '',
-        'invoice_service_month': '',
-        'invoice_item_details': '',
-
-        'invoice_rate': '',
-        'invoice_tax': '',
-        'invoice_amount': '',
-        'invoice_quiz': '',
-        'invoice_owner': '',
-        'invoice_quantity': '',
-
-
-        'lr_number': '',
-        'billing_party_name': '',
-        'origin_address': '',
-        'origin_pincode': '',
-        'vehicle_placement_date': '',
-        'vehicle_number': '',
-        'item_details': '',
-        'item_quantity': '',
-        'total_amount': '',
-        'tax': '',
+        // 'id': '',
+        // 'invoice_number': '',
+        // 'invoice_date': '',
+        // 'invoice_due_date': '',
+        // 'invoice_place_of_supply': '',
+        // 'invoice_destination': '',
+        // 'invoice_destination_address': '',
+        // 'invoice_destination_pincode': '',
+        // 'invoice_gst': '',
+        //
+        // 'invoice_quiz_id':'',
+        //
+        //
+        // 'invoice_salesperson': '',
+        // 'invoice_lr_number': '',
+        // 'invoice_vehicle_placement_date': '',
+        // 'invoice_vehicle_number': '',
+        // 'invoice_service_month': '',
+        // 'invoice_item_details': '',
+        //
+        // 'invoice_rate': '',
+        // 'invoice_tax': '',
+        // 'invoice_amount': '',
+        // 'invoice_quiz': '',
+        // 'invoice_owner': '',
+        // 'invoice_quantity': '',
+        //
+        //
+        // 'lr_number': '',
+        // 'billing_party_name': '',
+        // 'origin_address': '',
+        // 'origin_pincode': '',
+        // 'vehicle_placement_date': '',
+        // 'vehicle_number': '',
+        // 'item_details': '',
+        // 'item_quantity': '',
+        // 'total_amount': '',
+        // 'tax': '',
 
     });
 

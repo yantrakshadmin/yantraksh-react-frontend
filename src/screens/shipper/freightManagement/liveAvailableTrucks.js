@@ -4,7 +4,7 @@ import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {refreshing} from "../../../helpers/notifications";
-import {liveAvailableTrucks} from "../../../helpers/api";
+import {assignedTrucks, getKPIData, liveAvailableTrucks} from "../../../helpers/api";
 import Loader from "../../../components/loader";
 import {Line} from "react-chartjs-2";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
@@ -58,6 +58,24 @@ const columns = [
 export default () => {
 
     const [data, setData] = useState([]);
+    const [kpiData, setKpiData] = useState([
+        {total_time: ""},
+        {total_trucks: ""},
+        {total_orders: ""},
+        {total_orders_planned: ""},
+        {total_rfq: ""},
+        {total_bids: ""},
+        {total_orders_hold: ""},
+        {total_orders_delayed: ""},
+        {total_orders_pending: ""},
+        {total_trucks_assigned: ""},
+        {total_trucks_in_transit: ""},
+        {total_weight: ""},
+        {total_distance: ""},
+
+    ]);
+
+
     const sparkLineChartData = [
         {
             data: [35, 23, 56, 22, 97, 23, 64],
@@ -143,56 +161,82 @@ export default () => {
             setData(trucks)
         };
 
+        const loadKpiData = async () => {
+            refreshing();
+            const kpi = await getKPIData();
+            setKpiData(kpi);
+            console.log(kpi, "kp");
+            console.log(kpiData, "wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
+        };
+
         loadApiData();
+        loadKpiData()
+
     }, []);
+
 
     return (
         <div className="animated fadeIn">
             <Card>
+
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> Live Trucks <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/> All Orders <small className="text-muted"/>
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
-                                <small className="text-muted">New Clients</small>
-                                <br />
-                                <strong className="h4">9,123</strong>
+                                <small className="text-muted">Total Bids received</small>
+                                <br/>
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_bids}</strong>))}
+
                                 <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
                                 </div>
                             </div>
                         </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
-                                <small className="text-muted">Recurring Clients</small>
-                                <br />
-                                <strong className="h4">22,643</strong>
+                                <small className="text-muted">Total RFQ Raised</small>
+                                <br/>
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_rfq}</strong>))}
+
                                 <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
+                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
                                 </div>
                             </div>
                         </Col><Col sm="3">
                         <div className="callout callout-info">
-                            <small className="text-muted">New Clients</small>
-                            <br />
-                            <strong className="h4">9,123</strong>
+                            <small className="text-muted">Total Trucks Assigned</small>
+                            <br/>
+                            {
+                                kpiData.map(item => (<strong className="h4">{item.total_trucks_assigned}</strong>))}
+
                             <div className="chart-wrapper">
-                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100}
+                                      height={30}/>
                             </div>
                         </div>
                     </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
-                                <small className="text-muted">Recurring Clients</small>
-                                <br />
-                                <strong className="h4">22,643</strong>
+                                <small className="text-muted">Total Trucks In Transit</small>
+                                <br/>
+
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_trucks}</strong>))}
                                 <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
+                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
                                 </div>
                             </div>
                         </Col>
                     </Row>
                 </CardHeader>
+
+
                 <CardBody>
                     <ToolkitProvider
                         keyField="id"
@@ -213,7 +257,6 @@ export default () => {
                                         hover
                                         condensed
                                         striped
-
                                         bordered={false}
                                         pagination={paginationFactory()}
                                         noDataIndication={Loader}

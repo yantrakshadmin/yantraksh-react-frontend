@@ -224,6 +224,12 @@ const supplierExtraRoutes = [
         exact: true
     },
     {
+        path: '/supplier/printinvoice/:id',
+        component: lazy(() => import('../screens/supplier/forms/printInvoice')),
+        name: 'Print Invoice',
+        exact: true
+    },
+    {
         path: '/supplier/profile/:id',
         component: lazy(() => import('../screens/supplier/profile')),
         name: 'Supplier Profile',

@@ -29,7 +29,6 @@ const columns = [
         sort: true
 
 
-
     },
     {
         dataField: 'invoice_amount',
@@ -64,7 +63,7 @@ const columns = [
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
+                <Link to={`/supplier/printinvoice/${row.invoice_quiz}`}>
                     <Button color="primary">
                         Print Invoice
                     </Button>
@@ -79,7 +78,7 @@ const columns = [
         dataField: 'Upload POD',
         text: 'Upload POD',
         sort: true,
-        isDummyField:true,
+        isDummyField: true,
         formatter: (cell, row) => (
             <div>
                 <Upload to={`/freight/request-for-quotation/bids/${row.id}`}>
@@ -111,7 +110,8 @@ export default () => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/>Financial<small className="text-muted"/>
+                    <i className="fa fa-align-justify"/>Financial
+                    <small className="text-muted"/>
                 </CardHeader>
                 <CardBody>
                     <ToolkitProvider

@@ -7,7 +7,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://0.0.0.0:8000/";
+const BASE_URL = "http://localhost:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -18,7 +18,6 @@ const CREATE_ACCOUNT_SHIPPER = 'shippercreateapi/';
 const CREATE_ACCOUNT_SUPPLIER = 'suppliercreateapi/';
 const USER_DETAILS = "/auth/user/meta/";
 
-// const GET_INVOICE = '/suppliers/invoiceapi/';
 const USERNAME_AVAILABLE = '/auth/username/available/';
 const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 
@@ -58,13 +57,14 @@ const EDIT_LR = '/suppliers/lrapi/';
 
 
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
-const GET_INVOICE = '/api/invoice/';
+const GET_INVOICE = '/suppliers/invoiceapi/';
 const GET_LR = '/api/lr/';
 const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
 
 
+
 const INVOICE_TABLE_VIEW = '/suppliers/invoices/';
-const LR_TABLE_VIEW = '/suppliers/lrs/';
+const LR_TABLE_VIEW = '/api/lr/';
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -145,7 +145,6 @@ export const getAPITokens = async (username, password) => {
         },
         method: "post"
     })
-
 };
 export const getUserDetails = () => {
 
