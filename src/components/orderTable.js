@@ -1,5 +1,18 @@
 import React, {Component} from 'react';
-import {Button, ButtonGroup, Card, CardBody, CardHeader, Col, Nav, NavItem, NavLink, Row} from 'reactstrap';
+import {
+    Button,
+    ButtonGroup,
+    Card,
+    CardBody,
+    CardHeader,
+    Col,
+    Input,
+    Label,
+    Nav,
+    NavItem,
+    NavLink,
+    Row
+} from 'reactstrap';
 import {
     loadOrders,
     markOrdersOnHold,
@@ -234,13 +247,26 @@ class OrderTable extends Component {
                     <i className={"fa fa-rocket"}/> &nbsp;
                     Plan Vehicle
                 </Button>
-
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button color={"success"}
                         onClick={this.planVehicleManually.bind(this)}
                         disabled={title === DISPATCHED_ORDERS}>
                     <i className={"fa fa-rocket"}/> &nbsp;
                     Plan Vehicle Manually
                 </Button>
+
+                <Label for="truck_type">Truck Type</Label>
+                <Input type="select" name="truck_type" id="truck_type">
+                    <option selected disabled>---- Select ----</option>
+                    <option value="1">Open</option>
+                    <option value="2">Container</option>
+                    <option value="3">Trailer</option>
+                </Input>
+
+
+
+
+
             </div>
         );
 

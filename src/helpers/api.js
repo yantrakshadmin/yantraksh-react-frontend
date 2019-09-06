@@ -41,7 +41,7 @@ const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
 const UPLOAD_ORDERS = 'shipper/uploadapi/';
 const PLAN_VEHICLE = 'shipper/packit-api/';
 
-const PLAN_VEHICLE_MANUALLY = 'manualpackit/';
+const PLAN_VEHICLE_MANUALLY = 'bhu/manualpackit/';
 const CONFIRM_RFQ = 'confirmapi/';
 
 
@@ -229,14 +229,16 @@ export const uploadOrders = (file) => {
     });
 };
 export const planVehicle = () => loadSecureUrl(PLAN_VEHICLE);
-export const planVehicleManuallyButton = (ids) => loadSecureUrl(PLAN_VEHICLE_MANUALLY, {
+
+export const planVehicleManuallyButton = (data) => loadSecureUrl(PLAN_VEHICLE_MANUALLY, {
     method: 'post',
     data: {
-        'select_items': 1,
-        'quiz-pids': ids
+        chosentruck: 20
     }
 
+
 });
+
 export const assignRFQs = (id, bi) => loadSecureUrl(`confirmapi/${id}/${bi}/`,{
     method: 'post'
 });

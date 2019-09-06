@@ -1,35 +1,36 @@
 import React, {useEffect, useState} from "react";
 import DataTable from "../../../components/dataTable";
 import {Button, Card, CardBody, Col, Row} from "reactstrap";
-import {GoogleApiWrapper, Map} from 'google-maps-react'
+import {GoogleApiWrapper, Map, Marker} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
 import {assignedTrucks, trackNow} from "../../../helpers/api";
 import {refreshing} from "../../../helpers/notifications";
 
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 
-const LoadingPlan = ({row}) => {
-    const latt = row.lat[0];
-    const long = row.lat[1];
+const DispatchMap = (props) => {
+    console.log(props, "here");
+
+    return <Map google={props.google}
+                zoom={10}
+                center={{
+                    lat: props.location.loc ? props.location[1].loc[0] : 28.689631,
+                    lng: props.location.loc ? props.location[1].loc[1] : 77.129890,
+                }}
+
+    >
+        <Marker
+            name={'Your position'}
+            position={{
+                lat: props.location.loc ? props.location[1].loc[0] : 28.689631,
+                lng: props.location.loc ? props.location[1].loc[1] : 77.129890,
+            }}
+        />
+
+
+    </Map>
 }
-
-
-const DispatchMap = (props) => (
-
-    <Map google={props.google}
-         zoom={10}
-         initialCenter={{
-             lat: 353,
-             lng: 455454,
-         }}
-    />
-);
 console.log(DispatchMap);
-
-const DispatchMapWrapper = GoogleApiWrapper({
-    apiKey: apiKey
-})(DispatchMap);
-
 
 const assignedTruckColumns = [
     {
@@ -114,6 +115,12 @@ const dispatchListColumns = [
 ];
 
 
+const DispatchMapWrapper = GoogleApiWrapper({
+    apiKey: apiKey,
+
+})(DispatchMap);
+
+
 export default (props) => {
     // "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8"
 
@@ -137,24 +144,23 @@ export default (props) => {
             getLoacation();
         }, [assignedTrucks], [trackNow]
     );
-
     return (
-        <Row style={{position: 'relative',flexWrap: 'nowrap', padding:'0'}}>
+        <Row style={{position: 'relative', flexWrap: 'nowrap', padding: '0'}}>
             {/*<DispatchMapWrapper/>*/}
 
             <Card sm={"6"} lg={"6"}>
                 <CardHeader>
                     <b>Dispatch Plan</b>
                 </CardHeader>
-                <CardBody sm={"6"} lg={"6"} md={"6"} xs={"6"} style={{ padding:'0'}} >
+                <CardBody sm={"6"} lg={"6"} md={"6"} xs={"6"} style={{padding: '0'}}>
                     <DataTable columns={assignedTruckColumns} data={data}/>
                 </CardBody>
             </Card>
 
 
-            <Col sm={"6"} lg={"6"} xs={"6"} xl={"6"} style={{padding:'0'}}>
+            <Col sm={"6"} lg={"6"} xs={"6"} xl={"6"} style={{padding: '0'}}>
 
-                <Card sm={"6"} lg={"6"} style={{padding:0,marginBottom:'0'}}>
+                <Card sm={"6"} lg={"6"} style={{padding: 0, marginBottom: '0'}}>
                     <CardHeader>
                         <b>Loading Plan</b>
                     </CardHeader>
@@ -165,18 +171,17 @@ export default (props) => {
                 </Card>
 
 
-                <Card >
+                <Card>
 
                     <CardHeader>
                         <b>Route</b>
                     </CardHeader>
-                    <CardBody  sm={"6"} lg={"6"}  style={{ padding:'0',height:'15vw'}}>
-                        <DispatchMapWrapper/>
+                    <CardBody sm={"6"} lg={"6"} style={{padding: '0', height: '15vw'}}>
+                        {<DispatchMapWrapper location={plan}/>}
                     </CardBody>
 
                 </Card>
             </Col>
-
 
 
         </Row>
