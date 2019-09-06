@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
-import {Card, NavLink, Nav, NavItem, CardBody, CardHeader, Button, ButtonGroup, Col, Row} from 'reactstrap';
-import {loadOrders, markOrdersOnHold, markOrdersRTD, planVehiclesForOrders} from "../actions/data";
+import {Button, ButtonGroup, Card, CardBody, CardHeader, Col, Nav, NavItem, NavLink, Row} from 'reactstrap';
+import {
+    loadOrders,
+    markOrdersOnHold,
+    markOrdersRTD,
+    planVehiclesForOrders,
+    planVehiclesManuallyForOrders
+} from "../actions/data";
 import {connect} from "react-redux";
 import {ALL_ORDERS, DISPATCHED_ORDERS, ON_HOLD_ORDERS, RTD_ORDERS} from "../data/orderTitles";
 import {refreshing} from "../helpers/notifications";
@@ -81,6 +87,11 @@ class OrderTable extends Component {
 
     planVehicle() {
         this.props.planVehicle(this.props.history.push);
+        // this.props.history.push('/orders/dispatched')
+    }
+
+    planVehicleManually() {
+        this.props.planVehicleManually(this.props.history.push);
         // this.props.history.push('/orders/dispatched')
     }
 
@@ -223,6 +234,13 @@ class OrderTable extends Component {
                     <i className={"fa fa-rocket"}/> &nbsp;
                     Plan Vehicle
                 </Button>
+
+                <Button color={"success"}
+                        onClick={this.planVehicleManually.bind(this)}
+                        disabled={title === DISPATCHED_ORDERS}>
+                    <i className={"fa fa-rocket"}/> &nbsp;
+                    Plan Vehicle Manually
+                </Button>
             </div>
         );
 
@@ -356,7 +374,8 @@ const mapDispatchToProps = (dispatch) => ({
     getOrders: () => dispatch(loadOrders()),
     markHold: (selected, redirect) => dispatch(markOrdersOnHold(selected, redirect)),
     markRTD: (selected, redirect) => dispatch(markOrdersRTD(selected, redirect)),
-    planVehicle: (redirect) => dispatch(planVehiclesForOrders(redirect))
+    planVehicle: (redirect) => dispatch(planVehiclesForOrders(redirect)),
+    planVehicleManually: (redirect) => dispatch(planVehiclesManuallyForOrders(redirect))
 });
 
 

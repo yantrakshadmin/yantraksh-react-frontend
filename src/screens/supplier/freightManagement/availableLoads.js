@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, CardBody, CardHeader} from 'reactstrap';
 import {liveAvailableLoads} from "../../../helpers/api";
 import DataTable from "../../../components/dataTable";
@@ -73,11 +73,7 @@ export default () => {
                     </Link>
                 </div>
             )
-
-
         },
-
-
     ];
 
     return (

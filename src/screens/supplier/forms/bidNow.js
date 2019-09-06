@@ -1,16 +1,9 @@
 import React, {useState} from 'react';
-import {
-    Button, Card,
-    CardBody,
-    CardHeader, Col, Form,
-    FormGroup, Input,
-    Label, Row,
-} from 'reactstrap';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import {createNewRFQ} from "../../../helpers/api";
+import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row,} from 'reactstrap';
+import {bidNow} from "../../../helpers/api";
 
 
-export default () => {
+export default (props) => {
 
     const [form, setForm] = useState({
         'vehicle': '',
@@ -18,6 +11,7 @@ export default () => {
 
 
     });
+
 
     const handleInputChange = (event) => {
         const target = event.target;
@@ -33,7 +27,8 @@ export default () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await createNewRFQ(form);
+            await bidNow(form, props.match.params.id);
+
             alert('done')
         } catch (e) {
             alert('error')

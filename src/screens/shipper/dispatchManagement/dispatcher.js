@@ -1,13 +1,15 @@
-import React, {useState, useEffect} from "react";
-import DataTable from "../../components/dataTable";
-import {Col, Row, Card, CardBody, Button} from "reactstrap";
-import {Map, GoogleApiWrapper} from 'google-maps-react'
+import React, {useEffect, useState} from "react";
+import DataTable from "../../../components/dataTable";
+import {Button, Card, CardBody, Col, Row} from "reactstrap";
+import {GoogleApiWrapper, Map} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
-import {getDispatchHistory} from "../../helpers/api";
+import {getDispatchHistory} from "../../../helpers/api";
 import {Line} from "react-chartjs-2";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
-import {rfqRaised} from '../../helpers/notifications';
+
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
+const lat = 287041;
+const lng = 77.1025;
 
 
 
@@ -15,8 +17,8 @@ const DispatchMap = (props) => (
     <Map google={props.google}
          zoom={10}
          initialCenter={{
-             lat: 35.5496939,
-             lng: -120.7060049
+             lat: 287041,
+             lng: 77.1025
          }}
 
     />
@@ -290,7 +292,7 @@ export default (props) => {
                         <DataTable columns={dispatchPlanColumns} data={data} expandRow={{renderer: expandRow}}/>
                     </CardBody>
                 </Card>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"/>
+
             </Col>
         </Row>
     )

@@ -36,7 +36,7 @@ export default (props) => {
             keyField={keyField}
             data={data}
             columns={columns}
-            // search
+            search
             exportCSV={{onlyExportSelection: true, exportAll: true}}
         >
             {

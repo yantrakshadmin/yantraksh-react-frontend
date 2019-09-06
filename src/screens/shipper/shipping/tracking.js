@@ -1,82 +1,116 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import DataTable from "../../../components/dataTable";
-import {Col, Row, Card, CardBody, Button} from "reactstrap";
-import {Map, GoogleApiWrapper} from 'google-maps-react'
+import {Button, Card, CardBody, Col, Row} from "reactstrap";
+import {GoogleApiWrapper, Map} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
+import {assignedTrucks, trackNow} from "../../../helpers/api";
+import {refreshing} from "../../../helpers/notifications";
 
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 
+const LoadingPlan = ({row}) => {
+    const latt = row.lat[0];
+    const long = row.lat[1];
+}
+
+
 const DispatchMap = (props) => (
+
     <Map google={props.google}
          zoom={10}
          initialCenter={{
-             lat: 35.5496939,
-             lng: -120.7060049
+             lat: 353,
+             lng: 455454,
          }}
-
     />
 );
+console.log(DispatchMap);
 
 const DispatchMapWrapper = GoogleApiWrapper({
     apiKey: apiKey
 })(DispatchMap);
 
-const dispatchPlanColumns = [
+
+const assignedTruckColumns = [
     {
-        dataField: 'supplier',
-        text: 'supplier',
+        dataField: 'origin',
+        text: 'Origin',
+        sort: true
+
+    }, {
+        dataField: 'destination',
+        text: 'Destination',
         sort: true
     }, {
-        dataField: 'date',
+        dataField: 'total_trucks',
+        text: 'NO. of trucks',
+
+    }, {
+        dataField: 'scheduled_date',
         text: 'Date',
-
+        sort: true,
     }, {
-        dataField: 'bidAmount',
-        text: 'Weight',
+        dataField: 'offered_price',
+        text: 'Offered Price',
         sort: true
-    },
-    {
-        dataField: 'name',
-        text: 'Name',
-        sort: true,
-    },
-
-    {
-        dataField: 'startTrip',
-        text: 'Start Trip',
-        sort: true,
-        formatter: (row, cell) => (
-            <Button color="primary">Start Trip</Button>
-        )
-
-
     },
     {
         dataField: 'trackNow',
+        isDummyField: true,
         text: 'Track Now',
         sort: true,
-        formatter: (row, cell) => (
-            <Button color="primary">Track Now!</Button>
+        formatter: (cell, row) => (
+            <div>
+
+                <Button color="primary" onClick={() =>
+                    trackNow(row.id)}>
+                    Track Now!
+
+                </Button>
+
+            </div>
         )
 
+    }];
 
-    },
 
-
-];
 const dispatchListColumns = [
     {
-        dataField: 'lastSeen',
-        text: 'Last Seen At',
-        sort: true
+        dataField: 'Date and Time',
+        text: 'Date and time ',
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.createdAt)
+
+        }
     },
     {
-        dataField: 'time',
-        text: 'Time',
-        sort: true
+        dataField: 'tel',
+        text: 'Location',
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.address)
+        }
     },
 
+    {
+        dataField: 'location',
+        text: 'Location',
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.loc[0])
+        }
+    },
 
+    {
+        dataField: 'location',
+        text: 'Location',
+        sort: true,
+        formatter: (cell, row) => {
+
+            return (row.loc[1])
+        }
+    },
 ];
 
 
@@ -87,124 +121,22 @@ export default (props) => {
     const [plan, setPlan] = useState([]);
 
     useEffect(() => {
-        setData([
-            {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            }, {
-                'supplier': 'YNT1151',
-                'date': 'Container 20ft sxl 7 TON',
-                'bidAmount': '7878700 KG',
-                'name': '778787%',
-            },
+            const getTrucks = async () => {
+                refreshing();
+                const truckData = await assignedTrucks();
+                setData(truckData);
+                console.log(truckData, "truck")
+            };
+            const getLoacation = async () => {
+                const locationPlan = await trackNow();
+                setPlan(locationPlan);
+                console.log(locationPlan, "locationPlan");
+            };
 
-        ]);
-
-
-        setPlan([
-            {
-                'lastSeen': '12:12:12',
-                'time':'433',
-            }, {
-                'lastSeen': '12:12:12',
-                'time':'433',
-            }, {
-                'lastSeen': '12:12:12',
-                'time':'433',
-            }, {
-                'lastSeen': '12:12:12',
-                'time':'433',
-            }, {
-                'lastSeen': '12:12:12',
-                'time':'433',
-            }, {
-                'lastSeen': '12:12:12',
-                'time':'433',
-            }, {
-                'lastSeen': '12:12:12',
-                'time':'433',
-            },
-
-
-        ]);
-    }, [setData, setPlan]);
+            getTrucks();
+            getLoacation();
+        }, [assignedTrucks], [trackNow]
+    );
 
     return (
         <Row style={{position: 'relative',flexWrap: 'nowrap', padding:'0'}}>
@@ -215,7 +147,7 @@ export default (props) => {
                     <b>Dispatch Plan</b>
                 </CardHeader>
                 <CardBody sm={"6"} lg={"6"} md={"6"} xs={"6"} style={{ padding:'0'}} >
-                    <DataTable columns={dispatchPlanColumns} data={data}/>
+                    <DataTable columns={assignedTruckColumns} data={data}/>
                 </CardBody>
             </Card>
 

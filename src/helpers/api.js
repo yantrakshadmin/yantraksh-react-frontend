@@ -7,7 +7,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://192.168.0.135:8000/";
+const BASE_URL = "http://0.0.0.0:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -18,6 +18,7 @@ const CREATE_ACCOUNT_SHIPPER = 'shippercreateapi/';
 const CREATE_ACCOUNT_SUPPLIER = 'suppliercreateapi/';
 const USER_DETAILS = "/auth/user/meta/";
 
+// const GET_INVOICE = '/suppliers/invoiceapi/';
 const USERNAME_AVAILABLE = '/auth/username/available/';
 const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 
@@ -40,6 +41,8 @@ const SHIPPER_ALL_ORDER = '/api/all-orders/';
 const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
 const UPLOAD_ORDERS = 'shipper/uploadapi/';
 const PLAN_VEHICLE = 'shipper/packit-api/';
+
+const PLAN_VEHICLE_MANUALLY = 'manualpackit/';
 const CONFIRM_RFQ = 'confirmapi/';
 
 
@@ -48,6 +51,8 @@ const DISPATCH_HISTORY = 'api/dispatcherhistory/';
 const LOADING_PLAN = 'api/dispatchhistoryitem/';
 
 const CREATE_NEW_RFQ = 'createrfq/';
+
+const BID_NOW = 'quizapi/';
 const EDIT_INVOICE = 'api/invoice/';
 const EDIT_LR = '/suppliers/lrapi/';
 
@@ -58,8 +63,7 @@ const GET_LR = '/api/lr/';
 const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
 
 
-
-const INVOICE_TABLE_VIEW = '/api/invoices/';
+const INVOICE_TABLE_VIEW = '/suppliers/invoices/';
 const LR_TABLE_VIEW = '/suppliers/lrs/';
 
 const getAccessToken = () => {
@@ -141,6 +145,7 @@ export const getAPITokens = async (username, password) => {
         },
         method: "post"
     })
+
 };
 export const getUserDetails = () => {
 
@@ -225,6 +230,14 @@ export const uploadOrders = (file) => {
     });
 };
 export const planVehicle = () => loadSecureUrl(PLAN_VEHICLE);
+export const planVehicleManuallyButton = (ids) => loadSecureUrl(PLAN_VEHICLE_MANUALLY, {
+    method: 'post',
+    data: {
+        'select_items': 1,
+        'quiz-pids': ids
+    }
+
+});
 export const assignRFQs = (id, bi) => loadSecureUrl(`confirmapi/${id}/${bi}/`,{
     method: 'post'
 });
@@ -234,6 +247,11 @@ export const getDispatchHistory = () => loadSecureUrl(DISPATCH_HISTORY);
 export const getLoadingPlan = (pk) => loadSecureUrl(`${LOADING_PLAN}${pk}`);
 
 export const createNewRFQ = (data) => loadSecureUrl(CREATE_NEW_RFQ, {
+    data: data,
+    method: 'post'
+});
+
+export const bidNow = (data, id) => loadSecureUrl(`${BID_NOW}${id}/`, {
     data: data,
     method: 'post'
 });
@@ -261,6 +279,7 @@ export const editProfileSupplier = (data) => loadSecureUrl(EDIT_PROFILE_SUPPLIER
 export const getNumberOfWeightData = () => loadSecureUrl('weightvmonth/');
 export const getNumberOfTrucksData = () => loadSecureUrl('truckvmonth/');
 
-export const getKPIData =() => loadSecureUrl('api/kpi/')
-export const uploadPOD =() => loadSecureUrl('api/pod/')
-export const getMap =() => loadSecureUrl('map/')
+export const getKPIData = () => loadSecureUrl('api/kpi/');
+export const uploadPOD = () => loadSecureUrl('api/pod/');
+export const trackNow = () => loadSecureUrl('track/96/');
+export const getMap = () => loadSecureUrl('map/');

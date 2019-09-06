@@ -39,13 +39,7 @@ const supplierNavigation = [
         url: '/freight/financial',
         icon: 'fa fa-money',
     },
-    ,{
-        name: 'Bid Now',
-        component: lazy(() => import('../screens/supplier/forms/bidNow')),
-        url: '/freight/bid-now/',
-        icon: 'fa fa-money',
-        exact: true
-    },
+
     {
         name: 'Edit LR',
         component: lazy(() => import('../screens/supplier/forms/editLR')),
@@ -142,15 +136,17 @@ const shipperNavigation = [
         name: 'Auto-Dispatcher',
         url: '/dispatcher',
         icon: 'fa fa-compass',
-        component: lazy(() => import('../screens/shipper/dispatcher')),
+        component: lazy(() => import('../screens/shipper/dispatchManagement/dispatcher')),
     },
 
     {
         name: 'Manual-Dispatcher',
-        url: '/dispatcher',
+        url: '/manual-dispatcher',
         icon: 'fa fa-compass',
-        component: lazy(() => import('../screens/shipper/dispatcher')),
+        component: lazy(() => import('../screens/shipper/dispatchManagement/manualDispatcher')),
     },
+
+
     {
         name: 'Shipping',
         url: '/shipping',
@@ -165,6 +161,13 @@ const shipperExtraRoutes = [
         name: 'View Bids',
         exact: true
     },
+    {
+        name: 'Manual-Dispatcher',
+        path: '/manual-dispatcher',
+        icon: 'fa fa-compass',
+        component: lazy(() => import('../screens/shipper/dispatchManagement/manualDispatcher')),
+    },
+
     {
         path: '/supplier/profile/:id',
         component: lazy(() => import('../screens/supplier/profile')),
@@ -205,7 +208,6 @@ const supplierExtraRoutes = [
         name: 'Bid Now',
         path: '/freight/bid-now/:id',
         component: lazy(() => import('../screens/supplier/forms/bidNow')),
-        url: '/freight/bid-now/',
         icon: 'fa fa-money',
         exact: true
     },
