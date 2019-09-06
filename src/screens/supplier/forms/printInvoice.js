@@ -15,45 +15,45 @@ import {refreshing} from "../../../helpers/notifications";
 export default (props) => {
 
     const [form, setForm] = useState({
-    //  'id': id,
-    // 'invoice_number': '',
-    //  'invoice_date': '',
-    //  'invoice_due_date': '',
-    //  'invoice_place_of_supply': '',
-    //  'invoice_destination': '',
-    //  'invoice_destination_address': '',
-    //  'invoice_destination_pincode': '',
-    //  'invoice_gst': '',
-    //
-    //  'invoice_quiz_id': '',
-    //
-    //
-    //  'invoice_salesperson': '',
-    //  'invoice_lr_number': '',
-    //  'invoice_vehicle_placement_date': '',
-    //  'invoice_vehicle_number': '',
-    //  'invoice_service_month': '',
-    //  'invoice_item_details': '',
-    //
-    //  'invoice_rate': '',
-    //  'invoice_tax': '',
+        //  'id': id,
+        // 'invoice_number': '',
+        //  'invoice_date': '',
+        //  'invoice_due_date': '',
+        //  'invoice_place_of_supply': '',
+        //  'invoice_destination': '',
+        //  'invoice_destination_address': '',
+        //  'invoice_destination_pincode': '',
+        //  'invoice_gst': '',
+        //
+        //  'invoice_quiz_id': '',
+        //
+        //
+        //  'invoice_salesperson': '',
+        //  'invoice_lr_number': '',
+        //  'invoice_vehicle_placement_date': '',
+        //  'invoice_vehicle_number': '',
+        //  'invoice_service_month': '',
+        //  'invoice_item_details': '',
+        //
+        //  'invoice_rate': '',
+        //  'invoice_tax': '',
 
-    // {invoice_amount:""}
-    //  'invoice_quiz': '',
-    //  'invoice_owner': '',
-    //  'invoice_quantity': '',
-    //
-    //
-    //  'lr_number': '',
-    //  'billing_party_name': '',
-    //  'origin_address': '',
-    //  'origin_pincode': '',
-    //  'vehicle_placement_date': '',
-    //  'vehicle_number': '',
-    //  'item_details': '',
-    //  'item_quantity': '',
-    //  'total_amount': '',
-    //  'tax': '',
+        // {invoice_amount:""}
+        //  'invoice_quiz': '',
+        //  'invoice_owner': '',
+        //  'invoice_quantity': '',
+        //
+        //
+        //  'lr_number': '',
+        //  'billing_party_name': '',
+        //  'origin_address': '',
+        //  'origin_pincode': '',
+        //  'vehicle_placement_date': '',
+        //  'vehicle_number': '',
+        //  'item_details': '',
+        //  'item_quantity': '',
+        //  'total_amount': '',
+        //  'tax': '',
 
     });
     //
@@ -94,13 +94,14 @@ export default (props) => {
     return (
 
         <div>
-            <div id="container" style={{"border": "1px solid #9e9e9e", "marginTop": "5vh"}}>
+            <div id="container" style={{"border": "1px solid #9e9e9e", "marginTop": "5vh", "margin": "0 15vw"}}>
                 <div id="header" style={{"borderBottom": "#9e9e9e"}}>
                     <p style={{
                         "textAlign": "left",
                         "marginBottom": "unset",
                         "paddingLeft": "6vw",
-                        "paddingTop": "2vh"
+                        "paddingTop": "2vh",
+                        "lineHeight": "1.2"
                     }}>
                         <strong>{data.invoice_salesperson}</strong><br></br>
                         <small>{data.invoice_destination_address}</small>
@@ -117,7 +118,7 @@ export default (props) => {
 
                 <div id="fromto">
                     <div id="from">
-                        <table>
+                        <table style={{"lineHeight": "1.5"}}>
                             <tr>
                                 <td style={{"paddingRight": "10vw"}}>#</td>
                                 <td><strong>:YNT{data.invoice_number}</strong></td>
@@ -139,12 +140,12 @@ export default (props) => {
 
                     </div>
                     <div id="to">
-                        <p>
-                            Place of Supply : {data.invoice_place_of_supply}<br></br>
-                            LR Number : {data.invoice_lr_number}<br></br>
-                            Vehicle Placement Date : {data.invoice_vehicle_placement_date}<br></br>
-                            Vehicle Number : {data.invoice_vehicle_number}<br></br>
-                            Service Month : {data.invoice_service_month}
+                        <p style={{"font-size": "1.1em", "lineHeight": "1.4"}}>
+                            Place of Supply : <strong>{data.invoice_place_of_supply}</strong><br></br>
+                            LR Number : <strong>{data.invoice_lr_number}</strong><br></br>
+                            Vehicle Placement Date : <strong>{data.invoice_vehicle_placement_date}</strong><br></br>
+                            Vehicle Number : <strong>{data.invoice_vehicle_number}</strong><br></br>
+                            Service Month : <strong>{data.invoice_service_month}</strong>
                         </p>
                     </div>
                 </div>
@@ -157,26 +158,20 @@ export default (props) => {
                             <th style={{"backgroundColor": "#F2F3F4"}}>Bill To</th>
                         </tr>
                         <tr>
-                            <td>{data.invoice_destination_address}<br></br>
+                            <td style={{"paddingLeft": "15px"}}>{data.invoice_destination_address}<br></br>
                             </td>
                         </tr>
                         <tr>
-                            <td>{data.invoice_destination}</td>
+                            <td style={{"paddingLeft": "15px"}}>{data.invoice_destination}</td>
+
+                        </tr>
+                        <tr>
+                            <td style={{"paddingLeft": "15px"}}>{data.invoice_destination_pincode}</td>
 
 
                         </tr>
                         <tr>
-                            <td>{data.invoice_destination_pincode}</td>
-
-
-                        </tr>
-                        <tr>
-                            <td>India <br></br></td>
-
-
-                        </tr>
-                        <tr>
-                            <td>{data.invoice_gst}</td>
+                            <td style={{"paddingLeft": "15px", "paddingBottom": "10px"}}>{data.invoice_gst}</td>
 
                         </tr>
 
@@ -209,24 +204,32 @@ export default (props) => {
 
                         </tbody>
                     </table>
-                    <div id="container" style={{"float": "right", "width": "50%", "display": "inline-block"}}>
+                    <div id="container"
+                         style={{"float": "right", "width": "50%", "display": "inline-block"}}>
                         <div id="to">
                             <p style={{
                                 "alignment": "right",
-                                "border": "solid 0.09px",
+                                "border": "solid 0.09px #9e9e9e",
                                 "width": "60%",
-                                "float": "right"
+                                "float": "right",
+                                "paddingBottom": "10px",
+                                "paddingLeft": "10px",
+                                "borderTop": "none",
+                                "borderBottom": "none"
                             }}>
                                 <container>
-
                                     <br></br><strong>Sub Total : <span style={{
                                     "float": "right",
                                     "margin-right": "2vw"
                                 }}> &#8377;{data.invoice_amount}</span></strong><br></br>
+
+
                                     <strong>Total : <span style={{
                                         "float": "right",
                                         "margin-right": "2vw"
-                                    }}>&#8377;{data.invoice_amount}<br></br></span></strong>
+                                    }}>&#8377;{data.invoice_amount}<br></br></span></strong><br></br>
+
+
                                     <strong>Balance Due : <span style={{
                                         "float": "right",
                                         "margin-right": "2vw"
@@ -237,9 +240,12 @@ export default (props) => {
                         <div id="to">
                             <p style={{
                                 "alignment": "right",
-                                "border": "solid 0.09px",
+                                "border": "solid 0.09px #9e9e9e",
                                 "width": "60%",
-                                "float": "right"
+                                "float": "right",
+                                "paddingBottom": "10px",
+                                "paddingLeft": "10px",
+                                "text-align": "center"
                             }}>
                                 <container>
                                     <br></br>
@@ -258,21 +264,24 @@ export default (props) => {
                     </div>
                     <div id="note" style={{"display": "inline-block", "width": "calc(50% - 2vw)"}}>
                         <h4>Note :</h4>
-                        <p>Terms & Conditions
-                            Bank Name: ICICI Bank
-                            Account Name: Yantraksh Logistics Pvt Ltd
-                            Account No: 8505004142
-                            IFSC: ICIC0000085
+                        <p>Terms & Conditions<br></br>
+                            Bank Name: ICICI Bank<br></br>
+                            Account Name: Yantraksh Logistics Pvt Ltd<br></br>
+                            Account No: 8505004142<br></br>
+                            IFSC: ICIC0000085<br></br>
                             <br></br><br></br>
                             1) The payment should be made by way of Account Payee Cheque / Demand Draft / NEFT /
                             RTGS in the name of
                             "Yantraksh Logistics".
+                            <br></br>
                             2) We are exempted under section 194 C, TDS shall not be deducted on any payment.
+                            <br></br>
                             3) Any Discrepancy in the invoice shall be informed within 7 days of the invoice
-                            submission at
-                            finance@yantraksh.com
+                            submission at finance@yantraksh.com
+                            <br></br>
                             4) Interest at 2% p.m. or part thereof will be charged if the bill is not paid on the
                             due date.
+                            <br></br>
                             5) Any dispute is subject to Anand Jurisdiction.
                         </p>
                     </div>
