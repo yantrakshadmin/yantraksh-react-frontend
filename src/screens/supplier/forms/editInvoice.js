@@ -12,13 +12,6 @@ import {editInvoice, getInvoiceDetails} from "../../../helpers/api";
 
 export default (props) => {
 
-    //
-    // var len = window.location.href.length;
-    // var id = window.location.href[len-1];
-
-
-    //TODO THIS IS NOT THE REACT METHOD TO FETCH ID FROM THE URLTT
-
     const [form, setForm] = useState({
         // 'id': '',
         // 'invoice_number': '',
@@ -63,7 +56,6 @@ export default (props) => {
 
 
     useEffect(() => {
-        console.log("path",props);
 
         const getNetwork = async () => {
 
