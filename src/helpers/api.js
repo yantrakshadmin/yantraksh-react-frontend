@@ -7,7 +7,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://localhost:8000/";
+const BASE_URL = "http://192.168.0.134:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -31,19 +31,13 @@ const RFQ = '/api/rfq/';
 //API for shipper
 const LIVE_AVAILABLE_LOADS = '/api/liveavailableloads/';
 
-
 const RFQ_RESULTS = 'shipper/rfqresultsapi/';
-
-
 const SHIPPER_ALL_ORDER = '/api/all-orders/';
-
 const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
 const UPLOAD_ORDERS = 'shipper/uploadapi/';
 const PLAN_VEHICLE = 'shipper/packit-api/';
-
 const PLAN_VEHICLE_MANUALLY = 'manualpackit/';
 const CONFIRM_RFQ = 'confirmapi/';
-
 
 //Dispatch plan and Items
 const DISPATCH_HISTORY = 'api/dispatcherhistory/';
@@ -55,16 +49,15 @@ const BID_NOW = 'quizapi/';
 const EDIT_INVOICE = 'api/invoice/';
 const EDIT_LR = '/suppliers/lrapi/';
 
-
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
 const GET_INVOICE = '/suppliers/invoiceapi/';
 const GET_LR = '/api/lr/';
 const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
 
-
-
 const INVOICE_TABLE_VIEW = '/suppliers/invoices/';
 const LR_TABLE_VIEW = '/api/lr/';
+
+const ALL_AVAILABLE_TRUCKS = 'api/trucksdb/';
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -228,14 +221,25 @@ export const uploadOrders = (file) => {
         method: 'post'
     });
 };
+export const uploadPODFile = (file, id) => {
+    let formData = new FormData();
+    formData.append('file', file);
+
+    return loadSecureUrl(`uploadpod/${id}/`, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+        data: formData,
+        method: 'post'
+    });
+};
 export const planVehicle = () => loadSecureUrl(PLAN_VEHICLE);
-export const planVehicleManuallyButton = (ids) => loadSecureUrl(PLAN_VEHICLE_MANUALLY, {
+export const planVehicleManuallyButton = (truckId, selected) => loadSecureUrl(PLAN_VEHICLE_MANUALLY, {
     method: 'post',
     data: {
-        'select_items': 1,
-        'quiz-pids': ids
+        'chosentruck': truckId,
+        'quiz-pids': selected
     }
-
 });
 export const assignRFQs = (id, bi) => loadSecureUrl(`confirmapi/${id}/${bi}/`,{
     method: 'post'
@@ -282,3 +286,4 @@ export const getKPIData = () => loadSecureUrl('api/kpi/');
 export const uploadPOD = () => loadSecureUrl('api/pod/');
 export const trackNow = () => loadSecureUrl('track/96/');
 export const getMap = () => loadSecureUrl('map/');
+export const allAvailableTrucks = () => loadSecureUrl(ALL_AVAILABLE_TRUCKS);

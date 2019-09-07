@@ -31,13 +31,11 @@ function Basic(props) {
 
                             <Button color={"primary"} size="lg" onClick={async () => {
                                 try {
-                                    await uploadOrders(acceptedFiles[0]);
+                                    await props.upload(acceptedFiles[0]);
                                     alert('Done')
-
-
                                 } catch (e) {
                                     console.log(e);
-                                    alert('Error in uploading. Please ensure file type is csv.')
+                                    alert('Error in uploading. Please ensure file type is correct.')
                                 }
                             }}>
                                 <i className={"icon-cloud-upload"}/> &nbsp;
@@ -45,10 +43,11 @@ function Basic(props) {
                             </Button>
 
                             <Link to={'/orders/all'}>
-                                <Button color={"error"} onClick={(e) => this.closeModal(e)}>
-                                    Cancel
-                                </Button>
+
                             </Link>
+                            <Button color={"error"} onClick={(e) => props.onClose(e)}>
+                                Cancel
+                            </Button>
 
                         </div>
                     ) : (
@@ -56,7 +55,7 @@ function Basic(props) {
                             <i className={"icon-cloud-upload"} style={{fontSize: '5rem'}}/>
                             <br/>
                             <input {...getInputProps()} />
-                            <h3>Drag & drop csv files here, or click to select files</h3>
+                            <h3>Drag & drop files here, or click to select files</h3>
                         </div>
                     )}
                 </div>
@@ -93,7 +92,6 @@ class Upload extends React.Component {
     }
 
     render() {
-
         return (
             <div style={{display: 'inline-block'}}>
                 <Modal
@@ -108,7 +106,7 @@ class Upload extends React.Component {
                         top: '25%',
                     }}
                 >
-                    <Basic/>
+                    <Basic upload={this.props.upload} onClose={this.toggle}/>
                 </Modal>
                 <Button color={"secondary"}
                         style={{backgroundColor: 'white'}} onClick={this.toggle}>
