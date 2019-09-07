@@ -27,7 +27,8 @@ export default (props) => {
         }, refPass = () => {
         }, loading = false, loaded = true, keyField = "id",
         select,
-        expandRow={},
+        expandRow = {},
+        section,
         ...unusedprops
     } = props;
 
@@ -54,6 +55,11 @@ export default (props) => {
                                 <Search.SearchBar {...xprops.searchProps} />
                             </div>
                         </div>
+                        {section ? (
+                            <div style={{paddingTop: 10, paddingBottom: 10}}>
+                                {section}
+                            </div>
+                        ) : null}
                         <BootstrapTable
                             {...xprops.baseProps}
                             ref={node => refPass(node)}

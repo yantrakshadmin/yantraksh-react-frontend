@@ -48,14 +48,13 @@ const columns = [
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/supplier/invoiceapi/${row.invoice_quiz}/`}>
+                <Link to={`/supplier/invoice/${row.invoice_quiz}/`}>
                     <Button color="primary">
                         Edit Invoice
                     </Button>
                 </Link>
             </div>
         )
-
     },
     {
         dataField: 'Print Invoice',
@@ -78,7 +77,6 @@ const columns = [
         sort: true,
         isDummyField: true,
         formatter: (cell, row) => {
-            console.log(row, 'HJBHJEDBHRGH RH R');
             return (
                 <div>
                     <Upload upload={async (file) => {

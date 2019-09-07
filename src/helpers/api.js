@@ -46,7 +46,7 @@ const LOADING_PLAN = 'api/dispatchhistoryitem/';
 const CREATE_NEW_RFQ = 'createrfq/';
 
 const BID_NOW = 'quizapi/';
-const EDIT_INVOICE = 'api/invoice/';
+const EDIT_INVOICE = 'suppliers/invoiceapi/';
 const EDIT_LR = '/suppliers/lrapi/';
 
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
@@ -241,7 +241,7 @@ export const planVehicleManuallyButton = (truckId, selected) => loadSecureUrl(PL
         'quiz-pids': selected
     }
 });
-export const assignRFQs = (id, bi) => loadSecureUrl(`confirmapi/${id}/${bi}/`,{
+export const assignRFQs = (id, bi) => loadSecureUrl(`confirmapi/${id}/${bi}/`, {
     method: 'post'
 });
 
@@ -264,12 +264,12 @@ export const editProfileShipper = (data) => loadSecureUrl(EDIT_PROFILE_SHIPPER, 
     method: 'patch'
 });
 
-export const editInvoice = (data,id) => loadSecureUrl(`${EDIT_INVOICE}${id}/`, {
+export const editInvoice = (data, id) => loadSecureUrl(`${EDIT_INVOICE}${id}/`, {
     data: data,
     method: 'patch'
 });
 
-export const editLR = (data,id) => loadSecureUrl(`${EDIT_LR}${id}/`, {
+export const editLR = (data, id) => loadSecureUrl(`${EDIT_LR}${id}/`, {
     data: data,
     method: 'patch'
 });

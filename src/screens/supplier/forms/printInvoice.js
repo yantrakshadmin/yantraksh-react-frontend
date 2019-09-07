@@ -14,69 +14,10 @@ import {refreshing} from "../../../helpers/notifications";
 
 export default (props) => {
 
-    const [form, setForm] = useState({
-        //  'id': id,
-        // 'invoice_number': '',
-        //  'invoice_date': '',
-        //  'invoice_due_date': '',
-        //  'invoice_place_of_supply': '',
-        //  'invoice_destination': '',
-        //  'invoice_destination_address': '',
-        //  'invoice_destination_pincode': '',
-        //  'invoice_gst': '',
-        //
-        //  'invoice_quiz_id': '',
-        //
-        //
-        //  'invoice_salesperson': '',
-        //  'invoice_lr_number': '',
-        //  'invoice_vehicle_placement_date': '',
-        //  'invoice_vehicle_number': '',
-        //  'invoice_service_month': '',
-        //  'invoice_item_details': '',
-        //
-        //  'invoice_rate': '',
-        //  'invoice_tax': '',
-
-        // {invoice_amount:""}
-        //  'invoice_quiz': '',
-        //  'invoice_owner': '',
-        //  'invoice_quantity': '',
-        //
-        //
-        //  'lr_number': '',
-        //  'billing_party_name': '',
-        //  'origin_address': '',
-        //  'origin_pincode': '',
-        //  'vehicle_placement_date': '',
-        //  'vehicle_number': '',
-        //  'item_details': '',
-        //  'item_quantity': '',
-        //  'total_amount': '',
-        //  'tax': '',
-
+    const [form, setForm] = useState({});
+    const [data, setData] = useState({
+        'invoice_transanctions': []
     });
-    //
-
-    const [data, setData] = useState([
-
-        // {id: id},
-        // {invoice_amount: ""},
-        // {invoice_date: ""},
-        // {invoice_destination_pincode: ""},
-        // {total_orders_planned: ""},
-        // {total_rfq: ""},
-        // {total_bids: ""},
-        // {total_orders_hold: ""},
-        // {total_orders_delayed: ""},
-        // {total_orders_pending: ""},
-        // {total_trucks_assigned: ""},
-        // {total_trucks_in_transit: ""},
-        // {total_weight: ""},
-        // {total_distance: ""},
-
-    ]);
-
 
     useEffect(() => {
 
@@ -111,9 +52,12 @@ export default (props) => {
         }
     };
 
+    console.log(data, '------- ooo ---------', data['invoice_transanctions']);
     return (
-
         <div>
+            <Button onClick={() => global.print()}>
+                Print Invoice
+            </Button>
             <div id="container" style={{"border": "1px solid #9e9e9e", "marginTop": "5vh", "margin": "0 15vw"}}>
                 <Form method={'post'} onSubmit={handleSubmit}>
                     <div id="header" style={{"borderBottom": "#9e9e9e"}}>
@@ -124,14 +68,14 @@ export default (props) => {
                             "paddingTop": "2vh",
                             "lineHeight": "1.2"
                         }}>
-                            <strong>{data.invoice_salesperson}</strong><br></br>
+                            <strong>{data.invoice_salesperson}</strong><br/>
                             <small>{data.invoice_destination_address}</small>
-                            <br></br>
+                            <br/>
                             <small>{data.invoice_destination_pincode}</small>
-                            <br></br>
-                            <strong>LR No: {data.invoice_lr_number}</strong><br></br>
+                            <br/>
+                            <strong>LR No: {data.invoice_lr_number}</strong><br/>
                             <small>Date: {data.invoice_due_date}</small>
-                            <br></br>
+                            <br/>
                             <small>GSTIN: {data.invoice_gst}</small>
                         </p>
 
@@ -212,211 +156,142 @@ export default (props) => {
                                 <th>IGST</th>
                                 <th>Amount</th>
                             </tr>
-                            <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
-                                <td>1</td>
-                                <td>Transportation</td>
-                                <td>{data.invoice_lr_number}</td>
-                                <td>{data.invoice_vehicle_number}</td>
-                                <td>{data.invoice_date}</td>
-                                <td>{data.invoice_quantity}</td>
-                                <td>0%</td>
-                                <td>{data.invoice_amount}</td>
-                            </tr>
-
-                            <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
-                                <td>2</td>
-                                <td>{data.invoice_transaction_1_descinvoice_transanction_1_desc}</td>
-                                <td>{data.invoice_transaction_1_lrinvoice_lr_number}</td>
-                                <td>{data.invoice_transaction_1_vehicleinvoice_vehicle_number}</td>
-                                <td>{data.invoice_transaction_1_dateinvoice_date}</td>
-                                <td>{data.invoice_transaction_1_qtyinvoice_quantity}</td>
-                                <td>{data.invoice_transaction_1_amount}</td>
-                                <td>{data.invoice_transaction_1_gstinvoice_amount}</td>
-                            </tr>
-
-                            <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
-                                <td>3</td>
-                                <td>{data.invoice_transaction_1_descinvoice_transanction_1_desc}</td>
-                                <td>{data.invoice_transaction_1_lrinvoice_lr_number}</td>
-                                <td>{data.invoice_transaction_1_vehicleinvoice_vehicle_number}</td>
-                                <td>{data.invoice_transaction_1_dateinvoice_date}</td>
-                                <td>{data.invoice_transaction_1_qtyinvoice_quantity}</td>
-                                <td>{data.invoice_transaction_1_amount}</td>
-                                <td>{data.invoice_transaction_1_gstinvoice_amount}</td>
-                            </tr>
-
-                            <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
-                                <td>4</td>
-                                <td>{data.invoice_transaction_1_descinvoice_transanction_1_desc}</td>
-                                <td>{data.invoice_transaction_1_lrinvoice_lr_number}</td>
-                                <td>{data.invoice_transaction_1_vehicleinvoice_vehicle_number}</td>
-                                <td>{data.invoice_transaction_1_dateinvoice_date}</td>
-                                <td>{data.invoice_transaction_1_qtyinvoice_quantity}</td>
-                                <td>{data.invoice_transaction_1_amount}</td>
-                                <td>{data.invoice_transaction_1_gstinvoice_amount}</td>
-                            </tr>
-
-                            <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
-                                <td>5</td>
-                                <td>{data.invoice_transaction_1_descinvoice_transanction_1_desc}</td>
-                                <td>{data.invoice_transaction_1_lrinvoice_lr_number}</td>
-                                <td>{data.invoice_transaction_1_vehicleinvoice_vehicle_number}</td>
-                                <td>{data.invoice_transaction_1_dateinvoice_date}</td>
-                                <td>{data.invoice_transaction_1_qtyinvoice_quantity}</td>
-                                <td>{data.invoice_transaction_1_amount}</td>
-                                <td>{data.invoice_transaction_1_gstinvoice_amount}</td>
-                            </tr>
-
-                            <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
-                                <td>6</td>
-                                <td>{data.invoice_transaction_1_descinvoice_transanction_1_desc}</td>
-                                <td>{data.invoice_transaction_1_lrinvoice_lr_number}</td>
-                                <td>{data.invoice_transaction_1_vehicleinvoice_vehicle_number}</td>
-                                <td>{data.invoice_transaction_1_dateinvoice_date}</td>
-                                <td>{data.invoice_transaction_1_qtyinvoice_quantity}</td>
-                                <td>{data.invoice_transaction_1_amount}</td>
-                                <td>{data.invoice_transaction_1_gstinvoice_amount}</td>
-                            </tr>
-
-                            <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
-                                <td>7</td>
-                                <td>{data.invoice_transaction_1_descinvoice_transanction_1_desc}</td>
-                                <td>{data.invoice_transaction_1_lrinvoice_lr_number}</td>
-                                <td>{data.invoice_transaction_1_vehicleinvoice_vehicle_number}</td>
-                                <td>{data.invoice_transaction_1_dateinvoice_date}</td>
-                                <td>{data.invoice_transaction_1_qtyinvoice_quantity}</td>
-                                <td>{data.invoice_transaction_1_amount}</td>
-                                <td>{data.invoice_transaction_1_gstinvoice_amount}</td>
-                            </tr>
-
-                            <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
-                                <td>8</td>
-                                <td>{data.invoice_transaction_1_descinvoice_transanction_1_desc}</td>
-                                <td>{data.invoice_transaction_1_lrinvoice_lr_number}</td>
-                                <td>{data.invoice_transaction_1_vehicleinvoice_vehicle_number}</td>
-                                <td>{data.invoice_transaction_1_dateinvoice_date}</td>
-                                <td>{data.invoice_transaction_1_qtyinvoice_quantity}</td>
-                                <td>{data.invoice_transaction_1_amount}</td>
-                                <td>{data.invoice_transaction_1_gstinvoice_amount}</td>
-                            </tr>
-
-                            <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
-                                <td>9</td>
-                                <td>{data.invoice_transaction_1_descinvoice_transanction_1_desc}</td>
-                                <td>{data.invoice_transaction_1_lrinvoice_lr_number}</td>
-                                <td>{data.invoice_transaction_1_vehicleinvoice_vehicle_number}</td>
-                                <td>{data.invoice_transaction_1_dateinvoice_date}</td>
-                                <td>{data.invoice_transaction_1_qtyinvoice_quantity}</td>
-                                <td>{data.invoice_transaction_1_amount}</td>
-                                <td>{data.invoice_transaction_1_gstinvoice_amount}</td>
-                            </tr>
-
-                            <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
-                                <td>10</td>
-                                <td>{data.invoice_transaction_1_descinvoice_transanction_1_desc}</td>
-                                <td>{data.invoice_transaction_1_lrinvoice_lr_number}</td>
-                                <td>{data.invoice_transaction_1_vehicleinvoice_vehicle_number}</td>
-                                <td>{data.invoice_transaction_1_dateinvoice_date}</td>
-                                <td>{data.invoice_transaction_1_qtyinvoice_quantity}</td>
-                                <td>{data.invoice_transaction_1_amount}</td>
-                                <td>{data.invoice_transaction_1_gstinvoice_amount}</td>
-                            </tr>
-
-
-                            </tbody>
-                        </table>
-                        <div id="container"
-                             style={{"float": "right", "width": "50%", "display": "inline-block"}}>
-                            <div id="to">
-                                <p style={{
-                                    "alignment": "right",
-                                    "border": "solid 0.09px #9e9e9e",
-                                    "width": "60%",
-                                    "float": "right",
-                                    "paddingBottom": "10px",
-                                    "paddingLeft": "10px",
-                                    "borderTop": "none",
-                                    "borderBottom": "none"
-                                }}>
-                                    <container>
+                            {
+                                data['invoice_transanctions'].map((transaction, itemId) => {
+                                    // const transaction = invoices['invoice_transanctions'];
+                                    return (
+                                        <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
+                                            <td>{itemId + 1}</td>
+                                            <td>{transaction['invoice_transaction_desc']}</td>
+                                            <td>{transaction['invoice_transaction_lr']}</td>
+                                            <td>{transaction['invoice_transaction_vehicle']}</td>
+                                            <td>{transaction['invoice_transaction_date']}</td>
+                                            <td>{transaction['invoice_transaction_qty']}</td>
+                                            <td>{transaction['invoice_transaction_amount']}</td>
+                                            <td>{transaction['invoice_transaction_gst']}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                            <tr>
+                                <td colSpan={8}>
+                                    <Button onClick={() => {
+                                        setData({
+                                            ...data,
+                                            invoice_transanctions: [
+                                                ...data['invoice_transanctions'],
+                                                {
+                                                    id: data['invoice_transanctions'].length,
+                                                    invoice_transaction_desc: '',
+                                                    invoice_transaction_lr: '',
+                                                    invoice_transaction_vehicle: '',
+                                                    invoice_transaction_date: '',
+                                                    invoice_transaction_qty: '',
+                                                    invoice_transaction_amount: '',
+                                                    invoice_transaction_gst: ''
+                                                }
+                                            ]
+                                        });
+                                    }}>
+                                        + Add Row
+                                        </Button>
+                                        </td>
+                                        </tr>
+                                        </tbody>
+                                        </table>
+                                        <div id="container"
+                                        style={{"float": "right", "width": "50%", "display": "inline-block"}}>
+                                        <div id="to">
+                                        <p style={{
+                                        "alignment": "right",
+                                        "border": "solid 0.09px #9e9e9e",
+                                        "width": "60%",
+                                        "float": "right",
+                                        "paddingBottom": "10px",
+                                        "paddingLeft": "10px",
+                                        "borderTop": "none",
+                                        "borderBottom": "none"
+                                        }}>
+                                        <container>
                                         <br></br><strong>Sub Total : <span style={{
                                         "float": "right",
                                         "margin-right": "2vw"
-                                    }}> &#8377;{data.invoice_amount}</span></strong><br></br>
+                                        }}> &#8377;{data.invoice_amount}</span></strong><br></br>
 
 
-                                        <Input type="text" name="invoice_amount" id="invoice_amount" value={data.invoice_amount}
-                                               onChange={handleInputChange}/>
+                                        <Input type="text" name="invoice_amount" id="invoice_amount"
+                                        value={data.invoice_amount}
+                                        onChange={handleInputChange}/>
 
 
                                         <strong>Total : <span style={{
-                                            "float": "right",
-                                            "margin-right": "2vw"
+                                        "float": "right",
+                                        "margin-right": "2vw"
                                         }}>&#8377;{data.invoice_amount}<br></br></span></strong><br></br>
 
 
                                         <strong>Balance Due : <span style={{
-                                            "float": "right",
-                                            "margin-right": "2vw"
+                                        "float": "right",
+                                        "margin-right": "2vw"
                                         }}>&#8377;{data.invoice_amount}<br></br></span></strong><br></br>
-                                    </container>
-                                </p>
-                            </div>
-                            <div id="to">
-                                <p style={{
-                                    "alignment": "right",
-                                    "border": "solid 0.09px #9e9e9e",
-                                    "width": "60%",
-                                    "float": "right",
-                                    "paddingBottom": "10px",
-                                    "paddingLeft": "10px",
-                                    "text-align": "center"
-                                }}>
-                                    <container>
+                                        </container>
+                                        </p>
+                                        </div>
+                                        <div id="to">
+                                        <p style={{
+                                        "alignment": "right",
+                                        "border": "solid 0.09px #9e9e9e",
+                                        "width": "60%",
+                                        "float": "right",
+                                        "paddingBottom": "10px",
+                                        "paddingLeft": "10px",
+                                        "text-align": "center"
+                                        }}>
+                                        <container>
                                         <br></br>
                                         <br></br><br></br><br></br><br></br>
                                         <strong>Authorized Signature</strong></container>
-                                </p>
-                            </div>
-                        </div>
+                                        </p>
+                                        </div>
+                                        </div>
 
-                    </div>
+                                        </div>
 
-                    <div id="summary">
-                        <div id="total">
+                                        <div id="summary">
+                                        <div id="total">
 
 
-                        </div>
-                        <div id="note" style={{"display": "inline-block", "width": "calc(50% - 2vw)"}}>
-                            <h4>Note :</h4>
-                            <p>Terms & Conditions<br></br>
-                                Bank Name: ICICI Bank<br></br>
-                                Account Name: Yantraksh Logistics Pvt Ltd<br></br>
-                                Account No: 8505004142<br></br>
-                                IFSC: ICIC0000085<br></br>
-                                <br></br><br></br>
-                                1) The payment should be made by way of Account Payee Cheque / Demand Draft / NEFT /
-                                RTGS in the name of
-                                "Yantraksh Logistics".
-                                <br></br>
-                                2) We are exempted under section 194 C, TDS shall not be deducted on any payment.
-                                <br></br>
-                                3) Any Discrepancy in the invoice shall be informed within 7 days of the invoice
-                                submission at finance@yantraksh.com
-                                <br></br>
-                                4) Interest at 2% p.m. or part thereof will be charged if the bill is not paid on the
-                                due date.
-                                <br></br>
-                                5) Any dispute is subject to Anand Jurisdiction.
-                            </p>
-                        </div>
+                                        </div>
+                                        <div id="note" style={{"display": "inline-block", "width": "calc(50% - 2vw)"}}>
+                                        <h4>Note :</h4>
+                                        <p>Terms & Conditions<br></br>
+                                        Bank Name: ICICI Bank<br></br>
+                                        Account Name: Yantraksh Logistics Pvt Ltd<br></br>
+                                        Account No: 8505004142<br></br>
+                                        IFSC: ICIC0000085<br></br>
+                                        <br/><br/>
+                                        1) The payment should be made by way of Account Payee Cheque / Demand Draft / NEFT /
+                                        RTGS in the name of
+                                        "Yantraksh Logistics".
+                                        <br/>
+                                        2) We are exempted under section 194 C, TDS shall not be deducted on any payment.
+                                        <br/>
+                                        3) Any Discrepancy in the invoice shall be informed within 7 days of the invoice
+                                        submission at finance@yantraksh.com
+                                        <br/>
+                                        4) Interest at 2% p.m. or part thereof will be charged if the bill is not paid on the
+                                        due date.
+                                        <br/>
+                                        5) Any dispute is subject to Anand Jurisdiction.
+                                        </p>
+                                        </div>
 
-                        <div id="footer">
-                            <p></p>
-                        </div>
-                    </div>
-                </Form>
-            </div>
-        </div>
-    )
-}
+                                        <div id="footer">
+                                        <p></p>
+                                        </div>
+                                        </div>
+                                        </Form>
+                                        </div>
+                                        </div>
+                                        )
+                                        }

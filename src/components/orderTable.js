@@ -14,7 +14,8 @@ import {
     ModalBody,
     ModalHeader,
     ModalFooter,
-    Input
+    Input,
+    Form
 } from 'reactstrap';
 import {
     loadOrders,
@@ -36,9 +37,18 @@ import {Line} from "react-chartjs-2";
 import {allAvailableTrucks, getKPIData, uploadOrders} from "../helpers/api";
 
 
-const filterData = (data, hold, rtd, dispatched) => {
+const filterData = (data, hold, rtd, dispatched, origin = null, destination = null) => {
+    console.log(origin, destination);
+
     let xd = [];
     data.map((row) => {
+        if (origin || destination) {
+            const originMatch = row.origin.toUpperCase() === origin || origin === '-';
+            const destinationMatch = row.destination.toUpperCase() === destination || destination === '-';
+            if(!(originMatch && destinationMatch))
+                return null
+        }
+
         if (!row.is_dispatched && !row.rtd && hold)
             xd.push(row);
 
@@ -78,9 +88,10 @@ class OrderTable extends Component {
             modal: false,
             trucks: [],
             selectedTruck: null,
-            truckType: ''
+            truckType: '',
+            originSelected: '-',
+            destinationSelected: '-'
         }
-
     }
 
     refPass = (node) => {
@@ -160,6 +171,31 @@ class OrderTable extends Component {
         return isValid;
     };
 
+    handleOnSelect = (row, isSelect) => {
+        if (isSelect) {
+            this.setState(() => ({
+                selected: [...this.state.selected, row.id]
+            }));
+        } else {
+            this.setState(() => ({
+                selected: this.state.selected.filter(x => x !== row.id)
+            }));
+        }
+    };
+
+    handleOnSelectAll = (isSelect, rows) => {
+        const ids = rows.map(r => r.id);
+        if (isSelect) {
+            this.setState(() => ({
+                selected: ids
+            }));
+        } else {
+            this.setState(() => ({
+                selected: []
+            }));
+        }
+    };
+
     render() {
         const {
             orders = [],
@@ -234,7 +270,6 @@ class OrderTable extends Component {
                 display: false,
             },
         };
-
 
         const makeSparkLineData = (dataSetNo, variant) => {
             const dataset = sparkLineChartData[dataSetNo];
@@ -353,6 +388,45 @@ class OrderTable extends Component {
             </Modal>
         );
 
+        const section = (
+            <div>
+                <Form>
+                    <Row form>
+                        <Col md={2}>
+                            <Input
+                                type="select"
+                                onChange={(e) => this.setState({
+                                    originSelected: e.target.value
+                                })}>
+                                <option selected value={'-'}>----- Origin -----</option>
+                                {
+                                    orders.map(item => item.origin)
+                                        .filter((value, index, self) => self.indexOf(value) === index)
+                                        .map(item => <option value={item.toUpperCase()}>{item}</option>)
+                                }
+                            </Input>
+                        </Col>
+                        <Col md={1} style={{textAlign: 'center'}}>
+                            to
+                        </Col>
+                        <Col md={2}>
+                            <Input type="select"
+                                   onChange={(e) => this.setState({
+                                       destinationSelected: e.target.value
+                                   })}>
+                                <option selected value={'-'}>----- Destination -----</option>
+                                {
+                                    orders.map(item => item.destination)
+                                        .filter((value, index, self) => self.indexOf(value) === index)
+                                        .map(item => <option value={item.toUpperCase()}>{item}</option>)
+                                }
+                            </Input>
+                        </Col>
+                    </Row>
+                </Form>
+            </div>
+        );
+
         return (
             (
                 <div>
@@ -388,20 +462,21 @@ class OrderTable extends Component {
                                                   width={100} height={30}/>
                                         </div>
                                     </div>
-                                </Col><Col sm="3">
-                                <div className="callout callout-info">
-                                    <small className="text-muted">Pending Orders</small>
-                                    <br/>
-                                    {
-                                        this.state.kpi.map(item => (
-                                            <strong className="h4">{item.total_orders_pending}</strong>
-                                        ))}
-                                    <div className="chart-wrapper">
-                                        <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
-                                              width={100} height={30}/>
+                                </Col>
+                                <Col sm="3">
+                                    <div className="callout callout-info">
+                                        <small className="text-muted">Pending Orders</small>
+                                        <br/>
+                                        {
+                                            this.state.kpi.map(item => (
+                                                <strong className="h4">{item.total_orders_pending}</strong>
+                                            ))}
+                                        <div className="chart-wrapper">
+                                            <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
+                                                  width={100} height={30}/>
+                                        </div>
                                     </div>
-                                </div>
-                            </Col>
+                                </Col>
                                 <Col sm="3">
                                     <div className="callout callout-danger">
                                         <small className="text-muted">Planned Orders</small>
@@ -443,15 +518,17 @@ class OrderTable extends Component {
                                 </NavItem>
                             </Nav>
                             <DataTable
-                                data={filterData(orders, hold, rtd, dispatched)}
+                                data={filterData(orders, hold, rtd, dispatched, this.state.originSelected, this.state.destinationSelected)}
                                 loading={loading}
                                 loaded={loaded}
                                 columns={columns}
                                 right={rightButtons}
                                 left={leftButtons}
                                 keyField={"id"}
-                                select={{mode: "checkbox"}}
+                                select={{mode: "checkbox", selected: this.state.selected, onSelect: this.handleOnSelect,
+                                    onSelectAll: this.handleOnSelectAll, clickToSelect: true,}}
                                 refPass={this.refPass.bind(this)}
+                                section={section}
                                 {...props}
                             />
                         </CardBody>
