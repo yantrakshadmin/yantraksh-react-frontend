@@ -79,22 +79,13 @@ export const planVehiclesForOrders = (redirect) => (async (dispatch, getState) =
     redirect('/dispatcher')
 });
 
-export const planVehiclesManuallyForOrders = (redirect) => (async (dispatch, getState) => {
+export const planVehiclesManuallyForOrders = (truckID, selected,redirect) => (async (dispatch, getState) => {
     const orders = getState().data.orders.data;
     let data = orders.slice();
 
     dispatch({type: ORDERS_CHANGING});
-    await planVehicleManuallyButton();
+    await planVehicleManuallyButton(truckID, selected);
+    loadOrders()(dispatch, getState);
 
-    orders.map((item, index) => {
-        if (data[index.rtd]) {
-            data[index].rtd = true;
-            data[index].is_dispatched = true;
-        }
-
-        return null;
-    });
-
-    dispatch({type: ORDERS_LOADED, orders: data});
     redirect('/dispatcher')
 });

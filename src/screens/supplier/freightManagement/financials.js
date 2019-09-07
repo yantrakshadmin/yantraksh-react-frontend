@@ -4,11 +4,11 @@ import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {refreshing} from "../../../helpers/notifications";
-import {invoiceView} from "../../../helpers/api";
+import {invoiceView, uploadPODFile} from "../../../helpers/api";
 import Loader from "../../../components/loader";
 import {Link} from "react-router-dom";
 import Button from "reactstrap/es/Button";
-import Upload from '../../../components/upload'
+import Upload from '../../../components/upload';
 
 
 const columns = [
@@ -72,21 +72,21 @@ const columns = [
         )
 
     },
-
-
     {
         dataField: 'Upload POD',
         text: 'Upload POD',
         sort: true,
         isDummyField: true,
-        formatter: (cell, row) => (
-            <div>
-                <Upload to={`/freight/request-for-quotation/bids/${row.id}`}>
-                </Upload>
-
-
-            </div>
-        )
+        formatter: (cell, row) => {
+            console.log(row, 'HJBHJEDBHRGH RH R');
+            return (
+                <div>
+                    <Upload upload={async (file) => {
+                        await uploadPODFile(file, row.invoice_quiz);
+                    }} types={['*']} />
+                </div>
+            )
+        }
 
     },
 ];
@@ -119,7 +119,6 @@ export default () => {
                         data={data}
                         columns={columns}
                         search
-
                     >
                         {
                             props => (

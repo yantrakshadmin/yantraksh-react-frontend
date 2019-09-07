@@ -9,7 +9,6 @@ export default [{
     dataField: 'pid',
     text: 'SKU ID',
     sort: true
-
 }, {
     dataField: 'quantity',
     text: 'Quantity',
