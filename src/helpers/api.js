@@ -7,7 +7,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://192.168.0.134:8000/";
+const BASE_URL = "http://0.0.0.0:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -53,6 +53,8 @@ const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
 const GET_INVOICE = '/suppliers/invoiceapi/';
 const GET_LR = '/api/lr/';
 const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
+
+const TRACK_NOW = 'track/'
 
 const INVOICE_TABLE_VIEW = '/suppliers/invoices/';
 const LR_TABLE_VIEW = '/api/lr/';
@@ -269,6 +271,15 @@ export const editInvoice = (data,id) => loadSecureUrl(`${EDIT_INVOICE}${id}/`, {
     method: 'patch'
 });
 
+export const trackNow = (id) => loadSecureUrl(`${TRACK_NOW}${id}/`);
+
+
+// export const trackNow = () => loadSecureUrl(`track/96`);
+
+
+
+
+
 export const editLR = (data,id) => loadSecureUrl(`${EDIT_LR}${id}/`, {
     data: data,
     method: 'patch'
@@ -278,12 +289,10 @@ export const editProfileSupplier = (data) => loadSecureUrl(EDIT_PROFILE_SUPPLIER
     data: data,
     method: 'patch'
 });
-
 export const getNumberOfWeightData = () => loadSecureUrl('weightvmonth/');
-export const getNumberOfTrucksData = () => loadSecureUrl('truckvmonth/');
 
+export const getNumberOfTrucksData = () => loadSecureUrl('truckvmonth/');
 export const getKPIData = () => loadSecureUrl('api/kpi/');
 export const uploadPOD = () => loadSecureUrl('api/pod/');
-export const trackNow = () => loadSecureUrl('track/96/');
 export const getMap = () => loadSecureUrl('map/');
 export const allAvailableTrucks = () => loadSecureUrl(ALL_AVAILABLE_TRUCKS);

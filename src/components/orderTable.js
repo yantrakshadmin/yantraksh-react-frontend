@@ -6,15 +6,15 @@ import {
     CardBody,
     CardHeader,
     Col,
+    Input,
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
     Nav,
     NavItem,
     NavLink,
-    Row,
-    Modal,
-    ModalBody,
-    ModalHeader,
-    ModalFooter,
-    Input
+    Row
 } from 'reactstrap';
 import {
     loadOrders,
@@ -78,7 +78,7 @@ class OrderTable extends Component {
             modal: false,
             trucks: [],
             selectedTruck: null,
-            truckType: ''
+            truckType: 'Open'
         }
 
     }

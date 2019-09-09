@@ -16,6 +16,7 @@ import {
 import {isUsernameAvailable, signUpUserShipper, signUpUserSupplier} from "../helpers/api";
 import {signIn} from "../actions/auth";
 import {connect} from "react-redux";
+import Redirect from "react-router/es/Redirect";
 
 // const NAME_REGEX = '^[A-Z a-z]';
 const USERNAME_REGEX = '^[\\w.@+-]+$';
@@ -107,7 +108,12 @@ class SignUpScreenSupplier extends Component {
 
 
     render() {
+        if (this.props.isAuthenticated)
+            return <Redirect to={`${this.props.redirectTo.split('#')[1]}`}/>;
+
+
         return (
+
             <div className="app flex-row align-items-center">
                 <Container>
                     <Row className="justify-content-center">
@@ -175,7 +181,10 @@ class SignUpScreenSupplier extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.authenticated,
+    redirectTo: state.navigation.redirectTo
+});
 
 const mapDispatchToProps = (dispatch) => ({
     signInAction: (username, password) => dispatch(signIn(username, password)),
