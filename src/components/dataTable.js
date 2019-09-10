@@ -3,6 +3,7 @@ import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import Loader from "./loader";
+import {BeatLoader} from "react-spinners";
 
 const NCSVButton = (props) => {
     const handleClick = () => {
@@ -28,6 +29,7 @@ export default (props) => {
         }, loading = false, loaded = true, keyField = "id",
         select,
         expandRow = {},
+        noDataIndication={Loader},
         section,
         ...unusedprops
     } = props;
@@ -70,7 +72,7 @@ export default (props) => {
                             selectRow={select}
                             loading={loading}
                             expandRow={expandRow}
-                            noDataIndication={() => !loaded ? <Loader/> : 'No orders here'}
+                            noDataIndication={() => !loaded ? <BeatLoader/> : <BeatLoader/>}
                             {...unusedprops}
                         />
                     </div>

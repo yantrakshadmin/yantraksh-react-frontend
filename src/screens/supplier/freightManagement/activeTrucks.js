@@ -58,6 +58,22 @@ const columns = [
 export default () => {
 
     const [data, setData] = useState([]);
+    const [kpiData, setKpiData] = useState([
+        {total_time:"0"},
+        {total_trucks:"0"},
+        {total_orders:"0"},
+        {total_orders_planned:"0"},
+        {total_rfq:"0"},
+        {total_bids:"0"},
+        {total_orders_hold:"0"},
+        {total_orders_delayed:"0"},
+        {total_orders_pending:"0"},
+        {total_trucks_assigned:"0"},
+        {total_trucks_in_transit:"0"},
+        {total_weight:"0"},
+        {total_distance:"0"},
+
+    ]);
 
     useEffect(() => {
         const loadApiData = async () => {
@@ -79,22 +95,7 @@ export default () => {
         loadKpiData();
     }, []);
 
-    const [kpiData, setKpiData] = useState([
-        {total_time:"0"},
-        {total_trucks:"0"},
-        {total_orders:"0"},
-        {total_orders_planned:"0"},
-        {total_rfq:"0"},
-        {total_bids:"0"},
-        {total_orders_hold:"0"},
-        {total_orders_delayed:"0"},
-        {total_orders_pending:"0"},
-        {total_trucks_assigned:"0"},
-        {total_trucks_in_transit:"0"},
-        {total_weight:"0"},
-        {total_distance:"0"},
 
-    ]);
 
     const sparkLineChartData = [
         {
@@ -179,14 +180,13 @@ export default () => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> All Orders <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/> Active Trucks <small className="text-muted"/>
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
                                 <small className="text-muted">Total Bids received</small>
                                 <br />
-                                {
-                                    kpiData.map(item=>(<strong className="h4">{item.total_bids}</strong>))}
+                                <strong className="h4">0</strong>
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
@@ -197,8 +197,7 @@ export default () => {
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total RFQ Raised</small>
                                 <br />
-                                {
-                                    kpiData.map(item=>(<strong className="h4">{item.total_rfq}</strong>))}
+                                <strong className="h4">0</strong>
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
@@ -208,8 +207,7 @@ export default () => {
                         <div className="callout callout-info">
                             <small className="text-muted">Total Trucks Assigned</small>
                             <br />
-                            {
-                                kpiData.map(item=>(<strong className="h4">{item.total_trucks_assigned}</strong>))}
+                            <strong className="h4">0</strong>
 
                             <div className="chart-wrapper">
                                 <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
@@ -221,8 +219,8 @@ export default () => {
                                 <small className="text-muted">Total Trucks In Transit</small>
                                 <br />
 
-                                {
-                                    kpiData.map(item=>(<strong className="h4">{item.total_trucks}</strong>))}
+
+                                    <strong className="h4">0</strong>
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
                                 </div>

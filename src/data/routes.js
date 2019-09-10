@@ -1,22 +1,17 @@
 import {lazy} from "react";
 import {navToRoutes} from "../helpers/getRoutes";
-
 const supplierNavigation = [
     {
         name: 'Available Loads',
         component: lazy(() => import('../screens/supplier/freightManagement/availableLoads')),
         url: '/freight/available-loads',
-        icon: 'fa fa-money',
-    }, {
-        name: 'Post new Trucks',
-        component: lazy(() => import('../screens/supplier/forms/postTruck')),
-        url: '/freight/post-truck',
-        icon: 'fa fa-money',
-    }, {
+        icon: 'fa fa-archive',
+    },
+    {
         name: 'Active Trucks',
         component: lazy(() => import('../screens/supplier/freightManagement/activeTrucks')),
         url: '/freight/active-trucks',
-        icon: 'fa fa-money',
+        icon: 'fa fa-truck',
     }, {
         name: 'My Bids',
         component: lazy(() => import('../screens/supplier/freightManagement/myBids')),
@@ -26,18 +21,12 @@ const supplierNavigation = [
         name: 'Trips',
         component: lazy(() => import('../screens/supplier/freightManagement/trips')),
         url: '/freight/trips',
-        icon: 'fa fa-money',
+        icon: 'fa fa-suitcase',
     }, {
         name: 'Financial',
         component: lazy(() => import('../screens/supplier/freightManagement/financials')),
         url: '/freight/financial',
-        icon: 'fa fa-money',
-    }, {
-        name: 'Edit LR',
-        component: lazy(() => import('../screens/supplier/forms/editLR')),
-        url: '/freight/edit-lr/:id',
-        icon: 'fa fa-money',
-        exact: true
+        icon: 'fa fa-clipboard',
     },
 
 ];

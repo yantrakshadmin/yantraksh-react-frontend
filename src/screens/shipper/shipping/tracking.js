@@ -21,15 +21,17 @@ const styles = {
 
 
 const DispatchMap = (props) => {
-    console.log(props, "here");
-
-    return <Map google={props.google}
+    console.log(props, "here",props.loading);
+    return  <Map google={props.google}
                 style={styles}
-                zoom={5}
+                zoom={7}
                 center={{
-                    lat: props.location[0].loc[0] || this.state.loading,
-                    lng: props.location[0].loc[1] || this.state.loading,
+                    lat: props.location[0].loc[0] ,
+                    lng: props.location[0].loc[1] ,
+                // lat:33,
+                //     lng:72
                 }}
+
 
 
     >
@@ -37,12 +39,12 @@ const DispatchMap = (props) => {
             name={'Your position'}
             style={styles}
             position={{
-                lat: props.location[0].loc[0] || this.state.loading,
-                lng: props.location[0].loc[1] || this.state.loading,
+                lat: props.location[0].loc[0],
+                lng: props.location[0].loc[1],
+                // lat:33,
+                // lng:72
             }}
         />
-
-
     </Map>
 };
 const DispatchMapWrapper = GoogleApiWrapper({
@@ -120,7 +122,8 @@ class Tracking extends React.Component {
                             const locationPlan = await trackNow(row.id);
                             console.log(locationPlan);
                             this.setState({
-                                plan: locationPlan
+                                plan: locationPlan,
+                                loading:false,
                             })
                         }
 
@@ -202,8 +205,7 @@ class Tracking extends React.Component {
                         </CardHeader>
                         <CardBody className={"trackingCard"}>
 
-                            {<DispatchMapWrapper location={this.state.plan}/>}
-
+                            <DispatchMapWrapper location={this.state.plan} loading={this.state.loading}/>
                         </CardBody>
 
                     </Card>
@@ -214,8 +216,8 @@ class Tracking extends React.Component {
                         <CardHeader>
                             <b>Location Details</b>
                         </CardHeader>
+                         <DataTable columns={dispatchListColumns} data={this.state.plan}/>
 
-                            <DataTable columns={dispatchListColumns} data={this.state.plan}/>
                     </Card>
                 </Col>
             </Row>

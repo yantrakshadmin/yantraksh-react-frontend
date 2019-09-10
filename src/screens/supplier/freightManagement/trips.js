@@ -212,7 +212,7 @@ export default () => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> All Orders <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/> Trips <small className="text-muted"/>
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
