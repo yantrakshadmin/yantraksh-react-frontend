@@ -117,12 +117,12 @@ const shipperNavigation = [
     }, {
         name: 'Auto-Dispatcher',
         url: '/dispatcher',
-        icon: 'fa fa-compass',
+        icon: 'fa fa-rocket',
         component: lazy(() => import('../screens/shipper/dispatchManagement/dispatcher')),
     }, {
         name: 'Manual-Dispatcher',
         url: '/manual-dispatcher',
-        icon: 'fa fa-compass',
+        icon: 'fa fa-paper-plane',
         component: lazy(() => import('../screens/shipper/dispatchManagement/manualDispatcher')),
     }, {
         name: 'Shipping',

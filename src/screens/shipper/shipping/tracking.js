@@ -5,29 +5,40 @@ import {GoogleApiWrapper, Map, Marker} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
 import {assignedTrucks, trackNow} from "../../../helpers/api";
 import {refreshing} from "../../../helpers/notifications";
-
+import {BeatLoader} from "react-spinners";
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 
 //clase based mai connnnvert krlo is
 //kese hota h ??
 //nahii aata bc :/
 //classs banao return wala render(){return ()} is return mai dal do or use state ki jnga this.state={},set plan kiplace prr this,setState({)
+
+const styles = {
+    height:'100%',
+
+
+}
+
+
 const DispatchMap = (props) => {
     console.log(props, "here");
 
     return <Map google={props.google}
-                zoom={10}
+                style={styles}
+                zoom={5}
                 center={{
-                    lat: props.location[0].loc[0] || 28.689631,
-                    lng: props.location[0].loc[1] || 77.129890,
+                    lat: props.location[0].loc[0] || this.state.loading,
+                    lng: props.location[0].loc[1] || this.state.loading,
                 }}
+
 
     >
         <Marker
             name={'Your position'}
+            style={styles}
             position={{
-                lat: props.location[0].loc[0] || 28.689631,
-                lng: props.location[0].loc[1] || 77.129890,
+                lat: props.location[0].loc[0] || this.state.loading,
+                lng: props.location[0].loc[1] || this.state.loading,
             }}
         />
 
@@ -43,8 +54,9 @@ class Tracking extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            plan: [{loc: [33, 77]}],
+            plan: [{loc: [20.5937, 78.9629]}],
             data: [],
+            loading:true,
         }
     }
 
@@ -58,6 +70,7 @@ class Tracking extends React.Component {
         const getLoacation = async (id) => {
             const locationPlan = await trackNow(id);
             this.setState({data: locationPlan});
+            this.setState({loading:false});
 
             console.log(locationPlan, "locationPlan");
         };
@@ -112,6 +125,7 @@ class Tracking extends React.Component {
                         }
 
                         }>
+
                             Track Now!
 
                         </Button>
@@ -162,46 +176,50 @@ class Tracking extends React.Component {
         ];
 
 
+        return (
+            <Row>
+                {/*<DispatchMapWrapper/>*/}
 
 
+                <Col md={6}>
 
-
-    return (
-        <Row style={{position: 'relative', flexWrap: 'nowrap', padding: '0'}}>
-            {/*<DispatchMapWrapper/>*/}
-
-            <Card sm={"6"} lg={"6"}>
-                <CardHeader>
-                    <b>Dispatch Plan</b>
-                </CardHeader>
-                <CardBody sm={"6"} lg={"6"} md={"6"} xs={"6"} style={{padding: '0'}}>
-                    <DataTable columns={assignedTruckColumns} data={this.state.data}/>
-                </CardBody>
-            </Card>
-
-
-            <Col sm={"6"} lg={"6"} xs={"6"} xl={"6"} style={{padding: '0'}}>
-
-                <Card sm={"6"} lg={"6"} style={{padding: 0, marginBottom: '0'}}>
+                <Card >
                     <CardHeader>
-                        <b>Loading Plan</b>
+                        <b>Assigned Trucks</b>
                     </CardHeader>
-                    <div>
-                        <DataTable columns={dispatchListColumns} data={this.state.plan}/>
-                    </div>
-                </Card>
-                <Card>
-                    <CardHeader>
-                        <b>Route</b>
-                    </CardHeader>
-                    <CardBody sm={"6"} lg={"6"} style={{padding: '0', height: '15vw'}}>
-                        <DispatchMapWrapper location={this.state.plan}/>
+                    <CardBody>
+                        <DataTable columns={assignedTruckColumns} data={this.state.data}/>
                     </CardBody>
-
                 </Card>
-            </Col>
-        </Row>
-    )
+
+                </Col>
+
+
+                <Col md={6}>
+                    <Card style={{height: '21vw'}}>
+                        <CardHeader>
+                            <b>Route</b>
+                        </CardHeader>
+                        <CardBody className={"trackingCard"}>
+
+                            {<DispatchMapWrapper location={this.state.plan}/>}
+
+                        </CardBody>
+
+                    </Card>
+
+
+
+                    <Card>
+                        <CardHeader>
+                            <b>Location Details</b>
+                        </CardHeader>
+
+                            <DataTable columns={dispatchListColumns} data={this.state.plan}/>
+                    </Card>
+                </Col>
+            </Row>
+        )
 
 
     }

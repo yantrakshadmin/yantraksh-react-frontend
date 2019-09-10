@@ -6,7 +6,7 @@ import CardHeader from "reactstrap/es/CardHeader";
 import {getDispatchHistory} from "../../../helpers/api";
 import {Line} from "react-chartjs-2";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
-
+import {rfqRaised} from "../../../helpers/notifications";
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 const lat = 287041;
 const lng = 77.1025;
@@ -80,19 +80,6 @@ const dispatchPlanColumns = [
         text: 'Dispatch Time',
         sort: true,
     },
-    {
-        dataField: 'Action',
-        text: 'Action',
-        sort: true,
-        formatter: (row, cell) => (
-            <Button color="primary" >Raise RFQ
-            </Button>
-
-        )
-
-
-
-    }
 
 
 ];
