@@ -6,16 +6,16 @@ import {
     CardBody,
     CardHeader,
     Col,
+    Form,
+    Input,
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
     Nav,
     NavItem,
     NavLink,
-    Row,
-    Modal,
-    ModalBody,
-    ModalHeader,
-    ModalFooter,
-    Input,
-    Form
+    Row
 } from 'reactstrap';
 import {
     loadOrders,
@@ -171,6 +171,7 @@ class OrderTable extends Component {
         return isValid;
     };
 
+
     handleOnSelect = (row, isSelect) => {
         if (isSelect) {
             this.setState(() => ({
@@ -182,6 +183,7 @@ class OrderTable extends Component {
             }));
         }
     };
+
 
     handleOnSelectAll = (isSelect, rows) => {
         const ids = rows.map(r => r.id);

@@ -7,7 +7,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://0.0.0.0:8000/";
+const BASE_URL = "http://192.168.0.104:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -290,6 +290,12 @@ export const editProfileSupplier = (data) => loadSecureUrl(EDIT_PROFILE_SUPPLIER
     method: 'patch'
 });
 export const getNumberOfWeightData = () => loadSecureUrl('weightvmonth/');
+
+
+export const forgetPassword = () => loadSecureUrl('password-reset/', {
+    method: 'post',
+
+});
 
 export const getNumberOfTrucksData = () => loadSecureUrl('truckvmonth/');
 export const getKPIData = () => loadSecureUrl('api/kpi/');

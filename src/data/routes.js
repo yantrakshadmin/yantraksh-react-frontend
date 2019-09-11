@@ -1,5 +1,6 @@
 import {lazy} from "react";
 import {navToRoutes} from "../helpers/getRoutes";
+
 const supplierNavigation = [
     {
         name: 'Available Loads',
@@ -65,7 +66,16 @@ const shipperNavigation = [
 
                 url: '/orders/ready-to-dispatch',
                 icon: 'fa fa-share',
-            }, {
+            },
+
+            {
+                path: '/forget-password',
+                component: lazy(() => import('../screens/forgetPassword')),
+                name: 'New Request For Quotation',
+                exact: true
+            },
+
+            {
                 name: 'Dispatched',
                 component: lazy(() => import('../screens/shipper/orderManagement/dispatchedOrders')),
 
@@ -119,6 +129,12 @@ const shipperNavigation = [
         icon: 'fa fa-compass',
         component: lazy(() => import('../screens/shipper/shipping/tracking')),
     },
+    {
+        path: '/forget-password',
+        component: lazy(() => import('../screens/forgetPassword')),
+        name: 'New Request For Quotation',
+        exact: true
+    },
 ];
 const shipperExtraRoutes = [
     {
@@ -156,6 +172,19 @@ const shipperExtraRoutes = [
         path: '/card',
         component: lazy(() => import('../screens/signInCard')),
         name: 'New Request For Quotation',
+        exact: true
+    },
+    {
+        path: '/forget-password',
+        component: lazy(() => import('../screens/forgetPassword')),
+        name: 'New Request For Quotation',
+        exact: true
+    },
+
+    {
+        path: '/card',
+        component: lazy(() => import('../screens/forgetPassword')),
+        name: 'forget Password',
         exact: true
     },
 ];
@@ -203,6 +232,12 @@ const supplierExtraRoutes = [
     }, {
         path: '/card',
         component: lazy(() => import('../screens/signInCard')),
+        name: 'New Request For Quotation',
+        exact: true
+    },
+    {
+        path: '/forget-password',
+        component: lazy(() => import('../screens/forgetPassword')),
         name: 'New Request For Quotation',
         exact: true
     },

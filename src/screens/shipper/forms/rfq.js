@@ -1,22 +1,7 @@
 import React, {useState} from 'react';
-import {
-    Button, Card,
-    CardBody,
-    CardHeader, Col, Form,
-    FormGroup, Input,
-    Label, Row,
-} from 'reactstrap';
+import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row,} from 'reactstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import {createNewRFQ} from "../../../helpers/api";
-import SmallChartCard from "../../../components/smallChartCard";
-import {
-    cardChartData1, cardChartData2, cardChartData3, cardChartData4,
-    totalDistanceConfig,
-    totalOrdersConfig,
-    totalTruckConfig,
-    totalWeightConfig
-} from "../../../data/mockCharts";
-import {Bar} from "react-chartjs-2";
 
 
 export default () => {
@@ -43,10 +28,7 @@ export default () => {
             [name]: value
         });
     };
-    const [totalOrders] = useState(cardChartData1);
-    const [trucksDispatchedByMonth] = useState(cardChartData2);
-    const [totalWeight] = useState(cardChartData3);
-    const [totalDistance] = useState(cardChartData4);
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();

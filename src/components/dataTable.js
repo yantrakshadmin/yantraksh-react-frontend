@@ -72,7 +72,7 @@ export default (props) => {
                             selectRow={select}
                             loading={loading}
                             expandRow={expandRow}
-                            noDataIndication={() => !loaded ? <BeatLoader/> : <BeatLoader/>}
+                            noDataIndication={() => !loaded ? 'No data..' : <BeatLoader/>}
                             {...unusedprops}
                         />
                     </div>
