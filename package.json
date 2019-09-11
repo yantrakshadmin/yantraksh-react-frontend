@@ -1,7 +1,8 @@
 {
   "name": "yantraksh",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "homepage": "https://github.com/yantrakshadmin/yantraksh-app",
   "dependencies": {
     "@coreui/coreui": "^2.1.12",
     "@coreui/react": "^2.5.2",
@@ -11,6 +12,7 @@
     "chart.js": "^2.8.0",
     "classnames": "latest",
     "font-awesome": "^4.7.0",
+    "gh-pages": "^2.1.1",
     "google-maps-react": "^2.0.2",
     "history": "^4.9.0",
     "node-sass": "^4.12.0",
@@ -41,7 +43,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -15,43 +15,12 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 const columns = [
     {
         dataField: 'id',
-        text: 'ID',
-        sort: true
-
-    }, {
-        dataField: 'quiz',
-        text: 'Truck Type',
+        text: 'RFQ ID',
         sort: true,
         formatter: (cell, row) => {
-            return (row.quiz.truck_name)
+            return (row.quiz.id)
 
         }
-    },{
-        dataField: 'quiz',
-        text: 'Truck Type',
-        sort: true,
-        formatter: (cell, row) => {
-            return (row.quiz.truck_name)
-
-        }
-    },{
-        dataField: 'quiz',
-        text: 'Truck Type',
-        sort: true,
-        formatter: (cell, row) => {
-            return (row.quiz.truck_type)
-
-        }
-    },
-    {
-        dataField: 'your_bids',
-        text: 'Your Bids',
-        sort: true,
-
-    }, {
-        dataField: 'confirmed',
-        text: 'Status',
-        sort: true
 
     },
     {
@@ -75,18 +44,55 @@ const columns = [
         }
 
     },
+    {
+        dataField: 'quiz',
+        text: 'Truck Type',
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.quiz.truck_type)
+
+        }
+    },
+    {
+        dataField: 'quiz',
+        text: 'Truck Name',
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.quiz.truck_name)
+
+        }
+    },
+    {
+        dataField: 'date',
+        text: 'Scheduled Date',
+        sort: true,
+
+    },
+
+    {
+        dataField: 'least_bid',
+        text: 'Your Bid',
+        sort: true,
+
+    },
+    {
+        dataField: 'confirmed',
+        text: 'Status',
+        sort: true
+
+    },
 
 
     {
         dataField: 'action	',
         text: 'Action',
         sort: true,
-        isDummyField:true,
+        isDummyField: true,
         formatter: (cell, row) => (
             <div>
                 <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
                     <Button color="primary">
-                        Bid Now
+                        Post Another Bid
                     </Button>
                 </Link>
             </div>
@@ -264,6 +270,8 @@ export default () => {
                             </div>
                         </Col>
                     </Row>
+                    <i className="fa fa-align-justify"/> My Bids
+                    <small className="text-muted"/>
                 </CardHeader>
 
                 <CardBody>

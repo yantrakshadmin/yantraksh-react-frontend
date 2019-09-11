@@ -13,19 +13,19 @@ export default (props) => {
 
 
     const KPI = useState([
-        {total_time: ""},
-        {total_trucks: ""},
-        {total_orders: ""},
-        {total_orders_planned: ""},
-        {total_rfq: ""},
-        {total_bids: ""},
-        {total_orders_hold: ""},
-        {total_orders_delayed: ""},
-        {total_orders_pending: ""},
-        {total_trucks_assigned: ""},
-        {total_trucks_in_transit: ""},
-        {total_weight: ""},
-        {total_distance: ""},
+        // {total_time: ""},
+        // {total_trucks: ""},
+        // {total_orders: ""},
+        // {total_orders_planned: ""},
+        // {total_rfq: ""},
+        // {total_bids: ""},
+        // {total_orders_hold: ""},
+        // {total_orders_delayed: ""},
+        // {total_orders_pending: ""},
+        // {total_trucks_assigned: ""},
+        // {total_trucks_in_transit: ""},
+        // {total_weight: ""},
+        // {total_distance: ""},
 
     ]);
 

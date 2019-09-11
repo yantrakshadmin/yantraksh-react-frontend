@@ -45,7 +45,7 @@ const filterData = (data, hold, rtd, dispatched, origin = null, destination = nu
         if (origin || destination) {
             const originMatch = row.origin.toUpperCase() === origin || origin === '-';
             const destinationMatch = row.destination.toUpperCase() === destination || destination === '-';
-            if(!(originMatch && destinationMatch))
+            if (!(originMatch && destinationMatch))
                 return null
         }
 
@@ -89,6 +89,7 @@ class OrderTable extends Component {
             trucks: [],
             selectedTruck: null,
             truckType: '',
+            selected: [],
             originSelected: '-',
             destinationSelected: '-'
         }
@@ -353,6 +354,7 @@ class OrderTable extends Component {
                                     truckType: e.target.value
                                 })
                             }}>
+                                <option disabled selected>---- Select Truck Category---</option>
                                 <option value="open">Open</option>
                                 <option value="container">Container</option>
                                 <option value="trailer">Trailer</option>
@@ -363,7 +365,7 @@ class OrderTable extends Component {
                                     selectedTruck: e.target.value
                                 })
                             }}>
-                                <option disabled selected>---- Select ---</option>
+                                <option disabled selected>---- Select Truck Type ---</option>
                                 {
                                     this.state.trucks.map(truck => truck.Category.toUpperCase() === this.state.truckType.toUpperCase() ?
                                         <option value={truck.id}>{truck.display_name}</option> : null)
@@ -525,8 +527,10 @@ class OrderTable extends Component {
                                 right={rightButtons}
                                 left={leftButtons}
                                 keyField={"id"}
-                                select={{mode: "checkbox", selected: this.state.selected, onSelect: this.handleOnSelect,
-                                    onSelectAll: this.handleOnSelectAll, clickToSelect: true,}}
+                                select={{
+                                    mode: "checkbox", selected: this.state.selected, onSelect: this.handleOnSelect,
+                                    onSelectAll: this.handleOnSelectAll, clickToSelect: true,
+                                }}
                                 refPass={this.refPass.bind(this)}
                                 section={section}
                                 {...props}
