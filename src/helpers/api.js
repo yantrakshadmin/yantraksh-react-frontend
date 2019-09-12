@@ -45,7 +45,7 @@ const LOADING_PLAN = 'api/dispatchhistoryitem/';
 const CREATE_NEW_RFQ = 'createrfq/';
 
 const BID_NOW = 'quizapi/';
-const EDIT_INVOICE = 'api/invoice/';
+const EDIT_INVOICE = 'suppliers/invoiceapi/';
 const EDIT_LR = '/suppliers/lrapi/';
 
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';

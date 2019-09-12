@@ -15,8 +15,27 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
 const columns = [
     {
-        dataField: 'invoice_number',
+        dataField: 'invoice_quiz.id',
         text: 'Invoice Number',
+        sort: true
+
+    },
+    {
+        dataField: 'invoice_quiz.origin',
+        text: 'Origin',
+        sort: true
+
+
+    },
+    {
+        dataField: 'invoice_quiz.destination',
+        text: 'Destination',
+        sort: true
+
+    },
+    {
+        dataField: 'invoice_quiz.truck_name',
+        text: 'Vehicle',
         sort: true
 
     },
@@ -25,24 +44,6 @@ const columns = [
         text: 'Invoice Date',
         sort: true,
 
-    }, {
-        dataField: 'invoice_salesperson',
-        text: 'Billing Party',
-        sort: true
-
-
-    },
-    {
-        dataField: 'invoice_amount',
-        text: 'Total Amount',
-        sort: true
-
-    },
-    {
-        dataField: 'invoice_gst',
-        text: 'GST Number',
-        sort: true
-
     },
     {
         dataField: 'invoice_quiz',
@@ -50,7 +51,7 @@ const columns = [
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/supplier/invoice/${row.invoice_quiz}/`}>
+                <Link to={`/supplier/invoice/${row.invoice_quiz.id}/`}>
                     <Button color="primary">
                         Edit Invoice
                     </Button>
@@ -64,7 +65,7 @@ const columns = [
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/supplier/printinvoice/${row.invoice_quiz}`}>
+                <Link to={`/supplier/printinvoice/${row.invoice_quiz.id}`}>
                     <Button color="primary">
                         Print Invoice
                     </Button>
@@ -83,7 +84,7 @@ const columns = [
                 <div>
                     <Upload upload={async (file) => {
                         await uploadPODFile(file, row.invoice_quiz);
-                    }} types={['*']} />
+                    }} types={['*']}/>
                 </div>
             )
         }

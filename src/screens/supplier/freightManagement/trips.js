@@ -15,30 +15,30 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
 const columns = [
     {
-        dataField: 'lr_billingparty',
-        text: 'LR Billing Party',
+        dataField: 'lr_quiz',
+        text: 'RFQ ID',
         sort: true
 
     },
     {
-        dataField: 'lr_declared',
-        text: 'LR Declared',
+        dataField: 'lr_consignor_address',
+        text: 'Origin',
         sort: true,
 
     }, {
-        dataField: 'lr_invoice_date',
-        text: 'LR Date',
+        dataField: 'lr_consignee_address',
+        text: 'Destination',
         sort: true
     },
     {
-        dataField: 'lr_consignor_name',
-        text: 'LR Consignor Name',
+        dataField: 'lr_vehicle_type',
+        text: 'Vehicle Type',
         sort: true
 
     },
     {
-        dataField: 'lr_consignee_name',
-        text: 'LR Consignee Name',
+        dataField: 'lr_date',
+        text: 'Date',
         sort: true
 
     },

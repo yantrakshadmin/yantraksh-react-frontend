@@ -8,10 +8,13 @@ import {
 } from 'reactstrap';
 import {editInvoice, getInvoiceDetails} from "../../../helpers/api";
 import {withRouter} from "react-router-dom";
+import '../../../scss/printInvoice.scss';
 
 const EditInvoice = (props) => {
 
     const [form, setForm] = useState({
+        'invoice_transanctions': [],
+        'invoice_status': ''
     });
 
 
@@ -31,6 +34,10 @@ const EditInvoice = (props) => {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
 
+
+        console.log(target, value, name);
+        console.log(form.invoice_transanctions[0].invoice_transaction_desc);
+
         setForm({
             ...form,
             [name]: value
@@ -40,7 +47,7 @@ const EditInvoice = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            console.log(form, props.match.params.id, 'IS DATA GOIND');
+            console.log(form, props.match.params.id, 'IS DATA GOINg');
             await editInvoice(form, props.match.params.id);
             alert('done')
         } catch (e) {
@@ -50,195 +57,362 @@ const EditInvoice = (props) => {
     };
 
     return (
-        <Card>
-            <CardHeader>
-                <strong>Edit Invoice</strong>
-            </CardHeader>
-            <CardBody>
+        <div>
+            <Button onClick={() => global.print()}>
+                Print Invoice
+            </Button>
+            <div id="container" style={{"border": "1px solid #9e9e9e", "marginTop": "5vh", "margin": "0 15vw"}}>
                 <Form method={'post'} onSubmit={handleSubmit}>
-                    <Row form>
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="origin">Invoice number</Label>
-                                <Input type="text" name="invoice_number" id="invoice_number" valid={form.invoice_number}
-                                       onChange={handleInputChange}/>
+                    <div id="header" style={{"borderBottom": "#9e9e9e"}}>
+                        <p style={{
+                            "textAlign": "left",
+                            "marginBottom": "unset",
+                            "paddingLeft": "6vw",
+                            "paddingTop": "2vh",
+                            "lineHeight": "1.2"
+                        }}>
+                            <strong><Input type="text" name="invoice_salesperson"
+                                           id="invoice_salesperson" class="editable-input"
+                                           value={form.invoice_salesperson}
+                                           onChange={handleInputChange}/></strong><br/>
+                            <small><Input type="text" name="invoice_destination_address"
+                                          id="invoice_destination_address" class="editable-input"
+                                          value={form.invoice_destination_address}
+                                          onChange={handleInputChange}/></small>
+                            <br/>
+                            <small><Input type="number" name="invoice_destination_pincode"
+                                          id="invoice_destination_pincode" class="editable-input"
+                                          value={form.invoice_destination_pincode}
+                                          onChange={handleInputChange}/></small>
+                            <br/>
+                            <strong>LR No: <Input type="text" name="invoice_lr_number"
+                                                  id="invoice_lr_number" class="editable-input"
+                                                  value={form.invoice_lr_number}
+                                                  onChange={handleInputChange}/></strong><br/>
+                            <small>Date: <Input type="text" name="invoice_due_date"
+                                                id="invoice_due_date" class="editable-input"
+                                                value={form.invoice_due_date}
+                                                onChange={handleInputChange}/></small>
+                            <br/>
+                            <small>GSTIN: <Input type="text" name="invoice_gst"
+                                                 id="invoice_gst" class="editable-input"
+                                                 value={form.invoice_gst}
+                                                 onChange={handleInputChange}/></small>
+                        </p>
 
-                            </FormGroup>
-                        </Col>
+                    </div>
 
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="origin">Invoice ID</Label>
-                                <Input type="text" name="id" id="id" value={form.id}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
+                    <div id="fromto">
+                        <div id="from">
+                            <table style={{"lineHeight": "1.5"}}>
+                                <tr>
+                                    <td style={{"paddingRight": "10vw"}}>#</td>
+                                    <td><strong>:YNT<Input type="text" name="invoice_number"
+                                                           id="invoice_number" class="editable-input"
+                                                           value={form.invoice_number}
+                                                           onChange={handleInputChange}/></strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Invoice Date</td>
+                                    <td><strong>:<Input type="text" name="invoice_date"
+                                                        id="invoice_date" class="editable-input"
+                                                        value={form.invoice_date}
+                                                        onChange={handleInputChange}/></strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Terms</td>
+                                    <td><strong>:Due on Receipt</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Due Date</td>
+                                    <td><strong>:<Input type="text" name="invoice_due_date"
+                                                        id="invoice_due_date" class="editable-input"
+                                                        value={form.invoice_due_date}
+                                                        onChange={handleInputChange}/></strong></td>
+                                </tr>
 
-                        </Col>
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="scheduled_date">Invoice Date</Label>
-                                <Input type="datetime-local" name="invoice_date" id="invoice_date"
-                                       value={form.invoice_date}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                    </Row>
+                            </table>
 
-                    <Row>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="truck_type">Invoice Due Date</Label>
-                                <Input type="select" name="invoice_due_date" id="invoice_due_date"
-                                       onChange={handleInputChange} valid={form.invoice_due_date}>
+                        </div>
+                        <div id="to">
+                            <p style={{"font-size": "1.1em", "lineHeight": "1.4"}}>
+                                Place of Supply : <strong><Input type="text" name="invoice_place_of_supply"
+                                                                 id="invoice_place_of_supply" class="editable-input"
+                                                                 value={form.invoice_place_of_supply}
+                                                                 onChange={handleInputChange}/></strong><br></br>
+                                LR Number : <strong><Input type="text" name="invoice_lr_number"
+                                                           id="invoice_lr_number" class="editable-input"
+                                                           value={form.invoice_lr_number}
+                                                           onChange={handleInputChange}/></strong><br></br>
+                                Vehicle Placement Date : <strong><Input type="text"
+                                                                        name="invoice_vehicle_placement_date"
+                                                                        id="invoice_vehicle_placement_date"
+                                                                        class="editable-input"
+                                                                        value={form.invoice_vehicle_placement_date}
+                                                                        onChange={handleInputChange}/></strong><br></br>
+                                Vehicle Number : <strong><Input type="text" name="invoice_vehicle_number"
+                                                                id="invoice_vehicle_number" class="editable-input"
+                                                                value={form.invoice_vehicle_number}
+                                                                onChange={handleInputChange}/></strong><br></br>
+                                Service Month : <strong><Input type="text" name="invoice_service_month"
+                                                               id="invoice_service_month" class="editable-input"
+                                                               value={form.invoice_service_month}
+                                                               onChange={handleInputChange}/></strong>
+                            </p>
+                        </div>
+                    </div>
 
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="total_trucks">Place of Supply</Label>
-                                <Input type="number" name="invoice_place_of_supply" id="invoice_place_of_supply"
-                                       value={form.invoice_place_of_supply}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
+                    <div id="items">
+                        <p style={{"float": "left"}}></p>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <th style={{"backgroundColor": "#F2F3F4"}}>Bill To</th>
+                            </tr>
+                            <tr>
+                                <td style={{"paddingLeft": "15px"}}><Input type="text"
+                                                                           name="invoice_destination_address"
+                                                                           id="invoice_destination_address"
+                                                                           class="editable-input"
+                                                                           value={form.invoice_destination_address}
+                                                                           onChange={handleInputChange}/><br></br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{"paddingLeft": "15px"}}><Input type="text" name="invoice_destination"
+                                                                           id="invoice_destination"
+                                                                           class="editable-input"
+                                                                           value={form.invoice_destination}
+                                                                           onChange={handleInputChange}/></td>
 
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="offered_price">Invoice Destination</Label>
-                                <Input type="test" name="invoice_destination" id="invoice_destination"
-                                       value={form.invoice_destination}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-
-
-                    <Row>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="truck_type">Destination Address</Label>
-                                <Input type="select" name="invoice_destination_address" id="invoice_destination_address"
-                                       onChange={handleInputChange} value={form.invoice_destination_address}>
-
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="total_trucks">Destination PINCODE</Label>
-                                <Input type="number" name="invoice_destination_pincode" id="invoice_destination_pincode"
-                                       value={form.invoice_destination_pincode}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="offered_price">Invoice GST</Label>
-                                <Input type="number" name="invoice_gst" id="invoice_gst" value={form.invoice_gst}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="truck_type">Billing party</Label>
-                                <Input type="select" name="invoice_salesperson" id="invoice_salesperson"
-                                       onChange={handleInputChange} value={form.invoice_salesperson}>
-
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="total_trucks">LR number</Label>
-                                <Input type="number" name="invoice_lr_number" id="invoice_lr_number"
-                                       value={form.invoice_lr_number}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="offered_price">Vehicle Placement Date</Label>
-                                <Input type="number" name="invoice_vehicle_placement_date"
-                                       id="invoice_vehicle_placement_date" value={form.invoice_vehicle_placement_date}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="truck_type">Vehicle Number</Label>
-                                <Input type="select" name="invoice_vehicle_number" id="invoice_vehicle_number"
-                                       onChange={handleInputChange} value={form.invoice_vehicle_number}>
-
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="total_trucks">Invoice service Month</Label>
-                                <Input type="number" name="invoice_service_month" id="invoice_service_month"
-                                       value={form.invoice_service_month}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="offered_price">invoice Item Details</Label>
-                                <Input type="text" name="invoice_item_details" id="invoice_item_details"
-                                       value={form.invoice_item_details}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                    </Row>
+                            </tr>
+                            <tr>
+                                <td style={{"paddingLeft": "15px"}}><Input type="text"
+                                                                           name="invoice_destination_pincode"
+                                                                           id="invoice_destination_pincode"
+                                                                           class="editable-input"
+                                                                           value={form.invoice_destination_pincode}
+                                                                           onChange={handleInputChange}/></td>
 
 
-                    <Row>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="truck_type">Invoice Amount</Label>
-                                <Input type="select" name="invoice_rate" id="invoice_rate" onChange={handleInputChange}
-                                       value={form.invoice_rate}>
+                            </tr>
+                            <tr>
+                                <td style={{"paddingLeft": "15px", "paddingBottom": "10px"}}><Input type="text"
+                                                                                                    name="invoice_gst"
+                                                                                                    id="invoice_gst"
+                                                                                                    class="editable-input"
+                                                                                                    value={form.invoice_gst}
+                                                                                                    onChange={handleInputChange}/>
+                                </td>
 
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="total_trucks">TAX</Label>
-                                <Input type="number" name="invoice_tax" id="invoice_tax" value={form.invoice_tax}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="offered_price">Total Amount</Label>
-                                <Input type="number" name="invoice_amount" id="invoice_amount"
-                                       value={form.invoice_amount}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="offered_price">Total Amount</Label>
-                                <Input type="number" name="invoice_amount" id="invoice_amount"
-                                       value={form.invoice_quiz_id}
-                                       onChange={handleInputChange}/>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                    <br/><br/><br/>
-                    <Button color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;
-                    <Button color={"link"} size={"lg"} type={"button"} onClick={() => props.history.push('/freight/financial')}>Cancel</Button>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+
+                        <table>
+                            <tbody>
+                            <tr style={{"backgroundColor": "#F2F3F4", "fontWeight": "bold"}}>
+                                <th style={{"width": "10px"}}>#</th>
+                                <th>Item & Description</th>
+                                <th>LR No</th>
+                                <th>Vehicle No</th>
+                                <th>Date</th>
+                                <th>Qty</th>
+                                <th>IGST</th>
+                                <th>Amount</th>
+                            </tr>
+                            {
+                                form['invoice_transanctions'].map((transaction, itemId) => {
+                                    // console.log(transaction);
+                                    // const item = invoices['invoice_transanctions'];
+                                    return (
+                                        <tr style={{"borderBottom": "1px solid #9e9e9e"}}>
+                                            <td>{itemId + 1}</td>
+                                            <td><Input type="text"
+                                                       name="invoice_transaction_desc"
+                                                       id={transaction['invoice_transaction_desc']}
+                                                       class="editable-input"
+                                                       value={transaction['invoice_transaction_desc']}
+                                                       onChange={handleInputChange}/></td>
+                                            <td><Input type="text"
+                                                       name={transaction['invoice_transaction_lr']}
+                                                       id="{transaction['invoice_transaction_lr']}"
+                                                       class="editable-input"
+                                                       value={transaction['invoice_transaction_lr']}
+                                                       onChange={handleInputChange}/></td>
+                                            <td><Input type="text"
+                                                       name={transaction['invoice_transaction_vehicle']}
+                                                       id={transaction['invoice_transaction_vehicle']}
+                                                       class="editable-input"
+                                                       value={transaction['invoice_transaction_vehicle']}
+                                                       onChange={handleInputChange}/></td>
+                                            <td><Input type="text"
+                                                       name={transaction['invoice_transaction_date']}
+                                                       id={transaction['invoice_transaction_date']}
+                                                       class="editable-input"
+                                                       value={transaction['invoice_transaction_date']}
+                                                       onChange={handleInputChange}/></td>
+                                            <td><Input type="text"
+                                                       name={transaction['invoice_transaction_qty']}
+                                                       id={transaction['invoice_transaction_qty']}
+                                                       class="editable-input"
+                                                       value={transaction['invoice_transaction_qty']}
+                                                       onChange={handleInputChange}/></td>
+                                            <td><Input type="text"
+                                                       name="transaction['invoice_transaction_amount']"
+                                                       id="{transaction['invoice_transaction_amount']}"
+                                                       class="editable-input"
+                                                       value={transaction['invoice_transaction_amount']}
+                                                       onChange={handleInputChange}/></td>
+                                            <td><Input type="text"
+                                                       name="transaction['invoice_transaction_gst']"
+                                                       id="{transaction['invoice_transaction_gst']}"
+                                                       class="editable-input"
+                                                       value={transaction['invoice_transaction_gst']}
+                                                       onChange={handleInputChange}/></td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                            <tr>
+                                <td colSpan={8}>
+                                    <Button onClick={() => {
+                                        setForm({
+                                            ...form,
+                                            invoice_transanctions: [
+                                                ...form['invoice_transanctions'],
+                                                {
+                                                    id: form['invoice_transanctions'].length,
+                                                    invoice_transaction_desc: form.invoice_transanctions.invoice_transaction_desc,
+                                                    invoice_transaction_lr: form['invoice_transanctions']['invoice_transaction_lr'],
+                                                    invoice_transaction_vehicle: '',
+                                                    invoice_transaction_date: '',
+                                                    invoice_transaction_qty: '',
+                                                    invoice_transaction_amount: '',
+                                                    invoice_transaction_gst: ''
+                                                }
+                                            ]
+                                        });
+                                    }}>
+                                        + Add Row
+                                    </Button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div id="container"
+                             style={{"float": "right", "width": "50%", "display": "inline-block"}}>
+                            <div id="to">
+                                <p style={{
+                                    "alignment": "right",
+                                    "border": "solid 0.09px #9e9e9e",
+                                    "width": "60%",
+                                    "float": "right",
+                                    "paddingBottom": "10px",
+                                    "paddingLeft": "10px",
+                                    "borderTop": "none",
+                                    "borderBottom": "none"
+                                }}>
+                                    <container>
+                                        <br></br><strong>Sub Total : <span style={{
+                                        "float": "right",
+                                        "margin-right": "2vw"
+                                    }}> &#8377;<Input type="text" name="invoice_amount" id="invoice_amount"
+                                                      class="editable-input"
+                                                      value={form.invoice_amount}
+                                                      onChange={handleInputChange}/></span></strong><br></br>
+
+
+                                        <strong>Total : <span style={{
+                                            "float": "right",
+                                            "margin-right": "2vw"
+                                        }}>&#8377;<Input type="text" name="invoice_amount" id="invoice_amount"
+                                                         class="editable-input"
+                                                         value={form.invoice_amount}
+                                                         onChange={handleInputChange}/><br></br></span></strong><br></br>
+
+
+                                        <strong>Balance Due : <span style={{
+                                            "float": "right",
+                                            "margin-right": "2vw"
+                                        }}>&#8377;<Input type="text" name="invoice_amount" id="invoice_amount"
+                                                         class="editable-input"
+                                                         value={form.invoice_amount}
+                                                         onChange={handleInputChange}/><br></br></span></strong><br></br>
+
+                                        <Input type="select" name="invoice_status" id="invoice_status"
+                                               onChange={handleInputChange} value={form.invoice_status}>
+                                            <option disabled selected>---- Select Invoice Status ---</option>
+                                            <option value="Accepted">Accepted</option>
+                                            <option value="Rejected">Rejected</option>
+                                            <option value="Paid">Paid</option>
+                                            <option value="Write Off">Write Off</option>
+                                        </Input>
+
+                                    </container>
+                                </p>
+                            </div>
+                            <div id="to">
+                                <p style={{
+                                    "alignment": "right",
+                                    "border": "solid 0.09px #9e9e9e",
+                                    "width": "60%",
+                                    "float": "right",
+                                    "paddingBottom": "10px",
+                                    "paddingLeft": "10px",
+                                    "text-align": "center"
+                                }}>
+                                    <container>
+                                        <br></br>
+                                        <br></br><br></br><br></br><br></br>
+                                        <strong>Authorized Signature</strong></container>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="summary">
+                        <div id="total">
+
+
+                        </div>
+                        <div id="note" style={{"display": "inline-block", "width": "calc(50% - 2vw)"}}>
+                            <h4>Note :</h4>
+                            <p>Terms & Conditions<br></br>
+                                Bank Name: ICICI Bank<br></br>
+                                Account Name: Yantraksh Logistics Pvt Ltd<br></br>
+                                Account No: 8505004142<br></br>
+                                IFSC: ICIC0000085<br></br>
+                                <br/><br/>
+                                1) The payment should be made by way of Account Payee Cheque / Demand Draft / NEFT /
+                                RTGS in the name of
+                                "Yantraksh Logistics".
+                                <br/>
+                                2) We are exempted under section 194 C, TDS shall not be deducted on any payment.
+                                <br/>
+                                3) Any Discrepancy in the invoice shall be informed within 7 days of the invoice
+                                submission at finance@yantraksh.com
+                                <br/>
+                                4) Interest at 2% p.m. or part thereof will be charged if the bill is not paid on the
+                                due date.
+                                <br/>
+                                5) Any dispute is subject to Anand Jurisdiction.
+                            </p>
+                        </div>
+
+                        <Button color={"primary"} size={"lg"} type="submit">Save</Button> &nbsp;&nbsp;&nbsp;
+
+
+                        <div id="footer">
+                            <p></p>
+                        </div>
+                    </div>
                 </Form>
-            </CardBody>
-        </Card>
+            </div>
+        </div>
     )
 };
 

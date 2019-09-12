@@ -57,7 +57,7 @@ export default (props) => {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="destination">Least Bid</Label>
+                                <Label for="destination">Your Bid</Label>
                                 <Input type="text" name="least_bid" id="least_bid" onChange={handleInputChange}  value={form.least_bid} />
 
 

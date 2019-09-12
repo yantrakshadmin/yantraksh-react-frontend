@@ -59,48 +59,54 @@ export default () => {
     );
 
 
-    const availableLoadsColumn=[
+    const availableLoadsColumn = [
 
 
         {
             dataField: 'id',
-            text: 'SKU ID',
+            text: 'RFQ ID',
             sort: true
         },
-       {
+        {
+            dataField: 'origin',
+            text: 'Origin',
+            sort: true,
+        },
+        {
             dataField: 'destination',
             text: 'Destination',
             sort: true,
-        },{
+        },
+        {
             dataField: 'total_trucks',
             text: 'No. of Trucks',
             sort: true,
-        },{
+        }, {
             dataField: 'material_type',
             text: 'Material Type',
             sort: true,
-        },{
+        }, {
             dataField: 'date',
             text: 'Date',
             sort: true,
-        },{
+        }, {
             dataField: 'offered_price',
             text: 'Offered Price',
             sort: true,
-        },{
+        }, {
             dataField: 'comments',
             text: 'Comments',
             sort: true,
         },
         {
             dataField: 'Bid Now',
-            text: 'Track Now',
+            text: 'Action',
             sort: true,
             formatter: (cell, row) => (
                 <div>
                     <Link to={`/freight/bid-now/${row.id}`}>
                         <Button color="primary">
-                             Bids Now
+                            Bid Now
                         </Button>
                     </Link>
                 </div>
@@ -189,6 +195,7 @@ export default () => {
     return (
 
         <div>
+
             <Card>
                 <CardHeader>
                     <i className="fa fa-align-justify"/> Available Loads <small className="text-muted"/>
@@ -237,6 +244,8 @@ export default () => {
                             </div>
                         </Col>
                     </Row>
+                    <i className="fa fa-align-justify"/>Available Loads
+                    <small className="text-muted"/>
                 </CardHeader>
 
                 <CardBody>
