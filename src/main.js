@@ -10,6 +10,8 @@ const HomeScreen = lazy(() => import('./screens/home'));
 const SignInScreen = lazy(() => import('./screens/signInScreen'));
 const ShipperSignUpScreen = lazy(() => import('./screens/shipper/signUpScreen'));
 const SupplierSignUpScreen = lazy(() => import('./screens/supplier/signUpScreen'));
+const ForgetPassword = lazy(() => import('./screens/forgetPassword'));
+const ConfirmPassword = lazy(() => import('./screens/confirmPassword'));
 const DashboardScreen = lazy(() => import('./screens/dashboard'));
 const NotFound404Screen = lazy(() => import('./screens/notFound404'));
 
@@ -34,6 +36,8 @@ const Main = (props) => {
                             <Route exact path="/sign-in/" component={SignInScreen}/>
                             <Route exact path="/sign-up/shipper/" component={ShipperSignUpScreen}/>
                             <Route exact path="/sign-up/supplier/" component={SupplierSignUpScreen}/>
+                            <Route exact path="/forget-password/" component={ForgetPassword}/>
+                            <Route exact path="/confirm-password/" component={ConfirmPassword}/>
                             <Route path={'/dashboard/'} component={DashboardScreen}/>
                             <Route component={NotFound404Screen}/>
                         </Switch>

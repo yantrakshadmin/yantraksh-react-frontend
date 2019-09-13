@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Card, CardBody, CardHeader, Badge, Row, Col} from 'reactstrap';
+import React, {useEffect, useState} from 'react';
+import {Badge, Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -11,16 +11,11 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
 
 const columns = [
-
     {
-        dataField: 'origin',
+        dataField: 'name',
         text: 'Origin',
         sort: true
 
-    }, {
-        dataField: 'destination',
-        text: 'Destination',
-        sort: true
     },
     {
         dataField: 'truck_type',
@@ -35,10 +30,18 @@ const columns = [
                 return (<Badge color="warning" style={{width: '100%'}}>Open</Badge>)
         },
 
-    },
-    {
+    }, {
+        dataField: 'origin',
+        text: 'Origin',
+        sort: true
+
+    }, {
+        dataField: 'destination',
+        text: 'Destination',
+        sort: true
+    }, {
         dataField: 'total_trucks',
-        text: 'No. of trucks',
+        text: 'NO. of trucks',
 
     }, {
         dataField: 'scheduled_date',
@@ -48,13 +51,7 @@ const columns = [
         dataField: 'offered_price',
         text: 'Offered Price',
         sort: true
-    },
-    {
-        dataField: 'name',
-        text: 'Extra Remarks',
-        sort: true
-
-    },
+    }
 ];
 
 

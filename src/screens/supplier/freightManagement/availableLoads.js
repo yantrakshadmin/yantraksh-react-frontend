@@ -64,20 +64,14 @@ export default () => {
 
         {
             dataField: 'id',
-            text: 'RFQ ID',
+            text: 'SKU ID',
             sort: true
-        },
-        {
-            dataField: 'origin',
-            text: 'Origin',
-            sort: true,
         },
         {
             dataField: 'destination',
             text: 'Destination',
             sort: true,
-        },
-        {
+        }, {
             dataField: 'total_trucks',
             text: 'No. of Trucks',
             sort: true,
@@ -100,13 +94,13 @@ export default () => {
         },
         {
             dataField: 'Bid Now',
-            text: 'Action',
+            text: 'Track Now',
             sort: true,
             formatter: (cell, row) => (
                 <div>
                     <Link to={`/freight/bid-now/${row.id}`}>
                         <Button color="primary">
-                            Bid Now
+                            Bids Now
                         </Button>
                     </Link>
                 </div>
@@ -195,7 +189,6 @@ export default () => {
     return (
 
         <div>
-
             <Card>
                 <CardHeader>
                     <i className="fa fa-align-justify"/> Available Loads <small className="text-muted"/>
@@ -244,8 +237,6 @@ export default () => {
                             </div>
                         </Col>
                     </Row>
-                    <i className="fa fa-align-justify"/>Available Loads
-                    <small className="text-muted"/>
                 </CardHeader>
 
                 <CardBody>

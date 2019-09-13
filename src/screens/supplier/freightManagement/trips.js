@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Card, CardBody, CardHeader, Badge, Row, Col} from 'reactstrap';
+import React, {useEffect, useState} from 'react';
+import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -15,30 +15,30 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
 const columns = [
     {
-        dataField: 'lr_quiz',
-        text: 'RFQ ID',
+        dataField: 'lr_billingparty',
+        text: 'LR Billing Party',
         sort: true
 
     },
     {
-        dataField: 'lr_consignor_address',
-        text: 'Origin',
+        dataField: 'lr_declared',
+        text: 'LR Declared',
         sort: true,
 
     }, {
-        dataField: 'lr_consignee_address',
-        text: 'Destination',
+        dataField: 'lr_invoice_date',
+        text: 'LR Date',
         sort: true
     },
     {
-        dataField: 'lr_vehicle_type',
-        text: 'Vehicle Type',
+        dataField: 'lr_consignor_name',
+        text: 'LR Consignor Name',
         sort: true
 
     },
     {
-        dataField: 'lr_date',
-        text: 'Date',
+        dataField: 'lr_consignee_name',
+        text: 'LR Consignee Name',
         sort: true
 
     },

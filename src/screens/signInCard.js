@@ -53,9 +53,7 @@ class Login extends Component {
                                                     <Button color="primary" className="px-4">Login</Button>
                                                 </Col>
                                                 <Col xs="6" className="text-right">
-                                                    <Link to={"/forget-password"}>
-                                                        <Button color="link" className="px-0">Forgot password?</Button>
-                                                    </Link>
+                                                    <Button color="link" className="px-0">Forgot password?</Button>
                                                 </Col>
                                             </Row>
                                         </Form>
@@ -65,15 +63,13 @@ class Login extends Component {
                                     <CardBody className="text-center">
                                         <div>
                                             <h2>Sign up</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut
+                                                labore et dolore magna aliqua.</p>
                                             <Link to="/register">
                                                 <Button color="primary" className="mt-3" active tabIndex={-1}>Register
                                                     Now!</Button>
                                             </Link>
-                                            <Col xs="6" className="text-right">
-                                                <Link to={"/forget-password"}>
-                                                    <Button color="link" className="px-0">Forgot password?</Button>
-                                                </Link>
-                                            </Col>
                                         </div>
                                     </CardBody>
                                 </Card>

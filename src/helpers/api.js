@@ -7,10 +7,11 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "https://yantra-242714.appspot.com/";
+const BASE_URL = " http://0.0.0.0:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
+
 
 const GET_TOKEN_PAIR = '/auth/token/';
 const CREATE_ACCOUNT_SHIPPER = 'shippercreateapi/';
@@ -45,7 +46,7 @@ const LOADING_PLAN = 'api/dispatchhistoryitem/';
 const CREATE_NEW_RFQ = 'createrfq/';
 
 const BID_NOW = 'quizapi/';
-const EDIT_INVOICE = 'suppliers/invoiceapi/';
+const EDIT_INVOICE = 'api/invoice/';
 const EDIT_LR = '/suppliers/lrapi/';
 
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
@@ -289,10 +290,17 @@ export const editProfileSupplier = (data) => loadSecureUrl(EDIT_PROFILE_SUPPLIER
     method: 'patch'
 });
 export const getNumberOfWeightData = () => loadSecureUrl('weightvmonth/');
+export const forgetPassword = (data) => loadOpenUrl('password-reset/', {
 
+    data: data,
+    method: 'post'
 
-export const forgetPassword = () => loadSecureUrl('password-reset/', {
-    method: 'post',
+});
+
+export const confirmPassword = (data) => loadOpenUrl('password-reset/confirm/', {
+
+    data: data,
+    method: 'post'
 
 });
 
@@ -301,3 +309,4 @@ export const getKPIData = () => loadSecureUrl('api/kpi/');
 export const uploadPOD = () => loadSecureUrl('api/pod/');
 export const getMap = () => loadSecureUrl('map/');
 export const allAvailableTrucks = () => loadSecureUrl(ALL_AVAILABLE_TRUCKS);
+//takequiz/<int pk>

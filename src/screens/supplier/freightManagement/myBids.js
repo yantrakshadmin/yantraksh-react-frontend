@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Card, CardBody, CardHeader, Badge, Row, Col} from 'reactstrap';
+import React, {useEffect, useState} from 'react';
+import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -15,12 +15,43 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 const columns = [
     {
         dataField: 'id',
-        text: 'RFQ ID',
+        text: 'ID',
+        sort: true
+
+    }, {
+        dataField: 'quiz',
+        text: 'Truck Type',
         sort: true,
         formatter: (cell, row) => {
-            return (row.quiz.id)
+            return (row.quiz.truck_name)
 
         }
+    }, {
+        dataField: 'quiz',
+        text: 'Truck Type',
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.quiz.truck_name)
+
+        }
+    }, {
+        dataField: 'quiz',
+        text: 'Truck Type',
+        sort: true,
+        formatter: (cell, row) => {
+            return (row.quiz.truck_type)
+
+        }
+    },
+    {
+        dataField: 'your_bids',
+        text: 'Your Bids',
+        sort: true,
+
+    }, {
+        dataField: 'confirmed',
+        text: 'Status',
+        sort: true
 
     },
     {
@@ -44,43 +75,6 @@ const columns = [
         }
 
     },
-    {
-        dataField: 'quiz',
-        text: 'Truck Type',
-        sort: true,
-        formatter: (cell, row) => {
-            return (row.quiz.truck_type)
-
-        }
-    },
-    {
-        dataField: 'quiz',
-        text: 'Truck Name',
-        sort: true,
-        formatter: (cell, row) => {
-            return (row.quiz.truck_name)
-
-        }
-    },
-    {
-        dataField: 'date',
-        text: 'Scheduled Date',
-        sort: true,
-
-    },
-
-    {
-        dataField: 'least_bid',
-        text: 'Your Bid',
-        sort: true,
-
-    },
-    {
-        dataField: 'confirmed',
-        text: 'Status',
-        sort: true
-
-    },
 
 
     {
@@ -92,7 +86,7 @@ const columns = [
             <div>
                 <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
                     <Button color="primary">
-                        Post Another Bid
+                        Bid Now
                     </Button>
                 </Link>
             </div>
@@ -270,8 +264,6 @@ export default () => {
                             </div>
                         </Col>
                     </Row>
-                    <i className="fa fa-align-justify"/> My Bids
-                    <small className="text-muted"/>
                 </CardHeader>
 
                 <CardBody>

@@ -66,16 +66,7 @@ const shipperNavigation = [
 
                 url: '/orders/ready-to-dispatch',
                 icon: 'fa fa-share',
-            },
-
-            {
-                path: '/forget-password',
-                component: lazy(() => import('../screens/forgetPassword')),
-                name: 'New Request For Quotation',
-                exact: true
-            },
-
-            {
+            }, {
                 name: 'Dispatched',
                 component: lazy(() => import('../screens/shipper/orderManagement/dispatchedOrders')),
 
@@ -85,6 +76,12 @@ const shipperNavigation = [
                 divider: true
             }
         ],
+    },
+    {
+        name: 'Dispatches',
+        url: '/dispatcher',
+        icon: 'fa fa-rocket',
+        component: lazy(() => import('../screens/shipper/dispatchManagement/dispatcher')),
     },
     {
         name: 'Freight Exchange',
@@ -114,26 +111,10 @@ const shipperNavigation = [
             }
         ],
     }, {
-        name: 'Auto-Dispatcher',
-        url: '/dispatcher',
-        icon: 'fa fa-rocket',
-        component: lazy(() => import('../screens/shipper/dispatchManagement/dispatcher')),
-    }, {
-        name: 'Manual-Dispatcher',
-        url: '/manual-dispatcher',
-        icon: 'fa fa-paper-plane',
-        component: lazy(() => import('../screens/shipper/dispatchManagement/manualDispatcher')),
-    }, {
         name: 'Shipping',
         url: '/shipping',
         icon: 'fa fa-compass',
         component: lazy(() => import('../screens/shipper/shipping/tracking')),
-    },
-    {
-        path: '/forget-password',
-        component: lazy(() => import('../screens/forgetPassword')),
-        name: 'New Request For Quotation',
-        exact: true
     },
 ];
 const shipperExtraRoutes = [
@@ -142,7 +123,10 @@ const shipperExtraRoutes = [
         component: lazy(() => import('../screens/shipper/freightManagement/bids')),
         name: 'View Bids',
         exact: true
-    }, {
+    },
+
+
+    {
         name: 'Manual-Dispatcher',
         path: '/manual-dispatcher',
         icon: 'fa fa-compass',
@@ -174,25 +158,20 @@ const shipperExtraRoutes = [
         name: 'New Request For Quotation',
         exact: true
     },
-    {
-        path: '/forget-password',
-        component: lazy(() => import('../screens/forgetPassword')),
-        name: 'New Request For Quotation',
-        exact: true
-    },
-
-    {
-        path: '/card',
-        component: lazy(() => import('../screens/forgetPassword')),
-        name: 'forget Password',
-        exact: true
-    },
 ];
 const supplierExtraRoutes = [
     {
         name: 'Bid Now',
         path: '/freight/bid-now/:id',
         component: lazy(() => import('../screens/supplier/forms/bidNow')),
+        exact: true
+    },
+
+
+    {
+        name: 'Post Truck',
+        path: '/freight/post-truck/',
+        component: lazy(() => import('../screens/supplier/forms/postTruck')),
         exact: true
     }, {
         path: '/freight/request-for-quotation/bids/:id',
@@ -228,17 +207,6 @@ const supplierExtraRoutes = [
         path: '/edit-profile',
         component: lazy(() => import('../screens/shipper/forms/editProfile')),
         name: 'Edit Profile',
-        exact: true
-    }, {
-        path: '/card',
-        component: lazy(() => import('../screens/signInCard')),
-        name: 'New Request For Quotation',
-        exact: true
-    },
-    {
-        path: '/forget-password',
-        component: lazy(() => import('../screens/forgetPassword')),
-        name: 'New Request For Quotation',
         exact: true
     },
 ];

@@ -5,7 +5,6 @@ import {GoogleApiWrapper, Map, Marker} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
 import {assignedTrucks, trackNow} from "../../../helpers/api";
 import {refreshing} from "../../../helpers/notifications";
-import {BeatLoader} from "react-spinners";
 
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 
@@ -32,6 +31,7 @@ const DispatchMap = (props) => {
                     // lat:33,
                     //     lng:72
                 }}
+
 
 
     >
@@ -183,6 +183,7 @@ class Tracking extends React.Component {
             <Row>
                 {/*<DispatchMapWrapper/>*/}
 
+
                 <Col md={6}>
 
                     <Card>
@@ -196,27 +197,27 @@ class Tracking extends React.Component {
 
                 </Col>
 
-                <Col sm={"6"} lg={"6"} xs={"6"} xl={"6"} style={{padding: '0'}}>
 
-                    <Col md={6}>
-                        <Card style={{height: '21vw'}}>
-                            <CardHeader>
-                                <b>Route</b>
-                            </CardHeader>
-                            <CardBody className={"trackingCard"}>
-                                <DispatchMapWrapper location={this.state.plan} loading={this.state.loading}/>
-                            </CardBody>
+                <Col md={6}>
+                    <Card style={{height: '21vw'}}>
+                        <CardHeader>
+                            <b>Route</b>
+                        </CardHeader>
+                        <CardBody className={"trackingCard"}>
 
-                        </Card>
-                        <Card>
-                            <CardHeader>
-                                <b>Location Details</b>
-                            </CardHeader>
-                            <DataTable columns={dispatchListColumns} data={this.state.plan}/>
+                            <DispatchMapWrapper location={this.state.plan} loading={this.state.loading}/>
+                        </CardBody>
+
+                    </Card>
 
 
-                        </Card>
-                    </Col>
+                    <Card>
+                        <CardHeader>
+                            <b>Location Details</b>
+                        </CardHeader>
+                        <DataTable columns={dispatchListColumns} data={this.state.plan}/>
+
+                    </Card>
                 </Col>
             </Row>
         )

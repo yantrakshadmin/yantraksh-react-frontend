@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Card, CardBody, CardHeader, Badge, Row, Col} from 'reactstrap';
+import React, {useEffect, useState} from 'react';
+import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -15,27 +15,8 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
 const columns = [
     {
-        dataField: 'invoice_quiz.id',
+        dataField: 'invoice_number',
         text: 'Invoice Number',
-        sort: true
-
-    },
-    {
-        dataField: 'invoice_quiz.origin',
-        text: 'Origin',
-        sort: true
-
-
-    },
-    {
-        dataField: 'invoice_quiz.destination',
-        text: 'Destination',
-        sort: true
-
-    },
-    {
-        dataField: 'invoice_quiz.truck_name',
-        text: 'Vehicle',
         sort: true
 
     },
@@ -44,6 +25,24 @@ const columns = [
         text: 'Invoice Date',
         sort: true,
 
+    }, {
+        dataField: 'invoice_salesperson',
+        text: 'Billing Party',
+        sort: true
+
+
+    },
+    {
+        dataField: 'invoice_amount',
+        text: 'Total Amount',
+        sort: true
+
+    },
+    {
+        dataField: 'invoice_gst',
+        text: 'GST Number',
+        sort: true
+
     },
     {
         dataField: 'invoice_quiz',
@@ -51,7 +50,7 @@ const columns = [
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/supplier/invoice/${row.invoice_quiz.id}/`}>
+                <Link to={`/supplier/invoice/${row.invoice_quiz}/`}>
                     <Button color="primary">
                         Edit Invoice
                     </Button>
@@ -65,7 +64,7 @@ const columns = [
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/supplier/printinvoice/${row.invoice_quiz.id}`}>
+                <Link to={`/supplier/printinvoice/${row.invoice_quiz}`}>
                     <Button color="primary">
                         Print Invoice
                     </Button>

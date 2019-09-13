@@ -12,16 +12,16 @@ import {
     InputGroupText,
     Row,
 } from 'reactstrap';
-import {forgetPassword} from "../helpers/api";
+import {confirmPassword} from "../helpers/api";
 import {Link} from "react-router-dom";
 
 
 export default () => {
 
     const [form, setForm] = useState({
+        'otp': '',
+        'password': '',
         'username': '',
-        'phone': '',
-        'email': '',
         // 'truck_type': '',
         // 'truck_name': '',
         // 'total_trucks': 0,
@@ -45,7 +45,7 @@ export default () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await forgetPassword(form);
+            await confirmPassword(form);
             alert('done')
         } catch (e) {
             alert(JSON.stringify(e))
@@ -58,46 +58,41 @@ export default () => {
                 <Card className="p-4">
                     <CardBody>
                         <Form method={'post'} onSubmit={handleSubmit}>
-                            <h1>Forget Password</h1>
-                            <p className="text-muted">Enter Your Following Details :</p>
+                            <h1>Confirm Password</h1>
+                            <p className="text-muted">Don't share your OTP with anyone.</p>
                             <InputGroup className="mb-3">
-                                <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>
-                                        <i className="icon-user"/>
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                                <Input type="text" name="username" id="username" placeholder="Enter Username"
-                                       value={form.username}
-                                       onChange={handleInputChange}/>
-                            </InputGroup>
-                            <InputGroup className="mb-4">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
                                         <i className="icon-lock"/>
                                     </InputGroupText>
                                 </InputGroupAddon>
-                                <Input type="text" name="phone" id="number" placeholder="Enter Phone Number"
-                                       value={form.phone}
+                                <Input type="text" name="password" id="password" value={form.password}
+                                       placeholder="Enter Password"
                                        onChange={handleInputChange}/>
                             </InputGroup>
                             <InputGroup className="mb-4">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
-                                        <i className="icon-envelope-open"/>
+                                        <i className="icon-user"/>
                                     </InputGroupText>
                                 </InputGroupAddon>
-                                <Input type="email" name="email" id="email" placeholder="Enter Email Address"
-                                       value={form.email}
+                                <Input type="text" name="username" id="username" value={form.username}
+                                       placeholder="Enter Username"
+                                       onChange={handleInputChange}/>
+                            </InputGroup>
+                            <InputGroup className="mb-4">
+                                <InputGroupAddon addonType="prepend">
+                                    <InputGroupText>
+                                        <i className="icon-lock-open"/>
+                                    </InputGroupText>
+                                </InputGroupAddon>
+                                <Input type="text" name="otp" id="otp" placeholder="Enter OTP"
+                                       value={form.otp}
                                        onChange={handleInputChange}/>
                             </InputGroup>
                             <Row>
-
-                                <Button color={"primary"} size={"lg"}>Send OTP</Button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-
-
                                 <Link to="/confirm-password/">
-                                    <Button color={"primary"} size={"lg"}>Enter OTP</Button>
+                                    <Button color={"primary"} size={"lg"}>Change</Button>
                                 </Link>
 
 
@@ -135,7 +130,5 @@ export default () => {
                 </Card>
             </CardGroup>
         </div>
-
-
     )
 }

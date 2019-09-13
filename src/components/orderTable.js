@@ -89,7 +89,6 @@ class OrderTable extends Component {
             trucks: [],
             selectedTruck: null,
             truckType: '',
-            selected: [],
             originSelected: '-',
             destinationSelected: '-'
         }
@@ -173,6 +172,7 @@ class OrderTable extends Component {
     };
 
 
+
     handleOnSelect = (row, isSelect) => {
         if (isSelect) {
             this.setState(() => ({
@@ -184,6 +184,7 @@ class OrderTable extends Component {
             }));
         }
     };
+
 
 
     handleOnSelectAll = (isSelect, rows) => {
@@ -356,7 +357,6 @@ class OrderTable extends Component {
                                     truckType: e.target.value
                                 })
                             }}>
-                                <option disabled selected>---- Select Truck Category---</option>
                                 <option value="open">Open</option>
                                 <option value="container">Container</option>
                                 <option value="trailer">Trailer</option>
@@ -367,7 +367,7 @@ class OrderTable extends Component {
                                     selectedTruck: e.target.value
                                 })
                             }}>
-                                <option disabled selected>---- Select Truck Type ---</option>
+                                <option disabled selected>---- Select ---</option>
                                 {
                                     this.state.trucks.map(truck => truck.Category.toUpperCase() === this.state.truckType.toUpperCase() ?
                                         <option value={truck.id}>{truck.display_name}</option> : null)

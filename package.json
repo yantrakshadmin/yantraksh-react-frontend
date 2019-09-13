@@ -1,8 +1,7 @@
 {
   "name": "yantraksh",
-  "version": "1.0.0",
-  "private": false,
-  "homepage": "https://yantrakshadmin.github.io/yantraksh-app/",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "@coreui/coreui": "^2.1.12",
     "@coreui/react": "^2.5.2",
@@ -32,7 +31,7 @@
     "react-spinners": "^0.5.12",
     "react-toastify": "^5.3.2",
     "reactjs-localstorage": "^0.0.7",
-    "reactstrap": "^8.0.1",
+    "reactstrap": "latest",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "simple-line-icons": "^2.4.1",
@@ -42,9 +41,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -60,8 +57,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^2.1.1"
   }
 }

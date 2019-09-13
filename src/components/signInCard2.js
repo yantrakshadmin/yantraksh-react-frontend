@@ -69,12 +69,11 @@ const SignInCard = (props) => {
                                 <Button color="primary" className="px-4">Login</Button>
                             </Col>
                             <Col xs="6" className="text-right">
-                                <Col xs="6" className="text-right">
-                                    <Link to={"/forget-password"}>
-                                        <Button color="link" className="px-0">Forgot password?</Button>
-                                    </Link>
-                                </Col>
-
+                                <Link to="/forget-password/">
+                                    <Button color="link" className="mt-3" active tabIndex={-1}
+                                            style={{marginTop: '0 !important'}}>
+                                        Forget Password</Button>
+                                </Link>
                             </Col>
                         </Row>
                     </Form>
@@ -90,13 +89,15 @@ const SignInCard = (props) => {
                                 &nbsp;
                                 <i className="fa fa-truck"></i>
                                &nbsp;&nbsp;
-                                Register as supplier!</Button>
+                                Register
+                                as supplier!</Button>
                         </Link>
                         <Link to="/sign-up/shipper/">
                         <Button color="primary" className="mt-3" active tabIndex={-1}>
                             &nbsp;
                             <i className="fa fa-shopping-cart"></i>&nbsp;&nbsp;
-                            Register as shipper!</Button>
+                            Register
+                            as shipper!</Button>
                         </Link>
                     </div>
                 </CardBody>
