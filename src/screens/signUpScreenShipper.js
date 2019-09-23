@@ -121,7 +121,8 @@ class SignUpScreenSupplier extends Component {
                             <Card className="mx-4">
                                 <CardBody className="p-4">
                                     <Form onSubmit={this.onSubmit}>
-                                        <input type="hidden" name="user-type" value={this.props.type}/>
+                                        <input type="hidden" className={"form-control"} name="user-type"
+                                               value={this.props.type}/>
                                         <h1>Register for {this.props.type}</h1>
                                         <p className="text-muted">Create your account</p>
                                         <InputGroup className="mb-3">
@@ -130,14 +131,16 @@ class SignUpScreenSupplier extends Component {
                                                     <i className="icon-user"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <input type="text" name={"username"} onChange={this.handleChange}
+                                            <input type="text" className={"form-control"} name={"username"}
+                                                   onChange={this.handleChange}
                                                    value={this.state.username}/>
                                         </InputGroup>
                                         <InputGroup className="mb-3">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>@</InputGroupText>
                                             </InputGroupAddon>
-                                            <input type="email" name={"email"} onChange={this.handleChange}
+                                            <input type="email" name={"email"} className={"form-control"}
+                                                   onChange={this.handleChange}
                                                    value={this.state.email}/>
                                         </InputGroup>
                                         <InputGroup className="mb-3">
@@ -146,7 +149,8 @@ class SignUpScreenSupplier extends Component {
                                                     <i className="icon-lock"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <input type="password" name={"password"} onChange={this.handleChange}
+                                            <input type="password" name={"password"} className={"form-control"}
+                                                   onChange={this.handleChange}
                                                    value={this.state.password}/>
                                         </InputGroup>
                                         <InputGroup className="mb-4">
@@ -155,22 +159,19 @@ class SignUpScreenSupplier extends Component {
                                                     <i className="icon-lock"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <input type="password" name={"confirmpass"} onChange={this.handleChange}
+                                            <input type="password" name={"confirmpass"} className={"form-control"}
+                                                   onChange={this.handleChange}
                                                    value={this.state.confirmpass}/>
-                                            {this.state.password !== this.state.confPass ? "Password and confirm password should be same" : ""}
+
                                         </InputGroup>
+                                            {this.state.password !== this.state.confPass ? "Password and confirm password should be same" : ""}
+                                        <br></br>
+                                        <br></br>
                                         <Button color="success" block>Create Account</Button>
                                     </Form>
                                 </CardBody>
                                 <CardFooter className="p-4">
-                                    <Row>
-                                        <Col xs="12" sm="6">
-                                            <Button className="btn-facebook mb-1" block><span>LinkedIn</span></Button>
-                                        </Col>
-                                        <Col xs="12" sm="6">
-                                            <Button className="btn-twitter mb-1" block><span>Gmail</span></Button>
-                                        </Col>
-                                    </Row>
+
                                 </CardFooter>
                             </Card>
                         </Col>

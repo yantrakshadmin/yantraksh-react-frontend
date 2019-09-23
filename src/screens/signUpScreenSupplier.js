@@ -153,7 +153,7 @@ class SignUpScreenSupplier extends Component {
                                                    value={this.state.confirmpass}/>
                                             {this.state.password !== this.state.confPass ? "Password and confirm password should be same" : ""}
                                         </InputGroup>
-                                        <Button color="success" block>Create Account</Button>
+                                        <Button color="success" block>Create Account acount create</Button>
                                     </Form>
                                 </CardBody>
                                 <CardFooter className="p-4">

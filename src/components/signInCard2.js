@@ -68,9 +68,9 @@ const SignInCard = (props) => {
                             <Col xs="6">
                                 <Button color="primary" className="px-4">Login</Button>
                             </Col>
-                            <Col xs="6" className="text-right">
+                            <Col xs="6" className="text-right" style={{marginTop: '0 !important'}}>
                                 <Link to="/forget-password/">
-                                    <Button color="link" className="mt-3" active tabIndex={-1}
+                                    <Button color="link" className="mt-3 with-margin-top-null" active tabIndex={-1}
                                             style={{marginTop: '0 !important'}}>
                                         Forget Password</Button>
                                 </Link>

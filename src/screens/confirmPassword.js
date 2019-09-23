@@ -66,8 +66,8 @@ export default () => {
                                         <i className="icon-lock"/>
                                     </InputGroupText>
                                 </InputGroupAddon>
-                                <Input type="text" name="password" id="password" value={form.password}
-                                       placeholder="Enter Password"
+                                <Input type="text" name="username" id="username" value={form.username}
+                                       placeholder="Enter Username"
                                        onChange={handleInputChange}/>
                             </InputGroup>
                             <InputGroup className="mb-4">
@@ -76,9 +76,11 @@ export default () => {
                                         <i className="icon-user"/>
                                     </InputGroupText>
                                 </InputGroupAddon>
-                                <Input type="text" name="username" id="username" value={form.username}
-                                       placeholder="Enter Username"
+                                <Input type="text" name="password" id="password" value={form.password}
+                                       placeholder="Enter Password"
                                        onChange={handleInputChange}/>
+
+
                             </InputGroup>
                             <InputGroup className="mb-4">
                                 <InputGroupAddon addonType="prepend">

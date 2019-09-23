@@ -41,3 +41,11 @@ img.navbar-brand-full {
 .trackingCard > div > div {
     position: initial !important;
 }
+
+button.mt-3.with-margin-top-null.btn.btn-link.active {
+  margin-top: 0px !important;
+}
+
+.forget-password.col-md-3 {
+  display: inline-flex;
+}

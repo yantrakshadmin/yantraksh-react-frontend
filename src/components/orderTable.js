@@ -315,7 +315,7 @@ class OrderTable extends Component {
                             onClick={this.planVehicle.bind(this)}
                             disabled={title === DISPATCHED_ORDERS}>
                         <i className={"fa fa-rocket"}/> &nbsp;
-                        Plan Vehicle
+                        Auto-dispatch
                     </Button>
                     &nbsp;
                     <Button color={"success"}
@@ -324,7 +324,7 @@ class OrderTable extends Component {
                             }}
                             disabled={title === DISPATCHED_ORDERS}>
                         {/*<i className={"fa fa-rocket"}/> &nbsp;*/}
-                        Manually
+                        Manual-dispatch
                     </Button>
                 </ButtonGroup>
             </div>
@@ -361,7 +361,7 @@ class OrderTable extends Component {
                                 <option value="container">Container</option>
                                 <option value="trailer">Trailer</option>
                             </Input>
-                            <br/>
+                            <br/>,
                             <Input type="select" name="truck" id="truck" onChange={(e) => {
                                 this.setState({
                                     selectedTruck: e.target.value

@@ -67,7 +67,7 @@ const shipperNavigation = [
                 url: '/orders/ready-to-dispatch',
                 icon: 'fa fa-share',
             }, {
-                name: 'Dispatched',
+                name: 'Dispatch-plans',
                 component: lazy(() => import('../screens/shipper/orderManagement/dispatchedOrders')),
 
                 url: '/orders/dispatched',

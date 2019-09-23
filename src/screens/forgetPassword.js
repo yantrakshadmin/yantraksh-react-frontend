@@ -58,7 +58,7 @@ export default () => {
                 <Card className="p-4">
                     <CardBody>
                         <Form method={'post'} onSubmit={handleSubmit}>
-                            <h1>Forget Password</h1>
+                            <h1>Reset Password</h1>
                             <p className="text-muted">Enter Your Following Details :</p>
                             <InputGroup className="mb-3">
                                 <InputGroupAddon addonType="prepend">
@@ -73,7 +73,7 @@ export default () => {
                             <InputGroup className="mb-4">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
-                                        <i className="icon-lock"/>
+                                        <i className="icon-phone"/>
                                     </InputGroupText>
                                 </InputGroupAddon>
                                 <Input type="text" name="phone" id="number" placeholder="Enter Phone Number"
@@ -91,21 +91,25 @@ export default () => {
                                        onChange={handleInputChange}/>
                             </InputGroup>
                             <Row>
+                                <Col md="12" className="forget-password">
 
-                                <Button color={"primary"} size={"lg"}>Send OTP</Button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-
-
-                                <Link to="/confirm-password/">
-                                    <Button color={"primary"} size={"lg"}>Enter OTP</Button>
-                                </Link>
+                                    <Button color={"primary"} size={"lg"}>Send OTP</Button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
 
 
-                                <Col xs="6" className="text-right">
+                                    <Link to="/confirm-password/">
+                                        <Button color={"primary"} size={"lg"}>Enter OTP</Button>
+                                    </Link>
+
+
                                     <Link to="/sign-in/">
                                         <Button color={"link"} size={"lg"}>Cancel</Button>
                                     </Link>
+
                                 </Col>
+
+
                             </Row>
                         </Form>
                     </CardBody>
