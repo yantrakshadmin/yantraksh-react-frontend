@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, Badge} from 'reactstrap';
-import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
+import {Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, UncontrolledDropdown} from 'reactstrap';
+import {AppNavbarBrand, AppSidebarToggler} from '@coreui/react';
 
 import {USER_SIGN_OUT} from "../../actions";
 
 import logo from '../../assets/img/brand/Yantraksh Logo.png'
 import sygnet from '../../assets/img/brand/sygnet.png'
 import {Link} from "react-router-dom";
+import userImg from '../../assets/img/avatars/download.png'
 
 
 const defaultProps = {};
@@ -35,7 +36,7 @@ class DefaultHeader extends Component {
                     <UncontrolledDropdown nav direction="down">
                         <DropdownToggle nav>
                             {username}
-                            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTevazNrV7CSpxiuD6JK9K0q9ZD9BkEfcqGd7_zOCGaOj-4vCCX"} className="img-avatar" alt={email} />
+                            <img src={userImg} className="img-avatar" alt={email}/>
                         </DropdownToggle>
                         <DropdownMenu right>
                             <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>

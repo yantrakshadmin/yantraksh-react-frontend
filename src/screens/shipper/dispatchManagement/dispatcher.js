@@ -6,7 +6,7 @@ import CardHeader from "reactstrap/es/CardHeader";
 import {getDispatchHistory} from "../../../helpers/api";
 import {Line} from "react-chartjs-2";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
-import {rfqRaised} from "../../../helpers/notifications";
+
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 const lat = 287041;
 const lng = 77.1025;
@@ -31,7 +31,7 @@ const DispatchMapWrapper = GoogleApiWrapper({
 const dispatchPlanColumns = [
     {
         dataField: 'id',
-        text: 'ID',
+        text: 'Dispatch ID',
         sort: true
     },
     {
@@ -80,6 +80,22 @@ const dispatchPlanColumns = [
         text: 'Dispatch Time',
         sort: true,
     },
+
+    {
+        dataField: 'raiseRfq',
+        text: 'Raise RFQ',
+        sort: true,
+        formatter: (cell, row) => (
+            <div>
+
+                <Button color="primary">
+                    Raise RFQ
+                </Button>
+            </div>
+        )
+
+    },
+
 
 
 ];

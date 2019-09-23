@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import {rfq} from "../../../helpers/api";
 import DataTable from "../../../components/dataTable";
@@ -131,7 +131,7 @@ export default () => {
         <div>
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> All Orders <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/> Total RFQ <small className="text-muted"/>
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">

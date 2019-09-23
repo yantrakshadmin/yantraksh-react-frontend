@@ -1,29 +1,11 @@
-import React, { Component, lazy, Suspense } from 'react';
-import { Bar, Line, } from 'react-chartjs-2';
-import {
-    Badge,
-    Button,
-    ButtonDropdown,
-    ButtonGroup,
-    ButtonToolbar,
-    Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-    Col,
-    Dropdown,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Progress,
-    Row,
-    Table,
-} from 'reactstrap';
+import React, {Component, lazy} from 'react';
+import {Bar, Line,} from 'react-chartjs-2';
+import {ButtonDropdown, ButtonGroup, Card, CardBody, CardHeader, CardTitle, Col, Dropdown, Row,} from 'reactstrap';
 
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
-import {getKPIData, getNumberOfTrucksData, getNumberOfWeightData, getMap} from "../../helpers/api";
+import {getStyle, hexToRgba} from '@coreui/coreui/dist/js/coreui-utilities'
+import {getKPIData, getMap, getNumberOfTrucksData, getNumberOfWeightData} from "../../helpers/api";
 import Iframe from 'react-iframe'
+
 const Widget03 = lazy(() => import('../../components/Widgets/Widget03'));
 
 const brandPrimary = getStyle('--primary');
@@ -601,24 +583,16 @@ class Dashboard extends Component {
                             <CardBody className="pb-0">
                                 <ButtonGroup className="float-right">
                                     <ButtonDropdown id='card1' isOpen={this.state.card1} toggle={() => { this.setState({ card1: !this.state.card1 }); }}>
-                                        <DropdownToggle caret className="p-0" color="transparent">
-                                            <i className="icon-settings"/>
-                                        </DropdownToggle>
-                                        <DropdownMenu right>
-                                            <DropdownItem>Action</DropdownItem>
-                                            <DropdownItem>Another action</DropdownItem>
-                                            <DropdownItem disabled>Disabled action</DropdownItem>
-                                            <DropdownItem>Something else here</DropdownItem>
-                                        </DropdownMenu>
+
                                     </ButtonDropdown>
                                 </ButtonGroup>
                                 {
                                     this.state.kpi.map(item => (
-                                        <div className="text-value">{item.total_weight}</div>
+                                        <div className="text-value">{item.total_orders_pending}</div>
                                     ))}
 
 
-                                <div>Weight Shipped(Tons) </div>
+                                <div>Orders to Ship</div>
                             </CardBody>
                             <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                                 <Line data={cardChartData2} options={cardChartOpts2} height={70} />
@@ -631,14 +605,7 @@ class Dashboard extends Component {
                             <CardBody className="pb-0">
                                 <ButtonGroup className="float-right">
                                     <Dropdown id='card2' isOpen={this.state.card2} toggle={() => { this.setState({ card2: !this.state.card2 }); }}>
-                                        <DropdownToggle className="p-0" color="transparent">
-                                            <i className="icon-location-pin"></i>
-                                        </DropdownToggle>
-                                        <DropdownMenu right>
-                                            <DropdownItem>Action</DropdownItem>
-                                            <DropdownItem>Another action</DropdownItem>
-                                            <DropdownItem>Something else here</DropdownItem>
-                                        </DropdownMenu>
+
                                     </Dropdown>
                                 </ButtonGroup>
                                 {
@@ -646,7 +613,7 @@ class Dashboard extends Component {
                                         <div className="text-value">{item.total_trucks}</div>
                                     ))}
 
-                                <div>Trucks Dispatched</div>
+                                <div>Total dispatches</div>
                             </CardBody>
                             <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                                 <Line data={cardChartData1} options={cardChartOpts1} height={70} />
@@ -659,22 +626,15 @@ class Dashboard extends Component {
                             <CardBody className="pb-0">
                                 <ButtonGroup className="float-right">
                                     <Dropdown id='card3' isOpen={this.state.card3} toggle={() => { this.setState({ card3: !this.state.card3 }); }}>
-                                        <DropdownToggle caret className="p-0" color="transparent">
-                                            <i className="icon-settings"></i>
-                                        </DropdownToggle>
-                                        <DropdownMenu right>
-                                            <DropdownItem>Action</DropdownItem>
-                                            <DropdownItem>Another action</DropdownItem>
-                                            <DropdownItem>Something else here</DropdownItem>
-                                        </DropdownMenu>
+
                                     </Dropdown>
                                 </ButtonGroup>
                                 {
                                     this.state.kpi.map(item => (
-                                        <div className="text-value">{item.total_distance}</div>
+                                        <div className="text-value">{item.total_rfq}</div>
                                     ))}
 
-                                <div>Total Distance(KM)</div>
+                                <div>Total RFQs</div>
                             </CardBody>
                             <div className="chart-wrapper" style={{ height: '70px' }}>
                                 <Line data={cardChartData3} options={cardChartOpts3} height={70} />
@@ -687,14 +647,8 @@ class Dashboard extends Component {
                             <CardBody className="pb-0">
                                 <ButtonGroup className="float-right">
                                     <ButtonDropdown id='card4' isOpen={this.state.card4} toggle={() => { this.setState({ card4: !this.state.card4 }); }}>
-                                        <DropdownToggle caret className="p-0" color="transparent">
-                                            <i className="icon-settings"></i>
-                                        </DropdownToggle>
-                                        <DropdownMenu right>
-                                            <DropdownItem>Action</DropdownItem>
-                                            <DropdownItem>Another action</DropdownItem>
-                                            <DropdownItem>Something else here</DropdownItem>
-                                        </DropdownMenu>
+
+
                                     </ButtonDropdown>
                                 </ButtonGroup>
                                 {

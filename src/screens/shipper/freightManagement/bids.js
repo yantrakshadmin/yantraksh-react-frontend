@@ -1,22 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {Card, CardBody, CardHeader, Badge, Row, Col} from 'reactstrap';
-import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
-import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
+import React, {useEffect, useState} from 'react';
+import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import DataTable from "../../../components/dataTable";
 import {refreshing} from "../../../helpers/notifications";
 import {assignRFQs, rfqresults} from "../../../helpers/api";
-import Loader from "../../../components/loader";
-import SmallChartCard from "../../../components/smallChartCard";
-import {
-    cardChartData1, cardChartData2, cardChartData3, cardChartData4,
-    totalDistanceConfig,
-    totalOrdersConfig,
-    totalTruckConfig,
-    totalWeightConfig
-} from "../../../data/mockCharts";
-import {Bar, Line} from "react-chartjs-2";
-import {Link} from "react-router-dom";
+import {Line} from "react-chartjs-2";
 import Button from "reactstrap/es/Button";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
@@ -172,7 +159,7 @@ export default (props) => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> Live Trucks <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/>Bids <small className="text-muted"/>
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">

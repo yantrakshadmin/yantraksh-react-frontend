@@ -7,7 +7,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "https://yantra-242714.appspot.com/";
+const BASE_URL = "http://192.168.0.121:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -44,8 +44,9 @@ const DISPATCH_HISTORY = 'api/dispatcherhistory/';
 const LOADING_PLAN = 'api/dispatchhistoryitem/';
 
 const CREATE_NEW_RFQ = 'createrfq/';
+const POST_TRUCK = 'post-truck/';
 
-const BID_NOW = 'quizapi/';
+const BID_NOW = 'suppliers/quizapi/';
 const EDIT_INVOICE = 'api/invoice/';
 const EDIT_LR = '/suppliers/lrapi/';
 
@@ -252,6 +253,11 @@ export const getDispatchHistory = () => loadSecureUrl(DISPATCH_HISTORY);
 export const getLoadingPlan = (pk) => loadSecureUrl(`${LOADING_PLAN}${pk}`);
 
 export const createNewRFQ = (data) => loadSecureUrl(CREATE_NEW_RFQ, {
+    data: data,
+    method: 'post'
+});
+
+export const postTruck = (data) => loadSecureUrl(POST_TRUCK, {
     data: data,
     method: 'post'
 });

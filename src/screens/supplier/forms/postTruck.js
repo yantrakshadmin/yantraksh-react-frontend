@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row,} from 'reactstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import {createNewRFQ} from "../../../helpers/api";
+import {postTruck} from "../../../helpers/api";
+import Link from "react-router-dom/es/Link";
 
 
 export default () => {
@@ -31,8 +32,10 @@ export default () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await createNewRFQ(form);
+            await postTruck(form);
             alert('done')
+
+
         } catch (e) {
             alert(JSON.stringify(e))
         }
@@ -106,7 +109,10 @@ export default () => {
 
                     <br/><br/><br/>
                     <Button color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;
-                    <Button color={"link"} size={"lg"}>Cancel</Button>
+
+                    <Link to={'/freight/available-loads'}>
+                        <Button color={"link"} size={"lg"}>Cancel</Button>
+                    </Link>
                 </Form>
             </CardBody>
         </Card>

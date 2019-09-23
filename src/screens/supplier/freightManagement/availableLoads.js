@@ -64,7 +64,7 @@ export default () => {
 
         {
             dataField: 'id',
-            text: 'SKU ID',
+            text: 'RFQ ID',
             sort: true
         },
         {
@@ -86,10 +86,6 @@ export default () => {
         }, {
             dataField: 'offered_price',
             text: 'Offered Price',
-            sort: true,
-        }, {
-            dataField: 'comments',
-            text: 'Comments',
             sort: true,
         },
         {

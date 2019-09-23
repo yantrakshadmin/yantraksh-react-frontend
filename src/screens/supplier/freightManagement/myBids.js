@@ -84,9 +84,9 @@ const columns = [
         isDummyField: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/freight/request-for-quotation/bids/${row.id}`}>
+                <Link to={`/freight/bid-now/${row.id}`}>
                     <Button color="primary">
-                        Bid Now
+                        Bids Now
                     </Button>
                 </Link>
             </div>
@@ -217,13 +217,14 @@ export default () => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> My Bids <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/> Total RFQ <small className="text-muted"/>
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
                                 <small className="text-muted">Total Bids received</small>
                                 <br />
-                               <strong className="h4">0</strong>
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_bids}</strong>))}
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
@@ -234,7 +235,8 @@ export default () => {
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total RFQ Raised</small>
                                 <br />
-                                <strong className="h4">0</strong>
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_rfq}</strong>))}
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
@@ -244,7 +246,8 @@ export default () => {
                         <div className="callout callout-info">
                             <small className="text-muted">Total Trucks Assigned</small>
                             <br />
-                            <strong className="h4">0</strong>
+                            {
+                                kpiData.map(item => (<strong className="h4">{item.total_trucks_assigned}</strong>))}
 
                             <div className="chart-wrapper">
                                 <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
@@ -256,8 +259,8 @@ export default () => {
                                 <small className="text-muted">Total Trucks In Transit</small>
                                 <br />
 
-
-                                    <strong className="h4">0</strong>
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_trucks}</strong>))}
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
                                 </div>
@@ -265,6 +268,7 @@ export default () => {
                         </Col>
                     </Row>
                 </CardHeader>
+
 
                 <CardBody>
                     <ToolkitProvider

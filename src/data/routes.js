@@ -29,6 +29,15 @@ const supplierNavigation = [
         url: '/freight/financial',
         icon: 'fa fa-clipboard',
     },
+    {
+        name: 'Feedback',
+        url: '/feedback',
+        icon: 'icon-feed',
+        class: 'mt-auto',
+        variant: 'success',
+        attributes: {target: '_blank', rel: "noopener"},
+        component: lazy(() => import('../screens/feedback')),
+    },
 
 ];
 
@@ -115,6 +124,23 @@ const shipperNavigation = [
         url: '/shipping',
         icon: 'fa fa-compass',
         component: lazy(() => import('../screens/shipper/shipping/tracking')),
+    },
+
+    {
+        name: 'Finance',
+        url: '/finances',
+        icon: 'fa fa-compass',
+        component: lazy(() => import('../screens/shipper/finances/financials')),
+    },
+
+    {
+        name: 'Feedback',
+        url: '/feedback',
+        icon: 'icon-feed',
+        class: 'mt-auto',
+        variant: 'success',
+        attributes: {target: '_blank', rel: "noopener"},
+        component: lazy(() => import('../screens/feedback')),
     },
 ];
 const shipperExtraRoutes = [

@@ -89,6 +89,13 @@ class Tracking extends React.Component {
 
         const assignedTruckColumns = [
             {
+                dataField: 'id',
+                text: 'Trip ID',
+                sort: true
+
+            },
+
+            {
                 dataField: 'origin',
                 text: 'Origin',
                 sort: true
@@ -99,7 +106,7 @@ class Tracking extends React.Component {
                 sort: true
             }, {
                 dataField: 'total_trucks',
-                text: 'NO. of trucks',
+                text: 'No. of trucks',
 
             }, {
                 dataField: 'scheduled_date',
@@ -159,23 +166,15 @@ class Tracking extends React.Component {
             },
 
             {
-                dataField: 'location',
-                text: 'Location',
+                dataField: 'eta',
+                text: 'ETA',
                 sort: true,
                 formatter: (cell, row) => {
-                    return (row.loc[0])
+                    return (row.eta)
                 }
             },
 
-            {
-                dataField: 'location',
-                text: 'Location',
-                sort: true,
-                formatter: (cell, row) => {
 
-                    return (row.loc[1])
-                }
-            },
         ];
 
 

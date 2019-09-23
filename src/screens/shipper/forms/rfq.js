@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row,} from 'reactstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import {createNewRFQ} from "../../../helpers/api";
+import Link from "react-router-dom/es/Link";
 
 
 export default () => {
@@ -91,8 +92,357 @@ export default () => {
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="truck_name">Trucks Name</Label>
-                                <Input type="text" name="truck_name" id="truck_name" value={form.truck_name}
-                                       onChange={handleInputChange}/>
+                                <Input type="select" name="truck_name" id="truck_name" value={form.truck_name}
+                                       onChange={handleInputChange}>
+
+
+                                    <option value="">---------------------Open---------------------</option>
+
+                                    <option value="121">10 TYRE 14 Ton</option>
+
+                                    <option value="93">10 TYRE 14 Ton</option>
+
+                                    <option value="9">10 TYRE 14 Ton</option>
+
+                                    <option value="37">10 TYRE 14 Ton</option>
+
+                                    <option value="65">10 TYRE 14 Ton</option>
+
+                                    <option value="149">10 TYRE 14 Ton</option>
+
+                                    <option value="36">10 TYRE 15 Ton</option>
+
+                                    <option value="92">10 TYRE 15 Ton</option>
+
+                                    <option value="64">10 TYRE 15 Ton</option>
+
+                                    <option value="120">10 TYRE 15 Ton</option>
+
+                                    <option value="8">10 TYRE 15 Ton</option>
+
+                                    <option value="148">10 TYRE 15 Ton</option>
+
+                                    <option value="119">10 TYRE 19 Ton</option>
+
+                                    <option value="7">10 TYRE 19 Ton</option>
+
+                                    <option value="91">10 TYRE 19 Ton</option>
+
+                                    <option value="35">10 TYRE 19 Ton</option>
+
+                                    <option value="63">10 TYRE 19 Ton</option>
+
+                                    <option value="147">10 TYRE 19 Ton</option>
+
+                                    <option value="118">12 TYRE 20 Ton</option>
+
+                                    <option value="6">12 TYRE 20 Ton</option>
+
+                                    <option value="62">12 TYRE 20 Ton</option>
+
+                                    <option value="34">12 TYRE 20 Ton</option>
+
+                                    <option value="146">12 TYRE 20 Ton</option>
+
+                                    <option value="90">12 TYRE 20 Ton</option>
+
+                                    <option value="61">12 TYRE 21 Ton</option>
+
+                                    <option value="89">12 TYRE 21 Ton</option>
+
+                                    <option value="33">12 TYRE 21 Ton</option>
+
+                                    <option value="5">12 TYRE 21 Ton</option>
+
+                                    <option value="145">12 TYRE 21 Ton</option>
+
+                                    <option value="117">12 TYRE 21 Ton</option>
+
+                                    <option value="4">12 TYRE 24 Ton</option>
+
+                                    <option value="60">12 TYRE 24 Ton</option>
+
+                                    <option value="116">12 TYRE 24 Ton</option>
+
+                                    <option value="88">12 TYRE 24 Ton</option>
+
+                                    <option value="144">12 TYRE 24 Ton</option>
+
+                                    <option value="32">12 TYRE 24 Ton</option>
+
+                                    <option value="155">13 Feet 3.5 Ton</option>
+
+                                    <option value="99">13 Feet 3.5 Ton</option>
+
+                                    <option value="43">13 Feet 3.5 Ton</option>
+
+                                    <option value="71">13 Feet 3.5 Ton</option>
+
+                                    <option value="15">13 Feet 3.5 Ton</option>
+
+                                    <option value="127">13 Feet 3.5 Ton</option>
+
+                                    <option value="98">14 Feet 4 Ton</option>
+
+                                    <option value="14">14 Feet 4 Ton</option>
+
+                                    <option value="42">14 Feet 4 Ton</option>
+
+                                    <option value="154">14 Feet 4 Ton</option>
+
+                                    <option value="126">14 Feet 4 Ton</option>
+
+                                    <option value="70">14 Feet 4 Ton</option>
+
+                                    <option value="59">14 TYRE 24 Ton</option>
+
+                                    <option value="87">14 TYRE 24 Ton</option>
+
+                                    <option value="31">14 TYRE 24 Ton</option>
+
+                                    <option value="3">14 TYRE 24 Ton</option>
+
+                                    <option value="115">14 TYRE 24 Ton</option>
+
+                                    <option value="143">14 TYRE 24 Ton</option>
+
+                                    <option value="58">14 TYRE 25 Ton</option>
+
+                                    <option value="114">14 TYRE 25 Ton</option>
+
+                                    <option value="142">14 TYRE 25 Ton</option>
+
+                                    <option value="86">14 TYRE 25 Ton</option>
+
+                                    <option value="2">14 TYRE 25 Ton</option>
+
+                                    <option value="30">14 TYRE 25 Ton</option>
+
+                                    <option value="1">14 TYRE 29 Ton</option>
+
+                                    <option value="85">14 TYRE 29 Ton</option>
+
+                                    <option value="113">14 TYRE 29 Ton</option>
+
+                                    <option value="29">14 TYRE 29 Ton</option>
+
+                                    <option value="57">14 TYRE 29 Ton</option>
+
+                                    <option value="141">14 TYRE 29 Ton</option>
+
+                                    <option value="125">17 Feet 6 Ton</option>
+
+                                    <option value="97">17 Feet 6 Ton</option>
+
+                                    <option value="13">17 Feet 6 Ton</option>
+
+                                    <option value="153">17 Feet 6 Ton</option>
+
+                                    <option value="41">17 Feet 6 Ton</option>
+
+                                    <option value="69">17 Feet 6 Ton</option>
+
+                                    <option value="12">18 Feet 8 Ton</option>
+
+                                    <option value="152">18 Feet 8 Ton</option>
+
+                                    <option value="96">18 Feet 8 Ton</option>
+
+                                    <option value="68">18 Feet 8 Ton</option>
+
+                                    <option value="124">18 Feet 8 Ton</option>
+
+                                    <option value="40">18 Feet 8 Ton</option>
+
+                                    <option value="39">19 Feet 8 Ton</option>
+
+                                    <option value="11">19 Feet 8 Ton</option>
+
+                                    <option value="151">19 Feet 8 Ton</option>
+
+                                    <option value="67">19 Feet 8 Ton</option>
+
+                                    <option value="95">19 Feet 8 Ton</option>
+
+                                    <option value="123">19 Feet 8 Ton</option>
+
+                                    <option value="150">22 Feet 9.7 Ton</option>
+
+                                    <option value="94">22 Feet 9.7 Ton</option>
+
+                                    <option value="66">22 Feet 9.7 Ton</option>
+
+                                    <option value="122">22 Feet 9.7 Ton</option>
+
+                                    <option value="38">22 Feet 9.7 Ton</option>
+
+                                    <option value="10">22 Feet 9.7 Ton</option>
+
+                                    <option value="102">Tempo 407 1.5 Ton</option>
+
+                                    <option value="74">Tempo 407 1.5 Ton</option>
+
+                                    <option value="18">Tempo 407 1.5 Ton</option>
+
+                                    <option value="46">Tempo 407 1.5 Ton</option>
+
+                                    <option value="130">Tempo 407 1.5 Ton</option>
+
+                                    <option value="158">Tempo 407 1.5 Ton</option>
+
+                                    <option value="16">Tempo 407 2.5 Ton</option>
+
+                                    <option value="128">Tempo 407 2.5 Ton</option>
+
+                                    <option value="100">Tempo 407 2.5 Ton</option>
+
+                                    <option value="156">Tempo 407 2.5 Ton</option>
+
+                                    <option value="72">Tempo 407 2.5 Ton</option>
+
+                                    <option value="44">Tempo 407 2.5 Ton</option>
+
+                                    <option value="17">Tempo 407 2 Ton</option>
+
+                                    <option value="101">Tempo 407 2 Ton</option>
+
+                                    <option value="45">Tempo 407 2 Ton</option>
+
+                                    <option value="73">Tempo 407 2 Ton</option>
+
+                                    <option value="157">Tempo 407 2 Ton</option>
+
+                                    <option value="129">Tempo 407 2 Ton</option>
+
+                                    <option value=" ">---------------------Container---------------------</option>
+
+                                    <option value="168">20 ft sxl 6 Ton</option>
+
+                                    <option value="112">20 ft sxl 6 Ton</option>
+
+                                    <option value="28">20 ft sxl 6 Ton</option>
+
+                                    <option value="140">20 ft sxl 6 Ton</option>
+
+                                    <option value="56">20 ft sxl 6 Ton</option>
+
+                                    <option value="84">20 ft sxl 6 Ton</option>
+
+                                    <option value="83">20 ft sxl 7 Ton</option>
+
+                                    <option value="167">20 ft sxl 7 Ton</option>
+
+                                    <option value="55">20 ft sxl 7 Ton</option>
+
+                                    <option value="111">20 ft sxl 7 Ton</option>
+
+                                    <option value="27">20 ft sxl 7 Ton</option>
+
+                                    <option value="139">20 ft sxl 7 Ton</option>
+
+                                    <option value="78">24 ft mxl 14.5 Ton</option>
+
+                                    <option value="50">24 ft mxl 14.5 Ton</option>
+
+                                    <option value="22">24 ft mxl 14.5 Ton</option>
+
+                                    <option value="106">24 ft mxl 14.5 Ton</option>
+
+                                    <option value="134">24 ft mxl 14.5 Ton</option>
+
+                                    <option value="162">24 ft mxl 14.5 Ton</option>
+
+                                    <option value="79">24 ft mxl 14 Ton</option>
+
+                                    <option value="51">24 ft mxl 14 Ton</option>
+
+                                    <option value="135">24 ft mxl 14 Ton</option>
+
+                                    <option value="163">24 ft mxl 14 Ton</option>
+
+                                    <option value="107">24 ft mxl 14 Ton</option>
+
+                                    <option value="23">24 ft mxl 14 Ton</option>
+
+                                    <option value="161">24 ft mxl 15 Ton</option>
+
+                                    <option value="21">24 ft mxl 15 Ton</option>
+
+                                    <option value="49">24 ft mxl 15 Ton</option>
+
+                                    <option value="133">24 ft mxl 15 Ton</option>
+
+                                    <option value="77">24 ft mxl 15 Ton</option>
+
+                                    <option value="105">24 ft mxl 15 Ton</option>
+
+                                    <option value="25">24 ft sxl 6.5 Ton</option>
+
+                                    <option value="165">24 ft sxl 6.5 Ton</option>
+
+                                    <option value="53">24 ft sxl 6.5 Ton</option>
+
+                                    <option value="137">24 ft sxl 6.5 Ton</option>
+
+                                    <option value="81">24 ft sxl 6.5 Ton</option>
+
+                                    <option value="109">24 ft sxl 6.5 Ton</option>
+
+                                    <option value="82">24 ft sxl 6 Ton</option>
+
+                                    <option value="26">24 ft sxl 6 Ton</option>
+
+                                    <option value="110">24 ft sxl 6 Ton</option>
+
+                                    <option value="166">24 ft sxl 6 Ton</option>
+
+                                    <option value="54">24 ft sxl 6 Ton</option>
+
+                                    <option value="138">24 ft sxl 6 Ton</option>
+
+                                    <option value="80">24 ft sxl 7 Ton</option>
+
+                                    <option value="164">24 ft sxl 7 Ton</option>
+
+                                    <option value="52">24 ft sxl 7 Ton</option>
+
+                                    <option value="136">24 ft sxl 7 Ton</option>
+
+                                    <option value="24">24 ft sxl 7 Ton</option>
+
+                                    <option value="108">24 ft sxl 7 Ton</option>
+
+                                    <option value="103">32 ft sxl 6.5 Ton</option>
+
+                                    <option value="159">32 ft sxl 6.5 Ton</option>
+
+                                    <option value="47">32 ft sxl 6.5 Ton</option>
+
+                                    <option value="19">32 ft sxl 6.5 Ton</option>
+
+                                    <option value="75">32 ft sxl 6.5 Ton</option>
+
+                                    <option value="131">32 ft sxl 6.5 Ton</option>
+
+                                    <option value="76">32 ft sxl 6 Ton</option>
+
+                                    <option value="132">32 ft sxl 6 Ton</option>
+
+                                    <option value="104">32 ft sxl 6 Ton</option>
+
+                                    <option value="48">32 ft sxl 6 Ton</option>
+
+                                    <option value="20">32 ft sxl 6 Ton</option>
+
+                                    <option value=" ">---------------------Trailer---------------------</option>
+                                    <option value="160">High bed</option>
+
+                                    <option value="160">Low bed</option>
+
+                                    <option value="160">Semi bed</option>
+
+
+                                </Input>
                             </FormGroup>
                         </Col>
 
@@ -108,7 +458,11 @@ export default () => {
 
                     <br/><br/><br/>
                     <Button color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;
-                    <Button color={"link"} size={"lg"}>Cancel</Button>
+
+                    <Link to={'/freight/request-for-quotation'}>
+                        <Button color={"link"} size={"lg"}>Cancel</Button>
+                    </Link>
+
                 </Form>
             </CardBody>
         </Card>

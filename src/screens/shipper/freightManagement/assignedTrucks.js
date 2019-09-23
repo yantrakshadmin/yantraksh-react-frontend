@@ -1,18 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import {assignedTrucks, getKPIData} from "../../../helpers/api";
 import {refreshing} from "../../../helpers/notifications";
 import DataTable from "../../../components/dataTable";
 import columns from "../../../data/columns/assignedTrucks";
-import {
-    cardChartData1,
-    cardChartData2,
-    cardChartData3,
-    cardChartData4, totalDistanceConfig,
-    totalOrdersConfig, totalTruckConfig, totalWeightConfig
-} from "../../../data/mockCharts";
-import SmallChartCard from "../../../components/smallChartCard";
-import {Bar, Line} from "react-chartjs-2";
+import {Line} from "react-chartjs-2";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
 export default () => {
@@ -137,7 +129,7 @@ export default () => {
             <Card>
 
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> All Orders <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/> Assigned Trucks <small className="text-muted"/>
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">

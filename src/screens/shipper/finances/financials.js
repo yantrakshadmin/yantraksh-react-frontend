@@ -1,81 +1,135 @@
 import React, {useEffect, useState} from 'react';
-import {Badge, Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
+import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {refreshing} from "../../../helpers/notifications";
-import {getKPIData, liveAvailableTrucks} from "../../../helpers/api";
+import {getKPIData, invoiceView, uploadPODFile} from "../../../helpers/api";
 import Loader from "../../../components/loader";
+import {Link} from "react-router-dom";
+import Button from "reactstrap/es/Button";
+import Upload from '../../../components/upload';
 import {Line} from "react-chartjs-2";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
 
 const columns = [
     {
-        dataField: 'name',
-        text: 'Name',
+        dataField: 'invoice_number',
+        text: 'Invoice Number',
         sort: true
 
     },
     {
-        dataField: 'truck_type',
-        text: 'Truck Type',
+        dataField: 'invoice_date',
+        text: 'Invoice Date',
         sort: true,
+
+    }, {
+        dataField: 'invoice_salesperson',
+        text: 'Billing Party',
+        sort: true
+
+
+    },
+    {
+        dataField: 'invoice_amount',
+        text: 'Total Amount',
+        sort: true
+
+    },
+    {
+        dataField: 'invoice_gst',
+        text: 'GST Number',
+        sort: true
+
+    },
+    {
+        dataField: 'invoice_quiz',
+        text: 'Edit Invoice',
+        sort: true,
+        formatter: (cell, row) => (
+            <div>
+                <Link to={`/supplier/invoice/${row.invoice_quiz}/`}>
+                    <Button color="primary">
+                        Edit Invoice
+                    </Button>
+                </Link>
+            </div>
+        )
+    },
+    {
+        dataField: 'Print Invoice',
+        text: 'Print Invoice',
+        sort: true,
+        formatter: (cell, row) => (
+            <div>
+                <Link to={`/supplier/printinvoice/${row.invoice_quiz}`}>
+                    <Button color="primary">
+                        Print Invoice
+                    </Button>
+                </Link>
+            </div>
+        )
+
+    },
+    {
+        dataField: 'Upload POD',
+        text: 'Upload POD',
+        sort: true,
+        isDummyField: true,
         formatter: (cell, row) => {
-            if (row.truck_type === 1)
-                return (<Badge color="success" style={{width: '100%'}}>Container</Badge>);
-            if (row.truck_type === 2)
-                return (<Badge color="primary" style={{width: '100%'}}>Trailer</Badge>);
-            if (row.truck_type === 3)
-                return (<Badge color="warning" style={{width: '100%'}}>Open</Badge>)
-        },
+            return (
+                <div>
+                    <Upload upload={async (file) => {
+                        await uploadPODFile(file, row.invoice_quiz);
+                    }} types={['*']}/>
+                </div>
+            )
+        }
 
-    }, {
-        dataField: 'origin',
-        text: 'Origin',
-        sort: true
-
-    }, {
-        dataField: 'destination',
-        text: 'Destination',
-        sort: true
-    }, {
-        dataField: 'total_trucks',
-        text: 'NO. of trucks',
-
-    }, {
-        dataField: 'scheduled_date',
-        text: 'Date',
-        sort: true,
-    }, {
-        dataField: 'offered_price',
-        text: 'Offered Price',
-        sort: true
-    }
+    },
 ];
 
 
 export default () => {
 
     const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const loadApiData = async () => {
+            refreshing();
+            const trucks = await invoiceView();
+            setData(trucks);
+        };
+        const loadKpiData = async () => {
+            refreshing();
+            const kpi = await getKPIData();
+            setKpiData(kpi);
+            console.log(kpi, "kpiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+            console.log(kpiData, "wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
+        };
+
+        loadApiData();
+        loadKpiData();
+    }, []);
+
     const [kpiData, setKpiData] = useState([
-        {total_time: ""},
-        {total_trucks: ""},
-        {total_orders: ""},
-        {total_orders_planned: ""},
-        {total_rfq: ""},
-        {total_bids: ""},
-        {total_orders_hold: ""},
-        {total_orders_delayed: ""},
-        {total_orders_pending: ""},
-        {total_trucks_assigned: ""},
-        {total_trucks_in_transit: ""},
-        {total_weight: ""},
-        {total_distance: ""},
+        {total_time: "0"},
+        {total_trucks: "0"},
+        {total_orders: "0"},
+        {total_orders_planned: "0"},
+        {total_rfq: "0"},
+        {total_bids: "0"},
+        {total_orders_hold: "0"},
+        {total_orders_delayed: "0"},
+        {total_orders_pending: "0"},
+        {total_trucks_assigned: "0"},
+        {total_trucks_in_transit: "0"},
+        {total_weight: "0"},
+        {total_distance: "0"},
 
     ]);
-
-
     const sparkLineChartData = [
         {
             data: [35, 23, 56, 22, 97, 23, 64],
@@ -154,40 +208,19 @@ export default () => {
         return () => data;
     };
 
-    useEffect(() => {
-        const loadApiData = async () => {
-            refreshing();
-            const trucks = await liveAvailableTrucks();
-            setData(trucks)
-        };
-
-        const loadKpiData = async () => {
-            refreshing();
-            const kpi = await getKPIData();
-            setKpiData(kpi);
-            console.log(kpi, "kp");
-            console.log(kpiData, "wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
-        };
-
-        loadApiData();
-        loadKpiData()
-
-    }, []);
-
 
     return (
         <div className="animated fadeIn">
             <Card>
-
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> Live available trucks <small className="text-muted"/>
+                    <i className="fa fa-align-justify"/>Financials
+                    <small className="text-muted"/>
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
                                 <small className="text-muted">Total Bids received</small>
                                 <br/>
-                                {
-                                    kpiData.map(item => (<strong className="h4">{item.total_bids}</strong>))}
+                                <strong className="h4">0</strong>
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
@@ -199,8 +232,7 @@ export default () => {
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total RFQ Raised</small>
                                 <br/>
-                                {
-                                    kpiData.map(item => (<strong className="h4">{item.total_rfq}</strong>))}
+                                <strong className="h4">0</strong>
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
@@ -211,8 +243,7 @@ export default () => {
                         <div className="callout callout-info">
                             <small className="text-muted">Total Trucks Assigned</small>
                             <br/>
-                            {
-                                kpiData.map(item => (<strong className="h4">{item.total_trucks_assigned}</strong>))}
+                            <strong className="h4">0</strong>
 
                             <div className="chart-wrapper">
                                 <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100}
@@ -225,8 +256,7 @@ export default () => {
                                 <small className="text-muted">Total Trucks In Transit</small>
                                 <br/>
 
-                                {
-                                    kpiData.map(item => (<strong className="h4">{item.total_trucks}</strong>))}
+                                <strong className="h4">0</strong>
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
                                           width={100} height={30}/>
@@ -236,14 +266,12 @@ export default () => {
                     </Row>
                 </CardHeader>
 
-
                 <CardBody>
                     <ToolkitProvider
                         keyField="id"
                         data={data}
                         columns={columns}
                         search
-
                     >
                         {
                             props => (
@@ -257,6 +285,7 @@ export default () => {
                                         hover
                                         condensed
                                         striped
+
                                         bordered={false}
                                         pagination={paginationFactory()}
                                         noDataIndication={Loader}

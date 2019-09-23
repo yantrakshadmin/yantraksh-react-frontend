@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row,} from 'reactstrap';
-import {bidNow} from "../../../helpers/api";
-
+import {bidNow} from "../helpers/api"
 
 export default (props) => {
 
@@ -31,7 +30,7 @@ export default (props) => {
 
             alert('done')
         } catch (e) {
-            alert(JSON.stringify(e));
+            alert('error')
         }
     };
 
@@ -47,7 +46,8 @@ export default (props) => {
                             <FormGroup>
                                 <Label for="origin">Type of vehicle</Label>
                                 {/*<Input type="text" id="vehicle" placeholder="ex: Delhi" name={"vehicle"}/>*/}
-                                <Input type="select" name="vehicle" id="vehicle" onChange={handleInputChange}  value={form.vehicle} >
+                                <Input type="select" name="vehicle" id="vehicle" onChange={handleInputChange}
+                                       value={form.vehicle}>
                                     <option selected disabled>---- Select ----</option>
                                     <option value="1">Market Vehicle</option>
                                     <option value="2">Own Vehicle</option>
@@ -58,14 +58,14 @@ export default (props) => {
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="destination">Least Bid</Label>
-                                <Input type="text" name="least_bid" id="least_bid" onChange={handleInputChange}  value={form.least_bid} />
+                                <Input type="text" name="least_bid" id="least_bid" onChange={handleInputChange}
+                                       value={form.least_bid}/>
 
 
                             </FormGroup>
                         </Col>
 
                     </Row>
-
 
 
                     <br/><br/><br/>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 const defaultProps = {};
 
@@ -10,7 +10,8 @@ class DefaultFooter extends Component {
 
         return (
             <React.Fragment>
-                <span><a href="https://yantraksh.com">Yantraksh Logistics</a> &copy; All rights reserved </span>
+                <span><a
+                    href="https://yantraksh.com">Yantraksh Logistics Pvt. Ltd</a> &copy; All rights reserved </span>
             </React.Fragment>
         );
     }
