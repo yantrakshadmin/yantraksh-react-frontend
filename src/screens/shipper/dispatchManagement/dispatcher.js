@@ -3,9 +3,11 @@ import DataTable from "../../../components/dataTable";
 import {Button, Card, CardBody, Col, Row} from "reactstrap";
 import {GoogleApiWrapper, Map} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
-import {getDispatchHistory, getKPIData} from "../../../helpers/api";
+import {getDispatchHistory, getKPIData, uploadPODFile} from "../../../helpers/api";
 import {Line} from "react-chartjs-2";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
+import {Link, RichText, Date} from 'prismic-reactjs';
+import Upload from "../../../components/upload";
 
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 const lat = 287041;
@@ -31,7 +33,10 @@ const dispatchPlanColumns = [
     {
         dataField: 'id',
         text: 'Dispatch ID',
-        sort: true
+        sort: true,
+        formatter: (cell, row) => (
+            <span>YNTL{row.id}</span>
+        )
     },
     {
         dataField: 'name',
@@ -73,6 +78,13 @@ const dispatchPlanColumns = [
         dataField: 'scheduled_date',
         text: 'Date',
         sort: true,
+        formatter: (cell, row) => {
+            return (
+                <div>
+                    {row.scheduled_date.slice(0,10)}
+                </div>
+            )
+        }
     },
     {
         dataField: 'route_tat',

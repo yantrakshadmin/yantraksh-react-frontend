@@ -129,7 +129,7 @@ const shipperNavigation = [
     {
         name: 'Finance',
         url: '/finances',
-        icon: 'fa fa-compass',
+        icon: 'fa fa-clipboard',
         component: lazy(() => import('../screens/shipper/finances/financials')),
     },
 

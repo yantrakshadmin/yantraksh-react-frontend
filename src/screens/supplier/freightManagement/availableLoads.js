@@ -65,7 +65,10 @@ export default () => {
         {
             dataField: 'id',
             text: 'RFQ ID',
-            sort: true
+            sort: true,
+            formatter: (cell, row) => (
+                <span>YNTL{row.id}</span>
+            )
         },
         {
             dataField: 'destination',

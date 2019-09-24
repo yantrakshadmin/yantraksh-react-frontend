@@ -420,8 +420,8 @@ const mainChartOpts = {
                 ticks: {
                     beginAtZero: true,
                     maxTicksLimit: 5,
-                    stepSize: Math.ceil(250 / 5),
-                    max: 250,
+                    stepSize: Math.ceil(500 / 5),
+                    max: 500,
                 },
             }],
     },
@@ -677,12 +677,7 @@ class Dashboard extends Component {
 
                                         <Card>
                                             <CardBody>
-                                                <Row>
-                                                    <Col sm="5">
-                                                        <CardTitle className="mb-0">Traffic</CardTitle>
-                                                    </Col>
-
-                                                </Row>
+                                               
                                                 <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
                                                     {/*<Line data={this.state.mainChart} options={mainChartOpts} height={300} />*/}
                                                     <Bar data={this.state.mainChart} height={125}/>
@@ -703,12 +698,7 @@ class Dashboard extends Component {
                                         <Card>
                                             <CardBody>
 
-                                                <Row>
-                                                    <Col sm="5">
-                                                        <CardTitle className="mb-0">Traffic</CardTitle>
-                                                    </Col>
 
-                                                </Row>
                                                 <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
                                                     {/*<Line data={this.state.mainChart} options={mainChartOpts} height={300} />*/}
                                                     <Bar data={this.state.mainChart2} height={125}/>

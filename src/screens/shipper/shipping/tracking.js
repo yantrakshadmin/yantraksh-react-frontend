@@ -1,13 +1,12 @@
 import React from "react";
 import DataTable from "../../../components/dataTable";
-import {Button, Card, CardBody, Col, Row} from "reactstrap";
+import {Button, Card, CardBody, CardFooter, Col, Row} from "reactstrap";
 import {GoogleApiWrapper, Map, Marker} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
 import {assignedTrucks, trackNow} from "../../../helpers/api";
 import {refreshing} from "../../../helpers/notifications";
 
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
-
 
 
 const styles = {
@@ -28,7 +27,6 @@ const DispatchMap = (props) => {
                     // lat:33,
                     //     lng:72
                 }}
-
 
 
     >
@@ -102,13 +100,16 @@ class Tracking extends React.Component {
                 text: 'Destination',
                 sort: true
             }, {
-                dataField: 'total_trucks',
-                text: 'No. of trucks',
-
-            }, {
                 dataField: 'scheduled_date',
                 text: 'Date',
                 sort: true,
+                formatter: (cell, row) => {
+                    return (
+                        <div>
+                            {row.scheduled_date.slice(0, 10)}
+                        </div>
+                    )
+                }
             }, {
                 dataField: 'offered_price',
                 text: 'Offered Price',
@@ -149,8 +150,21 @@ class Tracking extends React.Component {
                 text: 'Date and time ',
                 sort: true,
                 formatter: (cell, row) => {
-                    return (row.createdAt)
+                    return (
+                        <div><span>
+                            {row.createdAt.slice(0, 10)}
+                            </span>
 
+                            &nbsp;&nbsp;
+
+                            <span>
+
+                                {row.createdAt.slice(11, 19)}
+
+
+                            </span>
+                        </div>
+                    )
                 }
             },
             {
@@ -167,7 +181,23 @@ class Tracking extends React.Component {
                 text: 'ETA',
                 sort: true,
                 formatter: (cell, row) => {
-                    return (row.curr_ETA)
+                    return (
+
+                        <div><span>
+                        {row.curr_ETA.slice(0, 10)}
+                </span>
+
+                            &nbsp;&nbsp;
+
+                            <span>
+
+                {row.curr_ETA.slice(11, 19)}
+
+
+                </span>
+                        </div>
+
+                    )
                 }
             },
 

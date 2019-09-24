@@ -6,7 +6,7 @@ import {AppNavbarBrand, AppSidebarToggler} from '@coreui/react';
 import {USER_SIGN_OUT} from "../../actions";
 
 import logo from '../../assets/img/brand/Yantraksh Logo.png'
-import sygnet from '../../assets/img/brand/sygnet.png'
+import logoY from '../../assets/img/Favicon_blue.png'
 import {Link} from "react-router-dom";
 import userImg from '../../assets/img/avatars/download.png'
 
@@ -24,7 +24,7 @@ class DefaultHeader extends Component {
                 <AppSidebarToggler className="d-lg-none" display="md" mobile />
                 <AppNavbarBrand
                     full={{ src: logo, width: 89, height: 25, alt: 'CoreUI Logo' }}
-                    minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
+                    minimized={{ src: logoY, width: 25, height: 27, alt: 'CoreUI Logo' }}
                 />
                 <AppSidebarToggler className="d-md-down-none" display="lg" />
 
