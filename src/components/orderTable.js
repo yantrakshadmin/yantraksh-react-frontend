@@ -87,10 +87,11 @@ class OrderTable extends Component {
             ],
             modal: false,
             trucks: [],
-            selectedTruck: null,
+            selectedTruck: [],
             truckType: '',
             originSelected: '-',
-            destinationSelected: '-'
+            destinationSelected: '-',
+            selected:[]
         }
     }
 

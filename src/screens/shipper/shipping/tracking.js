@@ -8,10 +8,7 @@ import {refreshing} from "../../../helpers/notifications";
 
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 
-//clase based mai connnnvert krlo is
-//kese hota h ??
-//nahii aata bc :/
-//classs banao return wala render(){return ()} is return mai dal do or use state ki jnga this.state={},set plan kiplace prr this,setState({)
+
 
 const styles = {
     height: '100%',
@@ -21,7 +18,7 @@ const styles = {
 
 
 const DispatchMap = (props) => {
-    console.log(props, "here", props.loading);
+    console.log(props, "here");
     return <Map google={props.google}
                 style={styles}
                 zoom={7}
@@ -166,11 +163,11 @@ class Tracking extends React.Component {
             },
 
             {
-                dataField: 'eta',
+                dataField: 'curr_ETA',
                 text: 'ETA',
                 sort: true,
                 formatter: (cell, row) => {
-                    return (row.eta)
+                    return (row.curr_ETA)
                 }
             },
 

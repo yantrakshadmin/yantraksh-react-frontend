@@ -3,14 +3,13 @@ import DataTable from "../../../components/dataTable";
 import {Button, Card, CardBody, Col, Row} from "reactstrap";
 import {GoogleApiWrapper, Map} from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
-import {getDispatchHistory} from "../../../helpers/api";
+import {getDispatchHistory, getKPIData} from "../../../helpers/api";
 import {Line} from "react-chartjs-2";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
 const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
 const lat = 287041;
 const lng = 77.1025;
-
 
 
 const DispatchMap = (props) => (
@@ -97,7 +96,6 @@ const dispatchPlanColumns = [
     },
 
 
-
 ];
 const dispatchListColumns = [
     {
@@ -129,15 +127,15 @@ const LoadingPlan = ({row}) => {
                     <i className="fa fa-align-justify"/>Loading Plan
                     <small className="text-muted"/>
                 </CardHeader>
-            <Row>
-                <Col lg={7}>
-                    <DataTable columns={dispatchListColumns} data={row.items}/>
-                </Col>
-                <Col lg={5}>
-                    <iframe src={row.route_link} frameBorder="0" style={{'height':'100%', 'width':'100%'}} />
-                    {/*<DispatchMapWrapper/>*/}
-                </Col>
-            </Row>
+                <Row>
+                    <Col lg={7}>
+                        <DataTable columns={dispatchListColumns} data={row.items}/>
+                    </Col>
+                    <Col lg={5}>
+                        <iframe src={row.route_link} frameBorder="0" style={{'height': '100%', 'width': '100%'}}/>
+                        {/*<DispatchMapWrapper/>*/}
+                    </Col>
+                </Row>
             </Card>
         </div>
     )
@@ -227,12 +225,22 @@ const makeSparkLineData = (dataSetNo, variant) => {
 export default (props) => {
 
     const [data, setData] = useState([]);
+    const [kpiData, setKPIData] = useState([]);
+
 
     useEffect(() => {
         const getNetwork = async () => {
             const data = await getDispatchHistory();
             setData(data);
             console.log(data);
+            const loadKPIData = async () => {
+                const kpi = await getKPIData();
+                console.log("kpi data h ye", kpi)
+                setKPIData(kpi);
+                console.log(setKPIData, "<--KPI data");
+            };
+
+            loadKPIData();
         };
 
         getNetwork();
@@ -250,40 +258,53 @@ export default (props) => {
                         <Row>
                             <Col sm="3">
                                 <div className="callout callout-info">
-                                    <small className="text-muted">New Clients</small>
-                                    <br />
-                                    <strong className="h4">9,123</strong>
+                                    <small className="text-muted">Total Bids received</small>
+                                    <br/>
+                                    {
+                                        kpiData.map(item => (<strong className="h4">{item.total_bids}</strong>))}
+
                                     <div className="chart-wrapper">
-                                        <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                        <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
+                                              width={100} height={30}/>
                                     </div>
                                 </div>
                             </Col>
                             <Col sm="3">
                                 <div className="callout callout-danger">
-                                    <small className="text-muted">Recurring Clients</small>
-                                    <br />
-                                    <strong className="h4">22,643</strong>
+                                    <small className="text-muted">Total RFQ Raised</small>
+                                    <br/>
+                                    {
+                                        kpiData.map(item => (<strong className="h4">{item.total_rfq}</strong>))}
+
                                     <div className="chart-wrapper">
-                                        <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
+                                        <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                              width={100} height={30}/>
                                     </div>
                                 </div>
                             </Col><Col sm="3">
-                                <div className="callout callout-info">
-                                    <small className="text-muted">New Clients</small>
-                                    <br />
-                                    <strong className="h4">9,123</strong>
-                                    <div className="chart-wrapper">
-                                        <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
-                                    </div>
+                            <div className="callout callout-info">
+                                <small className="text-muted">Total Trucks Assigned</small>
+                                <br/>
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_trucks_assigned}</strong>))}
+
+                                <div className="chart-wrapper">
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
+                                          width={100}
+                                          height={30}/>
                                 </div>
-                            </Col>
+                            </div>
+                        </Col>
                             <Col sm="3">
                                 <div className="callout callout-danger">
-                                    <small className="text-muted">Recurring Clients</small>
-                                    <br />
-                                    <strong className="h4">22,643</strong>
+                                    <small className="text-muted">Total Trucks In Transit</small>
+                                    <br/>
+
+                                    {
+                                        kpiData.map(item => (<strong className="h4">{item.total_trucks}</strong>))}
                                     <div className="chart-wrapper">
-                                        <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
+                                        <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                              width={100} height={30}/>
                                     </div>
                                 </div>
                             </Col>
