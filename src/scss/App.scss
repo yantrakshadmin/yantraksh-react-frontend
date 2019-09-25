@@ -6,8 +6,11 @@
 
 // If you want to add something do it here
 @import "custom";
-
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
 // ie fixes
 @import "ie-fix";
 
 @import "icons";
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';

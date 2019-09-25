@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row,} from 'reactstrap';
-import {bidNow} from "../helpers/api"
+import {bidNow, feedback} from "../helpers/api"
 
 export default (props) => {
 
     const [form, setForm] = useState({
-        'vehicle': '',
-        'least_bid': '',
+        'name': '',
+        'contact': '',
+        'title': '',
+        'description': '',
+        'summary': '',
 
 
     });
@@ -26,7 +29,7 @@ export default (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await bidNow(form, props.match.params.id);
+            await feedback(form);
 
             alert('done')
         } catch (e) {
@@ -37,29 +40,53 @@ export default (props) => {
     return (
         <Card>
             <CardHeader>
-                <strong>Post Truck</strong>
+                <strong>Feedback</strong>
             </CardHeader>
             <CardBody>
                 <Form method={'post'} onSubmit={handleSubmit}>
                     <Row form>
+
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="origin">Type of vehicle</Label>
-                                {/*<Input type="text" id="vehicle" placeholder="ex: Delhi" name={"vehicle"}/>*/}
-                                <Input type="select" name="vehicle" id="vehicle" onChange={handleInputChange}
-                                       value={form.vehicle}>
-                                    <option selected disabled>---- Select ----</option>
-                                    <option value="1">Market Vehicle</option>
-                                    <option value="2">Own Vehicle</option>
-                                </Input>
+                                <Label for="destination">name</Label>
+                                <Input type="text" name="name" id="name" onChange={handleInputChange}
+                                       value={form.name}/>
+
+
+                            </FormGroup>
+                        </Col>
+<Col md={4}>
+                            <FormGroup>
+                                <Label for="destination">contact</Label>
+                                <Input type="text" name="contact" id="contact" onChange={handleInputChange}
+                                       value={form.contact}/>
+
+
+                            </FormGroup>
+                        </Col>
+<Col md={4}>
+                            <FormGroup>
+                                <Label for="destination">title</Label>
+                                <Input type="text" name="title" id="title" onChange={handleInputChange}
+                                       value={form.title}/>
+
+
+                            </FormGroup>
+                        </Col>
+<Col md={4}>
+                            <FormGroup>
+                                <Label for="destination">description</Label>
+                                <Input type="text" name="description" id="description" onChange={handleInputChange}
+                                       value={form.description}/>
+
 
                             </FormGroup>
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="destination">Least Bid</Label>
-                                <Input type="text" name="least_bid" id="least_bid" onChange={handleInputChange}
-                                       value={form.least_bid}/>
+                                <Label for="destination">summary</Label>
+                                <Input type="text" name="summary" id="summary" onChange={handleInputChange}
+                                       value={form.summary}/>
 
 
                             </FormGroup>

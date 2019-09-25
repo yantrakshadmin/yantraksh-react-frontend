@@ -311,6 +311,15 @@ export const confirmPassword = (data) => loadOpenUrl('password-reset/confirm/', 
 });
 
 export const getNumberOfTrucksData = () => loadSecureUrl('truckvmonth/');
+export const getEventsData = () => loadSecureUrl('calendar-data')
+
+
+export const feedback = (data) => loadSecureUrl('shipper/feedbackapi/',{
+    data:data,
+    method:'post'
+
+})
+
 export const getKPIData = () => loadSecureUrl('api/kpi/');
 export const uploadPOD = () => loadSecureUrl('api/pod/');
 export const getMap = () => loadSecureUrl('map/');

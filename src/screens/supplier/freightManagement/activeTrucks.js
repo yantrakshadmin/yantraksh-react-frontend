@@ -12,10 +12,21 @@ import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
 const columns = [
     {
-        dataField: 'name',
+        dataField: 'id',
+        text: 'RFQ ID',
+        sort: true
+
+    },
+     {
+        dataField: 'origin',
         text: 'Origin',
         sort: true
 
+    },
+    {
+        dataField: 'destination',
+        text: 'Destination',
+        sort: true
     },
     {
         dataField: 'truck_type',
@@ -30,22 +41,19 @@ const columns = [
                 return (<Badge color="warning" style={{width: '100%'}}>Open</Badge>)
         },
 
-    }, {
-        dataField: 'origin',
-        text: 'Origin',
-        sort: true
+    },
 
-    }, {
-        dataField: 'destination',
-        text: 'Destination',
-        sort: true
-    }, {
-        dataField: 'total_trucks',
-        text: 'NO. of trucks',
+     {
+        dataField: 'total_name',
+        text: 'Truck Name',
 
     }, {
         dataField: 'scheduled_date',
         text: 'Date',
+        sort: true,
+    }, {
+        dataField: 'status',
+        text: 'Status',
         sort: true,
     }, {
         dataField: 'offered_price',

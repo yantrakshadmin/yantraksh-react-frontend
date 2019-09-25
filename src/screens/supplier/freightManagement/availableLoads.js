@@ -71,16 +71,17 @@ export default () => {
             )
         },
         {
+            dataField: 'truck_name',
+            text: 'Truck Name',
+            sort: true,
+        },
+        {
+            dataField: 'origin',
+            text: 'Origin',
+            sort: true,
+        },{
             dataField: 'destination',
             text: 'Destination',
-            sort: true,
-        }, {
-            dataField: 'total_trucks',
-            text: 'No. of Trucks',
-            sort: true,
-        }, {
-            dataField: 'material_type',
-            text: 'Material Type',
             sort: true,
         }, {
             dataField: 'date',
