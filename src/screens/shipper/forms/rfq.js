@@ -3,8 +3,8 @@ import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, 
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import {createNewRFQ} from "../../../helpers/api";
 import Link from "react-router-dom/es/Link";
-
-
+import MultiSelect from "@kenshooui/react-multi-select";
+import "@kenshooui/react-multi-select/dist/style.css"
 export default () => {
 
     const [form, setForm] = useState({
@@ -16,7 +16,45 @@ export default () => {
         'total_trucks': 0,
         'offered_price': 0,
         'weight': 0,
-        'id_comments': ''
+        'id_comments': '',
+
+
+        // Actions
+        //
+        states: [
+            { id: 1, label: "All India"},
+            { id: 2, label: "Andhra Pradesh"},
+            { id: 3, label: "Assam"},
+            { id: 4, label: "Bihar"},
+            { id: 5, label: "Chandigarh"},
+            { id: 6, label: "Chhattisgarh"},
+            { id: 7, label: "Delhi"},
+            { id: 8, label: "Goa"},
+            { id: 9, label: "Gujarat"},
+            { id: 10, label: "Haryana"},
+            { id: 11, label: "Himachal Pradesh"},
+            { id: 12, label: "Maharashtra"},
+            { id: 13, label: "Hyderabad"},
+            { id: 14, label: "Jammu Kashmir"},
+            { id: 15, label: "Jharkhand"},
+            { id: 16, label: "Karnataka"},
+            { id: 17, label: "Kerala"},
+            { id: 18, label: "Madhya Pradesh"},
+            { id: 19, label: "Odisha"},
+            { id: 20, label: "Punjab"},
+            { id: 21, label: "Rajasthan"},
+            { id: 22, label: "Tamil Nadu"},
+            { id: 23, label: "Telangana"},
+            { id: 24, label: "Tripura"},
+            { id: 25, label: "Uttar Pradesh"},
+            { id: 26, label: "Uttarakhand"},
+            { id: 27, label: "West Bengal"},
+
+        ],
+        selectedItems: []
+
+
+
     });
 
     const handleInputChange = (event) => {
@@ -26,8 +64,19 @@ export default () => {
 
         setForm({
             ...form,
-            [name]: value
+            [name]: value,
+
         });
+    };
+    const handleChange = (selectedItems)=> {
+
+        setForm({
+            ...form,
+            [selectedItems]: selectedItems,
+
+        });
+
+
     };
 
 
@@ -96,7 +145,7 @@ export default () => {
                                        onChange={handleInputChange}>
 
 
-                                    <option value="">---------------------Open---------------------</option>
+                                    <option value="">-------Open------</option>
 
                                     <option value="121">10 TYRE 14 Ton</option>
 
@@ -453,6 +502,23 @@ export default () => {
                                        onChange={handleInputChange}/>
                             </FormGroup>
                         </Col>
+
+<Col md={12}>
+                            <FormGroup>
+                                <Label for="weight"><h5>Invite Bidders From:</h5></Label>
+
+                                <MultiSelect
+                                    items={form.states}
+                                    selectedItems={form.selectedItems}
+                                    onChange={handleChange}
+
+
+                                />
+
+
+                            </FormGroup>
+</Col>
+
                     </Row>
 
 
@@ -470,4 +536,5 @@ export default () => {
 
 
  )
+
 }

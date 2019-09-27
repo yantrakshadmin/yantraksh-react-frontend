@@ -481,7 +481,7 @@ class Dashboard extends Component {
 
             calendarEvent:{events:[
                 {totalTrucks:'',
-                    weight:0,
+                    weight:0+"KG",
                     scheduled_date:'2019-09-22',
                 totalWeight:''}
             ]}
