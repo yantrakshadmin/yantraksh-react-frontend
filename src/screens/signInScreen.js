@@ -5,6 +5,7 @@ import {Redirect} from "react-router-dom";
 import {Col, Container, Row} from "reactstrap";
 
 const SignInScreen = (props) => {
+    console.log(props);
     if(props.isAuthenticated)
         return <Redirect to={`${props.redirectTo.split('#')[1]}`}/>;
 

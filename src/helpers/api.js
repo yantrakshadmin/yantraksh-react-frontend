@@ -7,7 +7,8 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-const BASE_URL = "http://192.168.0.121:8000/";
+// const BASE_URL = "https://yantra-242714.appspot.com/";
+const BASE_URL = "https://yantra-242714.appspot.com/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -55,7 +56,7 @@ const GET_INVOICE = '/suppliers/invoiceapi/';
 const GET_LR = '/api/lr/';
 const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
 
-const TRACK_NOW = 'track/'
+const TRACK_NOW = 'track/';
 
 const INVOICE_TABLE_VIEW = '/suppliers/invoices/';
 const LR_TABLE_VIEW = '/api/lr/';
@@ -318,7 +319,7 @@ export const feedback = (data) => loadSecureUrl('shipper/feedbackapi/',{
     data:data,
     method:'post'
 
-})
+});
 
 export const getKPIData = () => loadSecureUrl('api/kpi/');
 export const uploadPOD = () => loadSecureUrl('api/pod/');

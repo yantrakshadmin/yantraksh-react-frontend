@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
-import BootstrapTable from 'react-bootstrap-table-next';
+// import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {refreshing} from "../../../helpers/notifications";
 import {getKPIData, invoiceView, uploadPODFile} from "../../../helpers/api";
@@ -11,6 +11,7 @@ import Button from "reactstrap/es/Button";
 import Upload from '../../../components/upload';
 import {Line} from "react-chartjs-2";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
+import DataTable from "../../../components/dataTable";
 
 
 const columns = [
@@ -280,7 +281,7 @@ export default () => {
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <Search.SearchBar {...props.searchProps} />
                                     </div>
-                                    <BootstrapTable
+                                    <DataTable
                                         {...props.baseProps}
                                         hover
                                         condensed
@@ -288,7 +289,7 @@ export default () => {
 
                                         bordered={false}
                                         pagination={paginationFactory()}
-                                        noDataIndication={Loader}
+                                        // noDataIndication={Loader}
                                     />
                                 </div>
                             )

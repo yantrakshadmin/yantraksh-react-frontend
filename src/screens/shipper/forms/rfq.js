@@ -69,11 +69,11 @@ export default () => {
         });
     };
     const handleChange = (selectedItems)=> {
+        console.log(selectedItems);
 
         setForm({
             ...form,
-            [selectedItems]: selectedItems,
-
+            selectedItems,
         });
 
 
@@ -83,10 +83,10 @@ export default () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await createNewRFQ(form);
-            alert('done')
+            const {states, ...nf} = form;
+            await createNewRFQ(nf);
         } catch (e) {
-            alert(JSON.stringify(e))
+
         }
     };
 

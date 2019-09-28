@@ -51,7 +51,7 @@ export default (props) => {
                             <div style={{float: 'right', display: 'inline-block'}}>
                                 {right(xprops)}
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <NCSVButton {...props.csvProps} />
+                                <NCSVButton {...xprops.csvProps} />
 
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <Search.SearchBar {...xprops.searchProps} />
@@ -72,7 +72,7 @@ export default (props) => {
                             selectRow={select}
                             loading={loading}
                             expandRow={expandRow}
-                            noDataIndication={() => !loaded ? 'No data..' : <BeatLoader/>}
+                            // noDataIndication={() => loaded ? 'No data..' : <BeatLoader/>}
                             {...unusedprops}
                         />
                     </div>
