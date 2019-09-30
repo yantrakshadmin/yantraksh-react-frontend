@@ -237,7 +237,7 @@ class Tracking extends React.Component {
                     </Card>
 
 
-                    <Card>
+                    <Card className="locationTable">
                         <CardHeader>
                             <b>Location Details</b>
                         </CardHeader>

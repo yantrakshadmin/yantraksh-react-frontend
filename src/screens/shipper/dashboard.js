@@ -479,10 +479,10 @@ class Dashboard extends Component {
             // ],
 
 
-            calendarEvent:{events:[
+            events:[
                 {totalTrucks:'',
-                    weight:0+"KG",
-                    scheduled_date:'2019-09-22',
+                    weight:4545,
+                    scheduled_date:'2019-09-29',
                 totalWeight:''}
             ]}
 
@@ -490,7 +490,7 @@ class Dashboard extends Component {
 
 
         };
-    }
+
     calendarComponentRef = React.createRef();
 
 
@@ -810,7 +810,7 @@ class Dashboard extends Component {
                                                     {<FullCalendar defaultView="dayGridMonth"
 
 
-                                                                  events={[{ title: this.state.calendarEvent.events[0].weight.toString(), date:this.state.calendarEvent.events[0].scheduled_date.slice(0,10)  }]}
+                                                                  events={[{ title: this.state.events[0].weight.toString(), date:this.state.events[0].scheduled_date.slice(0,10)  }]}
                                                                   // defaultView="dayGridMonth"
                                                                   header={{
                                                                       left: "prev,next today",
