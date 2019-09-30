@@ -4,7 +4,7 @@ import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 // import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {refreshing} from "../../../helpers/notifications";
-import {getKPIData, invoiceView, uploadPODFile} from "../../../helpers/api";
+import {getKPIData, invoiceSupView, invoiceView, uploadPODFile} from "../../../helpers/api";
 import Loader from "../../../components/loader";
 import {Link} from "react-router-dom";
 import Button from "reactstrap/es/Button";
@@ -45,51 +45,51 @@ const columns = [
         sort: true
 
     },
-    {
-        dataField: 'invoice_quiz',
-        text: 'Edit Invoice',
-        sort: true,
-        formatter: (cell, row) => (
-            <div>
-                <Link to={`/supplier/invoice/${row.invoice_quiz}/`}>
-                    <Button color="primary">
-                        Edit Invoice
-                    </Button>
-                </Link>
-            </div>
-        )
-    },
-    {
-        dataField: 'Print Invoice',
-        text: 'Print Invoice',
-        sort: true,
-        formatter: (cell, row) => (
-            <div>
-                <Link to={`/supplier/printinvoice/${row.invoice_quiz}`}>
-                    <Button color="primary">
-                        Print Invoice
-                    </Button>
-                </Link>
-            </div>
-        )
-
-    },
-    {
-        dataField: 'Upload POD',
-        text: 'Upload POD',
-        sort: true,
-        isDummyField: true,
-        formatter: (cell, row) => {
-            return (
-                <div>
-                    <Upload upload={async (file) => {
-                        await uploadPODFile(file, row.invoice_quiz);
-                    }} types={['*']}/>
-                </div>
-            )
-        }
-
-    },
+    // {
+    //     dataField: 'invoice_quiz',
+    //     text: 'Edit Invoice',
+    //     sort: true,
+    //     formatter: (cell, row) => (
+    //         <div>
+    //             <Link to={`/supplier/invoice/${row.invoice_quiz}/`}>
+    //                 <Button color="primary">
+    //                     Edit Invoice
+    //                 </Button>
+    //             </Link>
+    //         </div>
+    //     )
+    // },
+    // {
+    //     dataField: 'Print Invoice',
+    //     text: 'Print Invoice',
+    //     sort: true,
+    //     formatter: (cell, row) => (
+    //         <div>
+    //             <Link to={`/supplier/printinvoice/${row.invoice_quiz}`}>
+    //                 <Button color="primary">
+    //                     Print Invoice
+    //                 </Button>
+    //             </Link>
+    //         </div>
+    //     )
+    //
+    // },
+    // {
+    //     dataField: 'Upload POD',
+    //     text: 'Upload POD',
+    //     sort: true,
+    //     isDummyField: true,
+    //     formatter: (cell, row) => {
+    //         return (
+    //             <div>
+    //                 <Upload upl  oad={async (file) => {
+    //                     await uploadPODFile(file, row.invoice_quiz);
+    //                 }} types={['*']}/>
+    //             </div>
+    //         )
+    //     }
+    //
+    // },
 ];
 
 
@@ -100,7 +100,7 @@ export default () => {
     useEffect(() => {
         const loadApiData = async () => {
             refreshing();
-            const trucks = await invoiceView();
+            const trucks = await invoiceSupView();
             setData(trucks);
         };
         const loadKpiData = async () => {
@@ -272,7 +272,7 @@ export default () => {
                         keyField="id"
                         data={data}
                         columns={columns}
-                        search
+
                     >
                         {
                             props => (

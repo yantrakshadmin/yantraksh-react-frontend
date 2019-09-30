@@ -7,7 +7,9 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-// const BASE_URL = "https://yantra-242714.appspot.com/";
+
+// const BASE_URL = "http://0.0.0.0:8000/";
+// const BASE_URL = "http://192.168.0.124:8000/";
 const BASE_URL = "https://yantra-242714.appspot.com/";
 
 axios.defaults.baseURL = BASE_URL;
@@ -189,6 +191,8 @@ export const getLRDetails = (id) => loadSecureUrl(`${GET_LR}${id}/`);
 
 
 export const invoiceView = () => loadSecureUrl(INVOICE_TABLE_VIEW);
+
+export const invoiceSupView = () => loadSecureUrl(`api/financials-api`);
 export const LRView = () => loadSecureUrl(LR_TABLE_VIEW);
 
 
