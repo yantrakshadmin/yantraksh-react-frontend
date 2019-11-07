@@ -8,43 +8,26 @@ import Button from "reactstrap/es/Button";
 import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
 
 const columns = [
-    {
-        dataField: 'name',
-        text: 'Origin',
-        sort: true
 
-    },
     {
-        dataField: 'least_bid',
-        text: 'Truck Type',
+        dataField: 'supplier',
+        text: 'Supplier Name',
         sort: true,
     },
 
     {
         dataField: 'least_bid',
-        text: 'Origin',
+        text: 'Least Bid',
         sort: true,
 
     },
     {
-        dataField: 'destination',
-        text: 'Destination',
-        sort: true
-    }, {
-        dataField: 'total_trucks',
-        text: 'NO. of trucks',
-
-    }, {
-        dataField: 'scheduled_date',
-        text: 'Date',
-        sort: true,
-    }, {
-        dataField: 'offered_price',
-        text: 'Offered Price',
+        dataField: 'confirmed',
+        text: 'Status',
         sort: true
     }, {
         dataField: 'taken_quizzes',
-        text: 'Offered Price',
+        text: 'Assign',
         sort: true,
         formatter: (cell, row) => (
             <div>
@@ -163,40 +146,48 @@ export default (props) => {
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
-                                <small className="text-muted">New Clients</small>
-                                <br />
-                                <strong className="h4">9,123</strong>
+                                <small className="text-muted">Total Bids received</small>
+                                <br/>
+                                <strong className="h4">0</strong>
+
                                 <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
                                 </div>
                             </div>
                         </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
-                                <small className="text-muted">Recurring Clients</small>
-                                <br />
-                                <strong className="h4">22,643</strong>
+                                <small className="text-muted">Total RFQ Raised</small>
+                                <br/>
+                                <strong className="h4">0</strong>
+
                                 <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
+                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
                                 </div>
                             </div>
                         </Col><Col sm="3">
                         <div className="callout callout-info">
-                            <small className="text-muted">New Clients</small>
-                            <br />
-                            <strong className="h4">9,123</strong>
+                            <small className="text-muted">Total Trucks Assigned</small>
+                            <br/>
+                            <strong className="h4">0</strong>
+
                             <div className="chart-wrapper">
-                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100}
+                                      height={30}/>
                             </div>
                         </div>
                     </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
-                                <small className="text-muted">Recurring Clients</small>
-                                <br />
-                                <strong className="h4">22,643</strong>
+                                <small className="text-muted">Total Trucks In Transit</small>
+                                <br/>
+
+                                <strong className="h4">0</strong>
                                 <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
+                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
                                 </div>
                             </div>
                         </Col>

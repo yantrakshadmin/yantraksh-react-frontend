@@ -150,8 +150,13 @@ const shipperExtraRoutes = [
         name: 'View Bids',
         exact: true
     },
-
-
+    {
+        path: '/supplier/printinvoice/:id',
+        component: lazy(() => import('../screens/supplier/forms/printInvoice')),
+        name: 'Print Invoice',
+        exact: true
+    },
+    
     {
         name: 'Manual-Dispatcher',
         path: '/manual-dispatcher',

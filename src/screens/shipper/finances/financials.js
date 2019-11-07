@@ -59,21 +59,21 @@ const columns = [
     //         </div>
     //     )
     // },
-    // {
-    //     dataField: 'Print Invoice',
-    //     text: 'Print Invoice',
-    //     sort: true,
-    //     formatter: (cell, row) => (
-    //         <div>
-    //             <Link to={`/supplier/printinvoice/${row.invoice_quiz}`}>
-    //                 <Button color="primary">
-    //                     Print Invoice
-    //                 </Button>
-    //             </Link>
-    //         </div>
-    //     )
-    //
-    // },
+    {
+        dataField: 'Print Invoice',
+        text: 'Print Invoice',
+        sort: true,
+        formatter: (cell, row) => (
+            <div>
+                <Link to={`/supplier/printinvoice/${row.invoice_quiz}`}>
+                    <Button color="primary">
+                        Print Invoice
+                    </Button>
+                </Link>
+            </div>
+        )
+
+    },
     // {
     //     dataField: 'Upload POD',
     //     text: 'Upload POD',
