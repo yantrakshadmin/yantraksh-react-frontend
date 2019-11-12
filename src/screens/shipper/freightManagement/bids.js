@@ -35,7 +35,6 @@ const columns = [
                     <Button color="primary" onClick={() =>
                         assignRFQs(row.quiz,row.id) }>
                         Assign Now!
-
                     </Button>
 
             </div>
@@ -74,8 +73,8 @@ export default (props) => {
             label: 'Bounce Rate',
         },
     ];
-    const brandPrimary = getStyle('--primary')
-    const brandDanger = getStyle('--danger')
+    const brandPrimary = getStyle('--primary');
+    const brandDanger = getStyle('--danger');
     const sparklineChartOpts = {
         tooltips: {
             enabled: false,

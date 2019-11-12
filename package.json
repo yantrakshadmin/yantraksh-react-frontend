@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://yantrakshadmin.github.io/yantraksh-app/",
-
   "dependencies": {
     "@coreui/coreui": "^2.1.12",
     "@coreui/react": "^2.5.2",
@@ -31,6 +30,7 @@
     "react-bootstrap-table2-paginator": "^2.0.8",
     "react-bootstrap-table2-toolkit": "^2.0.1",
     "react-chartjs-2": "^2.7.6",
+    "react-datepicker": "^2.10.0",
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.1.7",
     "react-google-places-autocomplete": "^1.5.1",

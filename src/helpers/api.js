@@ -7,21 +7,19 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
-
 // const BASE_URL = "http://0.0.0.0:8000/";
-// const BASE_URL = "http://192.168.0.124:8000/";
-const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
+const BASE_URL = "http://192.168.43.34:8000/";
+// const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // yantra-cloud.ap-south-1.elasticbeanstalk.com
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
 
-
 const GET_TOKEN_PAIR = '/auth/token/';
-const CREATE_ACCOUNT_SHIPPER = 'shippercreateapi/';
-const CREATE_ACCOUNT_SUPPLIER = 'suppliercreateapi/';
+export const CREATE_ACCOUNT_SHIPPER = 'shippercreateapi/';
+export const CREATE_ACCOUNT_SUPPLIER = 'suppliercreateapi/';
+export const CREATE_ACCOUNT_COMPANY = 'companycreateapi/';
 const USER_DETAILS = "/auth/user/meta/";
-
 const USERNAME_AVAILABLE = '/auth/username/available/';
 const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 
@@ -31,10 +29,8 @@ const LIVE_AVAILABLE_TRUCKS = '/api/liveavailabletrucks/';
 const MY_BIDS = '/suppliers/mybidsapi/';
 const RFQ = '/api/rfq/';
 
-
 //API for shipper
 const LIVE_AVAILABLE_LOADS = '/api/liveavailableloads/';
-
 const RFQ_RESULTS = 'shipper/rfqresultsapi/';
 const SHIPPER_ALL_ORDER = '/api/all-orders/';
 const CHANGE_ORDERS_STATUS = '/shipper/update-orders/';
@@ -65,6 +61,8 @@ const INVOICE_TABLE_VIEW = '/suppliers/invoices/';
 const LR_TABLE_VIEW = '/api/lr/';
 
 const ALL_AVAILABLE_TRUCKS = 'api/trucksdb/';
+
+export const REPORT_DISPATCHER= 'dispatcherreportapi/';
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -107,14 +105,13 @@ const getAccessToken = () => {
                 } catch (e) {
                     // pass
                 }
-
                 return reject('Error refreshing token', e);
             }
         }
-
         return resolve(access_token);
     });
 };
+
 export const loadOpenUrl = async (url, config = {}) => {
     return new Promise((resolve, reject) => {
         axios(url, config)
@@ -123,6 +120,7 @@ export const loadOpenUrl = async (url, config = {}) => {
     });
 };
 export const loadSecureUrl = (url, config) => {
+    console.log(config,'congif');
     return new Promise(async (resolve, reject) => {
         try {
             const data = await loadOpenUrl(url, {
@@ -154,6 +152,7 @@ export const getUserDetails = () => {
     //TODO: hide loading screen
     return data;
 };
+
 export const isUsernameAvailable = async (username) => {
     try {
         return await loadOpenUrl(USERNAME_AVAILABLE, {
@@ -165,16 +164,56 @@ export const isUsernameAvailable = async (username) => {
         console.log(e);
         return false
     }
-
 };
+export const getReportsShipper = async (url,obj) =>{
+   return getReports(url,{'date_from':obj.date_from,'date_to':obj.date_to,'c_name':obj.c_name})
+};
+
+export const getCompanyShipper = async (url) =>{
+    return loadOpenUrl(url,{
+        method:'get'
+    })
+};
+
 export const signUpUserShipper = async (data) => {
     return loadOpenUrl(CREATE_ACCOUNT_SHIPPER, {
         method: 'post',
         data: data
     })
 };
+
+export const getReports = async (url, obj) => {
+    return new Promise(
+        async (resolve, reject) => {
+            try {
+                const data = await axios.request(
+                    {
+                        method: 'post',
+                        url: BASE_URL+url,
+                        headers: {
+                            'Content-Type': 'Application/Json',
+                            'Authorization':  `Bearer ${await getAccessToken()}`
+                        },
+                        data: obj
+                    }
+                );
+                resolve(data);
+            } catch (e) {
+                reject(e)
+            }
+        }
+    )
+};
+
 export const signUpUserSupplier = async (data) => {
     return loadOpenUrl(CREATE_ACCOUNT_SUPPLIER, {
+        method: 'post',
+        data: data
+    })
+};
+
+export const signUpUserCompany = async (data) => {
+    return loadOpenUrl(CREATE_ACCOUNT_COMPANY, {
         method: 'post',
         data: data
     })

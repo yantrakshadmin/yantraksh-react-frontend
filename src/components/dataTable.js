@@ -3,7 +3,6 @@ import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import Loader from "./loader";
-import {BeatLoader} from "react-spinners";
 
 const NCSVButton = (props) => {
     const handleClick = () => {
@@ -18,11 +17,7 @@ const NCSVButton = (props) => {
 };
 
 export default (props) => {
-
-
     const {
-
-
         columns, data = [], right = () => {
         }, left = () => {
         }, refPass = () => {
@@ -31,6 +26,10 @@ export default (props) => {
         expandRow = {},
         noDataIndication={Loader},
         section,
+        searchClass,
+        searchContainerClass,
+        exportAll,
+        headerClasses,
         ...unusedprops
     } = props;
 
@@ -40,21 +39,19 @@ export default (props) => {
             data={data}
             columns={columns}
             search
-            exportCSV={{onlyExportSelection: true, exportAll: true}}
+            exportCSV={{onlyExportSelection: !exportAll, exportAll: true}}
         >
             {
                 xprops => (
                     <div>
                         <div style={{paddingTop: 10, paddingBottom: 10}}>
                             {left(xprops)}
-
-                            <div style={{float: 'right', display: 'inline-block'}}>
+                            <div className={searchContainerClass} style={{float: 'right', display: 'inline-block'}}>
                                 {right(xprops)}
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <NCSVButton {...xprops.csvProps} />
-
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Search.SearchBar {...xprops.searchProps} />
+                                <Search.SearchBar className={searchClass} {...xprops.searchProps} />
                             </div>
                         </div>
                         {section ? (
@@ -72,6 +69,7 @@ export default (props) => {
                             selectRow={select}
                             loading={loading}
                             expandRow={expandRow}
+                            headerClasses={headerClasses}
                             // noDataIndication={() => loaded ? 'No data..' : <BeatLoader/>}
                             {...unusedprops}
                         />

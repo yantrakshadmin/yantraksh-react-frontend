@@ -9,11 +9,13 @@ import {connectionStatusChanged} from "./actions/navigation";
 const HomeScreen = lazy(() => import('./screens/home'));
 const SignInScreen = lazy(() => import('./screens/signInScreen'));
 const ShipperSignUpScreen = lazy(() => import('./screens/shipper/signUpScreen'));
+const CompanySignUpScreen = lazy(() => import('./screens/company/signUpScreen'));
 const SupplierSignUpScreen = lazy(() => import('./screens/supplier/signUpScreen'));
 const ForgetPassword = lazy(() => import('./screens/forgetPassword'));
 const ConfirmPassword = lazy(() => import('./screens/confirmPassword'));
 const DashboardScreen = lazy(() => import('./screens/dashboard'));
 const NotFound404Screen = lazy(() => import('./screens/notFound404'));
+const Fake = lazy(() => import('./screens/shipper/reports/showReports'));
 
 
 const Main = (props) => {
@@ -33,9 +35,11 @@ const Main = (props) => {
                     <Suspense fallback={<LoadingScreen/>}>
                         <Switch>
                             <Route exact path={"/"} component={HomeScreen}/>
+                            {/*<Route exact path={"/"} component={Fake}/>*/}
                             <Route exact path="/sign-in/" component={SignInScreen}/>
                             <Route exact path="/sign-up/shipper/" component={ShipperSignUpScreen}/>
                             <Route exact path="/sign-up/supplier/" component={SupplierSignUpScreen}/>
+                            <Route exact path="/sign-up/company/" component={CompanySignUpScreen}/>
                             <Route exact path="/forget-password/" component={ForgetPassword}/>
                             <Route exact path="/confirm-password/" component={ConfirmPassword}/>
                             <Route path={'/dashboard/'} component={DashboardScreen}/>

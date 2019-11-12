@@ -38,7 +38,6 @@ const supplierNavigation = [
         attributes: {target: '_blank', rel: "noopener"},
         component: lazy(() => import('../screens/feedback')),
     },
-
 ];
 
 const shipperNavigation = [
@@ -124,8 +123,12 @@ const shipperNavigation = [
         url: '/shipping',
         icon: 'fa fa-compass',
         component: lazy(() => import('../screens/shipper/shipping/tracking')),
+    }, {
+        name: 'Reports',
+        url: '/reports',
+        icon: 'fa fa-chart-pie',
+        component: lazy(() => import('../screens/shipper/reports/reportsHome')),
     },
-
     {
         name: 'Finance',
         url: '/finances',
@@ -143,6 +146,50 @@ const shipperNavigation = [
         component: lazy(() => import('../screens/feedback')),
     },
 ];
+const reportPath = [
+    {
+    path: '/report-dispatcher-vs-lr',
+    component: lazy(() => import('../screens/shipper/reports/dispatcherVsLr')),
+    name: 'Dispatcher vs LR',
+    exact: true
+    },
+    {
+    path: '/report-tracking-vs-lr',
+    component: lazy(() => import('../screens/shipper/reports/trackingVsLr')),
+    name: 'Tracking Vs LR',
+    exact: true
+    },
+    {
+    path: '/report-tracking-vs-invoice',
+    component: lazy(() => import('../screens/shipper/reports/trackingVsInvoice')),
+    name: 'Tracking Vs Invoice',
+    exact: true
+    },
+    {
+    path: '/report-lr',
+    component: lazy(() => import('../screens/shipper/reports/lr')),
+    name: 'LR',
+    exact: true
+    },
+    {
+    path: '/report-tracking',
+    component: lazy(() => import('../screens/shipper/reports/tracking')),
+    name: 'Tracking',
+    exact: true
+    },
+    {
+    path: '/report-invoice',
+    component: lazy(() => import('../screens/shipper/reports/invoice')),
+    name: 'Invoice',
+    exact: true
+    },
+    {
+    path: '/report-dispatcher',
+    component: lazy(() => import('../screens/shipper/reports/dispatcher')),
+    name: 'Dispatcher',
+    exact: true
+    },
+];
 const shipperExtraRoutes = [
     {
         path: '/freight/request-for-quotation/bids/:id',
@@ -156,7 +203,6 @@ const shipperExtraRoutes = [
         name: 'Print Invoice',
         exact: true
     },
-    
     {
         name: 'Manual-Dispatcher',
         path: '/manual-dispatcher',
@@ -189,7 +235,9 @@ const shipperExtraRoutes = [
         name: 'New Request For Quotation',
         exact: true
     },
+    ...reportPath
 ];
+
 const supplierExtraRoutes = [
     {
         name: 'Bid Now',
@@ -197,8 +245,6 @@ const supplierExtraRoutes = [
         component: lazy(() => import('../screens/supplier/forms/bidNow')),
         exact: true
     },
-
-
     {
         name: 'Post Truck',
         path: '/freight/post-truck/',

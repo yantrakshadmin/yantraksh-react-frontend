@@ -20,7 +20,6 @@ export default () => {
             console.log(trucks, "hjdiewdgiewudeihdeodhoewhdoeid");
             setData(trucks)
         };
-
         loadApiData();
     }, [liveAvailableTrucks]);
 
@@ -36,7 +35,6 @@ export default () => {
                         data={data}
                         columns={columns}
                         search
-
                     >
                         {
                             props => (

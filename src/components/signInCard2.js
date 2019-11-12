@@ -87,17 +87,22 @@ const SignInCard = (props) => {
                         <Link to="/sign-up/supplier/">
                             <Button color="primary" className="mt-3" active tabIndex={-1}>
                                 &nbsp;
-                                <i className="fa fa-truck"></i>
+                                <i className="fa fa-truck"/>
                                &nbsp;&nbsp;
-                                Register
-                                as supplier!</Button>
+                                Register Supplier!</Button>
                         </Link>
                         <Link to="/sign-up/shipper/">
                         <Button color="primary" className="mt-3" active tabIndex={-1}>
                             &nbsp;
-                            <i className="fa fa-shopping-cart"></i>&nbsp;&nbsp;
-                            Register
-                            as shipper!</Button>
+                            <i className="fa fa-shopping-cart"/>&nbsp;&nbsp;
+                            Register Shipper!</Button>
+                        </Link>
+                        <Link to="/sign-up/company/">
+                        <Button color="primary" className="mt-3" active tabIndex={-1}>
+                            &nbsp;
+                            <i className="fa fa-sitemap"/>
+                            &nbsp;&nbsp;
+                            Register Company!</Button>
                         </Link>
                     </div>
                 </CardBody>
