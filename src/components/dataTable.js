@@ -70,7 +70,7 @@ export default (props) => {
                             loading={loading}
                             expandRow={expandRow}
                             headerClasses={headerClasses}
-                            // noDataIndication={() => loaded ? 'No data..' : <BeatLoader/>}
+                            noDataIndication={Loader}
                             {...unusedprops}
                         />
                     </div>

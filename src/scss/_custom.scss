@@ -56,4 +56,12 @@ button.mt-3.with-margin-top-null.btn.btn-link.active {
   display: inline-flex;
 }
 
+.scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
 
+    .card {
+        flex: 0 0 auto;
+    }
+}

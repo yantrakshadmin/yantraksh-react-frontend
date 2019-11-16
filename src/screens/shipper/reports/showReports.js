@@ -2,12 +2,56 @@ import React, {Component} from 'react';
 import DatePicker from "react-datepicker";
 import {CardHeader, Button} from 'reactstrap';
 import "react-datepicker/dist/react-datepicker.css";
-import {CREATE_ACCOUNT_SHIPPER, getCompanyShipper, getReportsShipper, REPORT_DISPATCHER} from "../../../helpers/api";
+import {CREATE_ACCOUNT_SHIPPER, getCompanyShipper, getReportsShipper,} from "../../../helpers/api";
 import DataTable from '../../../components/dataTable'
 
 //date_to
 //date_from
 //c_name
+
+let columnFarzi = [
+    {
+        'truck_name': 'Truck Name',
+        'truck_type': 'truck type',
+        'origin': "origin"
+    }, {
+        'truck_name': 'Truck Name',
+        'truck_type': 'truck type',
+        'origin': "origin"
+    }, {
+        'truck_name': 'Truck Name',
+        'truck_type': 'truck type',
+        'origin': "origin"
+    }, {
+        'truck_name': 'Truck Name',
+        'truck_type': 'truck type',
+        'origin': "origin"
+    },
+];
+
+let items = [
+    {
+        'name': 'something',
+        'length': 2,
+        'width': 2
+
+    }, {
+        'name': 'something',
+        'length': 2,
+        'width': 2
+
+    }, {
+        'name': 'something',
+        'length': 2,
+        'width': 2
+
+    }, {
+        'name': 'something',
+        'length': 2,
+        'width': 2
+
+    },
+];
 
 class ShowReports extends Component {
     state = {
@@ -16,8 +60,8 @@ class ShowReports extends Component {
         endDate: new Date,
         endDateString: '2019-11-11',
         companiesList: [],
-        company_name:1,
-        data:[]
+        company_name: 1,
+        data: []
     };
 
     changeFormat = (date) => {
@@ -51,32 +95,36 @@ class ShowReports extends Component {
             })
             .catch(e => console.log(e))
     }
-    getReport=()=>{
-        getReportsShipper(this.props.url,{
-            date_from:this.state.startDateString,date_to:this.state.endDateString,
-            c_name:1
+
+    getReport = () => {
+        getReportsShipper(this.props.url, {
+            date_from: this.state.startDateString, date_to: this.state.endDateString,
+            c_name: 1
         })
-            .then(result=>{
+            .then(result => {
                 this.setState({
-                    data:result.data,
+                    data: result.data,
                 })
             })
-            .catch(e=>console.error(e));
+            .catch(e => console.error(e));
     };
+
     render() {
-        const {companiesList,data} = this.state;
-        const {columns_props,column_collapsed} = this.props;
+        const {companiesList, data} = this.state;
+        const {columns_props, column_collapsed} = this.props;
         const CustomDatePicker = ({value, onClick}) => (
             <button type="button" className="btn btn-sm btn-success" onClick={onClick}>{value}</button>
         );
         const expandRow = {
             renderer: (row, rowIndex) => {
-                return <div className={'w-50'}>
-                    <DataTable
-                        exportAll={true}
-                        columns={column_collapsed}
-                        data={data[rowIndex].items}  />
-                </div>
+                return column_collapsed ? (
+                    <div className={'p-3 '}>
+                        <DataTable
+                            exportAll={true}
+                            columns={column_collapsed}
+                            data={data[rowIndex].items}
+                        />
+                    </div>) : null
             },
             showExpandColumn: true,
             expandByColumnOnly: true,
@@ -127,16 +175,19 @@ class ShowReports extends Component {
                             )}
                         </select>
                     </div>
-                    <button className={'btn btn-success btn-sm m-3'} onClick={()=>this.getReport()}>Get Report</button>
+                    <button className={'btn btn-success btn-sm m-3'} onClick={() => this.getReport()}>Get Report
+                    </button>
                 </div>
                 <div className={'m-3'}>
-                <DataTable
-                           headerClasses={'bg-light'}
-                           expandRow={expandRow}
-                           exportAll={true}
-                           data={data}
-                           columns={columns_props}
-                />
+                    <div className={'scrolling-wrapper-flexbox'}>
+                        <DataTable
+                            headerClasses={'bg-light'}
+                            expandRow={expandRow}
+                            exportAll={true}
+                            data={data}
+                            columns={columns_props}
+                        />
+                    </div>
                 </div>
             </div>
         );

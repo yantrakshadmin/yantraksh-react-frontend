@@ -95,8 +95,6 @@ export default () => {
             refreshing();
             const kpi = await getKPIData();
             setKpiData(kpi);
-            console.log(kpi, "kpiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-            console.log(kpiData ,"wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
         };
 
         loadApiData();
@@ -257,7 +255,6 @@ export default () => {
                                         hover
                                         condensed
                                         striped
-
                                         bordered={false}
                                         pagination={paginationFactory()}
                                         noDataIndication={Loader}

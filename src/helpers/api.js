@@ -8,7 +8,8 @@ import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
 // const BASE_URL = "http://0.0.0.0:8000/";
-const BASE_URL = "http://192.168.43.34:8000/";
+const BASE_URL = "http://127.0.0.1:8000/";
+// const BASE_URL = "http://192.168.43.34:8000/";
 // const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // yantra-cloud.ap-south-1.elasticbeanstalk.com
 
@@ -62,7 +63,16 @@ const LR_TABLE_VIEW = '/api/lr/';
 
 const ALL_AVAILABLE_TRUCKS = 'api/trucksdb/';
 
+//Reports
 export const REPORT_DISPATCHER= 'dispatcherreportapi/';
+export const REPORT_LR = 'lrreportapi/';
+export const REPORT_INVOICE = 'invoicereportapi/';
+export const REPORT_TRACKING = 'trackingreportapi/';
+
+export const REPORT_DISPATCHER_VS_LR = 'DispatchervsLr/';
+export const REPORT_TRACKING_VS_LR = 'TrackingvsLr/';
+
+
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -120,7 +130,6 @@ export const loadOpenUrl = async (url, config = {}) => {
     });
 };
 export const loadSecureUrl = (url, config) => {
-    console.log(config,'congif');
     return new Promise(async (resolve, reject) => {
         try {
             const data = await loadOpenUrl(url, {

@@ -1,44 +1,38 @@
 import React, {Component} from 'react';
-import ShowReports from "./showReports";
-import DataTable from "../../../components/dataTable"
-import {getReportsShipper, REPORT_DISPATCHER} from "../../../helpers/api";
+import ShowReports from "../showReports";
+import {REPORT_TRACKING} from "../../../../helpers/api";
 
-class Dispatcher extends Component {
-   state={
-       columns:[],
-       data:[],
-   };
-
+class Tracking extends Component {
     render() {
-        const columns = [ {
-            dataField: 'truck_name',
-            text: 'Truck Name',
+        const columns = [{
+            dataField: 'tracking_id',
+            text: 'Tracking ID',
             sort: true
         },
             {
-                dataField: 'truck_type',
-                text: 'Truck Type',
+                dataField: 'trip_id',
+                text: 'Trip ID',
                 sort: true
             },
             {
-                dataField: 'origin',
-                text: 'Origin',
+                dataField: 'telephone',
+                text: 'Phone Number',
                 sort: true
-            },{
-                dataField: 'destination',
-                text: 'Destination',
-                sort: true
-            },
-            {
-                dataField: 'material_type',
-                text: 'Material Type',
+            }, {
+                dataField: 'address',
+                text: 'Address',
                 sort: true
             },
             {
-                dataField: 'scheduled_date',
-                text: 'Scheduled Date',
+                dataField: 'city',
+                text: 'City',
                 sort: true
-            },{
+            },
+            {
+                dataField: 'created_at',
+                text: 'Created At',
+                sort: true
+            }, {
                 dataField: 'offered_price',
                 text: 'Offered Price',
                 sort: true
@@ -52,7 +46,7 @@ class Dispatcher extends Component {
                 dataField: 'status',
                 text: 'Status',
                 sort: true
-            },{
+            }, {
                 dataField: 'created_on',
                 text: 'Created On',
                 sort: true
@@ -83,7 +77,7 @@ class Dispatcher extends Component {
                 dataField: 'width',
                 text: 'Width',
                 sort: true
-            },{
+            }, {
                 dataField: 'height',
                 text: 'Height',
                 sort: true
@@ -102,10 +96,10 @@ class Dispatcher extends Component {
 
         return (
             <div>
-                <ShowReports columns_props={columns} column_collapsed={column_collapsed}  url={REPORT_DISPATCHER} />
+                <ShowReports columns_props={columns} column_collapsed={column_collapsed} url={REPORT_TRACKING}/>
             </div>
         );
     }
 }
 
-export default Dispatcher;
+export default Tracking;

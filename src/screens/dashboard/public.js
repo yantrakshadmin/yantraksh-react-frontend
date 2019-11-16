@@ -6,7 +6,6 @@ import {setRedirectTo} from "../../actions/navigation";
 // does nothing than redirect guest to sign-in
 const DashboardPublic =  (props) => {
     props.setRedirectTo(window.location.hash);
-
     return (
         <div>
             <Redirect to={`/sign-in/`} />

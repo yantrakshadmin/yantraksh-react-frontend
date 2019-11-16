@@ -12,13 +12,11 @@ import {
 
 export const getUser = () => (async (dispatch) => {
     const user = await getUserDetails();
-
     dispatch({
         type: USER_SIGN_IN_SUCCESS,
         user: user
     })
 });
-
 export const signIn = (username, password) => (async (dispatch, getState) => {
 
     try {

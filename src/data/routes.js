@@ -1,5 +1,6 @@
-import {lazy} from "react";
+import React, {lazy} from "react";
 import {navToRoutes} from "../helpers/getRoutes";
+import {Redirect} from "react-router-dom";
 
 const supplierNavigation = [
     {
@@ -126,7 +127,7 @@ const shipperNavigation = [
     }, {
         name: 'Reports',
         url: '/reports',
-        icon: 'fa fa-chart-pie',
+        icon: 'fa fa-bar-chart-o',
         component: lazy(() => import('../screens/shipper/reports/reportsHome')),
     },
     {
@@ -149,43 +150,43 @@ const shipperNavigation = [
 const reportPath = [
     {
     path: '/report-dispatcher-vs-lr',
-    component: lazy(() => import('../screens/shipper/reports/dispatcherVsLr')),
+    component: lazy(() => import('../screens/shipper/reports/analyticReports/dispatcherVsLr')),
     name: 'Dispatcher vs LR',
     exact: true
     },
     {
     path: '/report-tracking-vs-lr',
-    component: lazy(() => import('../screens/shipper/reports/trackingVsLr')),
+    component: lazy(() => import('../screens/shipper/reports/analyticReports/trackingVsLr')),
     name: 'Tracking Vs LR',
     exact: true
     },
     {
     path: '/report-tracking-vs-invoice',
-    component: lazy(() => import('../screens/shipper/reports/trackingVsInvoice')),
+    component: lazy(() => import('../screens/shipper/reports/analyticReports/trackingVsInvoice')),
     name: 'Tracking Vs Invoice',
     exact: true
     },
     {
     path: '/report-lr',
-    component: lazy(() => import('../screens/shipper/reports/lr')),
+    component: lazy(() => import('../screens/shipper/reports/normalReports/lr')),
     name: 'LR',
     exact: true
     },
     {
     path: '/report-tracking',
-    component: lazy(() => import('../screens/shipper/reports/tracking')),
+    component: lazy(() => import('../screens/shipper/reports/normalReports/tracking')),
     name: 'Tracking',
     exact: true
     },
     {
     path: '/report-invoice',
-    component: lazy(() => import('../screens/shipper/reports/invoice')),
+    component: lazy(() => import('../screens/shipper/reports/normalReports/invoice')),
     name: 'Invoice',
     exact: true
     },
     {
     path: '/report-dispatcher',
-    component: lazy(() => import('../screens/shipper/reports/dispatcher')),
+    component: lazy(() => import('../screens/shipper/reports/normalReports/dispatcher')),
     name: 'Dispatcher',
     exact: true
     },
@@ -239,6 +240,11 @@ const shipperExtraRoutes = [
 ];
 
 const supplierExtraRoutes = [
+    {
+        name:'Dashboard',
+        path:'/dashboard',
+        component:() => (<Redirect to={'/freight/available-loads'}/>)
+    },
     {
         name: 'Bid Now',
         path: '/freight/bid-now/:id',
