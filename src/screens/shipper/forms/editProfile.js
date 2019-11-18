@@ -156,7 +156,7 @@ export default () => {
 
                         <CardFooter>
                             <Button color={"primary"} size={"lg"}
-                                    onClick={handleSubmit}>Create</Button> &nbsp;&nbsp;&nbsp;
+                                    onClick={handleSubmit}>Update</Button> &nbsp;&nbsp;&nbsp;
                             <Button color={"link"} size={"lg"}>Cancel</Button>
                         </CardFooter>
                     </Card>

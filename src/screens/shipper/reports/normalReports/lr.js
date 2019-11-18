@@ -6,7 +6,7 @@ class Lr extends Component {
     render() {
         const columns = [ {
             dataField: 'lr_no',
-            text: 'LR NUMBER',
+            text: 'LR No.',
             sort: true
         },
             {
@@ -30,9 +30,14 @@ class Lr extends Component {
             },
             {
                 dataField: 'ewaybill_no',
-                text: 'EWayBill Number',
+                text: 'E-WayBill No.',
                 sort: true
             },{
+                dataField: 'lr_item_name',
+                text: 'Item Name',
+                sort: true
+            },
+            {
                 dataField: 'lr_quantity',
                 text: 'Quantity',
                 sort: true
@@ -45,10 +50,6 @@ class Lr extends Component {
             {
                 dataField: 'lr_invoice_date',
                 text: 'LR Invoice Date',
-                sort: true
-            },{
-                dataField: 'lr_item_name',
-                text: 'Item Name',
                 sort: true
             },
             {
@@ -91,7 +92,7 @@ class Lr extends Component {
                 sort: true
             },{
                 dataField: 'vehicle_no',
-                text: 'Vehicle Number',
+                text: 'Vehicle No.',
                 sort: true
             },
             {

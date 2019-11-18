@@ -44,22 +44,28 @@ const dispatchPlanColumns = [
         sort: true,
         isDummyField: true,
         formatter: (cell, row) => (
-            <span>{row.truck_type} {row.truck_name}</span>
+            <span>{row.truck_type} -  {row.truck_name}</span>
         )
     },
     {
         dataField: 'total_trucks',
-        text: 'NO. of trucks',
+        text: 'No. of Trucks',
         sort: true
     }, {
         dataField: 'weight',
         text: 'Weight',
-        sort: true
+        sort: true,
+        formatter: (cell, row) => (
+            <span> {row.weight} Kg</span>
+        )
     },
     {
         dataField: 'percent_filled',
-        text: 'Volume utilisation',
-        sort: true
+        text: 'Volume Utilisation',
+        sort: true,
+        formatter: (cell, row) => (
+            <span> {row.percent_filled} %</span>
+        )
     },
     {
         dataField: 'origin',
@@ -73,10 +79,13 @@ const dispatchPlanColumns = [
         dataField: 'route_distance',
         text: 'Route Distance',
         sort: true,
+        formatter: (cell, row) => (
+            <span> {row.route_distance} Km</span>
+        )
     },
     {
         dataField: 'scheduled_date',
-        text: 'Date',
+        text: 'Dispatch Date',
         sort: true,
         formatter: (cell, row) => {
             return (
@@ -88,13 +97,13 @@ const dispatchPlanColumns = [
     },
     {
         dataField: 'route_tat',
-        text: 'Dispatch Time',
+        text: 'Transit Time',
         sort: true,
     },
 
     {
         dataField: 'raiseRfq',
-        text: 'Raise RFQ',
+        text: 'Action',
         sort: true,
         formatter: (cell, row) => (
             <div>
@@ -268,6 +277,20 @@ export default (props) => {
                         <small className="text-muted"/>
 
                         <Row>
+
+                            <Col sm="3">
+                                <div className="callout callout-danger">
+                                    <small className="text-muted">Total RFQ Raised</small>
+                                    <br/>
+                                    {
+                                        kpiData.map(item => (<strong className="h4">{item.total_rfq}</strong>))}
+
+                                    <div className="chart-wrapper">
+                                        <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                              width={100} height={30}/>
+                                    </div>
+                                </div>
+                            </Col>
                             <Col sm="3">
                                 <div className="callout callout-info">
                                     <small className="text-muted">Total Bids received</small>
@@ -281,19 +304,8 @@ export default (props) => {
                                     </div>
                                 </div>
                             </Col>
-                            <Col sm="3">
-                                <div className="callout callout-danger">
-                                    <small className="text-muted">Total RFQ Raised</small>
-                                    <br/>
-                                    {
-                                        kpiData.map(item => (<strong className="h4">{item.total_rfq}</strong>))}
 
-                                    <div className="chart-wrapper">
-                                        <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                              width={100} height={30}/>
-                                    </div>
-                                </div>
-                            </Col><Col sm="3">
+                            <Col sm="3">
                             <div className="callout callout-info">
                                 <small className="text-muted">Total Trucks Assigned</small>
                                 <br/>

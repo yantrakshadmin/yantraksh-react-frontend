@@ -58,7 +58,7 @@ class ReportHome extends Component {
                     }
                 </Col>
                 <Col sm={12} xs={12} md={6} xl={3} lg={3}>
-                    <p style={{fontSize: 24, fontWeight: 'bold'}}>Normal</p>
+                    <p style={{fontSize: 24, fontWeight: 'bold'}}>Reports</p>
                     {normalReports.map((element,index)=>(
                         <Col span={12} key={index}>
                             <Link to={element.link} type={element.type}>

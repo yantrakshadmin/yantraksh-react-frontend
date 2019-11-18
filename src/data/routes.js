@@ -49,22 +49,22 @@ const shipperNavigation = [
         icon: 'cui-dashboard',
         badge: {
             variant: 'info',
-            text: 'NEW',
+
         },
     }, {
-        name: 'Orders Management',
+        name: 'Items Management',
         url: '/orders',
         icon: 'icon-layers',
         component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
         children: [
             {
-                name: 'All Orders',
+                name: 'All Items',
                 component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
 
                 url: '/orders/all',
                 icon: 'icon-list',
             }, {
-                name: 'Orders on hold',
+                name: 'Items on hold',
                 component: lazy(() => import('../screens/shipper/orderManagement/holdOrders')),
 
                 url: '/orders/on-hold',
@@ -74,7 +74,7 @@ const shipperNavigation = [
                 component: lazy(() => import('../screens/shipper/orderManagement/rtdOrders')),
 
                 url: '/orders/ready-to-dispatch',
-                icon: 'fa fa-share',
+                icon: 'fa fa-play-circle',
             }, {
                 name: 'Dispatch-plans',
                 component: lazy(() => import('../screens/shipper/orderManagement/dispatchedOrders')),
@@ -87,7 +87,7 @@ const shipperNavigation = [
         ],
     },
     {
-        name: 'Dispatches',
+        name: 'Dispatch Plans',
         url: '/dispatcher',
         icon: 'fa fa-rocket',
         component: lazy(() => import('../screens/shipper/dispatchManagement/dispatcher')),
@@ -124,17 +124,19 @@ const shipperNavigation = [
         url: '/shipping',
         icon: 'fa fa-compass',
         component: lazy(() => import('../screens/shipper/shipping/tracking')),
-    }, {
-        name: 'Reports',
-        url: '/reports',
-        icon: 'fa fa-bar-chart-o',
-        component: lazy(() => import('../screens/shipper/reports/reportsHome')),
     },
     {
         name: 'Finance',
         url: '/finances',
         icon: 'fa fa-clipboard',
         component: lazy(() => import('../screens/shipper/finances/financials')),
+    },
+
+    {
+        name: 'Reports & Analytics',
+        url: '/reports',
+        icon: 'fa fa-line-chart',
+        component: lazy(() => import('../screens/shipper/reports/reportsHome')),
     },
 
     {
@@ -243,7 +245,8 @@ const supplierExtraRoutes = [
     {
         name:'Dashboard',
         path:'/dashboard',
-        component:() => (<Redirect to={'/freight/available-loads'}/>)
+        component:() => (<Redirect to={'/dashboard'}/>)
+        // component:() => (<Redirect to={'/freight/available-loads'}/>)
     },
     {
         name: 'Bid Now',

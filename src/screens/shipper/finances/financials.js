@@ -218,6 +218,18 @@ export default () => {
                     <small className="text-muted"/>
                     <Row>
                         <Col sm="3">
+                            <div className="callout callout-danger">
+                                <small className="text-muted">Total RFQ Raised</small>
+                                <br/>
+                                <strong className="h4">0</strong>
+
+                                <div className="chart-wrapper">
+                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col sm="3">
                             <div className="callout callout-info">
                                 <small className="text-muted">Total Bids received</small>
                                 <br/>
@@ -230,17 +242,6 @@ export default () => {
                             </div>
                         </Col>
                         <Col sm="3">
-                            <div className="callout callout-danger">
-                                <small className="text-muted">Total RFQ Raised</small>
-                                <br/>
-                                <strong className="h4">0</strong>
-
-                                <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                          width={100} height={30}/>
-                                </div>
-                            </div>
-                        </Col><Col sm="3">
                         <div className="callout callout-info">
                             <small className="text-muted">Total Trucks Assigned</small>
                             <br/>

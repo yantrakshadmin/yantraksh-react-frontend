@@ -69,7 +69,7 @@ export default (props) => {
 
 
                     <br/><br/><br/>
-                    <Button color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;
+                    <Button color={"primary"} size={"lg"}>Bid</Button> &nbsp;&nbsp;&nbsp;
                     <Button color={"link"} size={"lg"}>Cancel</Button>
                 </Form>
             </CardBody>
