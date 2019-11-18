@@ -146,19 +146,7 @@ export default (props) => {
                 <CardHeader>
                     <i className="fa fa-align-justify"/> Bids <small className="text-muted"/>
                     <Row>
-                        <Col sm="3">
-                            <div className="callout callout-info">
-                                <small className="text-muted">Total Bids received</small>
-                                <br/>
-                                {
-                                    kpiData.map(item => (<strong className="h4">{item.total_bids}</strong>))}
 
-                                <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
-                                          width={100} height={30}/>
-                                </div>
-                            </div>
-                        </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total RFQ Raised</small>
@@ -171,7 +159,21 @@ export default (props) => {
                                           width={100} height={30}/>
                                 </div>
                             </div>
-                        </Col><Col sm="3">
+                        </Col>
+                        <Col sm="3">
+                            <div className="callout callout-info">
+                                <small className="text-muted">Total Bids Received</small>
+                                <br/>
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_bids}</strong>))}
+
+                                <div className="chart-wrapper">
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
+                                          width={100} height={30}/>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col sm="3">
                         <div className="callout callout-info">
                             <small className="text-muted">Total Trucks Assigned</small>
                             <br/>

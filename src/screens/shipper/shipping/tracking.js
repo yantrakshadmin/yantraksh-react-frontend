@@ -6,7 +6,7 @@ import CardHeader from "reactstrap/es/CardHeader";
 import {assignedTrucks, trackNow} from "../../../helpers/api";
 import {refreshing} from "../../../helpers/notifications";
 
-const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
+const apiKey = "AIzaSyD3m2rYpNTbKF7FAKGWDFGGUkYm8BLDfIM";
 
 
 const styles = {

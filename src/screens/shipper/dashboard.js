@@ -560,7 +560,7 @@ class Dashboard extends Component {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
                 datasets: [
                     {
-                        label: 'Total Number Of Trucks',
+                        label: 'Total Trucks Dispatched',
                         backgroundColor: 'rgb(0,142,255)',
                         borderColor: 'rgb(0,100,255)',
                         borderWidth: 1,
@@ -724,7 +724,7 @@ class Dashboard extends Component {
                     <Col>
                         <Card>
                             <CardHeader>
-                                Your Shipment Stats
+                                Shipment Stats
                             </CardHeader>
                             <CardBody>
                                 <Row>

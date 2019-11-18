@@ -298,7 +298,7 @@ class OrderTable extends Component {
                     <Button color={"warning"}
                             onClick={this.markHold.bind(this)}
                             disabled={title === ON_HOLD_ORDERS}>
-                        <i className={"fa fa-pause-circle"}/> &nbsp;
+                         &nbsp;
                         Mark Hold
                     </Button>
 
@@ -378,9 +378,9 @@ class OrderTable extends Component {
                     ) : (
                         <div>
                             <h1>
-                                Please reselect items.
+                                Please Reselect Items.
                             </h1>
-                            Origin destination of all items don't match
+                            Origin-Destination of all Items doesn't match
                         </div>
                     )) : "Data Not Loaded"}
                 </ModalBody>
@@ -454,34 +454,7 @@ class OrderTable extends Component {
                                         </div>
                                     </div>
                                 </Col>
-                                <Col sm="3">
-                                    <div className="callout callout-danger">
-                                        <small className="text-muted">Delayed Orders</small>
-                                        <br/>
-                                        {
-                                            this.state.kpi.map(item => (
-                                                <strong className="h4">{item.total_orders_delayed}</strong>
-                                            ))}
-                                        <div className="chart-wrapper">
-                                            <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                                  width={100} height={30}/>
-                                        </div>
-                                    </div>
-                                </Col>
-                                <Col sm="3">
-                                    <div className="callout callout-info">
-                                        <small className="text-muted">Pending Orders</small>
-                                        <br/>
-                                        {
-                                            this.state.kpi.map(item => (
-                                                <strong className="h4">{item.total_orders_pending}</strong>
-                                            ))}
-                                        <div className="chart-wrapper">
-                                            <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
-                                                  width={100} height={30}/>
-                                        </div>
-                                    </div>
-                                </Col>
+
                                 <Col sm="3">
                                     <div className="callout callout-danger">
                                         <small className="text-muted">Planned Orders</small>
@@ -496,6 +469,40 @@ class OrderTable extends Component {
                                         </div>
                                     </div>
                                 </Col>
+
+
+                                <Col sm="3">
+                                    <div className="callout callout-info">
+                                        <small className="text-muted">Pending Orders</small>
+                                        <br/>
+                                        {
+                                            this.state.kpi.map(item => (
+                                                <strong className="h4">{item.total_orders_pending}</strong>
+                                            ))}
+                                        <div className="chart-wrapper">
+                                            <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
+                                                  width={100} height={30}/>
+                                        </div>
+                                    </div>
+                                </Col>
+
+                                <Col sm="3">
+                                    <div className="callout callout-danger">
+                                        <small className="text-muted">Delayed Orders</small>
+                                        <br/>
+                                        {
+                                            this.state.kpi.map(item => (
+                                                <strong className="h4">{item.total_orders_delayed}</strong>
+                                            ))}
+                                        <div className="chart-wrapper">
+                                            <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
+                                                  width={100} height={30}/>
+                                        </div>
+                                    </div>
+                                </Col>
+
+
+
                             </Row>
                             <small className="text-muted"/>
                             <span style={{float: 'right'}}>
