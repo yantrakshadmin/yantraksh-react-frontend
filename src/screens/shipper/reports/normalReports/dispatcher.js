@@ -102,7 +102,7 @@ class Dispatcher extends Component {
 
         return (
             <div>
-                <ShowReports columns_props={columns} column_collapsed={column_collapsed}  url={REPORT_DISPATCHER} />
+                <ShowReports columns_props={columns} column_collapsed={column_collapsed} showExpandColumn={true}  url={REPORT_DISPATCHER} />
             </div>
         );
     }

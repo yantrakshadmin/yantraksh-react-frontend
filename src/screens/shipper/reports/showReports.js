@@ -111,7 +111,7 @@ class ShowReports extends Component {
 
     render() {
         const {companiesList, data} = this.state;
-        const {columns_props, column_collapsed} = this.props;
+        const {columns_props, column_collapsed,showExpandColumn} = this.props;
         const CustomDatePicker = ({value, onClick}) => (
             <button type="button" className="btn btn-sm btn-success" onClick={onClick}>{value}</button>
         );
@@ -126,7 +126,7 @@ class ShowReports extends Component {
                         />
                     </div>) : null
             },
-            showExpandColumn: true,
+            showExpandColumn: showExpandColumn,
             expandByColumnOnly: true,
             onlyOneExpanding: true,
         };

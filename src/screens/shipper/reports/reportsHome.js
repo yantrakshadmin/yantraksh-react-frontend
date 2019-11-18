@@ -49,22 +49,18 @@ class ReportHome extends Component {
                 <Col sm={12} xs={12} md={6} xl={3} lg={3}>
                     <p style={{fontSize: 24, fontWeight: 'bold'}}>Analytics</p>
                     {anayticsReports.map((element,index)=>(
-                        <Col span={12} key={index}>
-                            <Link to={element.link} type={element.type}>
+                            <Link key={index} to={element.link} type={element.type}>
                                 <p style={{fontSize: 18}}>{element.title}</p>
                             </Link>
-                        </Col>
                     ))
                     }
                 </Col>
                 <Col sm={12} xs={12} md={6} xl={3} lg={3}>
                     <p style={{fontSize: 24, fontWeight: 'bold'}}>Reports</p>
                     {normalReports.map((element,index)=>(
-                        <Col span={12} key={index}>
-                            <Link to={element.link} type={element.type}>
+                            <Link key={index} to={element.link} type={element.type}>
                                 <p style={{fontSize: 18}}>{element.title}</p>
                             </Link>
-                        </Col>
                     ))}
                 </Col>
             </Row>

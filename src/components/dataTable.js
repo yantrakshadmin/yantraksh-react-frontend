@@ -73,7 +73,7 @@ export default (props) => {
                             loading={loading}
                             expandRow={expandRow}
                             headerClasses={headerClasses}
-                            noDataIndication={loadingIndicator?Loader:null}
+                            noDataIndication={loadingIndicator?Loader:<div className={'w-100'}><p>No Data</p></div>}
                             {...unusedprops}
                         />
                     </div>
