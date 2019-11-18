@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 
 const AllOrderScreen = (props) => {
     return (
-        <OrderTable title={ALL_ORDERS} orders={props.orders} rtd={true} dispatched={true} hold={true} />
+        <OrderTable title={ALL_ORDERS} orders={props.orders} rtd={true} dispatched={true} hold={true} dispatched={true}  disableAutoDispatch={true} disableManualDispatch={true} />
     );
 };
 

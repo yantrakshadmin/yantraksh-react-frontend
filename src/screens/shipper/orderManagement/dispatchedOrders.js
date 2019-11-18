@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 
 const DispatchedOrdersScreen = (props) => {
     return (
-        <OrderTable title={DISPATCHED_ORDERS} orders={props.orders} dispatched={true} />
+        <OrderTable title={DISPATCHED_ORDERS} orders={props.orders}/>
     );
 };
 

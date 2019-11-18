@@ -36,7 +36,7 @@ class DefaultHeader extends Component {
                     <UncontrolledDropdown nav direction="down">
                         <DropdownToggle nav>
                             {username}
-                            <img src={userImg} className="img-avatar" alt={email}/>
+                            <img src={userImg} className="img-avatar p-1" alt={email}/>
                         </DropdownToggle>
                         <DropdownMenu right>
                             <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>

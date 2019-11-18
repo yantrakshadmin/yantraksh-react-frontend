@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
@@ -17,6 +17,9 @@ const NCSVButton = (props) => {
 };
 
 export default (props) => {
+    const [loadingIndicator,changeLoadingIndicator] = useState(true);
+    useEffect(()=>{setTimeout(()=>{changeLoadingIndicator(false);},5000)},
+[loadingIndicator]);
     const {
         columns, data = [], right = () => {
         }, left = () => {
@@ -70,7 +73,7 @@ export default (props) => {
                             loading={loading}
                             expandRow={expandRow}
                             headerClasses={headerClasses}
-                            noDataIndication={Loader}
+                            noDataIndication={loadingIndicator?Loader:null}
                             {...unusedprops}
                         />
                     </div>

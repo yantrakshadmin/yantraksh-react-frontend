@@ -312,21 +312,21 @@ class OrderTable extends Component {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <ButtonGroup>
-                    <Button color={"success"}
+                    { !this.props.disableAutoDispatch?  <Button color={"success"}
                             onClick={this.planVehicle.bind(this)}
                             disabled={title === DISPATCHED_ORDERS}>
                         <i className={"fa fa-rocket"}/> &nbsp;
                         Auto-dispatch
-                    </Button>
+                    </Button>:null}
                     &nbsp;
-                    <Button color={"success"}
+                    {!this.props.disableManualDispatch? <Button color={"success"}
                             onClick={() => {
                                 this.modalToggle();
                             }}
                             disabled={title === DISPATCHED_ORDERS}>
                         {/*<i className={"fa fa-rocket"}/> &nbsp;*/}
                         Manual-dispatch
-                    </Button>
+                    </Button>:null}
                 </ButtonGroup>
             </div>
         );
