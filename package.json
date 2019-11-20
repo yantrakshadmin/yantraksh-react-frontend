@@ -2,7 +2,7 @@
   "name": "yantraksh",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yantrakshadmin.github.io/yantraksh-app/",
+  "homepage": ".",
   "dependencies": {
     "@coreui/coreui": "^2.1.12",
     "@coreui/react": "^2.5.2",
