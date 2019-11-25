@@ -41,7 +41,7 @@ const columns = [
         sort: true
     }, {
         dataField: 'total_trucks',
-        text: 'NO. of trucks',
+        text: 'No. of trucks',
 
     }, {
         dataField: 'scheduled_date',

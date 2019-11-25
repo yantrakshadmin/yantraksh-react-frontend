@@ -10,6 +10,7 @@ import {errorGettingUserInfoNotification, signINAgainNotification} from "./notif
 // const BASE_URL = "http://0.0.0.0:8000/";
 // const BASE_URL = "http://127.0.0.1:8000/";
 const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
+// const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // sajkhciuab
 
 axios.defaults.baseURL = BASE_URL;
