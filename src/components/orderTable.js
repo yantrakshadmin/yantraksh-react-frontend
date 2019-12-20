@@ -312,14 +312,14 @@ class OrderTable extends Component {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <ButtonGroup>
-                    { !this.props.disableAutoDispatch?  <Button color={"success"}
+                    { title===RTD_ORDERS ? <Button color={"success"}
                             onClick={this.planVehicle.bind(this)}
                             disabled={title === DISPATCHED_ORDERS}>
                         <i className={"fa fa-rocket"}/> &nbsp;
                         Auto-dispatch
                     </Button>:null}
                     &nbsp;
-                    {!this.props.disableManualDispatch? <Button color={"success"}
+                    { title===RTD_ORDERS ? <Button color={"success"}
                             onClick={() => {
                                 this.modalToggle();
                             }}
@@ -333,7 +333,7 @@ class OrderTable extends Component {
 
         const rightButtons = (props) => (
             <div style={{display: 'inline-block'}}>
-                <Upload upload={uploadOrders}/>
+                { title===ALL_ORDERS ? <Upload upload={uploadOrders}/> : null }
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <Button color={"link"} onClick={() => {
