@@ -4,6 +4,9 @@ import {useDropzone} from 'react-dropzone';
 import {uploadOrders} from "../helpers/api";
 import Link from "react-router-dom/es/Link";
 import {toast} from "react-toastify";
+import { loadOrders } from '../actions/data';
+
+import {connect} from "react-redux";
 
 
 function Basic(props) {
@@ -33,6 +36,8 @@ function Basic(props) {
                             <Button color={"primary"} size="lg" onClick={async () => {
                                 try {
                                     await props.upload(acceptedFiles[0]);
+                                    await props.loadOrders();
+                                    await props.onClose();
                                     toast.success("Upload Successful!");
                                 } catch (e) {
                                     console.log(e);
@@ -107,7 +112,7 @@ class Upload extends React.Component {
                         top: '25%',
                     }}
                 >
-                    <Basic upload={this.props.upload} onClose={this.toggle}/>
+                    <Basic loadOrders={this.props.loadOrders} upload={this.props.upload} onClose={this.toggle}/>
                 </Modal>
                 <Button color={"secondary"}
                         style={{backgroundColor: 'white'}} onClick={this.toggle}>
@@ -119,4 +124,4 @@ class Upload extends React.Component {
     }
 }
 
-export default Upload;
+export default connect(null,{ loadOrders })(Upload);
