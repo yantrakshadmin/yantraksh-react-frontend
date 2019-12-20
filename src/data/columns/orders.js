@@ -2,7 +2,7 @@ import React from "react";
 import {Badge} from "reactstrap";
 
 export default [{
-    dataField: 'name',
+    dataField: 'Name',
     text: 'Name',
     sort: true
 }, {
@@ -10,22 +10,22 @@ export default [{
     text: 'SKU ID',
     sort: true
 }, {
-    dataField: 'quantity',
+    dataField: 'Quantity',
     text: 'Quantity',
     sort: true
 }, {
-    dataField: 'height',
+    dataField: 'Height',
     text: 'Dimension',
     isDummyField: true,
     formatter: (cell, row) => (<div>
         {row.length} x {row.width} x {row.height}
     </div>)
 }, {
-    dataField: 'weight',
+    dataField: 'Weight',
     text: 'Weight',
     sort: true
 }, {
-    dataField: 'volume',
+    dataField: 'Volume',
     text: 'Volume',
     sort: true,
 }, {
