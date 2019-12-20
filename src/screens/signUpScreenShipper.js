@@ -20,6 +20,8 @@ import {
     getCompanyShipper,
     CREATE_ACCOUNT_SUPPLIER, CREATE_ACCOUNT_SHIPPER
 } from "../helpers/api";
+import { userCreateSuccess, userCreateFailed } from '../helpers/notifications';
+import {toast} from "react-toastify";
 import {signIn} from "../actions/auth";
 import {connect} from "react-redux";
 import Redirect from "react-router/es/Redirect";
@@ -66,7 +68,7 @@ class SignUpScreenSupplier extends Component {
         //     errors.push('Password not valid');
 
         if (!this.state.username.match(USERNAME_REGEX))
-            errors.push('Username not valid');
+            toast.error("Username not valid");
         else {
             const data = await isUsernameAvailable(this.state.username);
             if (!data.available)
@@ -75,15 +77,15 @@ class SignUpScreenSupplier extends Component {
         if (this.state.confirmpass !== this.state.password)
             errors.push('Password and confirm password is not same');
         if (errors.length !== 0)
-            alert(errors.join('\n'));
+            toast.error(errors.join('\n'));
         else {
             if (this.props.type === "Supplier") {
                 try {
                     await signUpUserSupplier(this.state);
-                    alert('User created successful');
+                    userCreateSuccess("Supplier");
                     this.props.signInAction(this.state.username, this.state.password)
                 } catch (e) {
-                    alert('Problem creating user');
+                    userCreateFailed();
                     console.log(e)
                 }
             }
@@ -97,10 +99,10 @@ class SignUpScreenSupplier extends Component {
                         company_name: company_name,
                         company_code: company_code
                     });
-                    alert('User created successful');
+                    userCreateSuccess("Shipper");
                     this.props.signInAction(this.state.username, this.state.password)
                 } catch (e) {
-                    alert('Problem creating user');
+                    userCreateFailed();
                     console.log(e)
                 }
             }

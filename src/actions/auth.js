@@ -17,6 +17,7 @@ export const getUser = () => (async (dispatch) => {
         user: user
     })
 });
+
 export const signIn = (username, password) => (async (dispatch, getState) => {
 
     try {

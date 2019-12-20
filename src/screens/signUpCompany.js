@@ -14,6 +14,8 @@ import {
 } from 'reactstrap';
 
 import {isUsernameAvailable, signUpUserCompany, signUpUserShipper, signUpUserSupplier} from "../helpers/api";
+import history from '../history';
+import { userCreateSuccess,userCreateFailed } from '../helpers/notifications';
 import {signIn} from "../actions/auth";
 import {connect} from "react-redux";
 import Redirect from "react-router/es/Redirect";
@@ -68,10 +70,12 @@ class SignUpScreenCompany extends Component {
                 try {
                     console.log(this.state,'gatate')
                     await signUpUserCompany(this.state);
-                    alert('User created successful');
+                    history.push("/");
+                    userCreateSuccess("Company");
+                    //alert('User created successful');
                     // this.props.signInAction(this.state.username, this.state.password)
                 } catch (e) {
-                    alert('Problem creating user');
+                    userCreateFailed();
                     console.log(e)
                 }
             }

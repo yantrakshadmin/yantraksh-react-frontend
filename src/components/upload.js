@@ -3,6 +3,7 @@ import {Button, Modal} from 'reactstrap';
 import {useDropzone} from 'react-dropzone';
 import {uploadOrders} from "../helpers/api";
 import Link from "react-router-dom/es/Link";
+import {toast} from "react-toastify";
 
 
 function Basic(props) {
@@ -32,10 +33,10 @@ function Basic(props) {
                             <Button color={"primary"} size="lg" onClick={async () => {
                                 try {
                                     await props.upload(acceptedFiles[0]);
-                                    alert('Done')
+                                    toast.success("Upload Successful!");
                                 } catch (e) {
                                     console.log(e);
-                                    alert('Error in uploading. Please ensure file type is correct.')
+                                    toast.error("Upload failed!");
                                 }
                             }}>
                                 <i className={"icon-cloud-upload"}/> &nbsp;

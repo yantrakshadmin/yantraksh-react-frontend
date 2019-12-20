@@ -1,5 +1,6 @@
 import React, {lazy, Suspense, useEffect} from 'react';
-import {HashRouter as Router, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
+import history from './history';
 import {connect} from "react-redux";
 import LoadingScreen from "./screens/loadingScreen";
 
@@ -27,7 +28,7 @@ const Main = (props) => {
     }, [connectionChangeHandler, checkUser]);
 
     return (
-        <Router>
+        <Router history={history}>
             <div className={props.online ? 'online' : 'offline'}>
                 <div className="App">
                     <LoadingScreen/>
