@@ -55,6 +55,22 @@ export default [{
         return formatDate(d);
     }
 }, {
+    dataField: 'truck_type',
+    text: 'Truck Type',
+    isDummyField: true,
+    formatExtraData: (row) => {
+        if (row.truck_type === "Open")
+            return (<Badge color="warning" style={{width: '100%'}}>{row.truck_type}</Badge>);
+        else if (row.truck_type === "Container")
+            return (<Badge color="primary" style={{width: '100%'}}>{row.truck_type}</Badge>);
+        else if (row.truck_type === "Trailer")
+            return (<Badge color="success" style={{width: '100%'}}>{row.truck_type}</Badge>)
+    },
+    formatter: (cell, row, rowIndex, formatExtraData) => {
+        return formatExtraData(row);
+    },
+    align: 'center',
+}, {
     dataField: 'rtd',
     text: 'Status',
     isDummyField: true,
