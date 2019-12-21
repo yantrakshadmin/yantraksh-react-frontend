@@ -1,6 +1,16 @@
 import React from "react";
 import {Badge} from "reactstrap";
 
+function formatDate(d) {
+    let hrs = d.getHours();
+    let mins = d.getMinutes();
+    let secs = d. getSeconds();
+
+    return (
+        <span>{ d.getDate() }-{ d.getMonth() + 1 }-{ d.getFullYear() } { ("0" + hrs).slice(-2) }:{ ("0" + mins).slice(-2) }:{ ("0" + secs).slice(-2) }</span>
+    )
+}
+
 export default [{
     dataField: 'Name',
     text: 'Name',
@@ -18,7 +28,7 @@ export default [{
     text: 'Dimension',
     isDummyField: true,
     formatter: (cell, row) => (<div>
-        {row.length} x {row.width} x {row.height}
+        {row.Length} x {row.Breadth} x {row.Height}
     </div>)
 }, {
     dataField: 'Weight',
@@ -40,6 +50,10 @@ export default [{
     dataField: 'date',
     text: 'Date',
     sort: true,
+    formatter: (cell,row) => {
+        let d = new Date(row.date);
+        return formatDate(d);
+    }
 }, {
     dataField: 'rtd',
     text: 'Status',

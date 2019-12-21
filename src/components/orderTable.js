@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import _ from 'lodash';
 import {
     Button,
     ButtonGroup,
@@ -321,6 +322,7 @@ class OrderTable extends Component {
                     &nbsp;
                     { title===RTD_ORDERS ? <Button color={"success"}
                             onClick={() => {
+                                this.setState({ truckType:"open" })
                                 this.modalToggle();
                             }}
                             disabled={title === DISPATCHED_ORDERS}>
@@ -370,8 +372,11 @@ class OrderTable extends Component {
                             }}>
                                 <option disabled selected>---- Select ---</option>
                                 {
-                                    this.state.trucks.map(truck => truck.Category.toUpperCase() === this.state.truckType.toUpperCase() ?
-                                        <option value={truck.id}>{truck.display_name}</option> : null)
+                                    _.uniqBy(this.state.trucks,'display_name').map(truck => {
+                                        if ( truck.Category.toUpperCase() === this.state.truckType.toUpperCase() ) {
+                                            return <option value={truck.id}>{truck.display_name}</option>
+                                        }
+                                    })
                                 }
                             </Input>
                         </div>
