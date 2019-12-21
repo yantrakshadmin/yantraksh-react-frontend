@@ -16,8 +16,12 @@ import {
     Nav,
     NavItem,
     NavLink,
-    Row
+    Row,
 } from 'reactstrap';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus,faMinus } from '@fortawesome/free-solid-svg-icons';
+
 import {
     loadOrders,
     markOrdersOnHold,
@@ -90,6 +94,7 @@ class OrderTable extends Component {
             trucks: [],
             selectedTruck: [],
             truckType: '',
+            noOfTrucks: 1,
             originSelected: '-',
             destinationSelected: '-',
             selected:[]
@@ -120,7 +125,7 @@ class OrderTable extends Component {
     }
 
     planVehicleManually() {
-        this.props.planVehicleManually(this.state.selectedTruck, this.getSelectedData(), this.props.history.push);
+        this.props.planVehicleManually(this.state.selectedTruck, this.getSelectedData(), this.state.noOfTrucks, this.props.history.push);
         // this.props.history.push('/orders/dispatched')
     }
 
@@ -355,6 +360,9 @@ class OrderTable extends Component {
                     {this.tableNode ? (this.checkOriginDestinationMatch() ? (
                         <div>
                             <h1>Select truck</h1>
+                            <br />
+
+                            <label htmlFor="truck-type">Truck Type</label>
                             <Input type="select" name="truck-type" id="truck-type" onChange={(e) => {
                                 this.setState({
                                     truckType: e.target.value
@@ -364,7 +372,8 @@ class OrderTable extends Component {
                                 <option value="container">Container</option>
                                 <option value="trailer">Trailer</option>
                             </Input>
-                            <br/>,
+                            <br/>
+                            <label htmlFor="truck">Truck</label>
                             <Input type="select" name="truck" id="truck" onChange={(e) => {
                                 this.setState({
                                     selectedTruck: e.target.value
@@ -379,6 +388,26 @@ class OrderTable extends Component {
                                     })
                                 }
                             </Input>
+                            <br />
+                            <label>No of Trucks</label><br />
+                            <ButtonGroup>
+                                <Button color="primary" onClick={() => {
+                                    if (this.state.noOfTrucks > 1)
+                                        this.setState( p => {
+                                            return { noOfTrucks: p.noOfTrucks - 1 }
+                                        })
+                                }}>
+                                    <FontAwesomeIcon icon={faMinus} />
+                                </Button>
+                                <Button color="light">{this.state.noOfTrucks}</Button>
+                                <Button color="primary" onClick={() => {
+                                    this.setState( p => {
+                                        return { noOfTrucks: p.noOfTrucks + 1 }
+                                    })
+                                }}>
+                                    <FontAwesomeIcon icon={faPlus} />
+                                </Button>
+                            </ButtonGroup>
                         </div>
                     ) : (
                         <div>

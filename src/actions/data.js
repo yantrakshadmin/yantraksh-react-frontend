@@ -79,12 +79,12 @@ export const planVehiclesForOrders = (redirect) => (async (dispatch, getState) =
     redirect('/dispatcher')
 });
 
-export const planVehiclesManuallyForOrders = (truckID, selected,redirect) => (async (dispatch, getState) => {
+export const planVehiclesManuallyForOrders = (truckID, selected, noOfTrucks, redirect) => (async (dispatch, getState) => {
     const orders = getState().data.orders.data;
     let data = orders.slice();
 
     dispatch({type: ORDERS_CHANGING});
-    await planVehicleManuallyButton(truckID, selected);
+    await planVehicleManuallyButton(truckID, selected, noOfTrucks);
     loadOrders()(dispatch, getState);
 
     redirect('/dispatcher')
