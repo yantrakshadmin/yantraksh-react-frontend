@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
     Button,
     Card,
@@ -12,8 +12,8 @@ import {
     InputGroupText,
     Row,
 } from 'reactstrap';
-import {forgetPassword} from "../helpers/api";
-import {Link} from "react-router-dom";
+import { forgetPassword } from "../helpers/api";
+import { Link } from "react-router-dom";
 
 
 export default () => {
@@ -53,7 +53,7 @@ export default () => {
     };
 
     return (
-        <div className={"container col-md-5"} style={{"marginTop": "18vh"}}>
+        <div className={"container col-md-5"} style={{ "marginTop": "18vh" }}>
             <CardGroup>
                 <Card className="p-4">
                     <CardBody>
@@ -63,32 +63,32 @@ export default () => {
                             <InputGroup className="mb-3">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
-                                        <i className="icon-user"/>
+                                        <i className="icon-user" />
                                     </InputGroupText>
                                 </InputGroupAddon>
                                 <Input type="text" name="username" id="username" placeholder="Enter Username"
-                                       value={form.username}
-                                       onChange={handleInputChange}/>
+                                    value={form.username}
+                                    onChange={handleInputChange} />
                             </InputGroup>
                             <InputGroup className="mb-4">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
-                                        <i className="icon-phone"/>
+                                        <i className="icon-phone" />
                                     </InputGroupText>
                                 </InputGroupAddon>
                                 <Input type="text" name="phone" id="number" placeholder="Enter Phone Number"
-                                       value={form.phone}
-                                       onChange={handleInputChange}/>
+                                    value={form.phone}
+                                    onChange={handleInputChange} />
                             </InputGroup>
                             <InputGroup className="mb-4">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
-                                        <i className="icon-envelope-open"/>
+                                        <i className="icon-envelope-open" />
                                     </InputGroupText>
                                 </InputGroupAddon>
                                 <Input type="email" name="email" id="email" placeholder="Enter Email Address"
-                                       value={form.email}
-                                       onChange={handleInputChange}/>
+                                    value={form.email}
+                                    onChange={handleInputChange} />
                             </InputGroup>
                             <Row>
                                 <Col md="12" className="forget-password">
@@ -114,7 +114,7 @@ export default () => {
                         </Form>
                     </CardBody>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>
+                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                     <CardBody className="text-center">
                         <div>
                             <h2>Sign up</h2>

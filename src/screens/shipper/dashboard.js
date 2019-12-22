@@ -1,9 +1,9 @@
-import React, {Component, lazy} from 'react';
-import {Bar, Line,} from 'react-chartjs-2';
-import {ButtonDropdown, ButtonGroup, Card, CardBody, CardHeader, CardTitle, Col, Dropdown, Row,} from 'reactstrap';
+import React, { Component, lazy } from 'react';
+import { Bar, Line, } from 'react-chartjs-2';
+import { ButtonDropdown, ButtonGroup, Card, CardBody, CardHeader, CardTitle, Col, Dropdown, Row, } from 'reactstrap';
 
-import {getStyle, hexToRgba} from '@coreui/coreui/dist/js/coreui-utilities'
-import {getEventsData, getKPIData, getMap, getNumberOfTrucksData, getNumberOfWeightData} from "../../helpers/api";
+import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+import { getEventsData, getKPIData, getMap, getNumberOfTrucksData, getNumberOfWeightData } from "../../helpers/api";
 import Iframe from 'react-iframe'
 
 import FullCalendar from '@fullcalendar/react'
@@ -218,10 +218,10 @@ const cardChartOpts4 = {
 
 // Social Box Chart
 const socialBoxData = [
-    {data: [65, 59, 84, 84, 51, 55, 40], label: 'facebook'},
-    {data: [1, 13, 9, 17, 34, 41, 38], label: 'twitter'},
-    {data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin'},
-    {data: [35, 23, 56, 22, 97, 23, 64], label: 'google'},
+    { data: [65, 59, 84, 84, 51, 55, 40], label: 'facebook' },
+    { data: [1, 13, 9, 17, 34, 41, 38], label: 'twitter' },
+    { data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin' },
+    { data: [35, 23, 56, 22, 97, 23, 64], label: 'google' },
 ];
 
 const makeSocialBoxData = (dataSetNo) => {
@@ -407,7 +407,7 @@ const mainChartOpts = {
         position: 'nearest',
         callbacks: {
             labelColor: function (tooltipItem, chart) {
-                return {backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor}
+                return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor }
             }
         }
     },
@@ -455,21 +455,21 @@ class Dashboard extends Component {
             dropdownOpen: false,
             radioSelected: 2,
             mainChart: [],
-            mapUrl:{},
+            mapUrl: {},
             kpi: [
-                {total_time: ""},
-                {total_trucks: ""},
-                {total_orders: ""},
-                {total_orders_planned: ""},
-                {total_rfq: ""},
-                {total_bids: ""},
-                {total_orders_hold: ""},
-                {total_orders_delayed: ""},
-                {total_orders_pending: ""},
-                {total_trucks_assigned: ""},
-                {total_trucks_in_transit: ""},
-                {total_weight: ""},
-                {total_distance: ""},
+                { total_time: "" },
+                { total_trucks: "" },
+                { total_orders: "" },
+                { total_orders_planned: "" },
+                { total_rfq: "" },
+                { total_bids: "" },
+                { total_orders_hold: "" },
+                { total_orders_delayed: "" },
+                { total_orders_pending: "" },
+                { total_trucks_assigned: "" },
+                { total_trucks_in_transit: "" },
+                { total_weight: "" },
+                { total_distance: "" },
 
             ],
 
@@ -500,12 +500,12 @@ class Dashboard extends Component {
 
         try {
             const kpi = await getKPIData();
-             const mapUrl = await getMap();
-                console.log(mapUrl);
-             this.setState({
+            const mapUrl = await getMap();
+            console.log(mapUrl);
+            this.setState({
                 kpi,
                 mapUrl
-             });
+            });
         } catch (e) {
             console.log(e);
         }
@@ -523,7 +523,7 @@ class Dashboard extends Component {
         }
 
         const calendarEvent = await getEventsData();
-        this.setState({calendarEvent: calendarEvent}, () => console.log(this.state.calendarEvent));
+        this.setState({ calendarEvent: calendarEvent }, () => console.log(this.state.calendarEvent));
 
         console.log(calendarEvent,
             "calendarEvents");
@@ -567,7 +567,7 @@ class Dashboard extends Component {
                         hoverBackgroundColor: 'rgb(0,219,255)',
                         hoverBorderColor: 'rgb(0,135,255)',
                         data: truckData
-                    }
+                    },
                 ],
 
             },
@@ -629,7 +629,7 @@ class Dashboard extends Component {
                             <CardBody className="pb-0">
                                 <ButtonGroup className="float-right">
                                     <ButtonDropdown id='card1' isOpen={this.state.card1} toggle={() => {
-                                        this.setState({card1: !this.state.card1});
+                                        this.setState({ card1: !this.state.card1 });
                                     }}>
 
                                     </ButtonDropdown>
@@ -642,8 +642,8 @@ class Dashboard extends Component {
 
                                 <div>Orders to Ship</div>
                             </CardBody>
-                            <div className="chart-wrapper mx-3" style={{height: '70px'}}>
-                                <Line data={cardChartData2} options={cardChartOpts2} height={70}/>
+                            <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                                <Line data={cardChartData2} options={cardChartOpts2} height={70} />
                             </div>
                         </Card>
                     </Col>
@@ -653,7 +653,7 @@ class Dashboard extends Component {
                             <CardBody className="pb-0">
                                 <ButtonGroup className="float-right">
                                     <Dropdown id='card2' isOpen={this.state.card2} toggle={() => {
-                                        this.setState({card2: !this.state.card2});
+                                        this.setState({ card2: !this.state.card2 });
                                     }}>
 
                                     </Dropdown>
@@ -665,8 +665,8 @@ class Dashboard extends Component {
 
                                 <div>Total dispatches</div>
                             </CardBody>
-                            <div className="chart-wrapper mx-3" style={{height: '70px'}}>
-                                <Line data={cardChartData1} options={cardChartOpts1} height={70}/>
+                            <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                                <Line data={cardChartData1} options={cardChartOpts1} height={70} />
                             </div>
                         </Card>
                     </Col>
@@ -676,7 +676,7 @@ class Dashboard extends Component {
                             <CardBody className="pb-0">
                                 <ButtonGroup className="float-right">
                                     <Dropdown id='card3' isOpen={this.state.card3} toggle={() => {
-                                        this.setState({card3: !this.state.card3});
+                                        this.setState({ card3: !this.state.card3 });
                                     }}>
 
                                     </Dropdown>
@@ -688,8 +688,8 @@ class Dashboard extends Component {
 
                                 <div>Total RFQs</div>
                             </CardBody>
-                            <div className="chart-wrapper" style={{height: '70px'}}>
-                                <Line data={cardChartData3} options={cardChartOpts3} height={70}/>
+                            <div className="chart-wrapper" style={{ height: '70px' }}>
+                                <Line data={cardChartData3} options={cardChartOpts3} height={70} />
                             </div>
                         </Card>
                     </Col>
@@ -699,7 +699,7 @@ class Dashboard extends Component {
                             <CardBody className="pb-0">
                                 <ButtonGroup className="float-right">
                                     <ButtonDropdown id='card4' isOpen={this.state.card4} toggle={() => {
-                                        this.setState({card4: !this.state.card4});
+                                        this.setState({ card4: !this.state.card4 });
                                     }}>
 
 
@@ -712,8 +712,8 @@ class Dashboard extends Component {
 
                                 <div>Total Time (Hours)</div>
                             </CardBody>
-                            <div className="chart-wrapper mx-3" style={{height: '70px'}}>
-                                <Bar data={cardChartData4} options={cardChartOpts4} height={70}/>
+                            <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                                <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
                             </div>
                         </Card>
                     </Col>
@@ -733,9 +733,9 @@ class Dashboard extends Component {
                                             <CardBody>
 
                                                 <div className="chart-wrapper"
-                                                     style={{height: 300 + 'px', marginTop: 40 + 'px'}}>
+                                                    style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
                                                     {/*<Line data={this.state.mainChart} options={mainChartOpts} height={300} />*/}
-                                                    <Bar data={this.state.mainChart} height={125}/>
+                                                    <Bar data={this.state.mainChart} height={125} />
                                                 </div>
                                             </CardBody>
                                         </Card>
@@ -746,9 +746,9 @@ class Dashboard extends Component {
                                         <Card>
                                             <CardBody>
                                                 <div className="chart-wrapper"
-                                                     style={{height: 300 + 'px', marginTop: 40 + 'px'}}>
+                                                    style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
                                                     {/*<Line data={this.state.mainChart} options={mainChartOpts} height={300} />*/}
-                                                    <Bar data={this.state.mainChart2} height={125}/>
+                                                    <Bar data={this.state.mainChart2} height={125} />
                                                 </div>
                                             </CardBody>
                                         </Card>
@@ -772,17 +772,17 @@ class Dashboard extends Component {
                                 <Row>
                                     <Col xs="12" md="6" xl="6">
                                         <Card>
-                                            <CardBody style={{paddingTop: '0'}}>
+                                            <CardBody style={{ paddingTop: '0' }}>
                                                 <div className="chart-wrapper"
-                                                     style={{height: 650 + 'px', marginTop: 10 + 'px', padding: '0'}}>
+                                                    style={{ height: 650 + 'px', marginTop: 10 + 'px', padding: '0' }}>
                                                     <Iframe
                                                         url={this.state.mapUrl.map2}
                                                         width="100%"
                                                         height="100%"
                                                         id="myId"
                                                         className="myClassname"
-                                                        // display="initial"
-                                                        // position="relative"
+                                                    // display="initial"
+                                                    // position="relative"
                                                     />
                                                 </div>
                                             </CardBody>
@@ -796,22 +796,22 @@ class Dashboard extends Component {
 
 
                                                 <div className="chart-wrapper"
-                                                     style={{height: 650 + 'px', marginTop: 0 + 'px'}}>
+                                                    style={{ height: 650 + 'px', marginTop: 0 + 'px' }}>
                                                     {<FullCalendar defaultView="dayGridMonth"
 
 
-                                                                   events={[{
-                                                                       title: this.state.events[0].weight.toString(),
-                                                                       date: this.state.events[0].scheduled_date.slice(0, 10)
-                                                                   }]}
-                                                                   header={{
-                                                                       left: "prev,next today",
-                                                                       center: "title",
-                                                                       right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
-                                                                   }}
-                                                                   plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                                                                   dateClick={this.handleDateClick}
-                                                                   ref={this.calendarComponentRef}
+                                                        events={[{
+                                                            title: this.state.events[0].weight.toString(),
+                                                            date: this.state.events[0].scheduled_date.slice(0, 10)
+                                                        }]}
+                                                        header={{
+                                                            left: "prev,next today",
+                                                            center: "title",
+                                                            right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+                                                        }}
+                                                        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                                                        dateClick={this.handleDateClick}
+                                                        ref={this.calendarComponentRef}
                                                     />}
                                                 </div>
                                             </CardBody>
