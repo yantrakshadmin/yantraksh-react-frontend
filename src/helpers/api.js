@@ -8,8 +8,8 @@ import {API_TOKENS} from "../data/storage";
 import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
 
 // const BASE_URL = "http://0.0.0.0:8000/";
-// const BASE_URL = "http://127.0.0.1:8000/";
-const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
+ const BASE_URL = "http://192.168.0.131:8000/";
+//const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // sajkhciuab
 
@@ -291,11 +291,12 @@ export const uploadPODFile = (file, id) => {
     });
 };
 export const planVehicle = () => loadSecureUrl(PLAN_VEHICLE);
-export const planVehicleManuallyButton = (truckId, selected) => loadSecureUrl(PLAN_VEHICLE_MANUALLY, {
+export const planVehicleManuallyButton = (truckId, selected, noOfTrucks) => loadSecureUrl(PLAN_VEHICLE_MANUALLY, {
     method: 'post',
     data: {
         'chosentruck': truckId,
-        'quiz-pids': selected
+        'quiz-pids': selected,
+        'total_trucks': noOfTrucks,
     }
 });
 export const assignRFQs = (id, bi) => loadSecureUrl(`confirmapi/${id}/${bi}/`,{
