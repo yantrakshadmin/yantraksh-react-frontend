@@ -1,26 +1,29 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "../../../components/dataTable";
-import {Button, Card, CardBody, Col, Row} from "reactstrap";
-import {GoogleApiWrapper, Map} from 'google-maps-react'
+import { Button, Card, CardBody, Col, Row } from "reactstrap";
+import { GoogleApiWrapper, Map } from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
-import {getDispatchHistory, getKPIData, uploadPODFile} from "../../../helpers/api";
-import {Line} from "react-chartjs-2";
-import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
-import {Link, RichText, Date} from 'prismic-reactjs';
+import { getDispatchHistory, getKPIData, uploadPODFile } from "../../../helpers/api";
+import { Line } from "react-chartjs-2";
+import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
+import { Link, RichText, Date } from 'prismic-reactjs';
 import Upload from "../../../components/upload";
+import history from '../../../history';
+//import { Redirect } from 'react-router-dom';
 
-const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
+//const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
+const apiKey = "AIzaSyCiZ8sEWNfy468VwWvZ410fP46MasztfdU";
 const lat = 287041;
 const lng = 77.1025;
 
 
 const DispatchMap = (props) => (
     <Map google={props.google}
-         zoom={10}
-         initialCenter={{
-             lat: 287041,
-             lng: 77.1025
-         }}
+        zoom={10}
+        initialCenter={{
+            lat: 287041,
+            lng: 77.1025
+        }}
 
     />
 );
@@ -90,7 +93,7 @@ const dispatchPlanColumns = [
         formatter: (cell, row) => {
             return (
                 <div>
-                    {row.scheduled_date.slice(0,10)}
+                    {row.scheduled_date.slice(0, 10)}
                 </div>
             )
         }
@@ -108,7 +111,7 @@ const dispatchPlanColumns = [
         formatter: (cell, row) => (
             <div>
 
-                <Button color="primary">
+                <Button color="primary" onClick={() => { history.push("/dashboard/freight/request-for-quotation") }}>
                     Raise RFQ
                 </Button>
             </div>
@@ -125,7 +128,7 @@ const dispatchListColumns = [
         sort: true,
     },
     {
-        dataField: 'name',
+        dataField: 'Name',
         text: 'Name',
         sort: true
     }, {
@@ -133,27 +136,27 @@ const dispatchListColumns = [
         text: 'PID',
         sort: true,
     }, {
-        dataField: 'quantity',
+        dataField: 'Quantity',
         text: 'Quantity',
         sort: true,
     }
 ];
 
-const LoadingPlan = ({row}) => {
+const LoadingPlan = ({ row }) => {
 
     return (
-        <div className={"animated slideInDown lightSpeedIn"} style={{marginBottom: 60}}>
+        <div className={"animated slideInDown lightSpeedIn"} style={{ marginBottom: 60 }}>
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/>Loading Plan
-                    <small className="text-muted"/>
+                    <i className="fa fa-align-justify" />Loading Plan
+                    <small className="text-muted" />
                 </CardHeader>
                 <Row>
                     <Col lg={7}>
-                        <DataTable columns={dispatchListColumns} data={row.items}/>
+                        <DataTable columns={dispatchListColumns} data={row.items} />
                     </Col>
                     <Col lg={5}>
-                        <iframe src={row.route_link} frameBorder="0" style={{'height': '100%', 'width': '100%'}}/>
+                        <iframe src={row.route_link} frameBorder="0" style={{ 'height': '100%', 'width': '100%' }} />
                         {/*<DispatchMapWrapper/>*/}
                     </Col>
                 </Row>
@@ -163,7 +166,7 @@ const LoadingPlan = ({row}) => {
 };
 
 const expandRow = row => (
-    <LoadingPlan row={row}/>
+    <LoadingPlan row={row} />
 );
 const sparkLineChartData = [
     {
@@ -273,62 +276,62 @@ export default (props) => {
             <Col lg={12}>
                 <Card>
                     <CardHeader>
-                        <i className="fa fa-align-justify"/>Dispatch Plan
-                        <small className="text-muted"/>
+                        <i className="fa fa-align-justify" />Dispatch Plan
+                        <small className="text-muted" />
 
                         <Row>
 
                             <Col sm="3">
                                 <div className="callout callout-danger">
                                     <small className="text-muted">Total RFQ Raised</small>
-                                    <br/>
+                                    <br />
                                     {
                                         kpiData.map(item => (<strong className="h4">{item.total_rfq}</strong>))}
 
                                     <div className="chart-wrapper">
                                         <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                              width={100} height={30}/>
+                                            width={100} height={30} />
                                     </div>
                                 </div>
                             </Col>
                             <Col sm="3">
                                 <div className="callout callout-info">
                                     <small className="text-muted">Total Bids received</small>
-                                    <br/>
+                                    <br />
                                     {
                                         kpiData.map(item => (<strong className="h4">{item.total_bids}</strong>))}
 
                                     <div className="chart-wrapper">
                                         <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
-                                              width={100} height={30}/>
+                                            width={100} height={30} />
                                     </div>
                                 </div>
                             </Col>
 
                             <Col sm="3">
-                            <div className="callout callout-info">
-                                <small className="text-muted">Total Trucks Assigned</small>
-                                <br/>
-                                {
-                                    kpiData.map(item => (<strong className="h4">{item.total_trucks_assigned}</strong>))}
+                                <div className="callout callout-info">
+                                    <small className="text-muted">Total Trucks Assigned</small>
+                                    <br />
+                                    {
+                                        kpiData.map(item => (<strong className="h4">{item.total_trucks_assigned}</strong>))}
 
-                                <div className="chart-wrapper">
-                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
-                                          width={100}
-                                          height={30}/>
+                                    <div className="chart-wrapper">
+                                        <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
+                                            width={100}
+                                            height={30} />
+                                    </div>
                                 </div>
-                            </div>
-                        </Col>
+                            </Col>
                             <Col sm="3">
                                 <div className="callout callout-danger">
                                     <small className="text-muted">Total Trucks In Transit</small>
-                                    <br/>
+                                    <br />
 
                                     {
                                         kpiData.map(item => (<strong className="h4">{item.total_trucks}</strong>))}
                                     <div className="chart-wrapper">
                                         <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                              width={100} height={30}/>
+                                            width={100} height={30} />
                                     </div>
                                 </div>
                             </Col>
@@ -337,7 +340,7 @@ export default (props) => {
                     </CardHeader>
 
                     <CardBody>
-                        <DataTable columns={dispatchPlanColumns} data={data} expandRow={{renderer: expandRow}}/>
+                        <DataTable columns={dispatchPlanColumns} data={data} expandRow={{ renderer: expandRow }} />
                     </CardBody>
                 </Card>
 

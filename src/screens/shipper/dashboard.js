@@ -637,9 +637,8 @@ class Dashboard extends Component {
                                 {
                                     this.state.kpi.map(item => (
                                         <div className="text-value">{item.total_orders_pending}</div>
-                                    ))}
-
-
+                                    ))
+                                }
                                 <div>Orders to Ship</div>
                             </CardBody>
                             <div className="chart-wrapper mx-3" style={{ height: '70px' }}>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import _ from 'lodash';
 import {
     Button,
@@ -20,7 +20,7 @@ import {
 } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus,faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 import {
     loadOrders,
@@ -29,17 +29,17 @@ import {
     planVehiclesForOrders,
     planVehiclesManuallyForOrders
 } from "../actions/data";
-import {connect} from "react-redux";
-import {ALL_ORDERS, DISPATCHED_ORDERS, ON_HOLD_ORDERS, RTD_ORDERS} from "../data/orderTitles";
-import {refreshing} from "../helpers/notifications";
-import {withRouter} from 'react-router-dom'
+import { connect } from "react-redux";
+import { ALL_ORDERS, DISPATCHED_ORDERS, ON_HOLD_ORDERS, RTD_ORDERS } from "../data/orderTitles";
+import { refreshing } from "../helpers/notifications";
+import { withRouter } from 'react-router-dom'
 import Upload from "./upload";
 import DataTable from "../components/dataTable";
 import columns from "../data/columns/orders";
-import {BeatLoader} from "react-spinners";
-import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
-import {Line} from "react-chartjs-2";
-import {allAvailableTrucks, getKPIData, uploadOrders} from "../helpers/api";
+import { BeatLoader } from "react-spinners";
+import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
+import { Line } from "react-chartjs-2";
+import { allAvailableTrucks, getKPIData, uploadOrders } from "../helpers/api";
 
 
 const filterData = (data, hold, rtd, dispatched, origin = null, destination = null) => {
@@ -66,6 +66,17 @@ const filterData = (data, hold, rtd, dispatched, origin = null, destination = nu
         return null
     });
 
+    // if (!row.is_dispatched && !row.rtd) {
+    //     console.log("0")
+    //     xd.push(row);
+    // } else if (row.rtd && !row.is_dispatched) {
+    //     console.log("1")
+    //     xd.push(row);
+    // } else if (row.is_dispatched && !row.rtd) {
+    //     console.log("2")
+    //     xd.push(row);
+    // }
+
     return xd;
 };
 
@@ -75,19 +86,19 @@ class OrderTable extends Component {
         super(props);
         this.state = {
             kpi: [
-                {total_time: ""},
-                {total_trucks: ""},
-                {total_orders: ""},
-                {total_orders_planned: ""},
-                {total_rfq: ""},
-                {total_bids: ""},
-                {total_orders_hold: ""},
-                {total_orders_delayed: ""},
-                {total_orders_pending: ""},
-                {total_trucks_assigned: ""},
-                {total_trucks_in_transit: ""},
-                {total_weight: ""},
-                {total_distance: ""},
+                { total_time: "" },
+                { total_trucks: "" },
+                { total_orders: "" },
+                { total_orders_planned: "" },
+                { total_rfq: "" },
+                { total_bids: "" },
+                { total_orders_hold: "" },
+                { total_orders_delayed: "" },
+                { total_orders_pending: "" },
+                { total_trucks_assigned: "" },
+                { total_trucks_in_transit: "" },
+                { total_weight: "" },
+                { total_distance: "" },
 
             ],
             modal: false,
@@ -97,7 +108,7 @@ class OrderTable extends Component {
             noOfTrucks: 1,
             originSelected: '-',
             destinationSelected: '-',
-            selected:[]
+            selected: []
         }
     }
 
@@ -178,7 +189,30 @@ class OrderTable extends Component {
         return isValid;
     };
 
+    checkTruckTypeMatch = () => {
 
+        function search(id, myArray) {
+            for (let i = 0; i < myArray.length; i++) {
+                if (myArray[i].id === id) {
+                    return myArray[i];
+                }
+            }
+        }
+
+        const keys = this.getSelectedData();
+        const data = keys.map(key => search(key, this.props.orders));
+
+        let isValid = true;
+
+        for (let i = 0; i < (data.length - 1); i++) {
+            if (data[i].truck_type !== data[i + 1].truck_type) {
+                isValid = false;
+                break;
+            }
+        }
+
+        return isValid;
+    };
 
     handleOnSelect = (row, isSelect) => {
         if (isSelect) {
@@ -299,55 +333,54 @@ class OrderTable extends Component {
         };
 
         const leftButtons = (props) => (
-            <div style={{display: 'inline-block'}}>
+            <div style={{ display: 'inline-block' }}>
                 <ButtonGroup>
                     <Button color={"warning"}
-                            onClick={this.markHold.bind(this)}
-                            disabled={title === ON_HOLD_ORDERS}>
-                         &nbsp;
-                        Mark Hold
+                        onClick={this.markHold.bind(this)}
+                        disabled={title === ON_HOLD_ORDERS}>
+                        &nbsp;
+                       Mark Hold
                     </Button>
 
                     <Button color="primary"
-                            onClick={this.markRTD.bind(this)}
-                            disabled={title === RTD_ORDERS}>
-                        <i className={"fa fa-share"}/> &nbsp;
+                        onClick={this.markRTD.bind(this)}
+                        disabled={title === RTD_ORDERS}>
+                        <i className={"fa fa-share"} /> &nbsp;
                         Ready to Dispatch
                     </Button>
                 </ButtonGroup>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
                 <ButtonGroup>
-                    { title===RTD_ORDERS ? <Button color={"success"}
-                            onClick={this.planVehicle.bind(this)}
-                            disabled={title === DISPATCHED_ORDERS}>
-                        <i className={"fa fa-rocket"}/> &nbsp;
+                    {title === RTD_ORDERS ? <Button color={"success"}
+                        onClick={this.planVehicle.bind(this)}
+                        disabled={title === DISPATCHED_ORDERS}>
+                        <i className={"fa fa-rocket"} /> &nbsp;
                         Auto-dispatch
-                    </Button>:null}
+                    </Button> : null}
                     &nbsp;
-                    { title===RTD_ORDERS ? <Button color={"success"}
-                            onClick={() => {
-                                this.setState({ truckType:"open" })
-                                this.modalToggle();
-                            }}
-                            disabled={title === DISPATCHED_ORDERS}>
+                    {title === RTD_ORDERS ? <Button color={"success"}
+                        onClick={() => {
+                            this.setState({ truckType: "open" })
+                            this.modalToggle();
+                        }}
+                        disabled={title === DISPATCHED_ORDERS}>
                         {/*<i className={"fa fa-rocket"}/> &nbsp;*/}
                         Manual-dispatch
-                    </Button>:null}
+                    </Button> : null}
                 </ButtonGroup>
             </div>
         );
 
         const rightButtons = (props) => (
-            <div style={{display: 'inline-block'}}>
-                { title===ALL_ORDERS ? <Upload upload={uploadOrders}/> : null }
+            <div style={{ display: 'inline-block' }}>
+                {title === ALL_ORDERS ? <Upload upload={uploadOrders} /> : null}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <Button color={"link"} onClick={() => {
                     refreshing();
                     getOrders();
                 }}>
-                    <i className={"fa fa-refresh"}/> &nbsp;
+                    <i className={"fa fa-refresh"} /> &nbsp;
                     Refresh
                 </Button>
             </div>
@@ -357,7 +390,7 @@ class OrderTable extends Component {
             <Modal isOpen={this.state.modal} toggle={this.modalToggle.bind(this)} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>Select Truck</ModalHeader>
                 <ModalBody>
-                    {this.tableNode ? (this.checkOriginDestinationMatch() ? (
+                    {this.tableNode ? ((this.checkOriginDestinationMatch() && this.checkTruckTypeMatch()) ? (
                         <div>
                             <h1>Select truck</h1>
                             <br />
@@ -372,7 +405,7 @@ class OrderTable extends Component {
                                 <option value="container">Container</option>
                                 <option value="trailer">Trailer</option>
                             </Input>
-                            <br/>
+                            <br />
                             <label htmlFor="truck">Truck</label>
                             <Input type="select" name="truck" id="truck" onChange={(e) => {
                                 this.setState({
@@ -381,8 +414,8 @@ class OrderTable extends Component {
                             }}>
                                 <option disabled selected>---- Select ---</option>
                                 {
-                                    _.uniqBy(this.state.trucks,'display_name').map(truck => {
-                                        if ( truck.Category.toUpperCase() === this.state.truckType.toUpperCase() ) {
+                                    _.uniqBy(this.state.trucks, 'display_name').map(truck => {
+                                        if (truck.Category.toUpperCase() === this.state.truckType.toUpperCase()) {
                                             return <option value={truck.id}>{truck.display_name}</option>
                                         }
                                     })
@@ -393,7 +426,7 @@ class OrderTable extends Component {
                             <ButtonGroup>
                                 <Button color="primary" onClick={() => {
                                     if (this.state.noOfTrucks > 1)
-                                        this.setState( p => {
+                                        this.setState(p => {
                                             return { noOfTrucks: p.noOfTrucks - 1 }
                                         })
                                 }}>
@@ -401,7 +434,7 @@ class OrderTable extends Component {
                                 </Button>
                                 <Button color="light">{this.state.noOfTrucks}</Button>
                                 <Button color="primary" onClick={() => {
-                                    this.setState( p => {
+                                    this.setState(p => {
                                         return { noOfTrucks: p.noOfTrucks + 1 }
                                     })
                                 }}>
@@ -410,18 +443,19 @@ class OrderTable extends Component {
                             </ButtonGroup>
                         </div>
                     ) : (
-                        <div>
-                            <h1>
-                                Please Reselect Items.
+                            <div>
+                                <h1>
+                                    Please Reselect Items.
                             </h1>
-                            Origin-Destination of all Items doesn't match
+                                Origin-Destination of all Items doesn't match OR Truck types are not same!
                         </div>
-                    )) : "Data Not Loaded"}
+                        )) : "Data Not Loaded"}
                 </ModalBody>
                 <ModalFooter>
                     <Button color="success" onClick={this.planVehicleManually.bind(this)}
-                            disabled={this.state.selectedTruck === null && this.tableNode && this.checkOriginDestinationMatch()}>PACK
-                        ITEMS</Button>{' '}
+                        disabled={this.state.selectedTruck === null && this.tableNode && this.checkOriginDestinationMatch()}>
+                        PACKITEMS
+                    </Button>{' '}
                     <Button color="secondary" onClick={this.modalToggle.bind(this)}>Cancel</Button>
                 </ModalFooter>
             </Modal>
@@ -445,14 +479,14 @@ class OrderTable extends Component {
                                 }
                             </Input>
                         </Col>
-                        <Col md={1} style={{textAlign: 'center'}}>
+                        <Col md={1} style={{ textAlign: 'center' }}>
                             to
                         </Col>
                         <Col md={2}>
                             <Input type="select"
-                                   onChange={(e) => this.setState({
-                                       destinationSelected: e.target.value
-                                   })}>
+                                onChange={(e) => this.setState({
+                                    destinationSelected: e.target.value
+                                })}>
                                 <option selected value={'-'}>----- Destination -----</option>
                                 {
                                     orders.map(item => item.destination)
@@ -471,12 +505,12 @@ class OrderTable extends Component {
                 <div>
                     <Card>
                         <CardHeader>
-                            <i className="fa fa-align-justify"/>{title}
+                            <i className="fa fa-align-justify" />{title}
                             <Row>
                                 <Col sm="3">
                                     <div className="callout callout-info">
                                         <small className="text-muted">Total Orders</small>
-                                        <br/>
+                                        <br />
                                         {
                                             this.state.kpi.map(item => (
                                                 <strong className="h4">{item.total_orders}</strong>
@@ -484,7 +518,7 @@ class OrderTable extends Component {
 
                                         <div className="chart-wrapper">
                                             <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
-                                                  width={100} height={30}/>
+                                                width={100} height={30} />
                                         </div>
                                     </div>
                                 </Col>
@@ -492,14 +526,14 @@ class OrderTable extends Component {
                                 <Col sm="3">
                                     <div className="callout callout-danger">
                                         <small className="text-muted">Planned Orders</small>
-                                        <br/>
+                                        <br />
                                         {
                                             this.state.kpi.map(item => (
                                                 <strong className="h4">{item.total_orders_planned}</strong>
                                             ))}
                                         <div className="chart-wrapper">
                                             <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                                  width={100} height={30}/>
+                                                width={100} height={30} />
                                         </div>
                                     </div>
                                 </Col>
@@ -508,14 +542,14 @@ class OrderTable extends Component {
                                 <Col sm="3">
                                     <div className="callout callout-info">
                                         <small className="text-muted">Pending Orders</small>
-                                        <br/>
+                                        <br />
                                         {
                                             this.state.kpi.map(item => (
                                                 <strong className="h4">{item.total_orders_pending}</strong>
                                             ))}
                                         <div className="chart-wrapper">
                                             <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
-                                                  width={100} height={30}/>
+                                                width={100} height={30} />
                                         </div>
                                     </div>
                                 </Col>
@@ -523,14 +557,14 @@ class OrderTable extends Component {
                                 <Col sm="3">
                                     <div className="callout callout-danger">
                                         <small className="text-muted">Delayed Orders</small>
-                                        <br/>
+                                        <br />
                                         {
                                             this.state.kpi.map(item => (
                                                 <strong className="h4">{item.total_orders_delayed}</strong>
                                             ))}
                                         <div className="chart-wrapper">
                                             <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                                  width={100} height={30}/>
+                                                width={100} height={30} />
                                         </div>
                                     </div>
                                 </Col>
@@ -538,9 +572,9 @@ class OrderTable extends Component {
 
 
                             </Row>
-                            <small className="text-muted"/>
-                            <span style={{float: 'right'}}>
-                                {changing ? <BeatLoader/> : null}
+                            <small className="text-muted" />
+                            <span style={{ float: 'right' }}>
+                                {changing ? <BeatLoader /> : null}
 
                             </span>
                         </CardHeader>
@@ -548,19 +582,19 @@ class OrderTable extends Component {
                             <Nav tabs>
                                 <NavItem>
                                     <NavLink href="/#/dashboard/orders"
-                                             active={title === ALL_ORDERS}>{ALL_ORDERS}</NavLink>
+                                        active={title === ALL_ORDERS}>{ALL_ORDERS}</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink href="/#/dashboard/orders/on-hold"
-                                             active={title === ON_HOLD_ORDERS}>{ON_HOLD_ORDERS}</NavLink>
+                                        active={title === ON_HOLD_ORDERS}>{ON_HOLD_ORDERS}</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink href="/#/dashboard/orders/ready-to-dispatch"
-                                             active={title === RTD_ORDERS}>{RTD_ORDERS}</NavLink>
+                                        active={title === RTD_ORDERS}>{RTD_ORDERS}</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink href="/#/dashboard/orders/dispatched"
-                                             active={title === DISPATCHED_ORDERS}>{DISPATCHED_ORDERS}</NavLink>
+                                        active={title === DISPATCHED_ORDERS}>{DISPATCHED_ORDERS}</NavLink>
                                 </NavItem>
                             </Nav>
                             <DataTable

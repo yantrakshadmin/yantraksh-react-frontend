@@ -5,13 +5,14 @@ import {
     planVehicle,
     planVehicleManuallyButton
 } from "../helpers/api";
-import {ORDERS_CHANGING, ORDERS_LOADED} from "./index";
-import {errorFetchingData, orderLoadedSuccessfully} from "../helpers/notifications";
+import history from '../history';
+import { ORDERS_CHANGING, ORDERS_LOADED } from "./index";
+import { errorFetchingData, orderLoadedSuccessfully } from "../helpers/notifications";
 
 export const loadOrders = () => (async (dispatch, getState) => {
     try {
         const orders = await getShipperAllOrderDetails();
-        dispatch({type: ORDERS_LOADED, orders: orders});
+        dispatch({ type: ORDERS_LOADED, orders: orders });
         orderLoadedSuccessfully()
     } catch (e) {
         errorFetchingData();
@@ -23,7 +24,7 @@ export const markOrdersOnHold = (selected, redirect) => (async (dispatch, getSta
     const orders = getState().data.orders.data;
     let data = orders.slice();
 
-    dispatch({type: ORDERS_CHANGING});
+    dispatch({ type: ORDERS_CHANGING });
     await markHoldItemsApi(selected);
 
     orders.map((item, index) => {
@@ -35,7 +36,7 @@ export const markOrdersOnHold = (selected, redirect) => (async (dispatch, getSta
         return null;
     });
 
-    dispatch({type: ORDERS_LOADED, orders: data});
+    dispatch({ type: ORDERS_LOADED, orders: data });
     redirect('/orders/on-hold');
 });
 
@@ -43,7 +44,7 @@ export const markOrdersRTD = (selected, redirect) => (async (dispatch, getState)
     const orders = getState().data.orders.data;
     let data = orders.slice();
 
-    dispatch({type: ORDERS_CHANGING});
+    dispatch({ type: ORDERS_CHANGING });
     await markItemsForDispatchApi(selected);
 
     orders.map((item, index) => {
@@ -55,7 +56,7 @@ export const markOrdersRTD = (selected, redirect) => (async (dispatch, getState)
         return null;
     });
 
-    dispatch({type: ORDERS_LOADED, orders: data});
+    dispatch({ type: ORDERS_LOADED, orders: data });
     redirect('/orders/ready-to-dispatch')
 });
 
@@ -63,7 +64,7 @@ export const planVehiclesForOrders = (redirect) => (async (dispatch, getState) =
     const orders = getState().data.orders.data;
     let data = orders.slice();
 
-    dispatch({type: ORDERS_CHANGING});
+    dispatch({ type: ORDERS_CHANGING });
     await planVehicle();
 
     orders.map((item, index) => {
@@ -75,7 +76,7 @@ export const planVehiclesForOrders = (redirect) => (async (dispatch, getState) =
         return null;
     });
 
-    dispatch({type: ORDERS_LOADED, orders: data});
+    dispatch({ type: ORDERS_LOADED, orders: data });
     redirect('/dispatcher')
 });
 
@@ -83,9 +84,10 @@ export const planVehiclesManuallyForOrders = (truckID, selected, noOfTrucks, red
     const orders = getState().data.orders.data;
     let data = orders.slice();
 
-    dispatch({type: ORDERS_CHANGING});
+    await dispatch({ type: ORDERS_CHANGING });
     await planVehicleManuallyButton(truckID, selected, noOfTrucks);
+
     loadOrders()(dispatch, getState);
 
-    redirect('/dispatcher')
+    history.push('/dashboard/dispatcher');
 });

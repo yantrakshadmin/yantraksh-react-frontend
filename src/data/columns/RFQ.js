@@ -1,6 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import {Button} from "reactstrap";
+import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 
 
 export default [
@@ -48,7 +48,7 @@ export default [
         formatter: (cell, row) => (
             <div>
                 <Link to={{
-                    pathname:`/freight/request-for-quotation/bids/${row.id}`
+                    pathname: `/freight/request-for-quotation/bids/${row.id}`
                 }}>
                     <Button color="primary">
                         View Bids

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
     Button, Card,
     CardBody,
@@ -7,7 +7,7 @@ import {
     FormGroup, Input,
     Label, Row,
 } from 'reactstrap';
-import {editProfileSupplier, getSupplierProfileDetails} from "../../../helpers/api";
+import { editProfileSupplier, getSupplierProfileDetails } from "../../../helpers/api";
 
 
 export default () => {
@@ -76,18 +76,18 @@ export default () => {
                                         <FormGroup>
                                             <Label htmlFor="company">First Name</Label>
                                             <Input type="text" id="first_name" placeholder="Enter your company name"
-                                                   name={"supplier_fname"}
-                                                   value={ProfileForm.supplier_fname} onChange={handleInputChange}/>
+                                                name={"supplier_fname"}
+                                                value={ProfileForm.supplier_fname} onChange={handleInputChange} />
                                         </FormGroup>
                                     </Col>
 
                                     <Col xs="6">
                                         <FormGroup>
-                                            <Label htmlFor="vat">Last Name</Label>
+                                            <Label htmlFor="last_name">Last Name</Label>
+                                            <Input type="text" placeholder="Last Name" id="last_name" name={"supplier_lname"}
+                                                value={ProfileForm.supplier_lname}
+                                                onChange={handleInputChange} />
                                         </FormGroup>
-                                        <Input type="text" placeholder="Last Name" id="last_name" name={"supplier_lname"}
-                                               value={ProfileForm.supplier_lname}
-                                               onChange={handleInputChange}/>
                                     </Col>
                                 </FormGroup>
 
@@ -96,9 +96,9 @@ export default () => {
                                         <FormGroup>
                                             <Label htmlFor="company">Email</Label>
                                             <Input type="text" placeholder="Enter your company name"
-                                                   name={"supplier_email"}
-                                                   value={ProfileForm.supplier_email}
-                                                   onChange={handleInputChange}/>
+                                                name={"supplier_email"}
+                                                value={ProfileForm.supplier_email}
+                                                onChange={handleInputChange} />
                                         </FormGroup>
                                     </Col>
 
@@ -106,9 +106,9 @@ export default () => {
                                         <FormGroup>
                                             <Label htmlFor="vat">Company Name</Label>
                                             <Input type="text" placeholder="Company Name" id="company_name"
-                                                   name={"supplier_company_name"}
-                                                   value={ProfileForm.supplier_company_name}
-                                                   onChange={handleInputChange}/>
+                                                name={"supplier_company_name"}
+                                                value={ProfileForm.supplier_company_name}
+                                                onChange={handleInputChange} />
                                         </FormGroup>
                                     </Col>
                                 </FormGroup>
@@ -119,9 +119,9 @@ export default () => {
                                         <FormGroup>
                                             <Label htmlFor="company">GST</Label>
                                             <Input type="text" placeholder="Enter your company name"
-                                                   name={"supplier_gst"}
-                                                   id="GST_number" value={ProfileForm.supplier_gst}
-                                                   onChange={handleInputChange}/>
+                                                name={"supplier_gst"}
+                                                id="GST_number" value={ProfileForm.supplier_gst}
+                                                onChange={handleInputChange} />
                                         </FormGroup>
                                     </Col>
 
@@ -129,9 +129,9 @@ export default () => {
                                         <FormGroup>
                                             <Label htmlFor="vat">Phone Number</Label>
                                             <Input type="text" placeholder="Phone Number" id="phone_number"
-                                                   name={"supplier_number"}
-                                                   value={ProfileForm.supplier_number}
-                                                   onChange={handleInputChange}/>
+                                                name={"supplier_number"}
+                                                value={ProfileForm.supplier_number}
+                                                onChange={handleInputChange} />
                                         </FormGroup>
                                     </Col>
                                 </FormGroup>
@@ -147,9 +147,9 @@ export default () => {
                                         <FormGroup>
                                             <Label htmlFor="company">Address</Label>
                                             <Input type="text" placeholder="Enter your company Address"
-                                                   name={"supplier_pan"}
-                                                   id="address" value={ProfileForm.supplier_pan}
-                                                   onChange={handleInputChange}/>
+                                                name={"supplier_pan"}
+                                                id="address" value={ProfileForm.supplier_pan}
+                                                onChange={handleInputChange} />
                                         </FormGroup>
                                     </Col>
 
@@ -158,7 +158,7 @@ export default () => {
 
                         <CardFooter>
                             <Button color={"primary"} size={"lg"}
-                                    onClick={handleSubmit}>Create</Button> &nbsp;&nbsp;&nbsp;
+                                onClick={handleSubmit}>Create</Button> &nbsp;&nbsp;&nbsp;
                             <Button color={"link"} size={"lg"}>Cancel</Button>
                         </CardFooter>
                     </Card>

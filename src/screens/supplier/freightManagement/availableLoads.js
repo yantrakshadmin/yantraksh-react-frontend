@@ -1,30 +1,30 @@
-import React, {useEffect, useState} from 'react';
-import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
-import {getKPIData, liveAvailableLoads} from "../../../helpers/api";
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+import { getKPIData, liveAvailableLoads } from "../../../helpers/api";
 import DataTable from "../../../components/dataTable";
 import Button from "reactstrap/es/Button";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loader from "../../../components/loader";
-import {Line} from "react-chartjs-2";
-import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
-import {refreshing} from "../../../helpers/notifications";
+import { Line } from "react-chartjs-2";
+import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
+import { refreshing } from "../../../helpers/notifications";
 
 export default () => {
     const [data, setData] = useState([]);
     const [kpiData, setKpiData] = useState([
-        {total_time:"0"},
-        {total_trucks:"0"},
-        {total_orders:"0"},
-        {total_orders_planned:"0"},
-        {total_rfq:"0"},
-        {total_bids:"0"},
-        {total_orders_hold:"0"},
-        {total_orders_delayed:"0"},
-        {total_orders_pending:"0"},
-        {total_trucks_assigned:"0"},
-        {total_trucks_in_transit:"0"},
-        {total_weight:"0"},
-        {total_distance:"0"},
+        { total_time: "0" },
+        { total_trucks: "0" },
+        { total_orders: "0" },
+        { total_orders_planned: "0" },
+        { total_rfq: "0" },
+        { total_bids: "0" },
+        { total_orders_hold: "0" },
+        { total_orders_delayed: "0" },
+        { total_orders_pending: "0" },
+        { total_trucks_assigned: "0" },
+        { total_trucks_in_transit: "0" },
+        { total_weight: "0" },
+        { total_distance: "0" },
 
     ]);
 
@@ -41,22 +41,14 @@ export default () => {
             const kpi = await getKPIData();
             setKpiData(kpi);
             console.log(kpi, "kpiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-            console.log(kpiData ,"wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
+            console.log(kpiData, "wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
         };
 
         loadKpiData();
         loadApiData();
     }, []);
 
-    const leftButton = () => (
-        <Link to={"/freight/post-truck"}>
-            <Button color={"primary"}>
-                <i className={"fa fa-plus"}/>
-                &nbsp;&nbsp;&nbsp;
-                Post Truck
-            </Button>
-        </Link>
-    );
+    const leftButton = () => { };
 
 
     const availableLoadsColumn = [
@@ -79,7 +71,7 @@ export default () => {
             dataField: 'origin',
             text: 'Origin',
             sort: true,
-        },{
+        }, {
             dataField: 'destination',
             text: 'Destination',
             sort: true,
@@ -191,7 +183,7 @@ export default () => {
         <div>
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> Available Loads <small className="text-muted"/>
+                    <i className="fa fa-align-justify" /> Available Loads <small className="text-muted" />
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
@@ -215,16 +207,16 @@ export default () => {
                                 </div>
                             </div>
                         </Col><Col sm="3">
-                        <div className="callout callout-info">
-                            <small className="text-muted">Total Trucks Assigned</small>
-                            <br />
-                            <strong className="h4">0</strong>
+                            <div className="callout callout-info">
+                                <small className="text-muted">Total Trucks Assigned</small>
+                                <br />
+                                <strong className="h4">0</strong>
 
-                            <div className="chart-wrapper">
-                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                <div className="chart-wrapper">
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                </div>
                             </div>
-                        </div>
-                    </Col>
+                        </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total Trucks In Transit</small>
@@ -242,7 +234,7 @@ export default () => {
                 <CardBody>
                     <DataTable
                         noDataIndication={Loader}
-                        columns={availableLoadsColumn} data={data} left={leftButton}/>
+                        columns={availableLoadsColumn} data={data} left={leftButton} />
                 </CardBody>
             </Card>
         </div>

@@ -2,13 +2,13 @@
     Contains all URLs and ApiFunctions
  */
 import axios from "axios";
-import {reactLocalStorage} from "reactjs-localstorage";
+import { reactLocalStorage } from "reactjs-localstorage";
 
-import {API_TOKENS} from "../data/storage";
-import {errorGettingUserInfoNotification, signINAgainNotification} from "./notifications";
+import { API_TOKENS } from "../data/storage";
+import { errorGettingUserInfoNotification, signINAgainNotification } from "./notifications";
 
 // const BASE_URL = "http://0.0.0.0:8000/";
- const BASE_URL = "http://192.168.0.131:8000/";
+const BASE_URL = "http://192.168.0.131:8000/";
 //const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // sajkhciuab
@@ -48,8 +48,8 @@ const CREATE_NEW_RFQ = 'createrfq/';
 const POST_TRUCK = 'post-truck/';
 
 const BID_NOW = 'suppliers/quizapi/';
-const EDIT_INVOICE = 'api/invoice/';
-const EDIT_LR = '/suppliers/lrapi/';
+const EDIT_INVOICE = '/suppliers/invoiceapi/';
+const EDIT_LR = '/api/lr/';
 
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
 const GET_INVOICE = '/suppliers/invoiceapi/';
@@ -64,7 +64,7 @@ const LR_TABLE_VIEW = '/api/lr/';
 const ALL_AVAILABLE_TRUCKS = 'api/trucksdb/';
 
 //Reports
-export const REPORT_DISPATCHER= 'dispatcherreportapi/';
+export const REPORT_DISPATCHER = 'dispatcherreportapi/';
 export const REPORT_LR = 'lrreportapi/';
 export const REPORT_INVOICE = 'invoicereportapi/';
 export const REPORT_TRACKING = 'trackingreportapi/';
@@ -174,13 +174,13 @@ export const isUsernameAvailable = async (username) => {
         return false
     }
 };
-export const getReportsShipper = async (url,obj) =>{
-   return getReports(url,{'date_from':obj.date_from,'date_to':obj.date_to,'c_name':obj.c_name})
+export const getReportsShipper = async (url, obj) => {
+    return getReports(url, { 'date_from': obj.date_from, 'date_to': obj.date_to, 'c_name': obj.c_name })
 };
 
-export const getCompanyShipper = async (url) =>{
-    return loadOpenUrl(url,{
-        method:'get'
+export const getCompanyShipper = async (url) => {
+    return loadOpenUrl(url, {
+        method: 'get'
     })
 };
 
@@ -198,10 +198,10 @@ export const getReports = async (url, obj) => {
                 const data = await axios.request(
                     {
                         method: 'post',
-                        url: BASE_URL+url,
+                        url: BASE_URL + url,
                         headers: {
                             'Content-Type': 'Application/Json',
-                            'Authorization':  `Bearer ${await getAccessToken()}`
+                            'Authorization': `Bearer ${await getAccessToken()}`
                         },
                         data: obj
                     }
@@ -230,7 +230,7 @@ export const signUpUserCompany = async (data) => {
 
 //API's for supplier:
 export const liveAvailableLoads = () => loadSecureUrl(LIVE_AVAILABLE_LOADS);
-export const rfqresults = (id) => loadSecureUrl(`${RFQ_RESULTS}${id}`);
+export const rfqresults = (id) => loadSecureUrl(`${RFQ_RESULTS}${id}/`);
 
 
 export const getShipperProfileDetails = () => loadSecureUrl(EDIT_PROFILE_SHIPPER);
@@ -241,7 +241,7 @@ export const getLRDetails = (id) => loadSecureUrl(`${GET_LR}${id}/`);
 
 export const invoiceView = () => loadSecureUrl(INVOICE_TABLE_VIEW);
 
-export const invoiceSupView = () => loadSecureUrl(`api/financials-api`);
+export const invoiceSupView = () => loadSecureUrl(`api/financials-api/`);
 export const LRView = () => loadSecureUrl(LR_TABLE_VIEW);
 
 
@@ -299,7 +299,7 @@ export const planVehicleManuallyButton = (truckId, selected, noOfTrucks) => load
         'total_trucks': noOfTrucks,
     }
 });
-export const assignRFQs = (id, bi) => loadSecureUrl(`confirmapi/${id}/${bi}/`,{
+export const assignRFQs = (id, bi) => loadSecureUrl(`confirmapi/${id}/${bi}/`, {
     method: 'post'
 });
 
@@ -327,7 +327,7 @@ export const editProfileShipper = (data) => loadSecureUrl(EDIT_PROFILE_SHIPPER, 
     method: 'patch'
 });
 
-export const editInvoice = (data,id) => loadSecureUrl(`${EDIT_INVOICE}${id}/`, {
+export const editInvoice = (data, id) => loadSecureUrl(`${EDIT_INVOICE}${id}/`, {
     data: data,
     method: 'patch'
 });
@@ -341,7 +341,7 @@ export const trackNow = (id) => loadSecureUrl(`${TRACK_NOW}${id}/`);
 
 
 
-export const editLR = (data,id) => loadSecureUrl(`${EDIT_LR}${id}/`, {
+export const editLR = (data, id) => loadSecureUrl(`${EDIT_LR}${id}/`, {
     data: data,
     method: 'patch'
 });
@@ -369,9 +369,9 @@ export const getNumberOfTrucksData = () => loadSecureUrl('truckvmonth/');
 export const getEventsData = () => loadSecureUrl('calendar-data')
 
 
-export const feedback = (data) => loadSecureUrl('shipper/feedbackapi/',{
-    data:data,
-    method:'post'
+export const feedback = (data) => loadSecureUrl('shipper/feedbackapi/', {
+    data: data,
+    method: 'post'
 
 });
 

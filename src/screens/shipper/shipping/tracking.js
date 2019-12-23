@@ -1,10 +1,10 @@
 import React from "react";
 import DataTable from "../../../components/dataTable";
-import {Button, Card, CardBody, CardFooter, Col, Row} from "reactstrap";
-import {GoogleApiWrapper, Map, Marker} from 'google-maps-react'
+import { Button, Card, CardBody, CardFooter, Col, Row } from "reactstrap";
+import { GoogleApiWrapper, Map, Marker } from 'google-maps-react'
 import CardHeader from "reactstrap/es/CardHeader";
-import {assignedTrucks, trackNow} from "../../../helpers/api";
-import {refreshing} from "../../../helpers/notifications";
+import { assignedTrucks, trackNow } from "../../../helpers/api";
+import { refreshing } from "../../../helpers/notifications";
 
 const apiKey = "AIzaSyD3m2rYpNTbKF7FAKGWDFGGUkYm8BLDfIM";
 
@@ -18,15 +18,18 @@ const styles = {
 
 const DispatchMap = (props) => {
     console.log(props, "here");
+    if (props.location.length === 0) {
+        return null;
+    }
     return <Map google={props.google}
-                style={styles}
-                zoom={7}
-                center={{
-                    lat: props.location[0].loc[0],
-                    lng: props.location[0].loc[1],
-                    // lat:33,
-                    //     lng:72
-                }}
+        style={styles}
+        zoom={7}
+        center={{
+            lat: props.location[0].loc[0],
+            lng: props.location[0].loc[1],
+            // lat:33,
+            //     lng:72
+        }}
 
 
     >
@@ -51,7 +54,7 @@ class Tracking extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            plan: [{loc: [20.5937, 78.9629]}],
+            plan: [{ loc: [20.5937, 78.9629] }],
             data: [],
             loading: true,
         }
@@ -61,13 +64,13 @@ class Tracking extends React.Component {
         const getTrucks = async () => {
             refreshing();
             const truckData = await assignedTrucks();
-            this.setState({data: truckData});
+            this.setState({ data: truckData });
             console.log(truckData, "truck")
         };
         const getLoacation = async (id) => {
             const locationPlan = await trackNow(id);
-            this.setState({data: locationPlan});
-            this.setState({loading: false});
+            this.setState({ data: locationPlan });
+            this.setState({ loading: false });
 
             console.log(locationPlan, "locationPlan");
         };
@@ -153,7 +156,7 @@ class Tracking extends React.Component {
                     return (
                         <div><span>
                             {row.createdAt.slice(0, 10)}
-                            </span>
+                        </span>
 
                             &nbsp;&nbsp;
 
@@ -184,17 +187,17 @@ class Tracking extends React.Component {
                     return (
 
                         <div><span>
-                        {row.curr_ETA.slice(0, 10)}
-                </span>
+                            {row.curr_ETA.slice(0, 10)}
+                        </span>
 
                             &nbsp;&nbsp;
 
                             <span>
 
-                {row.curr_ETA.slice(11, 19)}
+                                {row.curr_ETA.slice(11, 19)}
 
 
-                </span>
+                            </span>
                         </div>
 
                     )
@@ -217,7 +220,7 @@ class Tracking extends React.Component {
                             <b>Assigned Trucks</b>
                         </CardHeader>
                         <CardBody>
-                            <DataTable columns={assignedTruckColumns} data={this.state.data}/>
+                            <DataTable columns={assignedTruckColumns} data={this.state.data} />
                         </CardBody>
                     </Card>
 
@@ -225,13 +228,13 @@ class Tracking extends React.Component {
 
 
                 <Col md={6}>
-                    <Card style={{height: '21vw'}}>
+                    <Card style={{ height: '21vw' }}>
                         <CardHeader>
                             <b>Route</b>
                         </CardHeader>
                         <CardBody className={"trackingCard"}>
 
-                            <DispatchMapWrapper location={this.state.plan} loading={this.state.loading}/>
+                            <DispatchMapWrapper location={this.state.plan} loading={this.state.loading} />
                         </CardBody>
 
                     </Card>
@@ -241,7 +244,7 @@ class Tracking extends React.Component {
                         <CardHeader>
                             <b>Location Details</b>
                         </CardHeader>
-                        <DataTable columns={dispatchListColumns} data={this.state.plan}/>
+                        <DataTable columns={dispatchListColumns} data={this.state.plan} />
 
                     </Card>
                 </Col>

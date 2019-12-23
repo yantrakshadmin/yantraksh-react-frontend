@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
-import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import {refreshing} from "../../../helpers/notifications";
-import {getKPIData, invoiceView, uploadPODFile} from "../../../helpers/api";
+import { refreshing } from "../../../helpers/notifications";
+import { getKPIData, invoiceView, uploadPODFile } from "../../../helpers/api";
 import Loader from "../../../components/loader";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "reactstrap/es/Button";
 import Upload from '../../../components/upload';
-import {Line} from "react-chartjs-2";
-import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
+import { Line } from "react-chartjs-2";
+import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
 
 
 const columns = [
@@ -50,7 +50,7 @@ const columns = [
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/supplier/invoice/${row.invoice_quiz}/`}>
+                <Link to={`/supplier/invoice/${row.id}/`}>
                     <Button color="primary">
                         Edit Invoice
                     </Button>
@@ -83,7 +83,7 @@ const columns = [
                 <div>
                     <Upload upload={async (file) => {
                         await uploadPODFile(file, row.invoice_quiz);
-                    }} types={['*']}/>
+                    }} types={['*']} />
                 </div>
             )
         }
@@ -107,7 +107,7 @@ export default () => {
             const kpi = await getKPIData();
             setKpiData(kpi);
             console.log(kpi, "kpiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-            console.log(kpiData ,"wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
+            console.log(kpiData, "wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
         };
 
         loadApiData();
@@ -115,19 +115,19 @@ export default () => {
     }, []);
 
     const [kpiData, setKpiData] = useState([
-        {total_time:"0"},
-        {total_trucks:"0"},
-        {total_orders:"0"},
-        {total_orders_planned:"0"},
-        {total_rfq:"0"},
-        {total_bids:"0"},
-        {total_orders_hold:"0"},
-        {total_orders_delayed:"0"},
-        {total_orders_pending:"0"},
-        {total_trucks_assigned:"0"},
-        {total_trucks_in_transit:"0"},
-        {total_weight:"0"},
-        {total_distance:"0"},
+        { total_time: "0" },
+        { total_trucks: "0" },
+        { total_orders: "0" },
+        { total_orders_planned: "0" },
+        { total_rfq: "0" },
+        { total_bids: "0" },
+        { total_orders_hold: "0" },
+        { total_orders_delayed: "0" },
+        { total_orders_pending: "0" },
+        { total_trucks_assigned: "0" },
+        { total_trucks_in_transit: "0" },
+        { total_weight: "0" },
+        { total_distance: "0" },
 
     ]);
     const sparkLineChartData = [
@@ -213,7 +213,7 @@ export default () => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/>Financials<small className="text-muted"/>
+                    <i className="fa fa-align-justify" />Financials<small className="text-muted" />
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
@@ -237,16 +237,16 @@ export default () => {
                                 </div>
                             </div>
                         </Col><Col sm="3">
-                        <div className="callout callout-info">
-                            <small className="text-muted">Total Trucks Assigned</small>
-                            <br />
-                            <strong className="h4">0</strong>
+                            <div className="callout callout-info">
+                                <small className="text-muted">Total Trucks Assigned</small>
+                                <br />
+                                <strong className="h4">0</strong>
 
-                            <div className="chart-wrapper">
-                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                <div className="chart-wrapper">
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                </div>
                             </div>
-                        </div>
-                    </Col>
+                        </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total Trucks In Transit</small>
@@ -271,7 +271,7 @@ export default () => {
                         {
                             props => (
                                 <div>
-                                    <div style={{paddingTop: 10, paddingBottom: 10, float: 'right'}}>
+                                    <div style={{ paddingTop: 10, paddingBottom: 10, float: 'right' }}>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <Search.SearchBar {...props.searchProps} />
                                     </div>
