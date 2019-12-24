@@ -1,3 +1,16 @@
+import React from "react";
+
+function formatDate(d) {
+    let hrs = d.getHours();
+    let mins = d.getMinutes();
+    let secs = d.getSeconds();
+
+    return (
+        <span>{d.getDate()}-{d.getMonth() + 1}-{d.getFullYear()} {("0" + hrs).slice(-2)}:{("0" + mins).slice(-2)}:{("0" + secs).slice(-2)}</span>
+    )
+}
+
+
 export default [{
     dataField: 'truck_type',
     text: 'Truck Type',
@@ -33,6 +46,10 @@ export default [{
     dataField: 'scheduled_date',
     text: 'Date',
     sort: true,
+    formatter: (cell, row) => {
+        let d = new Date(row.scheduled_date);
+        return formatDate(d);
+    }
 }, {
     dataField: 'offered_price',
     text: 'Offered Price',

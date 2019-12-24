@@ -1,17 +1,28 @@
-import React, {useEffect, useState} from 'react';
-import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
-import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 // import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import {refreshing} from "../../../helpers/notifications";
-import {getKPIData, invoiceSupView, invoiceView, uploadPODFile} from "../../../helpers/api";
+import { refreshing } from "../../../helpers/notifications";
+import { getKPIData, invoiceSupView, invoiceView, uploadPODFile } from "../../../helpers/api";
 import Loader from "../../../components/loader";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "reactstrap/es/Button";
 import Upload from '../../../components/upload';
-import {Line} from "react-chartjs-2";
-import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
+import { Line } from "react-chartjs-2";
+import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
 import DataTable from "../../../components/dataTable";
+
+
+function formatDate(d) {
+    let hrs = d.getHours();
+    let mins = d.getMinutes();
+    let secs = d.getSeconds();
+
+    return (
+        <span>{d.getDate()}-{d.getMonth() + 1}-{d.getFullYear()} {("0" + hrs).slice(-2)}:{("0" + mins).slice(-2)}:{("0" + secs).slice(-2)}</span>
+    )
+}
 
 
 const columns = [
@@ -25,7 +36,10 @@ const columns = [
         dataField: 'invoice_date',
         text: 'Invoice Date',
         sort: true,
-
+        formatter: (cell, row) => {
+            let d = new Date(row.invoice_date);
+            return formatDate(d);
+        }
     }, {
         dataField: 'invoice_salesperson',
         text: 'Billing Party',
@@ -116,19 +130,19 @@ export default () => {
     }, []);
 
     const [kpiData, setKpiData] = useState([
-        {total_time: "0"},
-        {total_trucks: "0"},
-        {total_orders: "0"},
-        {total_orders_planned: "0"},
-        {total_rfq: "0"},
-        {total_bids: "0"},
-        {total_orders_hold: "0"},
-        {total_orders_delayed: "0"},
-        {total_orders_pending: "0"},
-        {total_trucks_assigned: "0"},
-        {total_trucks_in_transit: "0"},
-        {total_weight: "0"},
-        {total_distance: "0"},
+        { total_time: "0" },
+        { total_trucks: "0" },
+        { total_orders: "0" },
+        { total_orders_planned: "0" },
+        { total_rfq: "0" },
+        { total_bids: "0" },
+        { total_orders_hold: "0" },
+        { total_orders_delayed: "0" },
+        { total_orders_pending: "0" },
+        { total_trucks_assigned: "0" },
+        { total_trucks_in_transit: "0" },
+        { total_weight: "0" },
+        { total_distance: "0" },
 
     ]);
     const sparkLineChartData = [
@@ -214,54 +228,54 @@ export default () => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/>Financials
-                    <small className="text-muted"/>
+                    <i className="fa fa-align-justify" />Financials
+                    <small className="text-muted" />
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total RFQ Raised</small>
-                                <br/>
+                                <br />
                                 <strong className="h4">0</strong>
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                          width={100} height={30}/>
+                                        width={100} height={30} />
                                 </div>
                             </div>
                         </Col>
                         <Col sm="3">
                             <div className="callout callout-info">
                                 <small className="text-muted">Total Bids received</small>
-                                <br/>
+                                <br />
                                 <strong className="h4">0</strong>
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
-                                          width={100} height={30}/>
+                                        width={100} height={30} />
                                 </div>
                             </div>
                         </Col>
                         <Col sm="3">
-                        <div className="callout callout-info">
-                            <small className="text-muted">Total Trucks Assigned</small>
-                            <br/>
-                            <strong className="h4">0</strong>
+                            <div className="callout callout-info">
+                                <small className="text-muted">Total Trucks Assigned</small>
+                                <br />
+                                <strong className="h4">0</strong>
 
-                            <div className="chart-wrapper">
-                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100}
-                                      height={30}/>
+                                <div className="chart-wrapper">
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100}
+                                        height={30} />
+                                </div>
                             </div>
-                        </div>
-                    </Col>
+                        </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total Trucks In Transit</small>
-                                <br/>
+                                <br />
 
                                 <strong className="h4">0</strong>
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                          width={100} height={30}/>
+                                        width={100} height={30} />
                                 </div>
                             </div>
                         </Col>
@@ -278,7 +292,7 @@ export default () => {
                         {
                             props => (
                                 <div>
-                                    <div style={{paddingTop: 10, paddingBottom: 10, float: 'right'}}>
+                                    <div style={{ paddingTop: 10, paddingBottom: 10, float: 'right' }}>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <Search.SearchBar {...props.searchProps} />
                                     </div>
@@ -290,7 +304,7 @@ export default () => {
 
                                         bordered={false}
                                         pagination={paginationFactory()}
-                                        // noDataIndication={Loader}
+                                    // noDataIndication={Loader}
                                     />
                                 </div>
                             )

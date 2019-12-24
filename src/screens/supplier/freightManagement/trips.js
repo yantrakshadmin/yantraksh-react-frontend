@@ -25,18 +25,6 @@ function formatDate(d) {
 
 const columns = [
     {
-        dataField: 'lr_billingparty',
-        text: 'Billing Party',
-        sort: true
-
-    },
-    {
-        dataField: 'lr_declared',
-        text: 'Declared',
-        sort: true,
-
-    },
-    {
         dataField: 'lr_quiz',
         text: 'Origin',
         sort: true,
@@ -88,6 +76,17 @@ const columns = [
         dataField: 'lr_consignee_name',
         text: 'Consignee',
         sort: true
+
+    }, {
+        dataField: 'lr_billingparty',
+        text: 'Billing Party',
+        sort: true
+
+    },
+    {
+        dataField: 'lr_declared',
+        text: 'Declared',
+        sort: true,
 
     },
     {

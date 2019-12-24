@@ -6,8 +6,8 @@ import CardHeader from "reactstrap/es/CardHeader";
 import { assignedTrucks, trackNow } from "../../../helpers/api";
 import { refreshing } from "../../../helpers/notifications";
 
-const apiKey = "AIzaSyD3m2rYpNTbKF7FAKGWDFGGUkYm8BLDfIM";
-
+//const apiKey = "AIzaSyD3m2rYpNTbKF7FAKGWDFGGUkYm8BLDfIM";
+const apiKey = "AIzaSyCiZ8sEWNfy468VwWvZ410fP46MasztfdU";
 
 const styles = {
     height: '100%',
@@ -23,7 +23,7 @@ const DispatchMap = (props) => {
     }
     return <Map google={props.google}
         style={styles}
-        zoom={7}
+        zoom={12}
         center={{
             lat: props.location[0].loc[0],
             lng: props.location[0].loc[1],

@@ -3,6 +3,17 @@ import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 
 
+function formatDate(d) {
+    let hrs = d.getHours();
+    let mins = d.getMinutes();
+    let secs = d.getSeconds();
+
+    return (
+        <span>{d.getDate()}-{d.getMonth() + 1}-{d.getFullYear()} {("0" + hrs).slice(-2)}:{("0" + mins).slice(-2)}:{("0" + secs).slice(-2)}</span>
+    )
+}
+
+
 export default [
     {
         dataField: 'id',
@@ -36,7 +47,11 @@ export default [
     }, {
         dataField: 'posted_on',
         text: 'Date',
-        sort: true
+        sort: true,
+        formatter: (cell, row) => {
+            let d = new Date(row.posted_on);
+            return formatDate(d);
+        }
     }, {
         dataField: 'status',
         text: 'Status',

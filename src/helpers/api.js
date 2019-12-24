@@ -8,8 +8,8 @@ import { API_TOKENS } from "../data/storage";
 import { errorGettingUserInfoNotification, signINAgainNotification } from "./notifications";
 
 // const BASE_URL = "http://0.0.0.0:8000/";
-const BASE_URL = "http://192.168.0.131:8000/";
-//const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
+//const BASE_URL = "http://192.168.0.131:8000/";
+const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // sajkhciuab
 
