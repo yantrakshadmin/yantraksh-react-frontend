@@ -12,8 +12,8 @@ export const signInRequestNotification = () => info('Please Sign In to console')
 export const errorFetchingData = () => error('An unknown error occurred while fetching data.');
 export const orderLoadedSuccessfully = () => success('Inventory refreshed.');
 //export const refreshDispatchPlans = () => success('DispatchPlansRefreshed');
-export const refreshing = () => info('Refreshing');
+export const refreshing = () => { };
 export const rfqRaised = () => info('RFQ Raised');
-
+export const bidSuccess = () => info('Bid Placed Successfully.');
 
 // export const get

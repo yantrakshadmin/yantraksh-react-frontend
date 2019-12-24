@@ -1,44 +1,92 @@
-import React, {useEffect, useState} from 'react';
-import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
-import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import {refreshing} from "../../../helpers/notifications";
-import {getKPIData, LRView} from "../../../helpers/api";
+import { refreshing } from "../../../helpers/notifications";
+import { getKPIData, LRView } from "../../../helpers/api";
 import Loader from "../../../components/loader";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "reactstrap/es/Button";
 import Upload from '../../../components/upload'
-import {Line} from "react-chartjs-2";
-import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
+import { Line } from "react-chartjs-2";
+import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
 
+
+function formatDate(d) {
+    let hrs = d.getHours();
+    let mins = d.getMinutes();
+    let secs = d.getSeconds();
+
+    return (
+        <span>{d.getDate()}-{d.getMonth() + 1}-{d.getFullYear()} {("0" + hrs).slice(-2)}:{("0" + mins).slice(-2)}:{("0" + secs).slice(-2)}</span>
+    )
+}
 
 const columns = [
     {
         dataField: 'lr_billingparty',
-        text: 'LR Billing Party',
+        text: 'Billing Party',
         sort: true
 
     },
     {
         dataField: 'lr_declared',
-        text: 'LR Declared',
+        text: 'Declared',
         sort: true,
 
-    }, {
+    },
+    {
+        dataField: 'lr_quiz',
+        text: 'Origin',
+        sort: true,
+        formatter: (cell, row) => {
+            return row.lr_quiz.origin
+        }
+    },
+    {
+        dataField: 'lr_quiz',
+        text: 'Destination',
+        sort: true,
+        formatter: (cell, row) => {
+            return row.lr_quiz.destination
+        }
+    },
+    {
+        dataField: 'lr_quiz',
+        text: 'Weight',
+        sort: true,
+        formatter: (cell, row) => {
+            return row.lr_quiz.weight
+        }
+    },
+    {
+        dataField: 'lr_quiz',
+        text: 'Scheduled Date',
+        sort: true,
+        formatter: (cell, row) => {
+            let d = new Date(row.lr_quiz.scheduled_date);
+            return formatDate(d);
+        }
+    },
+    {
         dataField: 'lr_invoice_date',
-        text: 'LR Date',
-        sort: true
+        text: 'Invoice Date',
+        sort: true,
+        formatter: (cell, row) => {
+            let d = new Date(row.lr_invoice_date);
+            return formatDate(d);
+        }
     },
     {
         dataField: 'lr_consignor_name',
-        text: 'LR Consignor Name',
+        text: 'Consignor',
         sort: true
 
     },
     {
         dataField: 'lr_consignee_name',
-        text: 'LR Consignee Name',
+        text: 'Consignee',
         sort: true
 
     },
@@ -78,7 +126,7 @@ const columns = [
         dataField: 'Upload POD',
         text: 'Upload POD',
         sort: true,
-        isDummyField:true,
+        isDummyField: true,
         formatter: (cell, row) => (
             <div>
                 <Upload to={`/freight/request-for-quotation/bids/${row.id}`}>
@@ -100,6 +148,7 @@ export default () => {
         const loadApiData = async () => {
             refreshing();
             const trucks = await LRView();
+            console.log(trucks)
             setData(trucks)
         };
         const loadKpiData = async () => {
@@ -107,7 +156,7 @@ export default () => {
             const kpi = await getKPIData();
             setKpiData(kpi);
             console.log(kpi, "kpiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-            console.log(kpiData ,"wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
+            console.log(kpiData, "wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
         };
 
         loadApiData()
@@ -115,19 +164,19 @@ export default () => {
     }, []);
 
     const [kpiData, setKpiData] = useState([
-        {total_time:"0"},
-        {total_trucks:"0"},
-        {total_orders:"0"},
-        {total_orders_planned:"0"},
-        {total_rfq:"0"},
-        {total_bids:"0"},
-        {total_orders_hold:"0"},
-        {total_orders_delayed:"0"},
-        {total_orders_pending:"0"},
-        {total_trucks_assigned:"0"},
-        {total_trucks_in_transit:"0"},
-        {total_weight:"0"},
-        {total_distance:"0"},
+        { total_time: "0" },
+        { total_trucks: "0" },
+        { total_orders: "0" },
+        { total_orders_planned: "0" },
+        { total_rfq: "0" },
+        { total_bids: "0" },
+        { total_orders_hold: "0" },
+        { total_orders_delayed: "0" },
+        { total_orders_pending: "0" },
+        { total_trucks_assigned: "0" },
+        { total_trucks_in_transit: "0" },
+        { total_weight: "0" },
+        { total_distance: "0" },
 
     ]);
     const sparkLineChartData = [
@@ -212,14 +261,14 @@ export default () => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> Trips <small className="text-muted"/>
+                    <i className="fa fa-align-justify" /> Trips <small className="text-muted" />
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
                                 <small className="text-muted">Total Bids received</small>
                                 <br />
                                 {
-                                    kpiData.map(item=>(<strong className="h4">{item.total_bids}</strong>))}
+                                    kpiData.map(item => (<strong className="h4">{item.total_bids}</strong>))}
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
@@ -231,31 +280,31 @@ export default () => {
                                 <small className="text-muted">Total RFQ Raised</small>
                                 <br />
                                 {
-                                    kpiData.map(item=>(<strong className="h4">{item.total_rfq}</strong>))}
+                                    kpiData.map(item => (<strong className="h4">{item.total_rfq}</strong>))}
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
                                 </div>
                             </div>
                         </Col><Col sm="3">
-                        <div className="callout callout-info">
-                            <small className="text-muted">Total Trucks Assigned</small>
-                            <br />
-                            {
-                                kpiData.map(item=>(<strong className="h4">{item.total_trucks_assigned}</strong>))}
+                            <div className="callout callout-info">
+                                <small className="text-muted">Total Trucks Assigned</small>
+                                <br />
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_trucks_assigned}</strong>))}
 
-                            <div className="chart-wrapper">
-                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                <div className="chart-wrapper">
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                </div>
                             </div>
-                        </div>
-                    </Col>
+                        </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total Trucks In Transit</small>
                                 <br />
 
                                 {
-                                    kpiData.map(item=>(<strong className="h4">{item.total_trucks}</strong>))}
+                                    kpiData.map(item => (<strong className="h4">{item.total_trucks}</strong>))}
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
                                 </div>
@@ -275,7 +324,7 @@ export default () => {
                         {
                             props => (
                                 <div>
-                                    <div style={{paddingTop: 10, paddingBottom: 10, float: 'right'}}>
+                                    <div style={{ paddingTop: 10, paddingBottom: 10, float: 'right' }}>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <Search.SearchBar {...props.searchProps} />
                                     </div>

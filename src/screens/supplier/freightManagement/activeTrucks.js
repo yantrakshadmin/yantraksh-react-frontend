@@ -12,6 +12,16 @@ import { Line } from "react-chartjs-2";
 import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
 
 
+function formatDate(d) {
+    let hrs = d.getHours();
+    let mins = d.getMinutes();
+    let secs = d.getSeconds();
+
+    return (
+        <span>{d.getDate()}-{d.getMonth() + 1}-{d.getFullYear()} {("0" + hrs).slice(-2)}:{("0" + mins).slice(-2)}:{("0" + secs).slice(-2)}</span>
+    )
+}
+
 const columns = [
     {
         dataField: 'id',
@@ -49,15 +59,17 @@ const columns = [
         dataField: 'name',
         text: 'Truck Name',
 
-    }, {
+    },
+    {
         dataField: 'scheduled_date',
         text: 'Date',
         sort: true,
-    }, {
-        dataField: 'status',
-        text: 'Status',
-        sort: true,
-    }, {
+        formatter: (cell, row) => {
+            let d = new Date(row.scheduled_date);
+            return formatDate(d);
+        }
+    },
+    {
         dataField: 'offered_price',
         text: 'Offered Price',
         sort: true

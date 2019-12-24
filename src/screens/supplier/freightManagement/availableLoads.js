@@ -9,6 +9,17 @@ import { Line } from "react-chartjs-2";
 import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
 import { refreshing } from "../../../helpers/notifications";
 
+
+function formatDate(d) {
+    let hrs = d.getHours();
+    let mins = d.getMinutes();
+    let secs = d.getSeconds();
+
+    return (
+        <span>{d.getDate()}-{d.getMonth() + 1}-{d.getFullYear()} {("0" + hrs).slice(-2)}:{("0" + mins).slice(-2)}:{("0" + secs).slice(-2)}</span>
+    )
+}
+
 export default () => {
     const [data, setData] = useState([]);
     const [kpiData, setKpiData] = useState([
@@ -68,31 +79,59 @@ export default () => {
             sort: true,
         },
         {
+            dataField: 'truck_type',
+            text: 'Truck Type',
+            sort: true,
+        },
+        {
+            dataField: 'total_trucks',
+            text: 'Total Trucks',
+            sort: true,
+        },
+        {
             dataField: 'origin',
             text: 'Origin',
             sort: true,
-        }, {
+        },
+        {
             dataField: 'destination',
             text: 'Destination',
             sort: true,
-        }, {
-            dataField: 'date',
+        },
+        {
+            dataField: 'material_type',
+            text: 'Material Type',
+            sort: true,
+        },
+        {
+            dataField: 'weight',
+            text: 'Weight',
+            sort: true,
+        },
+        {
+            dataField: 'scheduled_date',
             text: 'Date',
             sort: true,
-        }, {
+            formatter: (cell, row) => {
+                let d = new Date(row.scheduled_date);
+                return formatDate(d);
+            }
+        },
+        {
             dataField: 'offered_price',
             text: 'Offered Price',
             sort: true,
         },
         {
             dataField: 'Bid Now',
-            text: 'Track Now',
+            text: 'Action',
             sort: true,
             formatter: (cell, row) => (
                 <div>
                     <Link to={`/freight/bid-now/${row.id}`}>
                         <Button color="primary">
-                            Bids Now
+                            {console.log(row)}
+                            Bid Now
                         </Button>
                     </Link>
                 </div>

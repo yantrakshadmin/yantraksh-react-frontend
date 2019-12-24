@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
-import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row,} from 'reactstrap';
-import {bidNow} from "../../../helpers/api";
+import React, { useState } from 'react';
+import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row, } from 'reactstrap';
+import { bidNow } from "../../../helpers/api";
+import history from '../../../history';
+import { bidSuccess } from '../../../helpers/notifications';
 
 
 export default (props) => {
@@ -28,8 +30,8 @@ export default (props) => {
         event.preventDefault();
         try {
             await bidNow(form, props.match.params.id);
-
-            alert('done')
+            history.push('/dashboard/freight/my-bids');
+            bidSuccess();
         } catch (e) {
             alert(JSON.stringify(e));
         }
@@ -47,7 +49,7 @@ export default (props) => {
                             <FormGroup>
                                 <Label for="origin">Type of vehicle</Label>
                                 {/*<Input type="text" id="vehicle" placeholder="ex: Delhi" name={"vehicle"}/>*/}
-                                <Input type="select" name="vehicle" id="vehicle" onChange={handleInputChange}  value={form.vehicle} >
+                                <Input type="select" name="vehicle" id="vehicle" onChange={handleInputChange} value={form.vehicle} >
                                     <option selected disabled>---- Select ----</option>
                                     <option value="1">Market Vehicle</option>
                                     <option value="2">Own Vehicle</option>
@@ -58,7 +60,7 @@ export default (props) => {
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="destination">Least Bid</Label>
-                                <Input type="text" name="least_bid" id="least_bid" onChange={handleInputChange}  value={form.least_bid} />
+                                <Input type="text" name="least_bid" id="least_bid" onChange={handleInputChange} value={form.least_bid} />
 
 
                             </FormGroup>
@@ -68,7 +70,7 @@ export default (props) => {
 
 
 
-                    <br/><br/><br/>
+                    <br /><br /><br />
                     <Button color={"primary"} size={"lg"}>Bid</Button> &nbsp;&nbsp;&nbsp;
                     <Button color={"link"} size={"lg"}>Cancel</Button>
                 </Form>

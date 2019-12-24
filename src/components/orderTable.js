@@ -54,28 +54,37 @@ const filterData = (data, hold, rtd, dispatched, origin = null, destination = nu
                 return null
         }
 
-        if (!row.is_dispatched && !row.rtd && hold)
+        if (!row.is_dispatched && !row.rtd && hold) {
             xd.push(row);
+            return null;
+        }
 
-        if (row.is_dispatched && dispatched)
+
+        if (row.rtd && !row.is_dispatched && rtd) {
             xd.push(row);
+            return null;
+        }
 
-        if (row.rtd && rtd)
+        if (row.is_dispatched && !row.rtd && dispatched) {
             xd.push(row);
+            return null;
+        }
 
-        return null
+
+        // if (!row.is_dispatched && !row.rtd) {
+        //     console.log("0")
+        //     xd.push(row);
+        // } if (row.rtd && !row.is_dispatched) {
+        //     console.log("1")
+        //     xd.push(row);
+        // } if (row.is_dispatched && !row.rtd) {
+        //     console.log("2")
+        //     xd.push(row);
+        // }
+
+        //return null
     });
 
-    // if (!row.is_dispatched && !row.rtd) {
-    //     console.log("0")
-    //     xd.push(row);
-    // } else if (row.rtd && !row.is_dispatched) {
-    //     console.log("1")
-    //     xd.push(row);
-    // } else if (row.is_dispatched && !row.rtd) {
-    //     console.log("2")
-    //     xd.push(row);
-    // }
 
     return xd;
 };
@@ -254,6 +263,10 @@ class OrderTable extends Component {
             changing,
             props
         } = this.props;
+
+        console.log("RTD: ", rtd)
+        console.log("Hold: ", hold)
+        console.log("Dispatched: ", dispatched)
 
         const sparkLineChartData = [
             {

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
     Button,
     Card,
@@ -12,28 +12,45 @@ import {
     InputGroupText,
     Row
 } from "reactstrap";
-import {Link} from "react-router-dom";
-import {signIn} from "../actions/auth";
-import {connect} from "react-redux";
+import { Link } from "react-router-dom";
+import { signIn } from "../actions/auth";
+import { connect } from "react-redux";
 
 const SignInCard = (props) => {
+
     const [values, setValue] = useState({
         username: '',
-        password: ''
+        password: '',
+        phase: 0,
     });
 
-    const handleChange = ({target}) => {
+
+    const handleChange = ({ target }) => {
         const value = target.type === 'checkbox' ? target.checked : target.value;
-        const {name} = target;
+        const { name } = target;
         setValue({
             ...values,
             [name]: value,
         });
     };
 
-    const submitForm = (e) => {
+    const loginLoadingButton = () => {
+        if (values.phase === 1) {
+            return (
+                <Button color="primary" className="px-4" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading
+                </Button>
+            );
+        }
+
+        return <Button color="primary" className="px-4">Login</Button>;
+    }
+
+    const submitForm = async e => {
         e.preventDefault();
-        props.signIn(values.username, values.password);
+        setValue({ ...values, phase: 1 });
+        await props.signIn(values.username, values.password);
+        setValue({ ...values, phase: 0 });
     };
 
     return (
@@ -46,32 +63,32 @@ const SignInCard = (props) => {
                         <InputGroup className="mb-3">
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText>
-                                    <i className="icon-user"/>
+                                    <i className="icon-user" />
                                 </InputGroupText>
                             </InputGroupAddon>
                             <Input type="text" placeholder="Username" autoComplete="username" name={"username"} value={values.email}
-                                   onChange={handleChange}/>
+                                onChange={handleChange} />
                         </InputGroup>
                         <InputGroup className="mb-4">
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText>
-                                    <i className="icon-lock"/>
+                                    <i className="icon-lock" />
                                 </InputGroupText>
                             </InputGroupAddon>
                             <Input type="password" placeholder="Password"
-                                   autoComplete="current-password"
-                                   name={"password"}
-                                   value={values.password}
-                                   onChange={handleChange}/>
+                                autoComplete="current-password"
+                                name={"password"}
+                                value={values.password}
+                                onChange={handleChange} />
                         </InputGroup>
                         <Row>
                             <Col xs="6">
-                                <Button color="primary" className="px-4">Login</Button>
+                                {loginLoadingButton()}
                             </Col>
-                            <Col xs="6" className="text-right" style={{marginTop: '0 !important'}}>
+                            <Col xs="6" className="text-right" style={{ marginTop: '0 !important' }}>
                                 <Link to="/forget-password/">
                                     <Button color="link" className="mt-3 with-margin-top-null" active tabIndex={-1}
-                                            style={{marginTop: '0 !important'}}>
+                                        style={{ marginTop: '0 !important' }}>
                                         Forget Password</Button>
                                 </Link>
                             </Col>
@@ -79,7 +96,7 @@ const SignInCard = (props) => {
                     </Form>
                 </CardBody>
             </Card>
-            <Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>
+            <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                 <CardBody className="text-center">
                     <div>
                         <h2>Sign up</h2>
@@ -87,21 +104,21 @@ const SignInCard = (props) => {
                         <Link to="/sign-up/supplier/">
                             <Button color="primary" className="mt-3" active tabIndex={-1}>
                                 &nbsp;
-                                <i className="fa fa-truck"/>
-                               &nbsp;&nbsp;
+                                <i className="fa fa-truck" />
+                                &nbsp;&nbsp;
                                 Register Supplier!</Button>
                         </Link>
                         <Link to="/sign-up/shipper/">
-                        <Button color="primary" className="mt-3" active tabIndex={-1}>
-                            &nbsp;
-                            <i className="fa fa-shopping-cart"/>&nbsp;&nbsp;
+                            <Button color="primary" className="mt-3" active tabIndex={-1}>
+                                &nbsp;
+                            <i className="fa fa-shopping-cart" />&nbsp;&nbsp;
                             Register Shipper!</Button>
                         </Link>
                         <Link to="/sign-up/company/">
-                        <Button color="primary" className="mt-3" active tabIndex={-1}>
-                            &nbsp;
-                            <i className="fa fa-sitemap"/>
-                            &nbsp;&nbsp;
+                            <Button color="primary" className="mt-3" active tabIndex={-1}>
+                                &nbsp;
+                            <i className="fa fa-sitemap" />
+                                &nbsp;&nbsp;
                             Register Company!</Button>
                         </Link>
                     </div>

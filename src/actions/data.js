@@ -69,7 +69,7 @@ export const planVehiclesForOrders = (redirect) => (async (dispatch, getState) =
 
     orders.map((item, index) => {
         if (data[index.rtd]) {
-            data[index].rtd = true;
+            data[index].rtd = false;
             data[index].is_dispatched = true;
         }
 

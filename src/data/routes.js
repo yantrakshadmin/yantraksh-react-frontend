@@ -245,7 +245,7 @@ const supplierExtraRoutes = [
     {
         name: 'Dashboard',
         path: '/dashboard',
-        component: () => (<Redirect to={'/dashboard'} />)
+        component: () => (<Redirect to={'/freight/available-loads'} />)
         // component:() => (<Redirect to={'/freight/available-loads'}/>)
     },
     {

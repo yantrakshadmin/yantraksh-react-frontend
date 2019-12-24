@@ -13,6 +13,16 @@ import { Line } from "react-chartjs-2";
 import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
 
 
+function formatDate(d) {
+    let hrs = d.getHours();
+    let mins = d.getMinutes();
+    let secs = d.getSeconds();
+
+    return (
+        <span>{d.getDate()}-{d.getMonth() + 1}-{d.getFullYear()} {("0" + hrs).slice(-2)}:{("0" + mins).slice(-2)}:{("0" + secs).slice(-2)}</span>
+    )
+}
+
 const columns = [
     {
         dataField: 'invoice_number',
@@ -24,7 +34,10 @@ const columns = [
         dataField: 'invoice_date',
         text: 'Invoice Date',
         sort: true,
-
+        formatter: (cell, row) => {
+            let d = new Date(row.invoice_date);
+            return formatDate(d);
+        }
     }, {
         dataField: 'invoice_salesperson',
         text: 'Billing Party',

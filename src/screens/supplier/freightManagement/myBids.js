@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
-import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import {refreshing} from "../../../helpers/notifications";
-import {getKPIData, myBids} from "../../../helpers/api";
+import { refreshing } from "../../../helpers/notifications";
+import { getKPIData, myBids } from "../../../helpers/api";
 import Loader from "../../../components/loader";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "reactstrap/es/Button";
-import {Line} from "react-chartjs-2";
-import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
+import { Line } from "react-chartjs-2";
+import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
 
 
 const columns = [
@@ -20,15 +20,7 @@ const columns = [
 
     }, {
         dataField: 'quiz',
-        text: 'Truck Type',
-        sort: true,
-        formatter: (cell, row) => {
-            return (row.quiz.truck_name)
-
-        }
-    }, {
-        dataField: 'quiz',
-        text: 'Truck Type',
+        text: 'Truck Name',
         sort: true,
         formatter: (cell, row) => {
             return (row.quiz.truck_name)
@@ -44,7 +36,7 @@ const columns = [
         }
     },
     {
-        dataField: 'your_bids',
+        dataField: 'least_bid',
         text: 'Your Bids',
         sort: true,
 
@@ -82,15 +74,22 @@ const columns = [
         text: 'Action',
         sort: true,
         isDummyField: true,
-        formatter: (cell, row) => (
-            <div>
-                <Link to={`/freight/bid-now/${row.id}`}>
+        formatter: (cell, row) => {
+            if (row.confirmed === "Assigned") {
+                return (
+                    <Button color="primary" disabled>
+                        Bid Again
+                    </Button>
+                )
+            }
+            return (
+                <Link to={`/freight/bid-now/${row.quiz.id}`}>
                     <Button color="primary">
-                        Bids Now
+                        Bid Again
                     </Button>
                 </Link>
-            </div>
-        )
+            )
+        }
 
     },
 ];
@@ -104,6 +103,7 @@ export default () => {
         const loadApiData = async () => {
             refreshing();
             const trucks = await myBids();
+            console.log(trucks)
             setData(trucks)
         };
         const loadKpiData = async () => {
@@ -111,26 +111,26 @@ export default () => {
             const kpi = await getKPIData();
             setKpiData(kpi);
             console.log(kpi, "kpiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-            console.log(kpiData ,"wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
+            console.log(kpiData, "wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
         };
 
         loadKpiData();
         loadApiData();
     }, []);
     const [kpiData, setKpiData] = useState([
-        {total_time:"0"},
-        {total_trucks:"0"},
-        {total_orders:"0"},
-        {total_orders_planned:"0"},
-        {total_rfq:"0"},
-        {total_bids:"0"},
-        {total_orders_hold:"0"},
-        {total_orders_delayed:"0"},
-        {total_orders_pending:"0"},
-        {total_trucks_assigned:"0"},
-        {total_trucks_in_transit:"0"},
-        {total_weight:"0"},
-        {total_distance:"0"},
+        { total_time: "0" },
+        { total_trucks: "0" },
+        { total_orders: "0" },
+        { total_orders_planned: "0" },
+        { total_rfq: "0" },
+        { total_bids: "0" },
+        { total_orders_hold: "0" },
+        { total_orders_delayed: "0" },
+        { total_orders_pending: "0" },
+        { total_trucks_assigned: "0" },
+        { total_trucks_in_transit: "0" },
+        { total_weight: "0" },
+        { total_distance: "0" },
 
     ]);
 
@@ -217,7 +217,7 @@ export default () => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/> Total RFQ <small className="text-muted"/>
+                    <i className="fa fa-align-justify" /> Total RFQ <small className="text-muted" />
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-info">
@@ -243,17 +243,17 @@ export default () => {
                                 </div>
                             </div>
                         </Col><Col sm="3">
-                        <div className="callout callout-info">
-                            <small className="text-muted">Total Trucks Assigned</small>
-                            <br />
-                            {
-                                kpiData.map(item => (<strong className="h4">{item.total_trucks_assigned}</strong>))}
+                            <div className="callout callout-info">
+                                <small className="text-muted">Total Trucks Assigned</small>
+                                <br />
+                                {
+                                    kpiData.map(item => (<strong className="h4">{item.total_trucks_assigned}</strong>))}
 
-                            <div className="chart-wrapper">
-                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                <div className="chart-wrapper">
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                                </div>
                             </div>
-                        </div>
-                    </Col>
+                        </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total Trucks In Transit</small>
@@ -281,7 +281,7 @@ export default () => {
                         {
                             props => (
                                 <div>
-                                    <div style={{paddingTop: 10, paddingBottom: 10, float: 'right'}}>
+                                    <div style={{ paddingTop: 10, paddingBottom: 10, float: 'right' }}>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <Search.SearchBar {...props.searchProps} />
                                     </div>
