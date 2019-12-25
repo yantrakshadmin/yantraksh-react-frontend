@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     Button,
     Card,
@@ -13,11 +13,11 @@ import {
     Row
 } from 'reactstrap';
 
-import {isUsernameAvailable, signUpUserCompany, signUpUserShipper, signUpUserSupplier} from "../helpers/api";
+import { isUsernameAvailable, signUpUserCompany, signUpUserShipper, signUpUserSupplier } from "../helpers/api";
 import history from '../history';
-import { userCreateSuccess,userCreateFailed } from '../helpers/notifications';
-import {signIn} from "../actions/auth";
-import {connect} from "react-redux";
+import { userCreateSuccess, userCreateFailed } from '../helpers/notifications';
+import { signIn } from "../actions/auth";
+import { connect } from "react-redux";
 import Redirect from "react-router/es/Redirect";
 
 // const NAME_REGEX = '^[A-Z a-z]';
@@ -35,15 +35,28 @@ class SignUpScreenCompany extends Component {
             company_email: '',
             company_phone: '',
             company_type: '',
-
+            phase: 0,
         };
+    }
+
+
+    signUpLoadingButton = () => {
+        if (this.state.phase === 1) {
+            return (
+                <Button color="success" block disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading
+                </Button>
+            );
+        }
+
+        return <Button color="success" block>Create Account</Button>;
     }
 
     handleChange = (event) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        console.log(event,target,name,value);
+        console.log(event, target, name, value);
 
         this.setState({
             [name]: value
@@ -52,6 +65,7 @@ class SignUpScreenCompany extends Component {
 
     onSubmit = async (e) => {
         e.preventDefault();
+        this.setState({ phase: 1 })
         console.log(this.state);
 
         let errors = [];
@@ -68,8 +82,9 @@ class SignUpScreenCompany extends Component {
         else {
             if (this.props.type === "Company") {
                 try {
-                    console.log(this.state,'gatate')
+                    console.log(this.state, 'gatate')
                     await signUpUserCompany(this.state);
+                    this.setState({ phase: 0 })
                     history.push("/");
                     userCreateSuccess("Company");
                     //alert('User created successful');
@@ -80,12 +95,13 @@ class SignUpScreenCompany extends Component {
                 }
             }
         }
+        this.setState({ phase: 0 })
     };
 
 
     render() {
         if (this.props.isAuthenticated)
-            return <Redirect to={`${this.props.redirectTo.split('#')[1]}`}/>;
+            return <Redirect to={`${this.props.redirectTo.split('#')[1]}`} />;
 
 
         return (
@@ -98,48 +114,48 @@ class SignUpScreenCompany extends Component {
                                 <CardBody className="p-4">
                                     <Form onSubmit={this.onSubmit}>
                                         <input type="hidden" className={"form-control"} name="user-type"
-                                               value={this.props.type}/>
+                                            value={this.props.type} />
                                         <h1>Register {this.props.type}</h1>
                                         <p className="text-muted">Create your account</p>
                                         <InputGroup className="mb-3">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="icon-user"/>
+                                                    <i className="icon-user" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
                                             <input placeholder={'Name'} type="text" className={"form-control"}
-                                                   name={"company_name"}
-                                                   onChange={this.handleChange}
-                                                   value={this.state.company_name}/>
+                                                name={"company_name"}
+                                                onChange={this.handleChange}
+                                                value={this.state.company_name} required />
                                         </InputGroup>
                                         <InputGroup className="mb-3">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>@</InputGroupText>
                                             </InputGroupAddon>
                                             <input type="email" placeholder={'Email'} name={"company_email"}
-                                                   className={"form-control"}
-                                                   onChange={this.handleChange}
-                                                   value={this.state.company_email}/>
+                                                className={"form-control"}
+                                                onChange={this.handleChange}
+                                                value={this.state.company_email} required />
                                         </InputGroup>
                                         <InputGroup className="mb-3">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="icon-lock"/>
+                                                    <i className="icon-lock" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
                                             <input type="phone" placeholder={'Phone'}
-                                                   name={"company_phone"}
-                                                   className={"form-control"}
-                                                   onChange={this.handleChange}
-                                                   value={this.state.company_phone}/>
+                                                name={"company_phone"}
+                                                className={"form-control"}
+                                                onChange={this.handleChange}
+                                                value={this.state.company_phone} required />
                                         </InputGroup>
                                         <InputGroup className="mb-4">
                                             <div className="input-group-prepend">
                                                 <label className="input-group-text"
-                                                       htmlFor="inputGroupSelect01">Company</label>
+                                                    htmlFor="inputGroupSelect01">Company</label>
                                             </div>
                                             <select onChange={(e) => {
-                                                this.setState({company_type: e.target.value})
+                                                this.setState({ company_type: e.target.value })
                                             }} className="custom-select" id="inputGroupSelect01">
                                                 <option value={''} selected>Choose...</option>
                                                 <option value={'supplier'} selected>Supplier</option>
@@ -148,9 +164,9 @@ class SignUpScreenCompany extends Component {
                                         </InputGroup>
 
                                         {this.state.password !== this.state.confPass ? "Password and confirm password should be same" : ""}
-                                        <br/>
-                                        <br/>
-                                        <Button color="success" block>Create Account</Button>
+                                        <br />
+                                        <br />
+                                        {this.signUpLoadingButton()}
                                     </Form>
                                 </CardBody>
                                 <CardFooter className="p-4">

@@ -110,7 +110,7 @@ const columns = [
         sort: true,
         formatter: (cell, row) => (
             <div>
-                <Link to={`/supplier/printinvoice/${row.invoice_quiz}`}>
+                <Link to={`/supplier/printinvoice/${row.id}`}>
                     <Button color="primary">
                         Print Invoice
                     </Button>
