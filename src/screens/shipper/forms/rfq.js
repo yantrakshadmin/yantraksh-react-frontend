@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row,} from 'reactstrap';
+import React, { useState } from 'react';
+import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row, } from 'reactstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import {createNewRFQ} from "../../../helpers/api";
+import { createNewRFQ } from "../../../helpers/api";
 import Link from "react-router-dom/es/Link";
 import MultiSelect from "@kenshooui/react-multi-select";
 import "@kenshooui/react-multi-select/dist/style.css"
@@ -22,33 +22,33 @@ export default () => {
         // Actions
         //
         states: [
-            { id: 1, label: "All India"},
-            { id: 2, label: "Andhra Pradesh"},
-            { id: 3, label: "Assam"},
-            { id: 4, label: "Bihar"},
-            { id: 5, label: "Chandigarh"},
-            { id: 6, label: "Chhattisgarh"},
-            { id: 7, label: "Delhi"},
-            { id: 8, label: "Goa"},
-            { id: 9, label: "Gujarat"},
-            { id: 10, label: "Haryana"},
-            { id: 11, label: "Himachal Pradesh"},
-            { id: 12, label: "Maharashtra"},
-            { id: 13, label: "Hyderabad"},
-            { id: 14, label: "Jammu Kashmir"},
-            { id: 15, label: "Jharkhand"},
-            { id: 16, label: "Karnataka"},
-            { id: 17, label: "Kerala"},
-            { id: 18, label: "Madhya Pradesh"},
-            { id: 19, label: "Odisha"},
-            { id: 20, label: "Punjab"},
-            { id: 21, label: "Rajasthan"},
-            { id: 22, label: "Tamil Nadu"},
-            { id: 23, label: "Telangana"},
-            { id: 24, label: "Tripura"},
-            { id: 25, label: "Uttar Pradesh"},
-            { id: 26, label: "Uttarakhand"},
-            { id: 27, label: "West Bengal"},
+            { id: 1, label: "All India" },
+            { id: 2, label: "Andhra Pradesh" },
+            { id: 3, label: "Assam" },
+            { id: 4, label: "Bihar" },
+            { id: 5, label: "Chandigarh" },
+            { id: 6, label: "Chhattisgarh" },
+            { id: 7, label: "Delhi" },
+            { id: 8, label: "Goa" },
+            { id: 9, label: "Gujarat" },
+            { id: 10, label: "Haryana" },
+            { id: 11, label: "Himachal Pradesh" },
+            { id: 12, label: "Maharashtra" },
+            { id: 13, label: "Hyderabad" },
+            { id: 14, label: "Jammu Kashmir" },
+            { id: 15, label: "Jharkhand" },
+            { id: 16, label: "Karnataka" },
+            { id: 17, label: "Kerala" },
+            { id: 18, label: "Madhya Pradesh" },
+            { id: 19, label: "Odisha" },
+            { id: 20, label: "Punjab" },
+            { id: 21, label: "Rajasthan" },
+            { id: 22, label: "Tamil Nadu" },
+            { id: 23, label: "Telangana" },
+            { id: 24, label: "Tripura" },
+            { id: 25, label: "Uttar Pradesh" },
+            { id: 26, label: "Uttarakhand" },
+            { id: 27, label: "West Bengal" },
 
         ],
         selectedItems: []
@@ -68,7 +68,7 @@ export default () => {
 
         });
     };
-    const handleChange = (selectedItems)=> {
+    const handleChange = (selectedItems) => {
         console.log(selectedItems);
 
         setForm({
@@ -83,7 +83,7 @@ export default () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const {states, ...nf} = form;
+            const { states, ...nf } = form;
             await createNewRFQ(nf);
         } catch (e) {
 
@@ -101,28 +101,21 @@ export default () => {
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="origin">Origin</Label>
-                                {/*<Input type="text" name="origin" id="origin" placeholder="ex: Delhi"/>*/}
-                                <GooglePlacesAutocomplete
-                                    onSelect={(value) => setForm({...form, 'origin': value.description})}
-                                    initialValue={form.origin}
-                                />
+                                <Input type="text" onChange={(v) => setForm({ ...form, 'origin': v.description })} value={form.origin} name="origin" id="origin" placeholder="ex: Delhi" required />
                             </FormGroup>
                         </Col>
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="destination">Destination</Label>
-                                <GooglePlacesAutocomplete
-                                    onSelect={(value) => setForm({...form, 'destination': value.description})}
-                                    initialValue={form.destination}
-                                />
+                                <Input type="text" onChange={(v) => setForm({ ...form, 'destination': v.description })} value={form.destination} name="destination" id="destination" placeholder="ex: Mumbai" required />
                             </FormGroup>
                         </Col>
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="scheduled_date">Departure Date and Time</Label>
                                 <Input type="datetime-local" name="scheduled_date" id="scheduled_date"
-                                       value={form.scheduled_date}
-                                       onChange={handleInputChange}/>
+                                    value={form.scheduled_date}
+                                    onChange={handleInputChange} />
                             </FormGroup>
                         </Col>
                     </Row>
@@ -142,7 +135,7 @@ export default () => {
                             <FormGroup>
                                 <Label for="truck_name">Trucks Name</Label>
                                 <Input type="select" name="truck_name" id="truck_name" value={form.truck_name}
-                                       onChange={handleInputChange}>
+                                    onChange={handleInputChange}>
 
 
                                     <option value="">-------Open------</option>
@@ -499,11 +492,11 @@ export default () => {
                             <FormGroup>
                                 <Label for="weight">Weight</Label>
                                 <Input type="number" name="weight" id="weight" value={form.weight}
-                                       onChange={handleInputChange}/>
+                                    onChange={handleInputChange} />
                             </FormGroup>
                         </Col>
 
-<Col md={12}>
+                        <Col md={12}>
                             <FormGroup>
                                 <Label for="weight"><h5>Invite Bidders From:</h5></Label>
 
@@ -517,12 +510,12 @@ export default () => {
 
 
                             </FormGroup>
-</Col>
+                        </Col>
 
                     </Row>
 
 
-                    <br/><br/><br/>
+                    <br /><br /><br />
                     <Button color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;
 
                     <Link to={'/freight/request-for-quotation'}>
@@ -535,6 +528,6 @@ export default () => {
 
 
 
- )
+    )
 
 }

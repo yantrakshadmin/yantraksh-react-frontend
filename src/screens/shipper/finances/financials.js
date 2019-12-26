@@ -27,39 +27,6 @@ function formatDate(d) {
 
 const columns = [
     {
-        dataField: 'invoice_quiz',
-        text: 'Origin',
-        sort: true,
-        formatter: (cell, row) => {
-            return row.invoice_quiz.origin
-        }
-    },
-    {
-        dataField: 'invoice_quiz',
-        text: 'Destination',
-        sort: true,
-        formatter: (cell, row) => {
-            return row.invoice_quiz.destination
-        }
-    },
-    {
-        dataField: 'invoice_quiz',
-        text: 'Weight',
-        sort: true,
-        formatter: (cell, row) => {
-            return row.invoice_quiz.weight
-        }
-    },
-    {
-        dataField: 'invoice_quiz',
-        text: 'Scheduled Date',
-        sort: true,
-        formatter: (cell, row) => {
-            let d = new Date(row.invoice_quiz.scheduled_date);
-            return formatDate(d);
-        }
-    },
-    {
         dataField: 'invoice_number',
         text: 'Invoice Number',
         sort: true
@@ -155,8 +122,6 @@ export default () => {
             refreshing();
             const kpi = await getKPIData();
             setKpiData(kpi);
-            console.log(kpi, "kpiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-            console.log(kpiData, "wfnwdiacoaoashoasdosjdoasjdo", setKpiData);
         };
 
         loadApiData();

@@ -33,6 +33,7 @@ import { connect } from "react-redux";
 import { ALL_ORDERS, DISPATCHED_ORDERS, ON_HOLD_ORDERS, RTD_ORDERS } from "../data/orderTitles";
 import { refreshing } from "../helpers/notifications";
 import { withRouter } from 'react-router-dom'
+import history from '../history';
 import Upload from "./upload";
 import DataTable from "../components/dataTable";
 import columns from "../data/columns/orders";
@@ -117,7 +118,8 @@ class OrderTable extends Component {
             noOfTrucks: 1,
             originSelected: '-',
             destinationSelected: '-',
-            selected: []
+            selected: [],
+            phase: 0,
         }
     }
 
@@ -144,8 +146,11 @@ class OrderTable extends Component {
         // this.props.history.push('/orders/dispatched')
     }
 
-    planVehicleManually() {
-        this.props.planVehicleManually(this.state.selectedTruck, this.getSelectedData(), this.state.noOfTrucks, this.props.history.push);
+    async planVehicleManually() {
+        this.setState({ phase: 1 });
+        await this.props.planVehicleManually(this.state.selectedTruck, this.getSelectedData(), this.state.noOfTrucks, this.props.history.push);
+        this.setState({ phase: 0 });
+        history.push('/dashboard/dispatcher');
         // this.props.history.push('/orders/dispatched')
     }
 
@@ -249,6 +254,28 @@ class OrderTable extends Component {
             }));
         }
     };
+
+    renderLoadingBtn = () => {
+        if (this.state.phase === 1) {
+            return (
+                <ModalFooter>
+                    <Button color="success" className="px-4" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading
+                    </Button>
+                    <Button color="secondary" onClick={this.modalToggle.bind(this)}>Cancel</Button>
+                </ModalFooter>
+            );
+        }
+        return (
+            <ModalFooter>
+                <Button color="success" onClick={this.planVehicleManually.bind(this)}
+                    disabled={this.state.selectedTruck === null && this.tableNode && this.checkOriginDestinationMatch()}>
+                    PACK ITEMS
+                    </Button>{' '}
+                <Button color="secondary" onClick={this.modalToggle.bind(this)}>Cancel</Button>
+            </ModalFooter>
+        );
+    }
 
     render() {
         const {
@@ -399,6 +426,7 @@ class OrderTable extends Component {
             </div>
         );
 
+
         const vehiclePickerModal = (
             <Modal isOpen={this.state.modal} toggle={this.modalToggle.bind(this)} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>Select Truck</ModalHeader>
@@ -464,13 +492,7 @@ class OrderTable extends Component {
                         </div>
                         )) : "Data Not Loaded"}
                 </ModalBody>
-                <ModalFooter>
-                    <Button color="success" onClick={this.planVehicleManually.bind(this)}
-                        disabled={this.state.selectedTruck === null && this.tableNode && this.checkOriginDestinationMatch()}>
-                        PACKITEMS
-                    </Button>{' '}
-                    <Button color="secondary" onClick={this.modalToggle.bind(this)}>Cancel</Button>
-                </ModalFooter>
+                {this.renderLoadingBtn()}
             </Modal>
         );
 

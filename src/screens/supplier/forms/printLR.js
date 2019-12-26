@@ -7,8 +7,8 @@ import {
     Row,
     Col,
 } from 'reactstrap';
-import { editInvoice, getInvoiceDetails } from "../../../helpers/api";
-import { refreshing } from "../../../helpers/notifications";
+import { getInvoiceDetails } from "../../../helpers/api";
+import { getLRDetails } from "../../../helpers/api";
 
 
 
@@ -48,15 +48,12 @@ function inWords(num) {
 
 export default (props) => {
 
-    const [data, setData] = useState({
-        'invoice_transanctions': []
-    });
+    const [data, setData] = useState({ 'lr_quiz': {} });
 
-    useEffect(() => {
+    useEffect(async () => {
         const loadKpiData = async () => {
-            refreshing();
-            const invoice_details = await getInvoiceDetails(props.match.params.id);
-            setData(invoice_details);
+            const lr_details = await getLRDetails(props.match.params.id);
+            setData(lr_details);
         };
 
         loadKpiData();
@@ -67,13 +64,13 @@ export default (props) => {
         <div>
 
             <Button className="mb-4" onClick={() => global.print()}>
-                Print Invoice
+                Print LR
             </Button>
 
             <Container className="my-2" style={{ border: '2px solid black', padding: '20px 30px' }}>
 
 
-                <Table borderless className="mb-2" style={{ borderBottom: '2px solid black' }}>
+                <Table borderless className="mb-2">
                     <tbody>
                         <tr className="d-flex">
                             <td className="col-6">
@@ -86,67 +83,27 @@ export default (props) => {
                     </tbody>
                 </Table>
 
-                <Table borderless>
-                    <tbody>
-                        <tr className="d-flex">
-                            <td className="col" style={{ lineHeight: '18px' }}>
-                                <strong>Invoice No. :</strong> YNT{data.invoice_number}
-                                <br />
-                                <strong>Invoice Date :</strong> {formatDate(data.invoice_date)}
-                                <br />
-                                <strong>Terms :</strong> {data.invoice_number}
-                                <br />
-                                <strong>Due Date :</strong> {formatDate(data.invoice_due_date)}
-                            </td>
-                            <td className="col" style={{ lineHeight: '18px' }}>
-                                <strong>Place of supply :</strong> {data.invoice_place_of_supply}
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
-
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>
-                                <strong>Bill to:</strong>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style={{ lineHeight: '18px' }}>
-                                <strong>{data.invoice_destination}</strong>
-                                <br />
-                                {data.invoice_destination_address}
-                                <br />
-                                {data.invoice_destination_pincode}
-                                <br />
-                                GST: {data.invoice_gst}
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
-
                 <Table bordered>
-                    <thead>
+                    <tbody style={{ lineHeight: '16px' }}>
                         <tr>
-                            <th><strong>Item & Details</strong></th>
-                            <th><strong>LR No.</strong></th>
-                            <th><strong>Vehicle Number</strong></th>
-                            <th><strong>QTY</strong></th>
-                            <th><strong>Rate</strong></th>
-                            <th><strong>Amount</strong></th>
+                            <td>
+                                LR NUMBER:<br />
+                                <strong>{data.lr_no}</strong>
+                            </td>
+                            <td>
+                                LR DATE:<br />
+                                <strong>{formatDate(data.lr_date)}</strong>
+                            </td>
+                            <td>
+                                BILLING PARTY:<br />
+                                <strong>{data.lr_billingparty}</strong>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
                         <tr>
-                            <td>{data.invoice_item_details}</td>
-                            <td>{data.invoice_lr_number}</td>
-                            <td>{data.invoice_vehicle_number}</td>
-                            <td>{data.invoice_quantity}</td>
-                            <td>{data.invoice_rate}</td>
-                            <td>{data.invoice_amount}</td>
+                            <td>
+                                ORIGIN:<br />
+                                <strong>{data.lr_quiz.origin}</strong>
+                            </td>
                         </tr>
                     </tbody>
                 </Table>

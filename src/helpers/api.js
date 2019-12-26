@@ -14,6 +14,8 @@ const BASE_URL = "https://yantracloudbackend.herokuapp.com/";
 // const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // sajkhciuab
 
+export const GOOGLE_API_KEY = "AIzaSyDtuu39wICY-BsPDVIGS27FA9Sf0BQZggo";
+
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
 

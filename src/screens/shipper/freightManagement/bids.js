@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 import DataTable from "../../../components/dataTable";
-import {refreshing} from "../../../helpers/notifications";
-import {assignRFQs, rfqresults} from "../../../helpers/api";
-import {Line} from "react-chartjs-2";
+import { refreshing } from "../../../helpers/notifications";
+import { assignRFQs, rfqresults } from "../../../helpers/api";
+import { Line } from "react-chartjs-2";
 import Button from "reactstrap/es/Button";
-import {getStyle} from "@coreui/coreui/dist/js/coreui-utilities";
+import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
+import history from '../../../history';
 
 const columns = [
 
@@ -32,9 +33,15 @@ const columns = [
         formatter: (cell, row) => (
             <div>
 
-                    <Button color="primary" onClick={() =>
-                        assignRFQs(row.quiz,row.id) }>
-                        Assign Now!
+                <Button color="primary" onClick={async () => {
+                    try {
+                        await assignRFQs(row.quiz, row.id);
+                        history.push('/dashboard/freight/assigned-trucks');
+                    } catch (e) {
+                        alert("Something went wrong!");
+                    }
+                }}>
+                    Assign Now!
                     </Button>
 
             </div>
@@ -141,60 +148,60 @@ export default (props) => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <i className="fa fa-align-justify"/>Bids <small className="text-muted"/>
+                    <i className="fa fa-align-justify" />Bids <small className="text-muted" />
                     <Row>
                         <Col sm="3">
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total RFQ Raised</small>
-                                <br/>
+                                <br />
                                 <strong className="h4">0</strong>
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                          width={100} height={30}/>
+                                        width={100} height={30} />
                                 </div>
                             </div>
                         </Col>
                         <Col sm="3">
                             <div className="callout callout-info">
                                 <small className="text-muted">Total Bids received</small>
-                                <br/>
+                                <br />
                                 <strong className="h4">0</strong>
 
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts}
-                                          width={100} height={30}/>
+                                        width={100} height={30} />
                                 </div>
                             </div>
                         </Col>
                         <Col sm="3">
-                        <div className="callout callout-info">
-                            <small className="text-muted">Total Trucks Assigned</small>
-                            <br/>
-                            <strong className="h4">0</strong>
+                            <div className="callout callout-info">
+                                <small className="text-muted">Total Trucks Assigned</small>
+                                <br />
+                                <strong className="h4">0</strong>
 
-                            <div className="chart-wrapper">
-                                <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100}
-                                      height={30}/>
+                                <div className="chart-wrapper">
+                                    <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100}
+                                        height={30} />
+                                </div>
                             </div>
-                        </div>
-                    </Col>
+                        </Col>
                         <Col sm="3">
                             <div className="callout callout-danger">
                                 <small className="text-muted">Total Trucks In Transit</small>
-                                <br/>
+                                <br />
 
                                 <strong className="h4">0</strong>
                                 <div className="chart-wrapper">
                                     <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts}
-                                          width={100} height={30}/>
+                                        width={100} height={30} />
                                 </div>
                             </div>
                         </Col>
                     </Row>
                 </CardHeader>
                 <CardBody>
-                    <DataTable data={data.taken_quizzes} columns={columns}/>
+                    <DataTable data={data.taken_quizzes} columns={columns} />
                 </CardBody>
             </Card>
         </div>

@@ -299,6 +299,11 @@ const supplierExtraRoutes = [
         component: lazy(() => import('../screens/supplier/forms/editLR')),
         name: 'Edit LR',
         exact: true
+    }, {
+        path: '/freight/print-lr/:id',
+        component: lazy(() => import('../screens/supplier/forms/printLR')),
+        name: 'Print LR',
+        exact: true
     },
 ];
 

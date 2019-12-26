@@ -6,8 +6,8 @@ import CardHeader from "reactstrap/es/CardHeader";
 import { assignedTrucks, trackNow } from "../../../helpers/api";
 import { refreshing } from "../../../helpers/notifications";
 
-//const apiKey = "AIzaSyD3m2rYpNTbKF7FAKGWDFGGUkYm8BLDfIM";
-const apiKey = "AIzaSyCiZ8sEWNfy468VwWvZ410fP46MasztfdU";
+
+import { GOOGLE_API_KEY } from '../../../helpers/api';
 
 const styles = {
     height: '100%',
@@ -46,8 +46,7 @@ const DispatchMap = (props) => {
     </Map>
 };
 const DispatchMapWrapper = GoogleApiWrapper({
-    apiKey: apiKey,
-
+    apiKey: GOOGLE_API_KEY,
 })(DispatchMap);
 
 class Tracking extends React.Component {

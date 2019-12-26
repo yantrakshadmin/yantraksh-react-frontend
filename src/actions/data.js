@@ -88,6 +88,4 @@ export const planVehiclesManuallyForOrders = (truckID, selected, noOfTrucks, red
     await planVehicleManuallyButton(truckID, selected, noOfTrucks);
 
     loadOrders()(dispatch, getState);
-
-    history.push('/dashboard/dispatcher');
 });

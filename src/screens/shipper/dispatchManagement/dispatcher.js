@@ -11,8 +11,8 @@ import Upload from "../../../components/upload";
 import history from '../../../history';
 //import { Redirect } from 'react-router-dom';
 
-//const apiKey = "AIzaSyBa6popp4h4-uNP98vV_-qhI9-GdHg1uQ8";
-const apiKey = "AIzaSyCiZ8sEWNfy468VwWvZ410fP46MasztfdU";
+import { GOOGLE_API_KEY } from '../../../helpers/api';
+
 const lat = 287041;
 const lng = 77.1025;
 
@@ -29,7 +29,7 @@ const DispatchMap = (props) => (
 );
 
 const DispatchMapWrapper = GoogleApiWrapper({
-    apiKey: apiKey
+    apiKey: GOOGLE_API_KEY
 })(DispatchMap);
 
 const dispatchPlanColumns = [
