@@ -286,12 +286,12 @@ const supplierExtraRoutes = [
         exact: true
     }, {
         path: '/freight/edit-profile/new',
-        component: lazy(() => import('../screens/shipper/forms/editProfile')),
+        component: lazy(() => import('../screens/supplier/forms/editProfile')),
         name: 'Edit Profile',
         exact: true
     }, {
         path: '/edit-profile',
-        component: lazy(() => import('../screens/shipper/forms/editProfile')),
+        component: lazy(() => import('../screens/supplier/forms/editProfile')),
         name: 'Edit Profile',
         exact: true
     }, {

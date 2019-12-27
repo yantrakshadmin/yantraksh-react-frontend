@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import '../../../scss/printInvoice.scss'
 import {
     Container,
     Button,
@@ -66,11 +65,11 @@ export default (props) => {
     return (
         <div>
 
-            <Button className="mb-4" onClick={() => global.print()}>
+            <Button color="primary" className="mb-4" onClick={() => global.print()}>
                 Print Invoice
             </Button>
 
-            <Container className="my-2" style={{ border: '2px solid black', padding: '20px 30px' }}>
+            <Container className="my-2" style={{ border: '2px solid black', padding: '20px 30px', backgroundColor: 'white' }}>
 
 
                 <Table borderless className="mb-2" style={{ borderBottom: '2px solid black' }}>
@@ -90,16 +89,16 @@ export default (props) => {
                     <tbody>
                         <tr className="d-flex">
                             <td className="col" style={{ lineHeight: '18px' }}>
-                                <strong>Invoice No. :</strong> YNT{data.invoice_number}
+                                <b>Invoice No. :</b> YNT{data.invoice_number}
                                 <br />
-                                <strong>Invoice Date :</strong> {formatDate(data.invoice_date)}
+                                <b>Invoice Date :</b> {formatDate(data.invoice_date)}
                                 <br />
-                                <strong>Terms :</strong> {data.invoice_number}
+                                <b>Terms :</b> {data.invoice_number}
                                 <br />
-                                <strong>Due Date :</strong> {formatDate(data.invoice_due_date)}
+                                <b>Due Date :</b> {formatDate(data.invoice_due_date)}
                             </td>
                             <td className="col" style={{ lineHeight: '18px' }}>
-                                <strong>Place of supply :</strong> {data.invoice_place_of_supply}
+                                <b>Place of supply :</b> {data.invoice_place_of_supply}
                             </td>
                         </tr>
                     </tbody>
@@ -109,14 +108,14 @@ export default (props) => {
                     <thead>
                         <tr>
                             <th>
-                                <strong>Bill to:</strong>
+                                Bill to:
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style={{ lineHeight: '18px' }}>
-                                <strong>{data.invoice_destination}</strong>
+                                <b>{data.invoice_destination}</b>
                                 <br />
                                 {data.invoice_destination_address}
                                 <br />
@@ -131,12 +130,12 @@ export default (props) => {
                 <Table bordered>
                     <thead>
                         <tr>
-                            <th><strong>Item & Details</strong></th>
-                            <th><strong>LR No.</strong></th>
-                            <th><strong>Vehicle Number</strong></th>
-                            <th><strong>QTY</strong></th>
-                            <th><strong>Rate</strong></th>
-                            <th><strong>Amount</strong></th>
+                            <th>Item & Details</th>
+                            <th>LR No.</th>
+                            <th>Vehicle Number</th>
+                            <th>QTY</th>
+                            <th>Rate</th>
+                            <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -155,7 +154,7 @@ export default (props) => {
                     <Col>
                         Total in words:
                         <br />
-                        <strong>{inWords(1)}</strong>
+                        <b>{inWords(1)}</b>
                         <br />
                         <br />
                         Bank Name: ICICI Bank<br />

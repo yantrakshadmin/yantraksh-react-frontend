@@ -15,6 +15,7 @@ const EditInvoice = (props) => {
 
             const invoice_details = await getInvoiceDetails(props.match.params.id);
             setForm(invoice_details);
+            console.log(invoice_details)
         };
         getNetwork();
     }, [setForm]);
@@ -50,20 +51,12 @@ const EditInvoice = (props) => {
             </CardHeader>
             <CardBody>
                 <Form method={'post'} onSubmit={handleSubmit}>
+
                     <Row>
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="invoice_number">Invoice number</Label>
+                                <Label for="invoice_number">Invoice Number</Label>
                                 <Input type="number" name="invoice_number" id="invoice_number" value={form.invoice_number}
-                                    onChange={handleInputChange} />
-                            </FormGroup>
-                        </Col>
-
-                        <Col md={4}>
-                            <FormGroup>
-                                <Label for="invoice_date">Invoice Date</Label>
-                                <Input type="datetime-local" name="invoice_date" id="invoice_date"
-                                    value={form.invoice_date}
                                     onChange={handleInputChange} />
                             </FormGroup>
                         </Col>
@@ -72,12 +65,55 @@ const EditInvoice = (props) => {
                     <Row>
                         <Col md={4}>
                             <FormGroup>
+                                <Label for="invoice_order_number">Order Number</Label>
+                                <Input type="text" name="invoice_order_number" id="invoice_order_number" value={form.invoice_order_number}
+                                    onChange={handleInputChange} />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label for="invoice_date">Invoice Date</Label>
+                                <Input type="datetime-local" name="invoice_date" id="invoice_date"
+                                    value={form.invoice_date}
+                                    onChange={handleInputChange} />
+                            </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                            <FormGroup>
                                 <Label for="invoice_due_date">Invoice Due Date</Label>
                                 <Input type="datetime-local" name="invoice_due_date" id="invoice_due_date"
                                     onChange={handleInputChange} valid={form.invoice_due_date}>
                                 </Input>
                             </FormGroup>
                         </Col>
+                    </Row>
+                    <hr />
+                    <Row>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label for="invoice_salesperson">Salesperson</Label>
+                                <Input type="text" name="invoice_salesperson" id="invoice_salesperson"
+                                    onChange={handleInputChange} value={form.invoice_salesperson}>
+                                </Input>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label for="invoice_service_month">Service Month</Label>
+                                <Input type="text" name="invoice_service_month" id="invoice_service_month"
+                                    value={form.invoice_service_month}
+                                    onChange={handleInputChange} />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <hr />
+                    <Row>
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="invoice_place_of_supply">Place of Supply</Label>
@@ -127,15 +163,7 @@ const EditInvoice = (props) => {
                     </Row>
 
                     <Row>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="invoice_salesperson">Sales Person</Label>
-                                <Input type="text" name="invoice_salesperson" id="invoice_salesperson"
-                                    onChange={handleInputChange} value={form.invoice_salesperson}>
 
-                                </Input>
-                            </FormGroup>
-                        </Col>
                         <Col lg={4}>
                             <FormGroup>
                                 <Label for="invoice_lr_number">LR number</Label>
@@ -163,14 +191,7 @@ const EditInvoice = (props) => {
                                 </Input>
                             </FormGroup>
                         </Col>
-                        <Col lg={4}>
-                            <FormGroup>
-                                <Label for="invoice_service_month">Invoice service Month</Label>
-                                <Input type="text" name="invoice_service_month" id="invoice_service_month"
-                                    value={form.invoice_service_month}
-                                    onChange={handleInputChange} />
-                            </FormGroup>
-                        </Col>
+
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="invoice_item_details">invoice Item Details</Label>

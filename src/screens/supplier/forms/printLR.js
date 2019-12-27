@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import '../../../scss/printInvoice.scss'
 import {
     Container,
     Button,
@@ -63,11 +62,11 @@ export default (props) => {
     return (
         <div>
 
-            <Button className="mb-4" onClick={() => global.print()}>
+            <Button color="primary" className="mb-4" onClick={() => global.print()}>
                 Print LR
             </Button>
 
-            <Container className="my-2" style={{ border: '2px solid black', padding: '20px 30px' }}>
+            <Container className="my-2" style={{ border: '2px solid black', padding: '20px 30px', backgroundColor: 'white' }}>
 
 
                 <Table borderless className="mb-2">
@@ -104,45 +103,70 @@ export default (props) => {
                                 ORIGIN:<br />
                                 <strong>{data.lr_quiz.origin}</strong>
                             </td>
+                            <td>
+                                DESTINATION:<br />
+                                <strong>{data.lr_quiz.destination}</strong>
+                            </td>
+                            <td>
+                                PICK/DELIVERY:<br />
+                                <strong>anything</strong>
+                            </td>
                         </tr>
                     </tbody>
                 </Table>
 
-                <Row style={{ lineHeight: '16px' }} className="my-2">
-                    <Col>
-                        Total in words:
-                        <br />
-                        <strong>{inWords(1)}</strong>
-                        <br />
-                        <br />
-                        Bank Name: ICICI Bank<br />
-                        Account Name: Yantraksh Logistics Pvt Ltd<br />
-                        Account No: 8505004142<br />
-                        IFSC: ICIC0000085<br />
-                        <br /><br />
-                        1. The payment should be made by way of Account Payee Cheque / Demand Draft / NEFT /
-                        RTGS in the name of
-                        "Yantraksh Logistics".
-                        <br />
-                        2. We are exempted under section 194 C, TDS shall not be deducted on any payment.
-                        <br />
-                        3. Any Discrepancy in the invoice shall be informed within 7 days of the invoice
-                        submission at finance@yantraksh.com
-                        <br />
-                        4. Interest at 2% p.m. or part thereof will be charged if the bill is not paid on the
-                        due date.
-                        <br />
-                        5. Any dispute is subject to Anand Jurisdiction.
-                    </Col>
-                    <Col style={{ textAlign: 'right' }}>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        Authorized Signature
-                    </Col>
-                </Row>
+                <Table bordered>
+                    <thead style={{ textAlign: 'center' }}>
+                        <tr>
+                            <th>
+                                CONSIGNOR
+                            </th>
+                            <th>
+                                CONSIGNEE
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style={{ lineHeight: '16px' }}>
+                        <tr>
+                            <td>
+                                {data.lr_consignor_contact_name}
+                                <br />
+                                {data.lr_consignor_address}
+                                <br />
+                                Contact no : {data.lr_consignor_contact_phone}
+                            </td>
+                            <td>
+                                {data.lr_consignee_contact_name}
+                                <br />
+                                {data.lr_consignee_address}
+                                <br />
+                                Contact no : {data.lr_consignee_contact_phone}
+                            </td>
+                        </tr>
+                    </tbody>
+                </Table>
+
+                <Table bordered>
+                    <thead style={{ textAlign: 'center' }}>
+                        <tr>
+                            <th colspan="4">INVOICE DETAILS</th>
+                        </tr>
+                    </thead>
+                    <tbody style={{ lineHeight: '16px' }}>
+                        <tr>
+                            <td>INVOICE NO</td>
+                            <td>INVOICE DATE</td>
+                            <td>DECLARED VALUE</td>
+                            <td>E-WAY BILL NO</td>
+                        </tr>
+                        <tr>
+                            <td>{data.invoice_no}</td>
+                            <td>{formatDate(data.lr_invoice_date)}</td>
+                            <td>{data.lr_declared}</td>
+                            <td>{data.ewaybill_no}</td>
+                        </tr>
+                    </tbody>
+                </Table>
 
             </Container>
 

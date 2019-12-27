@@ -6,7 +6,7 @@ import {
     USER_SIGN_IN_SUCCESS,
     USER_SIGN_OUT
 } from "../actions";
-import {getNavigations, getRoutes} from "../data/routes";
+import { getNavigations, getRoutes } from "../data/routes";
 
 const initialState = {
     routes: [],

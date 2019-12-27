@@ -1,14 +1,15 @@
-import {getAPITokens, getUserDetails} from "../helpers/api";
-import {HIDE_LOADER, USER_SIGN_IN_SUCCESS, USER_SIGN_OUT} from "./index";
+import { getAPITokens, getUserDetails } from "../helpers/api";
+import { HIDE_LOADER, USER_SIGN_IN_SUCCESS, USER_SIGN_OUT } from "./index";
 
-import {reactLocalStorage} from 'reactjs-localstorage';
-import {API_TOKENS} from "../data/storage";
+import { reactLocalStorage } from 'reactjs-localstorage';
+import { API_TOKENS } from "../data/storage";
 import {
     errorSigningNotification,
     welcomeUserNotification,
     signINAgainNotification
 } from "../helpers/notifications";
 
+import history from '../history';
 
 export const getUser = () => (async (dispatch) => {
     const user = await getUserDetails();
@@ -27,6 +28,7 @@ export const signIn = (username, password) => (async (dispatch, getState) => {
             expires: data.tokens.expires
         });
         await getUser()(dispatch, getState);
+        history.push('/');
         welcomeUserNotification(getState().auth.user.name);
     } catch (e) {
         console.log(e);
@@ -45,15 +47,15 @@ export const checkUser = () => (async (dispatch, getState) => {
     if (reactLocalStorage.get(API_TOKENS))
         getUser()(dispatch, getState)
             .then(() => {
-                dispatch({type: HIDE_LOADER});
+                dispatch({ type: HIDE_LOADER });
             })
             .catch(() => {
-                dispatch({type: USER_SIGN_OUT});
-                dispatch({type: HIDE_LOADER});
+                dispatch({ type: USER_SIGN_OUT });
+                dispatch({ type: HIDE_LOADER });
                 signINAgainNotification();
             });
-    else{
-        dispatch({type: HIDE_LOADER});
+    else {
+        dispatch({ type: HIDE_LOADER });
         // signInRequestNotification();
     }
 });

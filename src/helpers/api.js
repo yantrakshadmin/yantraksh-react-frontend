@@ -59,6 +59,8 @@ const GET_INVOICE = '/suppliers/invoiceapi/';
 const GET_LR = '/api/lr/';
 const EDIT_PROFILE_SUPPLIER = 'editprofilesupplier/';
 
+const FETCH_SUPPLIER_TYPE = 'suppliertype/'
+
 const TRACK_NOW = 'track/';
 
 const INVOICE_TABLE_VIEW = '/suppliers/invoices/';
@@ -247,6 +249,8 @@ export const invoiceView = () => loadSecureUrl(INVOICE_TABLE_VIEW);
 export const invoiceSupView = () => loadSecureUrl(`api/financials-api/`);
 export const LRView = () => loadSecureUrl(LR_TABLE_VIEW);
 
+
+export const fetchSupplierType = () => loadSecureUrl(FETCH_SUPPLIER_TYPE);
 
 // export const getTotalTruckChartData = () => loadSecureUrl(TRUCK_CHART_DATA);
 export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);

@@ -43,7 +43,7 @@ const SignInCard = (props) => {
             );
         }
 
-        return <Button color="primary" className="px-4">Login</Button>;
+        return <Button type="submit" color="primary" className="px-4">Login</Button>;
     }
 
     const submitForm = async e => {

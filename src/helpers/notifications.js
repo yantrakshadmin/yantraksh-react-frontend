@@ -15,5 +15,6 @@ export const orderLoadedSuccessfully = () => success('Inventory refreshed.');
 export const refreshing = () => { };
 export const rfqRaised = () => info('RFQ Raised');
 export const bidSuccess = () => info('Bid Placed Successfully.');
+export const profileUpdatedSuccess = () => success('Profile Updated Successfully');
 
 // export const get
