@@ -7,10 +7,49 @@ import {
     FormGroup, Input,
     Label, Row, Container,
 } from 'reactstrap';
+import _ from 'lodash';
 import { editProfileSupplier, getSupplierProfileDetails, fetchSupplierType } from "../../../helpers/api";
 import { profileUpdatedSuccess } from "../../../helpers/notifications";
 
 export default () => {
+
+    const optionsData = {
+        age_company: [
+            'Less than one year',
+            '1-3 Years',
+            '3-10 Years',
+            '11-25 Years',
+            '25+ Years',
+        ],
+        operational_presence: [
+            'City',
+            'State',
+            'Lane',
+            'Regional',
+            'National',
+        ],
+        monthly_trips: [
+            '1 - 10 Vehicles',
+            '11-50 Vehicles',
+            '51 - 100 Vehicles',
+            '101- 200 Vehicles',
+            '200 + Vehicles',
+        ],
+        payment_terms: [
+            'Advance Payment',
+            'Payment on Delivery',
+            'Monthly account based Billing',
+            'Custom Credit terms',
+        ],
+        entity_types: [
+            'Transporter',
+            'Broker',
+            'Fleet Owner',
+            'Packers and Movers',
+            'ODC Heavy Transport',
+            'Part Load/ Daily Service Provider',
+        ]
+    }
 
     const [ProfileForm, setForm] = useState({
         supplier_fname: "",
@@ -50,8 +89,9 @@ export default () => {
 
     useEffect(() => {
         const getNetwork2 = async () => {
-            const s = await fetchSupplierType();
-            setSupType(s)
+            // const s = await fetchSupplierType();
+            // setSupType(s)
+            await setSupType([{ id: 1, name: "Transporter" }, { id: 2, name: "Broker" }, { id: 3, name: "Fleet Owner" }])
         }
 
         getNetwork2();
@@ -91,15 +131,26 @@ export default () => {
         return <Button color="primary" size="lg" onClick={handleSubmit}>Save</Button>
     }
 
-    const handleCheckBox = (e, name) => {
+    const handleCheckBox = (e, pk) => {
         const checked = e.target.checked;
-        console.log(checked + " " + name)
-
+        if (checked === true) {
+            setForm({
+                ...ProfileForm,
+                "supplier_type": _.uniq([...ProfileForm.supplier_type, pk])
+            });
+        } else if (checked === false) {
+            setForm({
+                ...ProfileForm,
+                "supplier_type": _.remove(ProfileForm.supplier_type, n => {
+                    return n === pk;
+                })
+            })
+        }
     }
 
-    const findChecked = name => {
+    const findChecked = pk => {
         ProfileForm.supplier_type.find(e => {
-            return e === name;
+            return e === pk;
         })
     }
 
@@ -109,7 +160,7 @@ export default () => {
                 return (
                     <FormGroup key={st.id} check>
                         <Label check>
-                            <Input type="checkbox" id={st.name} onChange={e => handleCheckBox(e, st.name)} checked={findChecked(st.name)} />{' '}
+                            <Input type="checkbox" id={st.name} onChange={e => handleCheckBox(e, st.id)} checked={findChecked(st.id)} />{' '}
                             {st.name}
                         </Label>
                     </FormGroup>
@@ -118,26 +169,31 @@ export default () => {
         }
     }
 
+    const renderOptions = data => {
+        return data.map(o => {
+            return <option key={o} value={o}>{o}</option>;
+        });
+    }
+
     return (
 
         <Card>
             <CardBody>
                 <Form method={'patch'} onSubmit={handleSubmit}>
-
                     <CardTitle><h5 className="mb-4">Personal Details</h5></CardTitle>
                     <FormGroup row className="my-0">
                         <Col md="6" form>
                             <FormGroup>
-                                <Label htmlFor="first_name">First Name</Label>
-                                <Input type="text" id="first_name" placeholder="Enter your First Name"
+                                <Label htmlFor="supplier_fname">First Name</Label>
+                                <Input type="text" id="supplier_fname" placeholder="First Name"
                                     name={"supplier_fname"}
                                     value={ProfileForm.supplier_fname} onChange={handleInputChange} />
                             </FormGroup>
                         </Col>
                         <Col md="6">
                             <FormGroup>
-                                <Label htmlFor="last_name">Last Name</Label>
-                                <Input type="text" placeholder="Last Name" id="last_name" name={"supplier_lname"}
+                                <Label htmlFor="supplier_lname">Last Name</Label>
+                                <Input type="text" placeholder="Last Name" id="supplier_lname" name={"supplier_lname"}
                                     value={ProfileForm.supplier_lname}
                                     onChange={handleInputChange} />
                             </FormGroup>
@@ -192,8 +248,8 @@ export default () => {
                     <FormGroup row className="my-0">
                         <Col md="6">
                             <FormGroup>
-                                <Label htmlFor="vat">Company Name</Label>
-                                <Input type="text" placeholder="Company Name" id="company_name"
+                                <Label htmlFor="supplier_company_name">Company Name</Label>
+                                <Input type="text" placeholder="Company Name" id="supplier_company_name"
                                     name={"supplier_company_name"}
                                     value={ProfileForm.supplier_company_name}
                                     onChange={handleInputChange} />
@@ -206,11 +262,7 @@ export default () => {
                                     name={"age_company"}
                                     value={ProfileForm.age_company}
                                     onChange={handleInputChange}>
-                                    <option value="Less than one year" defaultValue>Less than one year</option>
-                                    <option value="1-3 Years">1-3 Years</option>
-                                    <option value="3-10 Years">3-10 Years</option>
-                                    <option value="11-25 Years">11-25 Years</option>
-                                    <option value="25+ Years">25+ Years</option>
+                                    {renderOptions(optionsData.age_company)}
                                 </Input>
                             </FormGroup>
                         </Col>
@@ -278,11 +330,7 @@ export default () => {
                                     name={"operational_presence"}
                                     value={ProfileForm.operational_presence}
                                     onChange={handleInputChange}>
-                                    <option value="City" defaultValue>City</option>
-                                    <option value="State">State</option>
-                                    <option value="Lane">Lane</option>
-                                    <option value="Regional">Regional</option>
-                                    <option value="National">National</option>
+                                    {renderOptions(optionsData.operational_presence)}
                                 </Input>
                             </FormGroup>
                         </Col>
@@ -293,11 +341,7 @@ export default () => {
                                     name={"monthly_trips"}
                                     value={ProfileForm.monthly_trips}
                                     onChange={handleInputChange}>
-                                    <option value="1 - 10 Vehicles" defaultValue>1 - 10 Vehicles</option>
-                                    <option value="11-50 Vehicles">11-50 Vehicles</option>
-                                    <option value="51 - 100 Vehicles">51 - 100 Vehicles</option>
-                                    <option value="101- 200 Vehicles">101- 200 Vehicles</option>
-                                    <option value="200 + Vehicles">200 + Vehicles</option>
+                                    {renderOptions(optionsData.monthly_trips)}
                                 </Input>
                             </FormGroup>
                         </Col>
@@ -308,10 +352,7 @@ export default () => {
                                     name={"payment_terms"}
                                     value={ProfileForm.payment_terms}
                                     onChange={handleInputChange}>
-                                    <option value="Advance Payment" defaultValue>Advance Payment</option>
-                                    <option value="Payment on Delivery">Payment on Delivery</option>
-                                    <option value="Monthly account based Billing">Monthly account based Billing</option>
-                                    <option value="Custom Credit terms">Custom Credit terms</option>
+                                    {renderOptions(optionsData.payment_terms)}
                                 </Input>
                             </FormGroup>
                         </Col>
@@ -322,12 +363,7 @@ export default () => {
                                     name={"entity_types"}
                                     value={ProfileForm.entity_types}
                                     onChange={handleInputChange}>
-                                    <option value="Transporter" defaultValue>Transporter</option>
-                                    <option value="Broker">Broker</option>
-                                    <option value="Fleet Owner">Fleet Owner</option>
-                                    <option value="Packers and Movers">Packers and Movers</option>
-                                    <option value="ODC Heavy Transport">ODC Heavy Transport</option>
-                                    <option value="Part Load/ Daily Service Provider">Part Load/ Daily Service Provider</option>
+                                    {renderOptions(optionsData.entity_types)}
                                 </Input>
                             </FormGroup>
                         </Col>

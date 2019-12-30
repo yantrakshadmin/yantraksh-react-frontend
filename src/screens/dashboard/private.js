@@ -1,5 +1,5 @@
-import React, {Component, lazy, Suspense} from 'react';
-import {Route, Switch, BrowserRouter } from 'react-router-dom';
+import React, { Component, lazy, Suspense } from 'react';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
 
@@ -16,7 +16,7 @@ import {
     AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
 
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 const DefaultHeader = React.lazy(() => import('../../components/dashboard/header'));
 const DefaultAside = React.lazy(() => import('../../components/dashboard/aside'));
@@ -32,14 +32,14 @@ class DefaultLayout extends Component {
     }
 
     render() {
-        const {routes, navigation} = this.props;
+        const { routes, navigation } = this.props;
 
         return (
             <BrowserRouter basename={"/#/dashboard"}>
                 <div className="app">
                     <AppHeader fixed>
-                        <Suspense  fallback={this.loading()}>
-                            <DefaultHeader onLogout={e=>this.signOut(e)}/>
+                        <Suspense fallback={this.loading()}>
+                            <DefaultHeader onLogout={e => this.signOut(e)} />
                         </Suspense>
                     </AppHeader>
                     <div className="app-body" >
@@ -47,13 +47,13 @@ class DefaultLayout extends Component {
                             <AppSidebarHeader />
                             <AppSidebarForm />
                             <Suspense>
-                                <AppSidebarNav compact={true} navConfig={{items: navigation}} {...this.props} router={router}/>
+                                <AppSidebarNav compact={true} navConfig={{ items: navigation }} {...this.props} router={router} />
                             </Suspense>
                             <AppSidebarFooter />
                             <AppSidebarMinimizer />
                         </AppSidebar>
                         <main className="main">
-                            <AppBreadcrumb appRoutes={routes} router={router}/>
+                            <AppBreadcrumb appRoutes={routes} router={router} />
                             <Container fluid>
                                 <Suspense fallback={this.loading()}>
                                     <Switch>
