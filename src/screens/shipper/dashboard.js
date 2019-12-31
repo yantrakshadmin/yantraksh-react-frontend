@@ -501,58 +501,53 @@ class Dashboard extends Component {
         try {
             const kpi = await getKPIData();
             const mapUrl = await getMap();
-            console.log(mapUrl);
+            //console.log(mapUrl);
             this.setState({
                 kpi,
                 mapUrl
             });
         } catch (e) {
-            console.log(e);
+            //console.log(e);
         }
 
         try {
             const map = await getMap(); // fetching the data from api, before the page loaded
             // const kpiData = await kpi.json();
-            console.log(map, "map data")
+            //console.log(map, "map data")
             this.setState({
                 map,
 
             });
         } catch (e) {
-            console.log(e);
+            //console.log(e);
         }
 
         const calendarEvent = await getEventsData();
-        this.setState({ calendarEvent: calendarEvent }, () => console.log(this.state.calendarEvent));
+        this.setState({ calendarEvent: calendarEvent });
 
-        console.log(calendarEvent,
-            "calendarEvents");
+        //console.log(calendarEvent,"calendarEvents");
 
 
         const trucks = await getNumberOfTrucksData();
 
-        let truckData = [];
+        let truckData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         trucks.series[0].data.map(item => {
-            truckData.push(item.y);
+            let d = new Date(item.name);
+            truckData[d.getMonth()] = truckData[d.getMonth()] + item.y
         });
 
-        trucks.series[0].data.map(item => {
-            truckData.push(item.y);
-        });
+        // trucks.series[0].data.map(item => {
+        //     truckData.push(item.y);
+        // });
 
 
         const weight = await getNumberOfWeightData();
 
 
-        let weightData = [];
+        let weightData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         weight.series[0].data.map(item => {
-
-            weightData.push(item.y);
-        });
-
-        weight.series[0].data.map(item => {
-
-            weightData.push(item.y);
+            let d = new Date(item.name);
+            weightData[d.getMonth()] = weightData[d.getMonth()] + item.y
         });
 
         this.setState({
@@ -566,7 +561,7 @@ class Dashboard extends Component {
                         borderWidth: 1,
                         hoverBackgroundColor: 'rgb(0,219,255)',
                         hoverBorderColor: 'rgb(0,135,255)',
-                        data: truckData
+                        data: truckData,
                     },
                 ],
 
@@ -735,6 +730,7 @@ class Dashboard extends Component {
                                                     style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
                                                     {/*<Line data={this.state.mainChart} options={mainChartOpts} height={300} />*/}
                                                     <Bar data={this.state.mainChart} height={125} />
+                                                    {console.log(this.state.mainChart)}
                                                 </div>
                                             </CardBody>
                                         </Card>

@@ -145,7 +145,7 @@ const shipperNavigation = [
         icon: 'icon-feed',
         class: 'mt-auto',
         variant: 'success',
-        attributes: { target: '_blank', rel: "noopener" },
+        //attributes: { target: '_blank', rel: "noopener" },
         component: lazy(() => import('../screens/feedback')),
     },
 ];

@@ -179,7 +179,7 @@ export default () => {
         const getNetwork = async () => {
             const data = await getShipperProfileDetails();
             setForm(data);
-            console.log(ProfileForm);
+            //console.log(ProfileForm);
         };
         getNetwork();
     }, [setForm]);

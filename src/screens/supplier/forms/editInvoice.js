@@ -1,11 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row, Table } from 'reactstrap';
 import { editInvoice, getInvoiceDetails } from "../../../helpers/api";
 import { withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+
+
+function formatDate(text) {
+
+    let d = new Date(text);
+
+    let hrs = d.getHours();
+    let mins = d.getMinutes();
+    let secs = d.getSeconds();
+
+    return (
+        <span>{d.getDate()}-{d.getMonth() + 1}-{d.getFullYear()} {("0" + hrs).slice(-2)}:{("0" + mins).slice(-2)}:{("0" + secs).slice(-2)}</span>
+    )
+}
 
 const EditInvoice = (props) => {
 
-    const [form, setForm] = useState({
+    const [form, setForm] = useState({});
+
+    const [items, setItems] = useState([]);
+
+    const [itemsForm, setItemsForm] = useState({
+        invoice_transaction_desc: '',
+        invoice_transaction_lr: '',
+        invoice_transaction_vehicle: '',
+        invoice_transaction_date: '',
+        invoice_transaction_qty: '',
+        invoice_transaction_amount: '',
+        invoice_transaction_gst: '',
     });
 
 
@@ -15,7 +42,6 @@ const EditInvoice = (props) => {
 
             const invoice_details = await getInvoiceDetails(props.match.params.id);
             setForm(invoice_details);
-            console.log(invoice_details)
         };
         getNetwork();
     }, [setForm]);
@@ -32,11 +58,69 @@ const EditInvoice = (props) => {
         });
     };
 
+    const handleItemsInputChange = (event) => {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        setItemsForm({
+            ...itemsForm,
+            [name]: value
+        });
+    }
+
+    const addItems = async () => {
+        try {
+            //const response = await addItemsInInvoice(itemsForm);
+            setForm({ ...form, invoice_transanctions: [...form.invoice_transanctions, itemsForm] });
+            setItemsForm({
+                invoice_transaction_desc: '',
+                invoice_transaction_lr: '',
+                invoice_transaction_vehicle: '',
+                invoice_transaction_date: '',
+                invoice_transaction_qty: '',
+                invoice_transaction_amount: '',
+                invoice_transaction_gst: '',
+            });
+        } catch (e) {
+            alert("Error")
+        }
+    }
+
+    const deleteItems = async (i) => {
+        if ('id' in i) {
+            setForm({ ...form, invoice_transanctions: form.invoice_transanctions.filter(e => e.id) });
+        }
+    }
+
+    const renderItemsList = () => {
+        if (form.invoice_transanctions) {
+            return form.invoice_transanctions.map(i => {
+                return (
+                    <tr key={i.id}>
+                        <td>{i.invoice_transaction_desc}</td>
+                        <td>{i.invoice_transaction_lr}</td>
+                        <td>{i.invoice_transaction_vehicle}</td>
+                        <td>{formatDate(i.invoice_transaction_date)}</td>
+                        <td>{i.invoice_transaction_qty}</td>
+                        <td>{i.invoice_transaction_amount}</td>
+                        <td>{i.invoice_transaction_gst}</td>
+                        <td>
+                            <Button type="button" title="Delete Item" onClick={i => deleteItems(i)} color="danger" size="sm">
+                                <FontAwesomeIcon icon={faMinus} />
+                            </Button>
+                        </td>
+                    </tr>
+                )
+            })
+        }
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            console.log(form, props.match.params.id, 'IS DATA GOIND');
             await editInvoice(form, props.match.params.id);
+            setForm(await getInvoiceDetails(props.match.params.id));
             alert('done')
         } catch (e) {
             console.log(e);
@@ -112,7 +196,43 @@ const EditInvoice = (props) => {
                             </FormGroup>
                         </Col>
                     </Row>
+
                     <hr />
+
+                    <Table className="mt-3" striped responsive>
+                        <thead>
+                            <tr>
+                                <th>Item Details</th>
+                                <th>LR No.</th>
+                                <th>Vehicle No.</th>
+                                <th>Date</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                                <th>GST</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {renderItemsList()}
+                            <tr>
+                                <td><Input type="text" name="invoice_transaction_desc" value={itemsForm.invoice_transaction_desc} onChange={handleItemsInputChange} placeholder="Enter Item Details" bsSize="sm" /></td>
+                                <td><Input type="number" name="invoice_transaction_lr" value={itemsForm.invoice_transaction_lr} onChange={handleItemsInputChange} bsSize="sm" /></td>
+                                <td><Input type="number" name="invoice_transaction_vehicle" value={itemsForm.invoice_transaction_vehicle} onChange={handleItemsInputChange} bsSize="sm" /></td>
+                                <td><Input type="datetime-local" name="invoice_transaction_date" value={itemsForm.invoice_transaction_date} onChange={handleItemsInputChange} bsSize="sm" /></td>
+                                <td><Input type="number" name="invoice_transaction_qty" value={itemsForm.invoice_transaction_qty} bsSize="sm" onChange={handleItemsInputChange} /></td>
+                                <td><Input type="number" name="invoice_transaction_amount" value={itemsForm.invoice_transaction_amount} bsSize="sm" onChange={handleItemsInputChange} /></td>
+                                <td><Input type="number" name="invoice_transaction_gst" value={itemsForm.invoice_transaction_gst} bsSize="sm" onChange={handleItemsInputChange} /></td>
+                                <td>
+                                    <Button type="button" title="Add" onClick={addItems} color="success" size="sm">
+                                        <FontAwesomeIcon icon={faPlus} />
+                                    </Button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </Table>
+
+                    <hr />
+
                     <Row>
                         <Col md={4}>
                             <FormGroup>
@@ -133,6 +253,7 @@ const EditInvoice = (props) => {
                         </Col>
                     </Row>
 
+                    <hr />
 
                     <Row>
                         <Col lg={4}>
@@ -229,7 +350,7 @@ const EditInvoice = (props) => {
                         </Col>
                     </Row>
                     <br /><br /><br />
-                    <Button color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;
+                    <Button type="submit" color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;
                     <Button color={"link"} size={"lg"} type={"button"}
                         onClick={() => props.history.push('/freight/financial')}>Cancel</Button>
                 </Form>

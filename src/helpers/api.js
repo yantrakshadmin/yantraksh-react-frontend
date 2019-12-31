@@ -8,8 +8,8 @@ import { API_TOKENS } from "../data/storage";
 import { errorGettingUserInfoNotification, signINAgainNotification } from "./notifications";
 
 // const BASE_URL = "http://0.0.0.0:8000/";
-//const BASE_URL = "http://192.168.0.131:8000/";
-const BASE_URL = "https://yantracloudbackend.herokuapp.com/";
+const BASE_URL = "http://10.5.50.94:8000/";
+//const BASE_URL = "https://yantracloudbackend.herokuapp.com/";
 //const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // sajkhciuab
@@ -53,6 +53,8 @@ const POST_TRUCK = 'post-truck/';
 const BID_NOW = 'suppliers/quizapi/';
 const EDIT_INVOICE = '/suppliers/invoiceapi/';
 const EDIT_LR = '/api/lr/';
+
+const ADD_ITEM_IN_INVOICE = 'invoicetransactions/';
 
 const EDIT_PROFILE_SHIPPER = 'editprofileshipper/';
 const GET_INVOICE = '/suppliers/invoiceapi/';
@@ -256,6 +258,11 @@ export const fetchSupplierType = () => loadSecureUrl(FETCH_SUPPLIER_TYPE);
 export const getShipperAllOrderDetails = () => loadSecureUrl(SHIPPER_ALL_ORDER);
 export const liveAvailableTrucks = () => loadSecureUrl(LIVE_AVAILABLE_TRUCKS);
 export const myBids = () => loadSecureUrl(MY_BIDS);
+
+export const addItemsInInvoice = data => loadSecureUrl(ADD_ITEM_IN_INVOICE, {
+    method: 'post',
+    data: data,
+});
 
 export const assignedTrucks = () => loadSecureUrl(ASSIGNED_TRUCKS);
 export const rfq = () => loadSecureUrl(RFQ);

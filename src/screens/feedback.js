@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row,} from 'reactstrap';
-import {bidNow, feedback} from "../helpers/api"
+import React, { useState } from 'react';
+import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row, } from 'reactstrap';
+import { bidNow, feedback } from "../helpers/api"
 
 export default (props) => {
 
@@ -48,45 +48,45 @@ export default (props) => {
 
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="destination">name</Label>
+                                <Label for="destination">Name</Label>
                                 <Input type="text" name="name" id="name" onChange={handleInputChange}
-                                       value={form.name}/>
-
-
-                            </FormGroup>
-                        </Col>
-<Col md={4}>
-                            <FormGroup>
-                                <Label for="destination">contact</Label>
-                                <Input type="text" name="contact" id="contact" onChange={handleInputChange}
-                                       value={form.contact}/>
-
-
-                            </FormGroup>
-                        </Col>
-<Col md={4}>
-                            <FormGroup>
-                                <Label for="destination">title</Label>
-                                <Input type="text" name="title" id="title" onChange={handleInputChange}
-                                       value={form.title}/>
-
-
-                            </FormGroup>
-                        </Col>
-<Col md={4}>
-                            <FormGroup>
-                                <Label for="destination">description</Label>
-                                <Input type="text" name="description" id="description" onChange={handleInputChange}
-                                       value={form.description}/>
+                                    value={form.name} />
 
 
                             </FormGroup>
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="destination">summary</Label>
+                                <Label for="destination">Contact</Label>
+                                <Input type="text" name="contact" id="contact" onChange={handleInputChange}
+                                    value={form.contact} />
+
+
+                            </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label for="destination">Title</Label>
+                                <Input type="text" name="title" id="title" onChange={handleInputChange}
+                                    value={form.title} />
+
+
+                            </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label for="destination">Description</Label>
+                                <Input type="text" name="description" id="description" onChange={handleInputChange}
+                                    value={form.description} />
+
+
+                            </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label for="destination">Summary</Label>
                                 <Input type="text" name="summary" id="summary" onChange={handleInputChange}
-                                       value={form.summary}/>
+                                    value={form.summary} />
 
 
                             </FormGroup>
@@ -95,8 +95,8 @@ export default (props) => {
                     </Row>
 
 
-                    <br/><br/><br/>
-                    <Button color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;
+                    <br /><br /><br />
+                    <Button color={"primary"} size={"lg"}>Send</Button> &nbsp;&nbsp;&nbsp;
                     <Button color={"link"} size={"lg"}>Cancel</Button>
                 </Form>
             </CardBody>

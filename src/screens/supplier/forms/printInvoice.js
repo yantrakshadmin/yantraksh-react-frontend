@@ -6,7 +6,7 @@ import {
     Row,
     Col,
 } from 'reactstrap';
-import { editInvoice, getInvoiceDetails } from "../../../helpers/api";
+import { getInvoiceDetails } from "../../../helpers/api";
 import { refreshing } from "../../../helpers/notifications";
 
 
@@ -32,11 +32,11 @@ function inWords(num) {
         if ((num = num.toString()).length > 9) return 'overflow';
         var n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
         if (!n) return; var str = '';
-        str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
-        str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
-        str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
-        str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
-        str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+        str += (n[1] !== 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+        str += (n[2] !== 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+        str += (n[3] !== 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+        str += (n[4] !== 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+        str += (n[5] !== 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
         return str;
     }
     catch (e) {
@@ -60,6 +60,22 @@ export default (props) => {
 
         loadKpiData();
     }, [setData]);
+
+    const renderItemsList = () => {
+        return data.invoice_transanctions.map(i => {
+            return (
+                <tr key={i.id}>
+                    <td>{i.invoice_transaction_desc}</td>
+                    <td>{i.invoice_transaction_lr}</td>
+                    <td>{i.invoice_transaction_vehicle}</td>
+                    <td>{formatDate(i.invoice_transaction_date)}</td>
+                    <td>{i.invoice_transaction_qty}</td>
+                    <td>{i.invoice_transaction_amount}</td>
+                    <td>{i.invoice_transaction_gst}</td>
+                </tr>
+            );
+        })
+    }
 
     console.log(data, '------- ooo ---------', data['invoice_transanctions']);
     return (
@@ -127,26 +143,20 @@ export default (props) => {
                     </tbody>
                 </Table>
 
-                <Table bordered>
+                <Table className="mb-4" bordered>
                     <thead>
                         <tr>
-                            <th>Item & Details</th>
+                            <th>Item Details</th>
                             <th>LR No.</th>
-                            <th>Vehicle Number</th>
-                            <th>QTY</th>
-                            <th>Rate</th>
+                            <th>Vehicle No.</th>
+                            <th>Date</th>
+                            <th>Quantity</th>
                             <th>Amount</th>
+                            <th>GST</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>{data.invoice_item_details}</td>
-                            <td>{data.invoice_lr_number}</td>
-                            <td>{data.invoice_vehicle_number}</td>
-                            <td>{data.invoice_quantity}</td>
-                            <td>{data.invoice_rate}</td>
-                            <td>{data.invoice_amount}</td>
-                        </tr>
+                        {renderItemsList()}
                     </tbody>
                 </Table>
 
