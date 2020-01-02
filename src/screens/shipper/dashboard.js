@@ -1,10 +1,12 @@
 import React, { Component, lazy } from 'react';
 import { Bar, Line, } from 'react-chartjs-2';
-import { ButtonDropdown, ButtonGroup, Card, CardBody, CardHeader, CardTitle, Col, Dropdown, Row, } from 'reactstrap';
+import { ButtonDropdown, ButtonGroup, Card, CardBody, CardHeader, CardTitle, Col, Dropdown, Row, Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Form } from 'reactstrap';
 
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
-import { getEventsData, getKPIData, getMap, getNumberOfTrucksData, getNumberOfWeightData } from "../../helpers/api";
+import { getEventsData, addEventsData, getKPIData, getMap, getNumberOfTrucksData, getNumberOfWeightData } from "../../helpers/api";
 import Iframe from 'react-iframe'
+
+import { toast } from 'react-toastify';
 
 import FullCalendar from '@fullcalendar/react'
 
@@ -451,7 +453,12 @@ class Dashboard extends Component {
 
         this.state = {
 
-
+            addEventModel: false,
+            addEventSelectedDate: null,
+            addEventForm: {
+                title: "",
+                date: null,
+            },
             dropdownOpen: false,
             radioSelected: 2,
             mainChart: [],
@@ -570,7 +577,7 @@ class Dashboard extends Component {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
                 datasets: [
                     {
-                        label: 'Total Weight Shipped',
+                        label: 'Total Weight Shipped (in Tons)',
                         backgroundColor: 'rgb(0,142,255)',
                         borderColor: 'rgb(0,100,255)',
                         borderWidth: 1,
@@ -590,6 +597,8 @@ class Dashboard extends Component {
         });
     }
 
+    addEventModelToggle = () => this.setState(pS => ({ addEventModel: !pS.addEventModel }));
+
     onRadioBtnClick(radioSelected) {
         this.setState({
             radioSelected: radioSelected,
@@ -597,19 +606,37 @@ class Dashboard extends Component {
     }
 
     handleDateClick = arg => {
-        if (window.confirm("Would you like to add an event to " + arg.dateStr + " ?")) {
-            this.setState({
-                // add new event data
-                calendarEvents: this.state.calendarEvents.concat({
-                    // creates a new array
-                    title: "New Event",
-                    start: arg.date,
-                    allDay: arg.allDay
-                })
-            });
-            return;
-        }
+        // if (window.confirm("Would you like to add an event to " + arg.dateStr + " ?")) {
+        //     this.setState({
+
+        //         calendarEvents: this.state.calendarEvents.concat({
+
+        //             title: "New Event",
+        //             start: arg.date,
+        //             allDay: arg.allDay
+        //         })
+        //     });
+        //     console.log(this.state.calendarEvents)
+        //     return;
+        // }
+        this.addEventModelToggle();
+        this.setState({ addEventSelectedDate: arg.dateStr });
+        this.setState({ addEventForm: { ...this.state.addEventForm, date: arg.dateStr } })
     };
+
+    handleAddEventFormSubmit = async ev => {
+        ev.preventDefault();
+        try {
+            await addEventsData(this.state.addEventForm);
+            this.addEventModelToggle();
+            toast.success("Event added successfully.");
+            this.setState({ addEventForm: { title: "", date: null } })
+        } catch (e) {
+            toast.error("Somthing went wrong!")
+        }
+        const calendarEvent = await getEventsData();
+        this.setState({ calendarEvent: calendarEvent });
+    }
 
 
     loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>;
@@ -729,7 +756,25 @@ class Dashboard extends Component {
                                                 <div className="chart-wrapper"
                                                     style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
                                                     {/*<Line data={this.state.mainChart} options={mainChartOpts} height={300} />*/}
-                                                    <Bar data={this.state.mainChart} height={125} />
+                                                    <Bar
+                                                        data={this.state.mainChart}
+                                                        height={125}
+                                                        options={{
+                                                            responsive: true,
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    gridLines: {
+                                                                        show: true
+                                                                    },
+                                                                }],
+                                                                yAxes: [{
+                                                                    gridLines: {
+                                                                        show: false
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }}
+                                                    />
                                                     {console.log(this.state.mainChart)}
                                                 </div>
                                             </CardBody>
@@ -795,10 +840,7 @@ class Dashboard extends Component {
                                                     {<FullCalendar defaultView="dayGridMonth"
 
 
-                                                        events={[{
-                                                            title: this.state.events[0].weight.toString(),
-                                                            date: this.state.events[0].scheduled_date.slice(0, 10)
-                                                        }]}
+                                                        events={this.state.calendarEvent}
                                                         header={{
                                                             left: "prev,next today",
                                                             center: "title",
@@ -808,6 +850,27 @@ class Dashboard extends Component {
                                                         dateClick={this.handleDateClick}
                                                         ref={this.calendarComponentRef}
                                                     />}
+                                                    <Modal isOpen={this.state.addEventModel} toggle={this.addEventModelToggle}>
+                                                        <ModalHeader toggle={this.addEventModelToggle}>Add Event</ModalHeader>
+                                                        <Form>
+                                                            <ModalBody>
+                                                                <h4>Add Event on: {this.state.addEventSelectedDate}</h4>
+                                                                <FormGroup className="mt-3">
+                                                                    <Label for="event">Event Title</Label>
+                                                                    <Input type="text" name="event" id="event" placeholder="Event Title"
+                                                                        onChange={ev => {
+                                                                            this.setState({ addEventForm: { ...this.state.addEventForm, title: ev.target.value } })
+                                                                        }}
+                                                                        value={this.state.addEventForm.title}
+                                                                    />
+                                                                </FormGroup>
+                                                            </ModalBody>
+                                                            <ModalFooter>
+                                                                <Button color="primary" type="submit" onClick={this.handleAddEventFormSubmit}>Add Event</Button>{' '}
+                                                                <Button color="secondary" onClick={this.addEventModelToggle}>Cancel</Button>
+                                                            </ModalFooter>
+                                                        </Form>
+                                                    </Modal>
                                                 </div>
                                             </CardBody>
                                         </Card>

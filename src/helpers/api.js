@@ -9,6 +9,7 @@ import { errorGettingUserInfoNotification, signINAgainNotification } from "./not
 
 // const BASE_URL = "http://0.0.0.0:8000/";
 const BASE_URL = "http://10.5.50.94:8000/";
+//const BASE_URL = "http://192.168.43.34:8000/";
 //const BASE_URL = "https://yantracloudbackend.herokuapp.com/";
 //const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
@@ -380,13 +381,16 @@ export const confirmPassword = (data) => loadOpenUrl('password-reset/confirm/', 
 });
 
 export const getNumberOfTrucksData = () => loadSecureUrl('truckvmonth/');
-export const getEventsData = () => loadSecureUrl('calendar-data')
+export const getEventsData = () => loadSecureUrl('calenderapi/')
+export const addEventsData = data => loadSecureUrl('calenderapi/', {
+    data: data,
+    method: 'post'
+})
 
 
 export const feedback = (data) => loadSecureUrl('shipper/feedbackapi/', {
     data: data,
     method: 'post'
-
 });
 
 export const getKPIData = () => loadSecureUrl('api/kpi/');

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row, } from 'reactstrap';
-import { bidNow, feedback } from "../helpers/api"
+import { feedback } from "../helpers/api"
+import { toast } from 'react-toastify';
+import history from '../history';
 
 export default (props) => {
 
@@ -10,8 +12,6 @@ export default (props) => {
         'title': '',
         'description': '',
         'summary': '',
-
-
     });
 
 
@@ -30,10 +30,10 @@ export default (props) => {
         event.preventDefault();
         try {
             await feedback(form);
-
-            alert('done')
+            toast.success("Feedback sent successful.");
+            history.push('/');
         } catch (e) {
-            alert('error')
+            toast.error("Something went wrong!");
         }
     };
 
