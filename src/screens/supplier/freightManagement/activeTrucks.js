@@ -267,7 +267,6 @@ export default () => {
                         data={data}
                         columns={columns}
                         search
-
                     >
                         {
                             props => (

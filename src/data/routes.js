@@ -4,6 +4,27 @@ import { Redirect } from "react-router-dom";
 
 const supplierNavigation = [
     {
+        name: 'Masters',
+        url: '/masters',
+        icon: 'icon-layers',
+        component: lazy(() => import('../screens/supplier/masters/items')),
+        children: [
+            {
+                name: 'Items',
+                component: lazy(() => import('../screens/supplier/masters/items')),
+                url: '/masters/items',
+                icon: 'icon-list',
+            }, {
+                name: 'Customers',
+                component: lazy(() => import('../screens/supplier/masters/customers')),
+                url: '/masters/customers',
+                icon: 'fa fa-users',
+            }, {
+                divider: true
+            }
+        ],
+    },
+    {
         name: 'Available Loads',
         component: lazy(() => import('../screens/supplier/freightManagement/availableLoads')),
         url: '/freight/available-loads',
@@ -51,7 +72,8 @@ const shipperNavigation = [
             variant: 'info',
 
         },
-    }, {
+    },
+    {
         name: 'Items Management',
         url: '/orders',
         icon: 'icon-layers',
@@ -247,6 +269,18 @@ const supplierExtraRoutes = [
         path: '/dashboard',
         component: () => (<Redirect to={'/freight/available-loads'} />)
         // component:() => (<Redirect to={'/freight/available-loads'}/>)
+    },
+    {
+        name: 'Add Item',
+        path: '/masters/items/add',
+        component: lazy(() => import('../screens/supplier/forms/addMastersItem')),
+        exact: true
+    },
+    {
+        name: 'Add Customer',
+        path: '/masters/customers/add',
+        component: lazy(() => import('../screens/supplier/forms/addMastersCustomer')),
+        exact: true
     },
     {
         name: 'Bid Now',
