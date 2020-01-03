@@ -70,7 +70,7 @@ export default (props) => {
                     <td>{i.invoice_transaction_vehicle}</td>
                     <td>{formatDate(i.invoice_transaction_date)}</td>
                     <td>{i.invoice_transaction_qty}</td>
-                    <td>{i.invoice_transaction_amount}</td>
+                    <td>₹{i.invoice_transaction_amount}</td>
                     <td>{i.invoice_transaction_gst}</td>
                 </tr>
             );

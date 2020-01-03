@@ -852,7 +852,7 @@ class Dashboard extends Component {
                                                     />}
                                                     <Modal isOpen={this.state.addEventModel} toggle={this.addEventModelToggle}>
                                                         <ModalHeader toggle={this.addEventModelToggle}>Add Event</ModalHeader>
-                                                        <Form>
+                                                        <Form onSubmit={this.handleAddEventFormSubmit}>
                                                             <ModalBody>
                                                                 <h4>Add Event on: {this.state.addEventSelectedDate}</h4>
                                                                 <FormGroup className="mt-3">
@@ -862,11 +862,14 @@ class Dashboard extends Component {
                                                                             this.setState({ addEventForm: { ...this.state.addEventForm, title: ev.target.value } })
                                                                         }}
                                                                         value={this.state.addEventForm.title}
+                                                                        minLength={1}
+                                                                        maxLength={500}
+                                                                        required
                                                                     />
                                                                 </FormGroup>
                                                             </ModalBody>
                                                             <ModalFooter>
-                                                                <Button color="primary" type="submit" onClick={this.handleAddEventFormSubmit}>Add Event</Button>{' '}
+                                                                <Button color="primary" type="submit">Add Event</Button>{' '}
                                                                 <Button color="secondary" onClick={this.addEventModelToggle}>Cancel</Button>
                                                             </ModalFooter>
                                                         </Form>

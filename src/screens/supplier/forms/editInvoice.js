@@ -4,6 +4,7 @@ import { editInvoice, getInvoiceDetails } from "../../../helpers/api";
 import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { toast } from 'react-toastify';
 
 
 function formatDate(text) {
@@ -42,6 +43,7 @@ const EditInvoice = (props) => {
 
             const invoice_details = await getInvoiceDetails(props.match.params.id);
             setForm(invoice_details);
+            console.log(invoice_details)
         };
         getNetwork();
     }, [setForm]);
@@ -83,30 +85,32 @@ const EditInvoice = (props) => {
                 invoice_transaction_gst: '',
             });
         } catch (e) {
-            alert("Error")
+            toast.error("Something went wrong!");
         }
     }
 
     const deleteItems = async (i) => {
-        if ('id' in i) {
-            setForm({ ...form, invoice_transanctions: form.invoice_transanctions.filter(e => e.id) });
+        if ("id" in i) {
+            setForm({ ...form, invoice_transanctions: form.invoice_transanctions.filter(e => e.id !== i.id) });
+        } else {
+            setForm({ ...form, invoice_transanctions: form.invoice_transanctions.filter(e => e.invoice_transaction_desc !== i.invoice_transaction_desc) });
         }
     }
 
     const renderItemsList = () => {
         if (form.invoice_transanctions) {
-            return form.invoice_transanctions.map(i => {
+            return form.invoice_transanctions.map((i, idx) => {
                 return (
-                    <tr key={i.id}>
+                    <tr key={idx}>
                         <td>{i.invoice_transaction_desc}</td>
                         <td>{i.invoice_transaction_lr}</td>
                         <td>{i.invoice_transaction_vehicle}</td>
                         <td>{formatDate(i.invoice_transaction_date)}</td>
                         <td>{i.invoice_transaction_qty}</td>
-                        <td>{i.invoice_transaction_amount}</td>
+                        <td>₹{i.invoice_transaction_amount}</td>
                         <td>{i.invoice_transaction_gst}</td>
                         <td>
-                            <Button type="button" title="Delete Item" onClick={i => deleteItems(i)} color="danger" size="sm">
+                            <Button type="button" title="Delete Item" onClick={() => deleteItems(i)} color="danger" size="sm">
                                 <FontAwesomeIcon icon={faMinus} />
                             </Button>
                         </td>
@@ -121,12 +125,23 @@ const EditInvoice = (props) => {
         try {
             await editInvoice(form, props.match.params.id);
             setForm(await getInvoiceDetails(props.match.params.id));
-            alert('done')
+            toast.success("Invoice Updated.");
         } catch (e) {
-            console.log(e);
-            alert(JSON.stringify(e))
+            toast.error("Something went wrong!");
         }
     };
+
+    const renderAddItemButton = () => {
+        if (itemsForm.invoice_transaction_desc && itemsForm.invoice_transaction_lr && itemsForm.invoice_transaction_vehicle && itemsForm.invoice_transaction_date && itemsForm.invoice_transaction_qty && itemsForm.invoice_transaction_amount && itemsForm.invoice_transaction_gst) {
+            return (<Button type="button" title="Add" onClick={addItems} color="success" size="sm">
+                <FontAwesomeIcon icon={faPlus} />
+            </Button>)
+        } else {
+            return (<Button type="button" title="Fill all fields!" color="success" size="sm" disabled={true}>
+                <FontAwesomeIcon icon={faPlus} />
+            </Button>)
+        }
+    }
 
     return (
         <Card>
@@ -223,9 +238,7 @@ const EditInvoice = (props) => {
                                 <td><Input type="number" name="invoice_transaction_amount" value={itemsForm.invoice_transaction_amount} bsSize="sm" onChange={handleItemsInputChange} /></td>
                                 <td><Input type="number" name="invoice_transaction_gst" value={itemsForm.invoice_transaction_gst} bsSize="sm" onChange={handleItemsInputChange} /></td>
                                 <td>
-                                    <Button type="button" title="Add" onClick={addItems} color="success" size="sm">
-                                        <FontAwesomeIcon icon={faPlus} />
-                                    </Button>
+                                    {renderAddItemButton()}
                                 </td>
                             </tr>
                         </tbody>
@@ -350,7 +363,7 @@ const EditInvoice = (props) => {
                         </Col>
                     </Row>
                     <br /><br /><br />
-                    <Button type="submit" color={"primary"} size={"lg"}>Create</Button> &nbsp;&nbsp;&nbsp;
+                    <Button type="submit" color={"primary"} size={"lg"}>Update invoice</Button> &nbsp;&nbsp;&nbsp;
                     <Button color={"link"} size={"lg"} type={"button"}
                         onClick={() => props.history.push('/freight/financial')}>Cancel</Button>
                 </Form>
