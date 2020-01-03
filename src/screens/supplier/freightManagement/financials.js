@@ -12,6 +12,9 @@ import Upload from '../../../components/upload';
 import { Line } from "react-chartjs-2";
 import { getStyle } from "@coreui/coreui/dist/js/coreui-utilities";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faPrint, faPlus } from '@fortawesome/free-solid-svg-icons';
+
 
 function formatDate(d) {
     let hrs = d.getHours();
@@ -19,11 +22,16 @@ function formatDate(d) {
     let secs = d.getSeconds();
 
     return (
-        <span>{d.getDate()}-{d.getMonth() + 1}-{d.getFullYear()} {("0" + hrs).slice(-2)}:{("0" + mins).slice(-2)}:{("0" + secs).slice(-2)}</span>
+        <span>{d.getDate()}-{d.getMonth() + 1}-{d.getFullYear()}</span>
     )
 }
 
 const columns = [
+    {
+        dataField: 'invoice_salesperson',
+        text: 'Billing Client',
+        sort: true
+    },
     {
         dataField: 'invoice_quiz',
         text: 'Origin',
@@ -71,22 +79,10 @@ const columns = [
             let d = new Date(row.invoice_date);
             return formatDate(d);
         }
-    }, {
-        dataField: 'invoice_salesperson',
-        text: 'Billing Party',
-        sort: true
-
-
     },
     {
         dataField: 'invoice_amount',
         text: 'Total Amount',
-        sort: true
-
-    },
-    {
-        dataField: 'invoice_gst',
-        text: 'GST Number',
         sort: true
 
     },
@@ -98,7 +94,7 @@ const columns = [
             <div>
                 <Link to={`/supplier/invoice/${row.id}/`}>
                     <Button color="primary">
-                        Edit Invoice
+                        <FontAwesomeIcon icon={faEdit} />
                     </Button>
                 </Link>
             </div>
@@ -112,7 +108,7 @@ const columns = [
             <div>
                 <Link to={`/supplier/printinvoice/${row.id}`}>
                     <Button color="primary">
-                        Print Invoice
+                        <FontAwesomeIcon icon={faPrint} />
                     </Button>
                 </Link>
             </div>
@@ -319,6 +315,9 @@ export default () => {
                             props => (
                                 <div>
                                     <div style={{ paddingTop: 10, paddingBottom: 10, float: 'right' }}>
+                                        <Link to="/supplier/createinvoice/">
+                                            <Button color="primary"><FontAwesomeIcon icon={faPlus} /> Create Invoice</Button>
+                                        </Link>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <Search.SearchBar {...props.searchProps} />
                                     </div>

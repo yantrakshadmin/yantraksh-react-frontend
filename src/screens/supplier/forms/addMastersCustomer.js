@@ -1,31 +1,31 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
-    Card, CardHeader, CardBody, CardTitle, CardText,
+    Card, CardHeader, CardBody,
     Form, FormGroup,
     Row, Col,
     TabContent, TabPane, Nav, NavItem, NavLink,
     Label, Input, Button, Alert, Table,
 } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 
 
-const AddMastersCustomer = props => {
+const optionsData = {
+    tax_preference: [
+        'Taxable',
+        'Non-Taxable',
+    ],
+    gst_treatment: [
+        'Registered Business - Regular',
+        'Registered Business - Composition',
+        'Unregistered Business',
+        'Consumer',
+    ],
+}
 
-    const optionsData = {
-        tax_preference: [
-            'Taxable',
-            'Non-Taxable',
-        ],
-        gst_treatment: [
-            'Registered Business - Regular',
-            'Registered Business - Composition',
-            'Unregistered Business',
-            'Consumer',
-        ],
-    }
+const AddMastersCustomer = props => {
 
     const [form, setForm] = useState({
         customer_type: 'Business',
@@ -73,95 +73,122 @@ const AddMastersCustomer = props => {
 
     const [phase, setPhase] = useState(0);
 
-    const toggle = tab => {
-        if (activeTab !== tab) setActiveTab(tab);
-    }
+    const toggle = useCallback(
+        tab => {
+            if (activeTab !== tab) setActiveTab(tab);
+        },
+        [activeTab, setActiveTab]
+    )
 
-    const handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+    const handleInputChange = useCallback(
+        event => {
+            const target = event.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.name;
 
-        setForm({
-            ...form,
-            [name]: value
-        });
-    };
+            setForm({
+                ...form,
+                [name]: value
+            });
+        },
+        [form, setForm]
+    )
 
-    const renderOptions = data => {
-        return data.map(o => {
-            return <option key={o} value={o}>{o}</option>;
-        });
-    }
+    const contactPersonInputChange = useCallback(
+        event => {
+            const target = event.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.name;
 
-    const contactPersonInputChange = (event) => {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+            setContactPersonForm({
+                ...contactPersonForm,
+                [name]: value
+            });
+        },
+        [contactPersonForm, setContactPersonForm]
+    )
 
-        setContactPersonForm({
-            ...contactPersonForm,
-            [name]: value
-        });
-    }
+    const addCP = useCallback(
+        async () => {
+            setForm({ ...form, contact_persons: [...form.contact_persons, contactPersonForm] });
+            setContactPersonForm({
+                cp_name: '',
+                cp_email: '',
+                cp_phone: '',
+                cp_designation: '',
+                cp_department: '',
+            });
+        },
+        [form, setForm, contactPersonForm, setContactPersonForm]
+    )
 
-    const addCP = async () => {
-        setForm({ ...form, contact_persons: [...form.contact_persons, contactPersonForm] });
-        setContactPersonForm({
-            cp_name: '',
-            cp_email: '',
-            cp_phone: '',
-            cp_designation: '',
-            cp_department: '',
-        });
-    }
+    const deleteCP = useCallback(
+        async i => {
+            if ("id" in i) {
+                setForm({ ...form, contact_persons: form.contact_persons.filter(e => e.id !== i.id) });
+            } else {
+                setForm({ ...form, contact_persons: form.contact_persons.filter(e => e.cp_name !== i.cp_name) });
+            }
+        },
+        [form, setForm]
+    )
 
-    const deleteCP = async (i) => {
-        if ("id" in i) {
-            setForm({ ...form, contact_persons: form.contact_persons.filter(e => e.id !== i.id) });
-        } else {
-            setForm({ ...form, contact_persons: form.contact_persons.filter(e => e.cp_name !== i.cp_name) });
-        }
-    }
+    const renderContactPersonList = useCallback(
+        () => {
+            if (form.contact_persons) {
+                return form.contact_persons.map((i, idx) => {
+                    return (
+                        <tr key={idx}>
+                            <td>{i.cp_name}</td>
+                            <td>{i.cp_email}</td>
+                            <td>{i.cp_phone}</td>
+                            <td>{i.cp_designation}</td>
+                            <td>{i.cp_department}</td>
+                            <td>
+                                <Button type="button" title="Delete Item" onClick={() => deleteCP(i)} color="danger" size="sm">
+                                    <FontAwesomeIcon icon={faMinus} />
+                                </Button>
+                            </td>
+                        </tr>
+                    )
+                })
+            }
+        },
+        [form]
+    )
 
-    const renderContactPersonList = () => {
-        if (form.contact_persons) {
-            return form.contact_persons.map((i, idx) => {
+    const renderOptions = useCallback(
+        data => {
+            return data.map(o => {
+                return <option key={o} value={o}>{o}</option>;
+            });
+        },
+        []
+    )
+
+    const btnLoader = useCallback(
+        () => {
+            if (phase === 1) {
                 return (
-                    <tr key={idx}>
-                        <td>{i.cp_name}</td>
-                        <td>{i.cp_email}</td>
-                        <td>{i.cp_phone}</td>
-                        <td>{i.cp_designation}</td>
-                        <td>{i.cp_department}</td>
-                        <td>
-                            <Button type="button" title="Delete Item" onClick={() => deleteCP(i)} color="danger" size="sm">
-                                <FontAwesomeIcon icon={faMinus} />
-                            </Button>
-                        </td>
-                    </tr>
-                )
-            })
-        }
-    }
-
-    const btnLoader = () => {
-        if (phase === 1) {
-            return (
-                <Button color="primary" size="lg" disabled>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving
+                    <Button color="primary" size="lg" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving
                 </Button>
-            )
-        }
-        return <Button type="submit" color="primary" size="lg">Save</Button>
-    }
+                )
+            }
+            return <Button type="submit" color="primary" size="lg">Save</Button>
+        },
+        [phase]
+    )
 
-    const handleSubmit = ev => {
-        ev.preventDefault();
-        setPhase(1);
-        console.log(form)
-        setPhase(0);
-    }
+    const handleSubmit = useCallback(
+        event => {
+            event.preventDefault();
+            setPhase(1);
+            console.log(form)
+            setPhase(0);
+        },
+        [form, phase, setPhase]
+    )
 
     return (
         <div className="animated fadeIn">
@@ -443,7 +470,7 @@ const AddMastersCustomer = props => {
 
                         {btnLoader()}
                         {' '}
-                        <Link to="/masters/items">
+                        <Link to="/masters/customers">
                             <Button type="button" color="link" size="lg">Cancel</Button>
                         </Link>
                     </Form>

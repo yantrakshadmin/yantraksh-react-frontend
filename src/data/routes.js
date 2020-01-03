@@ -299,6 +299,11 @@ const supplierExtraRoutes = [
         name: 'View Bids',
         exact: true
     }, {
+        path: '/supplier/createinvoice/',
+        component: lazy(() => import('../screens/supplier/forms/invoiceForm')),
+        name: 'Create Invoice',
+        exact: true
+    }, {
         path: '/supplier/invoice/:id',
         component: lazy(() => import('../screens/supplier/forms/editInvoice')),
         name: 'Invoices',
