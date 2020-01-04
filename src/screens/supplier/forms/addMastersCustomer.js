@@ -45,18 +45,16 @@ const AddMastersCustomer = props => {
         billing_address: '',
         billing_city: '',
         billing_state: '',
-        billing_zip_code: '',
+        billing_pin_code: '',
         billing_phone: '',
-        billing_fax: '',
 
         shipping_attention: '',
         shipping_country: '',
         shipping_address: '',
         shipping_city: '',
         shipping_state: '',
-        shipping_zip_code: '',
+        shipping_pin_code: '',
         shipping_phone: '',
-        shipping_fax: '',
 
         contact_persons: [],
     })
@@ -374,18 +372,13 @@ const AddMastersCustomer = props => {
                                                 onChange={handleInputChange} />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label htmlFor="billing_zip_code">ZIP Code</Label>
-                                            <Input type="text" name="billing_zip_code" id="billing_zip_code" value={form.billing_zip_code}
+                                            <Label htmlFor="billing_pin_code">PIN Code</Label>
+                                            <Input type="text" name="billing_pin_code" id="billing_pin_code" value={form.billing_pin_code}
                                                 onChange={handleInputChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label htmlFor="billing_phone">Phone</Label>
                                             <Input type="text" name="billing_phone" id="billing_phone" value={form.billing_phone}
-                                                onChange={handleInputChange} />
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label htmlFor="billing_fax">Fax</Label>
-                                            <Input type="text" name="billing_fax" id="billing_fax" value={form.billing_fax}
                                                 onChange={handleInputChange} />
                                         </FormGroup>
                                     </Col>
@@ -417,18 +410,13 @@ const AddMastersCustomer = props => {
                                                 onChange={handleInputChange} />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label htmlFor="shipping_zip_code">ZIP Code</Label>
-                                            <Input type="text" name="shipping_zip_code" id="shipping_zip_code" value={form.shipping_zip_code}
+                                            <Label htmlFor="shipping_pin_code">PIN Code</Label>
+                                            <Input type="text" name="shipping_pin_code" id="shipping_pin_code" value={form.shipping_pin_code}
                                                 onChange={handleInputChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label htmlFor="shipping_phone">Phone</Label>
                                             <Input type="text" name="shipping_phone" id="shipping_phone" value={form.shipping_phone}
-                                                onChange={handleInputChange} />
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label htmlFor="shipping_fax">Fax</Label>
-                                            <Input type="text" name="shipping_fax" id="shipping_fax" value={form.shipping_fax}
                                                 onChange={handleInputChange} />
                                         </FormGroup>
                                     </Col>
