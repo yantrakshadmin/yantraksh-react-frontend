@@ -9,7 +9,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { createMasterCustomer, fetchMasterCustomer, editMasterCustomer } from '../../../helpers/api';
+import history from '../../../history';
 
 
 const optionsData = {
@@ -45,7 +48,7 @@ const AddMastersCustomer = props => {
         billing_address: '',
         billing_city: '',
         billing_state: '',
-        billing_pin_code: '',
+        billing_pin_code: null,
         billing_phone: '',
 
         shipping_attention: '',
@@ -53,7 +56,7 @@ const AddMastersCustomer = props => {
         shipping_address: '',
         shipping_city: '',
         shipping_state: '',
-        shipping_pin_code: '',
+        shipping_pin_code: null,
         shipping_phone: '',
 
         contact_persons: [],
@@ -66,6 +69,16 @@ const AddMastersCustomer = props => {
         cp_designation: '',
         cp_department: '',
     });
+
+    useEffect(() => {
+        if (props.match.params.id) {
+            const fetchCustomerData = async () => {
+                const customerData = await fetchMasterCustomer(props.match.params.id);
+                setForm(customerData);
+            }
+            fetchCustomerData();
+        }
+    }, [setForm])
 
     const [activeTab, setActiveTab] = useState('1');
 
@@ -179,11 +192,26 @@ const AddMastersCustomer = props => {
     )
 
     const handleSubmit = useCallback(
-        event => {
+        async event => {
             event.preventDefault();
-            setPhase(1);
             console.log(form)
-            setPhase(0);
+            setPhase(1);
+            try {
+                if (props.match.params.id) {
+                    await editMasterCustomer(props.match.params.id, form)
+                    setPhase(0);
+                    toast.success('Customer Updated Successfully');
+                } else {
+                    await createMasterCustomer(form);
+                    setPhase(0);
+                    toast.success('Customer created successfully!');
+                    history.push('/dashboard/masters/customers');
+                }
+
+            } catch (err) {
+                setPhase(0);
+                toast.error('Something went wrong!');
+            }
         },
         [form, phase, setPhase]
     )
@@ -192,7 +220,7 @@ const AddMastersCustomer = props => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <b>Add Customer</b>
+                    {props.match.params.id ? <b>Edit Customer</b> : <b>Add Customer</b>}
                 </CardHeader>
                 <CardBody>
                     <Form method="post" onSubmit={handleSubmit}>
@@ -200,7 +228,7 @@ const AddMastersCustomer = props => {
                         <Row>
                             <Col md={4}>
                                 <FormGroup tag="fieldset">
-                                    <Label>Cutomer Type</Label>
+                                    <Label>Customer Type</Label>
                                     <FormGroup check>
                                         <Label check>
                                             <Input value="Business" checked={form.customer_type === "Business"} type="radio" name="customer_type" onChange={handleInputChange} />{' '}
@@ -373,7 +401,7 @@ const AddMastersCustomer = props => {
                                         </FormGroup>
                                         <FormGroup>
                                             <Label htmlFor="billing_pin_code">PIN Code</Label>
-                                            <Input type="text" name="billing_pin_code" id="billing_pin_code" value={form.billing_pin_code}
+                                            <Input type="number" name="billing_pin_code" id="billing_pin_code" value={form.billing_pin_code}
                                                 onChange={handleInputChange} />
                                         </FormGroup>
                                         <FormGroup>
@@ -411,7 +439,7 @@ const AddMastersCustomer = props => {
                                         </FormGroup>
                                         <FormGroup>
                                             <Label htmlFor="shipping_pin_code">PIN Code</Label>
-                                            <Input type="text" name="shipping_pin_code" id="shipping_pin_code" value={form.shipping_pin_code}
+                                            <Input type="number" name="shipping_pin_code" id="shipping_pin_code" value={form.shipping_pin_code}
                                                 onChange={handleInputChange} />
                                         </FormGroup>
                                         <FormGroup>

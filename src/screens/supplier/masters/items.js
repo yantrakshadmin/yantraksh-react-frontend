@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardBody, Button, Table, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { fetchMasterItems, deleteMasterItem } from '../../../helpers/api';
 import { toast } from 'react-toastify';
 
@@ -36,7 +36,7 @@ const Action = ({ item, items, setItems }) => {
     return (
         <div>
             <Link to={`/masters/items/edit/${item.id}`}>
-                <Button color="primary"><FontAwesomeIcon icon={faEdit} /></Button>{" "}
+                <Button color="primary"><FontAwesomeIcon icon={faPencilAlt} /></Button>{" "}
             </Link>
             <Button onClick={toggle} color="danger"><FontAwesomeIcon icon={faTrashAlt} /></Button>{" "}
             <Modal isOpen={modal} toggle={toggle}>
@@ -68,6 +68,7 @@ const ItemsTable = ({ items, setItems }) => {
                     )
                 })
             }
+            return <div>No Data</div>;
         },
         [items, setItems]
     )
@@ -85,7 +86,7 @@ const ItemsTable = ({ items, setItems }) => {
                 {renderItemsRows()}
             </tbody>
         </Table>
-    )
+    );
 }
 
 const Items = () => {

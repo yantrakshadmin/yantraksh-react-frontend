@@ -289,6 +289,12 @@ const supplierExtraRoutes = [
         exact: true
     },
     {
+        name: 'Edit Customer',
+        path: '/masters/customers/edit/:id',
+        component: lazy(() => import('../screens/supplier/forms/addMastersCustomer')),
+        exact: true
+    },
+    {
         name: 'Bid Now',
         path: '/freight/bid-now/:id',
         component: lazy(() => import('../screens/supplier/forms/bidNow')),

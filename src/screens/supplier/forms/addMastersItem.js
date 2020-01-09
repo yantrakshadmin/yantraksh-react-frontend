@@ -123,7 +123,7 @@ const AddMastersItem = props => {
                             </FormGroup>
                         </Col>
                     </Row>
-                )
+                );
             } else if (!form.intra_state_tax_rate && form.inter_state_tax_rate) {
                 return (
                     <Row>
@@ -151,7 +151,7 @@ const AddMastersItem = props => {
                             </FormGroup>
                         </Col>
                     </Row>
-                )
+                );
             }
             return (
                 <Row>
@@ -180,7 +180,7 @@ const AddMastersItem = props => {
                         </FormGroup>
                     </Col>
                 </Row>
-            )
+            );
         },
         [form,]
     )
@@ -192,9 +192,9 @@ const AddMastersItem = props => {
                     <Button color="primary" size="lg" disabled>
                         <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving
                     </Button>
-                )
+                );
             }
-            return <Button type="submit" color="primary" size="lg">Save</Button>
+            return <Button type="submit" color="primary" size="lg">Save</Button>;
         },
         [phase,]
     )
@@ -227,7 +227,7 @@ const AddMastersItem = props => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <b>Add Item</b>
+                    {props.match.params.id ? <b>Edit Item</b> : <b>Add Item</b>}
                 </CardHeader>
                 <CardBody>
                     <Form method="post" onSubmit={handleSubmit}>

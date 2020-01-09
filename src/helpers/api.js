@@ -83,6 +83,7 @@ export const REPORT_TRACKING_VS_LR = 'TrackingvsLr/';
 
 //SupplierMasters
 export const MASTER_ITEMS = 'suppliers/supplieritems/';
+export const MASTER_CUSTOMERS = 'suppliers/suppliercustomer/';
 
 
 const getAccessToken = () => {
@@ -404,7 +405,7 @@ export const allAvailableTrucks = () => loadSecureUrl(ALL_AVAILABLE_TRUCKS);
 
 
 
-//Supplier Masters
+//Supplier ITEMS Master
 
 export const fetchMasterItems = () => loadSecureUrl(MASTER_ITEMS);
 
@@ -423,5 +424,28 @@ export const editMasterItem = (id, data) => loadSecureUrl(`${MASTER_ITEMS}${id}/
 })
 
 export const deleteMasterItem = id => loadSecureUrl(`${MASTER_ITEMS}${id}/`, {
+    method: 'delete',
+})
+
+
+//Supplier CUSTOMERS Master
+
+export const fetchMasterCustomers = () => loadSecureUrl(MASTER_CUSTOMERS);
+
+export const createMasterCustomer = data => loadSecureUrl(MASTER_CUSTOMERS, {
+    data: data,
+    method: 'post'
+})
+
+export const fetchMasterCustomer = id => loadSecureUrl(`${MASTER_CUSTOMERS}${id}/`, {
+    method: 'get',
+})
+
+export const editMasterCustomer = (id, data) => loadSecureUrl(`${MASTER_CUSTOMERS}${id}/`, {
+    data: data,
+    method: 'patch',
+})
+
+export const deleteMasterCustomer = id => loadSecureUrl(`${MASTER_CUSTOMERS}${id}/`, {
     method: 'delete',
 })
