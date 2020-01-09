@@ -8,7 +8,8 @@ import { API_TOKENS } from "../data/storage";
 import { errorGettingUserInfoNotification, signINAgainNotification } from "./notifications";
 
 // const BASE_URL = "http://0.0.0.0:8000/";
-const BASE_URL = "http://10.5.50.94:8000/";
+const BASE_URL = "http://127.0.0.1:8000/"
+//const BASE_URL = "http://10.5.50.94:8000/";
 //const BASE_URL = "http://192.168.43.34:8000/";
 //const BASE_URL = "https://yantracloudbackend.herokuapp.com/";
 //const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
@@ -80,6 +81,8 @@ export const REPORT_TRACKING = 'trackingreportapi/';
 export const REPORT_DISPATCHER_VS_LR = 'DispatchervsLr/';
 export const REPORT_TRACKING_VS_LR = 'TrackingvsLr/';
 
+//SupplierMasters
+export const MASTER_ITEMS = 'suppliers/supplieritems/';
 
 
 const getAccessToken = () => {
@@ -398,3 +401,27 @@ export const uploadPOD = () => loadSecureUrl('api/pod/');
 export const getMap = () => loadSecureUrl('map/');
 export const allAvailableTrucks = () => loadSecureUrl(ALL_AVAILABLE_TRUCKS);
 //takequiz/<int pk>
+
+
+
+//Supplier Masters
+
+export const fetchMasterItems = () => loadSecureUrl(MASTER_ITEMS);
+
+export const createMasterItem = data => loadSecureUrl(MASTER_ITEMS, {
+    data: data,
+    method: 'post',
+})
+
+export const fetchMasterItem = id => loadSecureUrl(`${MASTER_ITEMS}${id}/`, {
+    method: 'get',
+})
+
+export const editMasterItem = (id, data) => loadSecureUrl(`${MASTER_ITEMS}${id}/`, {
+    data: data,
+    method: 'patch',
+})
+
+export const deleteMasterItem = id => loadSecureUrl(`${MASTER_ITEMS}${id}/`, {
+    method: 'delete',
+})

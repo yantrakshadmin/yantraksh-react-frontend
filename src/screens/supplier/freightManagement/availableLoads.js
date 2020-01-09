@@ -44,8 +44,6 @@ export default () => {
         const loadApiData = async () => {
             const trucks = await liveAvailableLoads();
             setData(trucks)
-
-
         };
         const loadKpiData = async () => {
             refreshing();

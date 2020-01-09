@@ -169,7 +169,7 @@ const AddMastersCustomer = props => {
             if (phase === 1) {
                 return (
                     <Button color="primary" size="lg" disabled>
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving
+                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving
                 </Button>
                 )
             }
