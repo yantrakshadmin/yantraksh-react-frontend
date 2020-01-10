@@ -326,6 +326,11 @@ const supplierExtraRoutes = [
         name: 'Edit Invoice',
         exact: true
     }, {
+        path: '/supplier/invoices/print/:id',
+        component: lazy(() => import('../screens/supplier/printInvoice')),
+        name: 'Print Invoice',
+        exact: true
+    }, {
         path: '/supplier/invoice/:id',
         component: lazy(() => import('../screens/supplier/forms/editInvoice')),
         name: 'Invoices',

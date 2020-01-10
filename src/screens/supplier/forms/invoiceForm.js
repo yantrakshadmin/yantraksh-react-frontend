@@ -357,7 +357,7 @@ const InvoiceForm = props => {
                         <Row>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="terms_and_conditions">Terms_and Conditions</Label>
+                                    <Label htmlFor="terms_and_conditions">Terms and Conditions</Label>
                                     <Input type="textarea" name="terms_and_conditions" id="terms_and_conditions" value={form.terms_and_conditions}
                                         onChange={handleInputChange} />
                                 </FormGroup>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardBody, Button, Table, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPencilAlt, faTrashAlt, faPrint } from '@fortawesome/free-solid-svg-icons';
 import { fetchSupplierInvoices, deleteSupplierInvoice } from '../../helpers/api';
 import { toast } from 'react-toastify';
 
@@ -37,6 +37,9 @@ const Action = ({ invoice, invoices, setInvoices }) => {
         <div>
             <Link to={`/supplier/invoices/edit/${invoice.id}`}>
                 <Button color="primary"><FontAwesomeIcon icon={faPencilAlt} /></Button>{" "}
+            </Link>
+            <Link to={`/supplier/invoices/print/${invoice.id}`}>
+                <Button color="primary"><FontAwesomeIcon icon={faPrint} /></Button>{" "}
             </Link>
             <Button onClick={toggle} color="danger"><FontAwesomeIcon icon={faTrashAlt} /></Button>{" "}
             <Modal isOpen={modal} toggle={toggle}>
