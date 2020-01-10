@@ -3,11 +3,11 @@ import { Card, CardBody, Button, Table, Row, Col, Modal, ModalHeader, ModalBody,
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { fetchMasterCustomers, deleteMasterCustomer } from '../../../helpers/api';
+import { fetchSupplierInvoices, deleteSupplierInvoice } from '../../helpers/api';
 import { toast } from 'react-toastify';
 
 
-const Action = ({ customer, customers, setCustomers }) => {
+const Action = ({ invoice, invoices, setInvoices }) => {
 
     const [modal, setModal] = useState(false);
 
@@ -18,34 +18,34 @@ const Action = ({ customer, customers, setCustomers }) => {
         [modal, setModal]
     )
 
-    const deleteCustomer = useCallback(
+    const deleteInvoice = useCallback(
         async () => {
             try {
-                await deleteMasterCustomer(customer.id);
-                await setCustomers(customers.filter(e => e.id !== customer.id));
+                await deleteSupplierInvoice(invoice.id);
+                await setInvoices(invoices.filter(e => e.id !== invoice.id));
                 toggle();
-                toast.success(`${customer.name} deleted!`);
+                toast.success(`${invoice.name} deleted!`);
             } catch (err) {
                 toggle();
                 toast.error("Something went wrong");
             }
         },
-        [customer, customers, setCustomers, toggle]
+        [invoice, invoices, setInvoices, toggle]
     )
 
     return (
         <div>
-            <Link to={`/masters/customers/edit/${customer.id}`}>
+            <Link to={`/supplier/invoices/edit/${invoice.id}`}>
                 <Button color="primary"><FontAwesomeIcon icon={faPencilAlt} /></Button>{" "}
             </Link>
             <Button onClick={toggle} color="danger"><FontAwesomeIcon icon={faTrashAlt} /></Button>{" "}
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Delete {customer.name}?</ModalHeader>
+                <ModalHeader toggle={toggle}>Delete {invoice.name}?</ModalHeader>
                 <ModalBody>
-                    Are you sure you want to permanently delete {customer.name}?
+                    Are you sure you want to permanently delete {invoice.name}?
             </ModalBody>
                 <ModalFooter>
-                    <Button color="danger" onClick={deleteCustomer}>Delete</Button>{' '}
+                    <Button color="danger" onClick={deleteInvoice}>Delete</Button>{' '}
                     <Button color="link" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
@@ -53,53 +53,54 @@ const Action = ({ customer, customers, setCustomers }) => {
     );
 }
 
-const CustomersTable = ({ customers, setCustomers }) => {
+const InvoicesTable = ({ invoices, setInvoices }) => {
 
-    const renderCustomersRows = useCallback(
+    const renderItemsRows = useCallback(
         () => {
-            if (customers.length > 0) {
-                return customers.map(i => {
+            if (invoices.length > 0) {
+                return invoices.map(i => {
                     return (
                         <tr key={i.id}>
-                            <td>{i.company_name}</td>
-                            <td>{i.customer_type}</td>
-                            <td><Action customer={i} customers={customers} setCustomers={setCustomers} /></td>
+                            <td>{i.invoice_number}</td>
+                            <td>{`${i.customer_name.primary_contact} | ${i.customer_name.company_name}`}</td>
+                            {console.log(i)}
+                            <td><Action invoice={i} invoices={invoices} setInvoices={setInvoices} /></td>
                         </tr>
-                    );
-                });
+                    )
+                })
             }
             return <div>No Data</div>;
-        }
+        },
+        [invoices, setInvoices]
     )
 
     return (
         <Table hover className="mt-3">
             <thead>
                 <tr>
-                    <th>Company Name</th>
-                    <th>Type</th>
+                    <th>Invoice#</th>
+                    <th>Customer</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                {renderCustomersRows()}
+                {renderItemsRows()}
             </tbody>
         </Table>
     );
 }
 
-const Customers = () => {
+const Invoices = props => {
 
-    const [customers, setCustomers] = useState([]);
+    const [invoices, setInvoices] = useState([]);
 
     useEffect(() => {
-        const loadCustomersData = async () => {
-            const customersData = await fetchMasterCustomers();
-            console.log(customersData)
-            setCustomers(customersData);
+        const loadInvoicesData = async () => {
+            const invoicesData = await fetchSupplierInvoices();
+            setInvoices(invoicesData);
         }
-        loadCustomersData();
-    }, [setCustomers,])
+        loadInvoicesData();
+    }, [])
 
     return (
         <div className="animated fadeIn">
@@ -107,16 +108,16 @@ const Customers = () => {
                 <CardBody>
                     <Row>
                         <Col sm={6}>
-                            <h3>Customers</h3>
+                            <h3>Invoices</h3>
                         </Col>
                         <Col sm={6} className="text-right">
-                            <Link to="/masters/customers/add">
-                                <Button color="primary"><FontAwesomeIcon icon={faPlus} /> Add Customer</Button>
+                            <Link to="/supplier/invoice/create">
+                                <Button color="primary"><FontAwesomeIcon icon={faPlus} /> Create Invoice</Button>
                             </Link>
                         </Col>
                     </Row>
 
-                    <CustomersTable customers={customers} setCustomers={setCustomers} />
+                    <InvoicesTable invoices={invoices} setInvoices={setInvoices} />
 
                 </CardBody>
             </Card>
@@ -124,4 +125,4 @@ const Customers = () => {
     )
 }
 
-export default Customers;
+export default Invoices;

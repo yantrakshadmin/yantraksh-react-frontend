@@ -85,6 +85,9 @@ export const REPORT_TRACKING_VS_LR = 'TrackingvsLr/';
 export const MASTER_ITEMS = 'suppliers/supplieritems/';
 export const MASTER_CUSTOMERS = 'suppliers/suppliercustomer/';
 
+//Supplier Invoice
+export const SUPPLIER_INVOICE = 'suppliers/supplierinvoice/';
+
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -447,5 +450,27 @@ export const editMasterCustomer = (id, data) => loadSecureUrl(`${MASTER_CUSTOMER
 })
 
 export const deleteMasterCustomer = id => loadSecureUrl(`${MASTER_CUSTOMERS}${id}/`, {
+    method: 'delete',
+})
+
+//Supplier Invoice
+
+export const fetchSupplierInvoices = () => loadSecureUrl(SUPPLIER_INVOICE);
+
+export const createSupplierInvoice = data => loadSecureUrl(SUPPLIER_INVOICE, {
+    data: data,
+    method: 'post',
+})
+
+export const fetchSupplierInvoice = id => loadSecureUrl(`${SUPPLIER_INVOICE}${id}/`, {
+    method: 'get',
+})
+
+export const editSupplierInvoice = (id, data) => loadSecureUrl(`${SUPPLIER_INVOICE}${id}/`, {
+    data: data,
+    method: 'patch',
+})
+
+export const deleteSupplierInvoice = id => loadSecureUrl(`${SUPPLIER_INVOICE}${id}/`, {
     method: 'delete',
 })

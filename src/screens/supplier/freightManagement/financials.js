@@ -315,7 +315,7 @@ export default () => {
                             props => (
                                 <div>
                                     <div style={{ paddingTop: 10, paddingBottom: 10, float: 'right' }}>
-                                        <Link to="/supplier/createinvoice/">
+                                        <Link to="/supplier/invoice/create">
                                             <Button color="primary"><FontAwesomeIcon icon={faPlus} /> Create Invoice</Button>
                                         </Link>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

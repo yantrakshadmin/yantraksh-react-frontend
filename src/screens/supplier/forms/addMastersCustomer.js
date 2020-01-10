@@ -168,6 +168,15 @@ const AddMastersCustomer = props => {
         [form]
     )
 
+    const renderAddContantPersonButton = useCallback(
+        () => {
+            if (contactPersonForm.cp_name) {
+                return <Button type="button" title="Add" onClick={addCP} color="success" size="sm"><FontAwesomeIcon icon={faPlus} /></Button>;
+            }
+            return <Button type="button" title="Add" color="success" size="sm" disabled><FontAwesomeIcon icon={faPlus} /></Button>
+        }
+    )
+
     const renderOptions = useCallback(
         data => {
             return data.map(o => {
@@ -454,7 +463,7 @@ const AddMastersCustomer = props => {
                                 <Table className="mt-3" striped responsive>
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Name*</th>
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Designation</th>
@@ -470,11 +479,7 @@ const AddMastersCustomer = props => {
                                             <td><Input type="text" name="cp_phone" value={contactPersonForm.cp_phone} onChange={contactPersonInputChange} bsSize="sm" /></td>
                                             <td><Input type="text" name="cp_designation" value={contactPersonForm.cp_designation} onChange={contactPersonInputChange} bsSize="sm" /></td>
                                             <td><Input type="text" name="cp_department" value={contactPersonForm.cp_department} bsSize="sm" onChange={contactPersonInputChange} /></td>
-                                            <td>
-                                                <Button type="button" title="Add" onClick={addCP} color="success" size="sm">
-                                                    <FontAwesomeIcon icon={faPlus} />
-                                                </Button>
-                                            </td>
+                                            <td>{renderAddContantPersonButton()}</td>
                                         </tr>
                                     </tbody>
                                 </Table>

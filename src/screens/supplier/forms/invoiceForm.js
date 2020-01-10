@@ -9,12 +9,15 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { createSupplierInvoice, fetchSupplierInvoice, editSupplierInvoice, fetchMasterCustomers, fetchMasterItems } from '../../../helpers/api';
+import { toast } from 'react-toastify';
+import history from '../../../history';
 
 
 const InvoiceForm = props => {
 
     const [form, setForm] = useState({
-        customer_name: '',
+        customer_name_id: '',
         invoice_number: '',
         invoice_date: '',
         invoice_due_date: '',
@@ -39,7 +42,68 @@ const InvoiceForm = props => {
         invoice_transaction_amount: 0,
     });
 
+    useEffect(() => {
+        if (props.match.params.id) {
+            const fetchInvoiceData = async () => {
+                const invoiceData = await fetchSupplierInvoice(props.match.params.id);
+                setForm({
+                    customer_name_id: invoiceData.customer_name.id,
+                    invoice_number: invoiceData.invoice_number,
+                    invoice_date: invoiceData.invoice_date,
+                    invoice_due_date: invoiceData.invoice_due_date,
+
+                    place_of_supply: invoiceData.place_of_supply,
+                    service_month: invoiceData.service_month,
+
+                    invoice_transactions: invoiceData.invoice_transactions,
+
+                    company_notes: invoiceData.company_notes,
+                    terms_and_conditions: invoiceData.terms_and_conditions,
+                });
+            }
+            fetchInvoiceData();
+        }
+    }, [])
+
+    const [customers, setCustomers] = useState([]);
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        const getCustomersData = async () => {
+            const data = await fetchMasterCustomers();
+            setCustomers(data);
+        }
+        const getItemsData = async () => {
+            const data = await fetchMasterItems();
+            setItems(data);
+        }
+        getCustomersData();
+        getItemsData();
+    }, [])
+
     const [phase, setPhase] = useState(0);
+
+    const renderCustomerOptions = useCallback(
+        data => {
+            if (data.length > 0) {
+                return data.map(o => {
+                    return <option key={o.id} value={o.id}>{o.primary_contact} | {o.company_name}</option>;
+                });
+            }
+        },
+        []
+    )
+
+    const renderItemsOptions = useCallback(
+        data => {
+            if (data.length > 0) {
+                return data.map(o => {
+                    return <option key={o.id} value={`${o.name} | ${o.type}`}>{o.name} | {o.type}</option>;
+                });
+            }
+        },
+        []
+    )
 
     const handleInputChange = useCallback(
         event => {
@@ -82,7 +146,7 @@ const InvoiceForm = props => {
             setForm({ ...form, invoice_transactions: [...form.invoice_transactions, { ...itemsForm, invoice_transaction_amount: amount }] });
             setItemsForm({
                 invoice_transaction_desc: '',
-                invoice_transaction_lr: '',
+                invoice_transaction_lr: 0,
                 invoice_transaction_vehicle: '',
                 invoice_transaction_date: '',
                 invoice_transaction_qty: 0,
@@ -147,11 +211,25 @@ const InvoiceForm = props => {
     )
 
     const handleSubmit = useCallback(
-        event => {
+        async event => {
             event.preventDefault();
             setPhase(1);
             console.log(form)
-            setPhase(0);
+            try {
+                if (props.match.params.id) {
+                    await editSupplierInvoice(props.match.params.id, form);
+                    setPhase(0);
+                    toast.success('Invoice Updated Successfully');
+                } else {
+                    await createSupplierInvoice(form);
+                    setPhase(0);
+                    toast.success('Invoice Created Successfully');
+                    history.push('/dashboard/supplier/invoices');
+                }
+            } catch (err) {
+                toast.error('Something went wrong!');
+                setPhase(0);
+            }
         },
         [form, phase, setPhase]
     )
@@ -160,7 +238,7 @@ const InvoiceForm = props => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    <b>Create New Invoice</b>
+                    {props.match.params.id ? <b>Edit Invoice</b> : <b>Create Invoice</b>}
                 </CardHeader>
                 <CardBody>
                     <Form method="post" onSubmit={handleSubmit}>
@@ -168,9 +246,12 @@ const InvoiceForm = props => {
                         <Row>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="customer_name">Customer Name*</Label>
-                                    <Input type="text" name="customer_name" id="customer_name" value={form.customer_name}
-                                        onChange={handleInputChange} required />
+                                    <Label htmlFor="customer_name_id">Customer Name*</Label>
+                                    <Input type="select" name="customer_name_id" id="customer_name_id" value={form.customer_name_id}
+                                        onChange={handleInputChange} required>
+                                        <option value={""} defaultValue>Select Customer</option>
+                                        {renderCustomerOptions(customers)}
+                                    </Input>
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -240,8 +321,13 @@ const InvoiceForm = props => {
                             <tbody>
                                 {renderItemsList()}
                                 <tr>
-                                    <td><Input type="text" name="invoice_transaction_desc" value={itemsForm.invoice_transaction_desc} onChange={handleItemsInputChange} placeholder="Item Details" bsSize="sm" /></td>
-                                    <td><Input type="text" name="invoice_transaction_lr" value={itemsForm.invoice_transaction_lr} onChange={handleItemsInputChange} bsSize="sm" /></td>
+                                    <td>
+                                        <Input type="select" name="invoice_transaction_desc" value={itemsForm.invoice_transaction_desc} onChange={handleItemsInputChange} placeholder="Item Details" bsSize="sm">
+                                            <option value={""} defaultValue>Select Item</option>
+                                            {renderItemsOptions(items)}
+                                        </Input>
+                                    </td>
+                                    <td><Input type="number" name="invoice_transaction_lr" value={itemsForm.invoice_transaction_lr} onChange={handleItemsInputChange} bsSize="sm" /></td>
                                     <td><Input type="text" name="invoice_transaction_vehicle" value={itemsForm.invoice_transaction_vehicle} onChange={handleItemsInputChange} bsSize="sm" /></td>
                                     <td><Input type="date" name="invoice_transaction_date" value={itemsForm.invoice_transaction_date} onChange={handleItemsInputChange} bsSize="sm" /></td>
                                     <td><Input type="number" name="invoice_transaction_qty" value={itemsForm.invoice_transaction_qty} bsSize="sm" onChange={handleItemsInputChange} /></td>

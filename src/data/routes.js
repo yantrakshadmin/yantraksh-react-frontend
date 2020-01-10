@@ -52,6 +52,12 @@ const supplierNavigation = [
         icon: 'fa fa-clipboard',
     },
     {
+        name: 'Invoices',
+        url: '/supplier/invoices',
+        icon: 'fa fa-clipboard',
+        component: lazy(() => import('../screens/supplier/invoices')),
+    },
+    {
         name: 'Feedback',
         url: '/feedback',
         icon: 'icon-feed',
@@ -153,7 +159,6 @@ const shipperNavigation = [
         icon: 'fa fa-clipboard',
         component: lazy(() => import('../screens/shipper/finances/financials')),
     },
-
     {
         name: 'Reports & Analytics',
         url: '/reports',
@@ -311,9 +316,14 @@ const supplierExtraRoutes = [
         name: 'View Bids',
         exact: true
     }, {
-        path: '/supplier/createinvoice/',
+        path: '/supplier/invoice/create',
         component: lazy(() => import('../screens/supplier/forms/invoiceForm')),
         name: 'Create Invoice',
+        exact: true
+    }, {
+        path: '/supplier/invoices/edit/:id',
+        component: lazy(() => import('../screens/supplier/forms/invoiceForm')),
+        name: 'Edit Invoice',
         exact: true
     }, {
         path: '/supplier/invoice/:id',
