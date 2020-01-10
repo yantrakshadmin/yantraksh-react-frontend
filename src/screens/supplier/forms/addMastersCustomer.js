@@ -488,7 +488,6 @@ const AddMastersCustomer = props => {
 
                         <hr />
 
-
                         {btnLoader()}
                         {' '}
                         <Link to="/masters/customers">

@@ -58,6 +58,12 @@ const supplierNavigation = [
         component: lazy(() => import('../screens/supplier/invoices')),
     },
     {
+        name: 'E-Way-Bill',
+        url: '/supplier/ewaybill',
+        icon: 'fa fa-clipboard',
+        component: lazy(() => import('../screens/supplier/forms/eWayBill')),
+    },
+    {
         name: 'Feedback',
         url: '/feedback',
         icon: 'icon-feed',
