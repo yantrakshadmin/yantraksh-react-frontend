@@ -43,9 +43,9 @@ const Action = ({ invoice, invoices, setInvoices }) => {
             </Link>
             <Button onClick={toggle} color="danger"><FontAwesomeIcon icon={faTrashAlt} /></Button>{" "}
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Delete {invoice.name}?</ModalHeader>
+                <ModalHeader toggle={toggle}>Delete {invoice.invoice_number}?</ModalHeader>
                 <ModalBody>
-                    Are you sure you want to permanently delete {invoice.name}?
+                    Are you sure you want to permanently delete {invoice.invoice_number}?
             </ModalBody>
                 <ModalFooter>
                     <Button color="danger" onClick={deleteInvoice}>Delete</Button>{' '}

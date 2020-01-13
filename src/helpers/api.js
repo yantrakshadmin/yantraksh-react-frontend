@@ -88,6 +88,10 @@ export const MASTER_CUSTOMERS = 'suppliers/suppliercustomer/';
 //Supplier Invoice
 export const SUPPLIER_INVOICE = 'suppliers/supplierinvoice/';
 
+//User Account Verification
+export const VERIFY_OTP = 'verifyotp/';
+export const RESEND_OTP = 'resendotp/';
+
 
 const getAccessToken = () => {
     return new Promise(async (resolve, reject) => {
@@ -474,3 +478,12 @@ export const editSupplierInvoice = (id, data) => loadSecureUrl(`${SUPPLIER_INVOI
 export const deleteSupplierInvoice = id => loadSecureUrl(`${SUPPLIER_INVOICE}${id}/`, {
     method: 'delete',
 })
+
+//User Account Verification
+
+export const verifyOTP = data => loadSecureUrl(VERIFY_OTP, {
+    data: data,
+    method: 'post',
+})
+
+export const resendOTP = () => loadSecureUrl(RESEND_OTP);

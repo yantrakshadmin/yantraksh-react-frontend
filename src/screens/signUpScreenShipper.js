@@ -82,18 +82,24 @@ class SignUpScreenSupplier extends Component {
         // if (!this.state.password.match(PASSWORD_REGEX))
         //     errors.push('Password not valid');
 
-        if (!this.state.username.match(USERNAME_REGEX))
+        if (!this.state.username.match(USERNAME_REGEX)) {
             toast.error("Username not valid");
-        else {
+            this.setState({ phase: 0 })
+        } else {
             const data = await isUsernameAvailable(this.state.username);
-            if (!data.available)
+            if (!data.available) {
                 errors.push(`Username '${data.username}' not available`);
+                this.setState({ phase: 0 })
+            }
         }
-        if (this.state.confirmpass !== this.state.password)
+        if (this.state.confirmpass !== this.state.password) {
             errors.push('Password and confirm password is not same');
-        if (errors.length !== 0)
+            this.setState({ phase: 0 })
+        }
+        if (errors.length !== 0) {
             toast.error(errors.join('\n'));
-        else {
+            this.setState({ phase: 0 })
+        } else {
             if (this.props.type === "Supplier") {
                 try {
                     await signUpUserSupplier(this.state);

@@ -17,6 +17,7 @@ import history from '../../../history';
 const InvoiceForm = props => {
 
     const [form, setForm] = useState({
+        invoice_quiz: '',
         customer_name_id: '',
         invoice_number: '',
         invoice_date: '',
@@ -46,17 +47,16 @@ const InvoiceForm = props => {
         if (props.match.params.id) {
             const fetchInvoiceData = async () => {
                 const invoiceData = await fetchSupplierInvoice(props.match.params.id);
+                console.log(invoiceData)
                 setForm({
+                    invoice_quiz: invoiceData.invoice_quiz,
                     customer_name_id: invoiceData.customer_name.id,
                     invoice_number: invoiceData.invoice_number,
                     invoice_date: invoiceData.invoice_date,
                     invoice_due_date: invoiceData.invoice_due_date,
-
                     place_of_supply: invoiceData.place_of_supply,
                     service_month: invoiceData.service_month,
-
                     invoice_transactions: invoiceData.invoice_transactions,
-
                     company_notes: invoiceData.company_notes,
                     terms_and_conditions: invoiceData.terms_and_conditions,
                 });
