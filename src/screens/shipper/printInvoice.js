@@ -6,7 +6,7 @@ import {
     Row,
     Col,
 } from 'reactstrap';
-import { fetchSupplierInvoice } from '../../helpers/api';
+import { fetchShipperInvoice, getShipperProfileDetails } from '../../helpers/api';
 
 
 function formatDate(text) {
@@ -39,47 +39,26 @@ function inWords(num) {
 }
 
 
-export default (props) => {
+const PrintInvoice = props => {
 
     const [data, setData] = useState({});
+    const [profile, setProfile] = useState({});
 
     useEffect(() => {
         if (props.match.params.id) {
             const fetchInvoiceData = async () => {
-                const invoiceData = await fetchSupplierInvoice(props.match.params.id);
+                const invoiceData = await fetchShipperInvoice(props.match.params.id);
                 setData(invoiceData);
             }
+            const fetchProfileDetails = async () => {
+                const profileData = await getShipperProfileDetails();
+                console.log(profileData)
+                setProfile(profileData);
+            }
             fetchInvoiceData();
+            fetchProfileDetails();
         }
     }, [])
-
-
-    const renderBillTo = useCallback(
-        () => {
-            if (data.customer_name) {
-                return (
-                    <td style={{ lineHeight: '18px' }}>
-                        <b>{data.customer_name.billing_attention}</b>
-                        <br />
-                        {data.customer_name.billing_address}
-                        <br />
-                        {data.customer_name.billing_city}, {data.customer_name.billing_state}, {data.customer_name.billing_country}
-                        <br />
-                        {data.customer_name.billing_pin_code}
-                        <br />
-                        GSTIN / PAN: {data.customer_name.gstin_pan}
-                    </td>
-                )
-            } else if (data.invoice_quiz) {
-                return (
-                    <td style={{ lineHeight: '18px' }}>
-                        <b>{data.invoice_quiz.owner}</b>
-                    </td>
-                )
-            }
-
-        }
-    )
 
     const renderItemsList = useCallback(
         () => {
@@ -101,7 +80,7 @@ export default (props) => {
         [data,]
     )
 
-    if (!data.id) {
+    if (!data.id || !profile.user) {
         return null;
     }
 
@@ -157,7 +136,17 @@ export default (props) => {
                     </thead>
                     <tbody>
                         <tr>
-                            {renderBillTo()}
+                            <td style={{ lineHeight: '18px' }}>
+                                <b>{`${profile.shipper_fname} ${profile.shipper_lname}`}</b>
+                                <br />
+                                {profile.shipper_street}, {profile.shipper_address}
+                                <br />
+                                {profile.shipper_city}, {profile.shipper_state}
+                                <br />
+                                {profile.shipper_pin}
+                                <br />
+                                GSTIN / PAN: {profile.shipper_gst}
+                            </td>
                         </tr>
                     </tbody>
                 </Table>
@@ -204,3 +193,5 @@ export default (props) => {
         </div>
     )
 }
+
+export default PrintInvoice;

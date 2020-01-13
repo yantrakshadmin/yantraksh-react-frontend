@@ -8,8 +8,9 @@ import { API_TOKENS } from "../data/storage";
 import { errorGettingUserInfoNotification, signINAgainNotification } from "./notifications";
 
 // const BASE_URL = "http://0.0.0.0:8000/";
-const BASE_URL = "http://127.0.0.1:8000/"
+//const BASE_URL = "http://127.0.0.1:8000/"
 //const BASE_URL = "http://10.5.50.94:8000/";
+const BASE_URL = "https://backend.yantraksh.com/";
 //const BASE_URL = "http://192.168.43.34:8000/";
 //const BASE_URL = "https://yantracloudbackend.herokuapp.com/";
 //const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
@@ -91,6 +92,9 @@ export const SUPPLIER_INVOICE = 'suppliers/supplierinvoice/';
 //User Account Verification
 export const VERIFY_OTP = 'verifyotp/';
 export const RESEND_OTP = 'resendotp/';
+
+//Shipper Invoice
+export const SHIPPER_INVOICE = "shipper/shipperinvoice/";
 
 
 const getAccessToken = () => {
@@ -477,6 +481,13 @@ export const editSupplierInvoice = (id, data) => loadSecureUrl(`${SUPPLIER_INVOI
 
 export const deleteSupplierInvoice = id => loadSecureUrl(`${SUPPLIER_INVOICE}${id}/`, {
     method: 'delete',
+})
+
+//Shipper Invoice
+export const fetchShipperInvoices = () => loadSecureUrl(SHIPPER_INVOICE);
+
+export const fetchShipperInvoice = id => loadSecureUrl(`${SHIPPER_INVOICE}${id}/`, {
+    method: 'get',
 })
 
 //User Account Verification

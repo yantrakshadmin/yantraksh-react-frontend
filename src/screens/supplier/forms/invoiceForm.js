@@ -47,19 +47,33 @@ const InvoiceForm = props => {
         if (props.match.params.id) {
             const fetchInvoiceData = async () => {
                 const invoiceData = await fetchSupplierInvoice(props.match.params.id);
-                console.log(invoiceData)
-                setForm({
-                    invoice_quiz: invoiceData.invoice_quiz,
-                    customer_name_id: invoiceData.customer_name.id,
-                    invoice_number: invoiceData.invoice_number,
-                    invoice_date: invoiceData.invoice_date,
-                    invoice_due_date: invoiceData.invoice_due_date,
-                    place_of_supply: invoiceData.place_of_supply,
-                    service_month: invoiceData.service_month,
-                    invoice_transactions: invoiceData.invoice_transactions,
-                    company_notes: invoiceData.company_notes,
-                    terms_and_conditions: invoiceData.terms_and_conditions,
-                });
+                if (invoiceData.customer_name) {
+                    setForm({
+                        invoice_quiz: invoiceData.invoice_quiz,
+                        customer_name_id: invoiceData.customer_name.id,
+                        invoice_number: invoiceData.invoice_number,
+                        invoice_date: invoiceData.invoice_date,
+                        invoice_due_date: invoiceData.invoice_due_date,
+                        place_of_supply: invoiceData.place_of_supply,
+                        service_month: invoiceData.service_month,
+                        invoice_transactions: invoiceData.invoice_transactions,
+                        company_notes: invoiceData.company_notes,
+                        terms_and_conditions: invoiceData.terms_and_conditions,
+                    });
+                } else if (invoiceData.invoice_quiz) {
+                    setForm({
+                        invoice_quiz: invoiceData.invoice_quiz,
+                        customer_name_id: invoiceData.customer_name,
+                        invoice_number: invoiceData.invoice_number,
+                        invoice_date: invoiceData.invoice_date,
+                        invoice_due_date: invoiceData.invoice_due_date,
+                        place_of_supply: invoiceData.place_of_supply,
+                        service_month: invoiceData.service_month,
+                        invoice_transactions: invoiceData.invoice_transactions,
+                        company_notes: invoiceData.company_notes,
+                        terms_and_conditions: invoiceData.terms_and_conditions,
+                    });
+                }
             }
             fetchInvoiceData();
         }
@@ -92,6 +106,31 @@ const InvoiceForm = props => {
             }
         },
         []
+    )
+
+    const renderCustomerInput = useCallback(
+        () => {
+            if (form.invoice_quiz) {
+                return (
+                    <FormGroup>
+                        <Label>Customer Name*</Label>
+                        <Input type="text" value={`${form.invoice_quiz.get_shipper.shipper_fname} ${form.invoice_quiz.get_shipper.shipper_lname}`} disabled />
+                    </FormGroup>
+                );
+            } else {
+                return (
+                    <FormGroup>
+                        <Label htmlFor="customer_name_id">Customer Name*</Label>
+                        <Input type="select" name="customer_name_id" id="customer_name_id" value={form.customer_name_id}
+                            onChange={handleInputChange} required>
+                            <option value={""} defaultValue>Select Customer</option>
+                            {renderCustomerOptions(customers)}
+                        </Input>
+                    </FormGroup>
+                );
+            }
+        },
+        [form,]
     )
 
     const renderItemsOptions = useCallback(
@@ -245,14 +284,7 @@ const InvoiceForm = props => {
 
                         <Row>
                             <Col md={4}>
-                                <FormGroup>
-                                    <Label htmlFor="customer_name_id">Customer Name*</Label>
-                                    <Input type="select" name="customer_name_id" id="customer_name_id" value={form.customer_name_id}
-                                        onChange={handleInputChange} required>
-                                        <option value={""} defaultValue>Select Customer</option>
-                                        {renderCustomerOptions(customers)}
-                                    </Input>
-                                </FormGroup>
+                                {renderCustomerInput()}
                             </Col>
                         </Row>
                         <Row>
@@ -368,7 +400,7 @@ const InvoiceForm = props => {
 
                         {btnLoader()}
                         {' '}
-                        <Link to="/freight/financial">
+                        <Link to="/supplier/invoices">
                             <Button type="button" color="link" size="lg">Cancel</Button>
                         </Link>
                     </Form>

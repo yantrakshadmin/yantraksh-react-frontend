@@ -55,7 +55,7 @@ const UnverifiedHome = props => {
         () => {
             if (phase === 1) {
                 return (
-                    <Button color="link" disabled>
+                    <Button type="button" color="link" disabled>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading
                     </Button>
                 );

@@ -45,11 +45,6 @@ const supplierNavigation = [
         component: lazy(() => import('../screens/supplier/freightManagement/trips')),
         url: '/freight/trips',
         icon: 'fa fa-suitcase',
-    }, {
-        name: 'Financial',
-        component: lazy(() => import('../screens/supplier/freightManagement/financials')),
-        url: '/freight/financial',
-        icon: 'fa fa-clipboard',
     },
     {
         name: 'Invoices',
@@ -159,11 +154,17 @@ const shipperNavigation = [
         icon: 'fa fa-compass',
         component: lazy(() => import('../screens/shipper/shipping/tracking')),
     },
+    // {
+    //     name: 'Finance',
+    //     url: '/finances',
+    //     icon: 'fa fa-clipboard',
+    //     component: lazy(() => import('../screens/shipper/finances/financials')),
+    // },
     {
-        name: 'Finance',
-        url: '/finances',
+        name: 'Invoices',
+        url: '/shipper/invoices',
         icon: 'fa fa-clipboard',
-        component: lazy(() => import('../screens/shipper/finances/financials')),
+        component: lazy(() => import('../screens/shipper/invoices')),
     },
     {
         name: 'Reports & Analytics',
@@ -234,8 +235,8 @@ const shipperExtraRoutes = [
         exact: true
     },
     {
-        path: '/supplier/printinvoice/:id',
-        component: lazy(() => import('../screens/supplier/forms/printInvoice')),
+        path: '/shipper/invoices/print/:id',
+        component: lazy(() => import('../screens/shipper/printInvoice')),
         name: 'Print Invoice',
         exact: true
     },

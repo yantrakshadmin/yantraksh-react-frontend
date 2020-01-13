@@ -58,6 +58,17 @@ const Action = ({ invoice, invoices, setInvoices }) => {
 
 const InvoicesTable = ({ invoices, setInvoices }) => {
 
+
+    const renderInvoiceCustomerName = useCallback(
+        i => {
+            if (i.customer_name) {
+                return <td>{`${i.customer_name.primary_contact} | ${i.customer_name.company_name}`}</td>
+            } else if (i.invoice_quiz) {
+                return <td>{`${i.invoice_quiz.get_shipper.shipper_fname} ${i.invoice_quiz.get_shipper.shipper_lname}`}</td>
+            }
+        }
+    )
+
     const renderItemsRows = useCallback(
         () => {
             if (invoices.length > 0) {
@@ -65,7 +76,7 @@ const InvoicesTable = ({ invoices, setInvoices }) => {
                     return (
                         <tr key={i.id}>
                             <td>{i.invoice_number}</td>
-                            <td>{`${i.customer_name.primary_contact} | ${i.customer_name.company_name}`}</td>
+                            {renderInvoiceCustomerName(i)}
                             {console.log(i)}
                             <td><Action invoice={i} invoices={invoices} setInvoices={setInvoices} /></td>
                         </tr>

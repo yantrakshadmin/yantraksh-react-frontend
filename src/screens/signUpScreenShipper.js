@@ -230,7 +230,7 @@ class SignUpScreenSupplier extends Component {
                                                 )}
                                             </select>
                                         </InputGroup>
-                                        <InputGroup className="mb-4">
+                                        {/* <InputGroup className="mb-4">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
                                                     <i className="icon-lock" />
@@ -242,7 +242,7 @@ class SignUpScreenSupplier extends Component {
                                                 className={"form-control"}
                                                 onChange={this.handleChange}
                                                 value={this.state.company_code} />
-                                        </InputGroup>
+                                        </InputGroup> */}
                                         {this.state.password !== this.state.confPass ? "Password and confirm password should be same" : ""}
                                         <br />
                                         <br />
