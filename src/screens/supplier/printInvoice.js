@@ -73,7 +73,15 @@ export default (props) => {
             } else if (data.invoice_quiz) {
                 return (
                     <td style={{ lineHeight: '18px' }}>
-                        <b>{data.invoice_quiz.owner}</b>
+                        <b>{`${data.invoice_quiz.get_shipper.shipper_fname} ${data.invoice_quiz.get_shipper.shipper_lname}`}</b>
+                        <br />
+                        {data.invoice_quiz.get_shipper.shipper_street}, {data.invoice_quiz.get_shipper.shipper_address}
+                        <br />
+                        {data.invoice_quiz.get_shipper.shipper_city}, {data.invoice_quiz.get_shipper.shipper_state}
+                        <br />
+                        {data.invoice_quiz.get_shipper.shipper_pin}
+                        <br />
+                        GSTIN / PAN: {data.invoice_quiz.get_shipper.shipper_gst}
                     </td>
                 )
             }

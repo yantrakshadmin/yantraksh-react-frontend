@@ -6,7 +6,7 @@ import {
     Row,
     Col,
 } from 'reactstrap';
-import { fetchShipperInvoice, getShipperProfileDetails } from '../../helpers/api';
+import { fetchShipperInvoice } from '../../helpers/api';
 
 
 function formatDate(text) {
@@ -42,7 +42,6 @@ function inWords(num) {
 const PrintInvoice = props => {
 
     const [data, setData] = useState({});
-    const [profile, setProfile] = useState({});
 
     useEffect(() => {
         if (props.match.params.id) {
@@ -50,13 +49,7 @@ const PrintInvoice = props => {
                 const invoiceData = await fetchShipperInvoice(props.match.params.id);
                 setData(invoiceData);
             }
-            const fetchProfileDetails = async () => {
-                const profileData = await getShipperProfileDetails();
-                console.log(profileData)
-                setProfile(profileData);
-            }
             fetchInvoiceData();
-            fetchProfileDetails();
         }
     }, [])
 
@@ -80,7 +73,7 @@ const PrintInvoice = props => {
         [data,]
     )
 
-    if (!data.id || !profile.user) {
+    if (!data.id) {
         return null;
     }
 
@@ -137,15 +130,15 @@ const PrintInvoice = props => {
                     <tbody>
                         <tr>
                             <td style={{ lineHeight: '18px' }}>
-                                <b>{`${profile.shipper_fname} ${profile.shipper_lname}`}</b>
+                                <b>{`${data.invoice_quiz.get_shipper.shipper_fname} ${data.invoice_quiz.get_shipper.shipper_lname}`}</b>
                                 <br />
-                                {profile.shipper_street}, {profile.shipper_address}
+                                {data.invoice_quiz.get_shipper.shipper_street}, {data.invoice_quiz.get_shipper.shipper_address}
                                 <br />
-                                {profile.shipper_city}, {profile.shipper_state}
+                                {data.invoice_quiz.get_shipper.shipper_city}, {data.invoice_quiz.get_shipper.shipper_state}
                                 <br />
-                                {profile.shipper_pin}
+                                {data.invoice_quiz.get_shipper.shipper_pin}
                                 <br />
-                                GSTIN / PAN: {profile.shipper_gst}
+                                GSTIN / PAN: {data.invoice_quiz.get_shipper.shipper_gst}
                             </td>
                         </tr>
                     </tbody>
