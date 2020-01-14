@@ -21,14 +21,6 @@ export default () => {
 
     const [form, setForm] = useState({
         'username': '',
-        //'phone': '',
-        //'email': '',
-        // 'truck_type': '',
-        // 'truck_name': '',
-        // 'total_trucks': 0,
-        // 'offered_price': 0,
-        // 'weight': 0,
-        // 'id_comments': ''
     });
 
     const [phase, setPhase] = useState(0);

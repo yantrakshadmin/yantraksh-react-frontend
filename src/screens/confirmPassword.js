@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
     Button,
     Card,
@@ -24,36 +24,35 @@ export default () => {
         'otp': '',
         'password': '',
         'username': '',
-        // 'truck_type': '',
-        // 'truck_name': '',
-        // 'total_trucks': 0,
-        // 'offered_price': 0,
-        // 'weight': 0,
-        // 'id_comments': ''
     });
 
-    const handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+    const handleInputChange = useCallback(
+        event => {
+            const target = event.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.name;
 
-        setForm({
-            ...form,
-            [name]: value
-        });
-    };
+            setForm({
+                ...form,
+                [name]: value
+            });
+        },
+        [form, setForm]
+    )
 
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            await confirmPassword(form);
-            toast.success("Password changed successfully!");
-            history.push('/sign-in/');
-        } catch (e) {
-            toast.error("Something went wrong!")
-        }
-    };
+    const handleSubmit = useCallback(
+        async event => {
+            event.preventDefault();
+            try {
+                await confirmPassword(form);
+                toast.success("Password changed successfully!");
+                history.push('/sign-in/');
+            } catch (e) {
+                toast.error("Something went wrong!")
+            }
+        },
+        [form]
+    )
 
     return (
         <div className={"container col-md-5"} style={{ "marginTop": "18vh" }}>
