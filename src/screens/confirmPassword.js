@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
     Button,
     Card,
@@ -12,8 +12,10 @@ import {
     InputGroupText,
     Row,
 } from 'reactstrap';
-import {confirmPassword} from "../helpers/api";
-import {Link} from "react-router-dom";
+import { confirmPassword } from "../helpers/api";
+import { toast } from 'react-toastify';
+import { Link } from "react-router-dom";
+import history from '../history';
 
 
 export default () => {
@@ -46,68 +48,69 @@ export default () => {
         event.preventDefault();
         try {
             await confirmPassword(form);
-            alert('done')
+            toast.success("Password changed successfully!");
+            history.push('/sign-in/');
         } catch (e) {
-            alert(JSON.stringify(e))
+            toast.error("Something went wrong!")
         }
     };
 
     return (
-        <div className={"container col-md-5"} style={{"marginTop": "18vh"}}>
+        <div className={"container col-md-5"} style={{ "marginTop": "18vh" }}>
             <CardGroup>
                 <Card className="p-4">
                     <CardBody>
                         <Form method={'post'} onSubmit={handleSubmit}>
                             <h1>Confirm Password</h1>
                             <p className="text-muted">Don't share your OTP with anyone.</p>
+
                             <InputGroup className="mb-3">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
-                                        <i className="icon-lock"/>
+                                        <i className="icon-lock" />
                                     </InputGroupText>
                                 </InputGroupAddon>
                                 <Input type="text" name="username" id="username" value={form.username}
-                                       placeholder="Enter Username"
-                                       onChange={handleInputChange}/>
+                                    placeholder="Enter Username"
+                                    onChange={handleInputChange}
+                                    required
+                                />
                             </InputGroup>
                             <InputGroup className="mb-4">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
-                                        <i className="icon-user"/>
+                                        <i className="icon-user" />
                                     </InputGroupText>
                                 </InputGroupAddon>
                                 <Input type="text" name="password" id="password" value={form.password}
-                                       placeholder="Enter Password"
-                                       onChange={handleInputChange}/>
-
-
+                                    placeholder="Enter New Password"
+                                    onChange={handleInputChange}
+                                    required
+                                />
                             </InputGroup>
                             <InputGroup className="mb-4">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
-                                        <i className="icon-lock-open"/>
+                                        <i className="icon-lock-open" />
                                     </InputGroupText>
                                 </InputGroupAddon>
-                                <Input type="text" name="otp" id="otp" placeholder="Enter OTP"
-                                       value={form.otp}
-                                       onChange={handleInputChange}/>
+                                <Input type="number" name="otp" id="otp" placeholder="Enter OTP"
+                                    value={form.otp}
+                                    onChange={handleInputChange}
+                                    required
+                                />
                             </InputGroup>
-                            <Row>
-                                <Link to="/confirm-password/">
-                                    <Button color={"primary"} size={"lg"}>Change</Button>
-                                </Link>
+
+                            <Button type="submit" color={"primary"}>Change</Button>{" "}
+                            <Link to="/sign-in/">
+                                <Button type="link" color={"link"}>Cancel</Button>
+                            </Link>{" "}
 
 
-                                <Col xs="6" className="text-right">
-                                    <Link to="/sign-in/">
-                                        <Button color={"link"} size={"lg"}>Cancel</Button>
-                                    </Link>
-                                </Col>
-                            </Row>
                         </Form>
                     </CardBody>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>
+                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                     <CardBody className="text-center">
                         <div>
                             <h2>Sign up</h2>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
     Button,
     Card,
@@ -14,14 +14,15 @@ import {
 } from 'reactstrap';
 import { forgetPassword } from "../helpers/api";
 import { Link } from "react-router-dom";
-
+import { toast } from 'react-toastify';
+import history from '../history';
 
 export default () => {
 
     const [form, setForm] = useState({
         'username': '',
-        'phone': '',
-        'email': '',
+        //'phone': '',
+        //'email': '',
         // 'truck_type': '',
         // 'truck_name': '',
         // 'total_trucks': 0,
@@ -30,37 +31,62 @@ export default () => {
         // 'id_comments': ''
     });
 
-    const handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+    const [phase, setPhase] = useState(0);
 
-        setForm({
-            ...form,
-            [name]: value
-        });
-    };
-
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            await forgetPassword(form);
-            alert('done')
-        } catch (e) {
-            alert(JSON.stringify(e))
+    const renderLoadingButton = useCallback(
+        () => {
+            if (phase === 1) {
+                return (
+                    <Button color="primary" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending
+                </Button>
+                );
+            }
+            return <Button type="submit" color={"primary"}>Send OTP</Button>;
         }
-    };
+    )
+
+    const handleInputChange = useCallback(
+        event => {
+            const target = event.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.name;
+
+            setForm({
+                ...form,
+                [name]: value
+            });
+        },
+        [form, setForm]
+    )
+
+    const handleSubmit = useCallback(
+        async event => {
+            event.preventDefault();
+            setPhase(1);
+            try {
+                await forgetPassword(form);
+                setPhase(0);
+                toast.success("We've sent an otp to your registered Email.");
+                history.push('/confirm-password/');
+            } catch (e) {
+                setPhase(0);
+                toast.error("Please check the username you entered!")
+            }
+        },
+        [form, phase, setPhase]
+    )
 
     return (
-        <div className={"container col-md-5"} style={{ "marginTop": "18vh" }}>
+        <div className={"container col-md-6"} style={{ "marginTop": "18vh" }}>
             <CardGroup>
                 <Card className="p-4">
                     <CardBody>
                         <Form method={'post'} onSubmit={handleSubmit}>
+
                             <h1>Reset Password</h1>
                             <p className="text-muted">Enter Your Following Details :</p>
-                            <InputGroup className="mb-3">
+                            <InputGroup className="my-3">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
                                         <i className="icon-user" />
@@ -68,49 +94,23 @@ export default () => {
                                 </InputGroupAddon>
                                 <Input type="text" name="username" id="username" placeholder="Enter Username"
                                     value={form.username}
-                                    onChange={handleInputChange} />
+                                    onChange={handleInputChange}
+                                    required
+                                />
                             </InputGroup>
-                            <InputGroup className="mb-4">
-                                <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>
-                                        <i className="icon-phone" />
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                                <Input type="text" name="phone" id="number" placeholder="Enter Phone Number"
-                                    value={form.phone}
-                                    onChange={handleInputChange} />
-                            </InputGroup>
-                            <InputGroup className="mb-4">
-                                <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>
-                                        <i className="icon-envelope-open" />
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                                <Input type="email" name="email" id="email" placeholder="Enter Email Address"
-                                    value={form.email}
-                                    onChange={handleInputChange} />
-                            </InputGroup>
+
                             <Row>
                                 <Col md="12" className="forget-password">
-
-                                    <Button color={"primary"} size={"lg"}>Send OTP</Button>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-
-
+                                    {renderLoadingButton()}{" "}
                                     <Link to="/confirm-password/">
-                                        <Button color={"primary"} size={"lg"}>Enter OTP</Button>
-                                    </Link>
-
-
+                                        <Button type="link" color={"primary"}>Enter OTP</Button>
+                                    </Link>{" "}
                                     <Link to="/sign-in/">
-                                        <Button color={"link"} size={"lg"}>Cancel</Button>
-                                    </Link>
-
+                                        <Button type="link" color={"link"}>Cancel</Button>
+                                    </Link>{" "}
                                 </Col>
-
-
                             </Row>
+
                         </Form>
                     </CardBody>
                 </Card>
