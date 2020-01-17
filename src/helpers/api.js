@@ -9,8 +9,8 @@ import { errorGettingUserInfoNotification, signINAgainNotification } from "./not
 
 // const BASE_URL = "http://0.0.0.0:8000/";
 //const BASE_URL = "http://127.0.0.1:8000/"
-const BASE_URL = "http://10.5.50.94:8000/";
-//const BASE_URL = "https://backend.yantraksh.com/";
+//const BASE_URL = "http://10.5.50.94:8000/";
+const BASE_URL = "https://backend.yantraksh.com/";
 //const BASE_URL = "http://192.168.43.34:8000/";
 //const BASE_URL = "https://yantracloudbackend.herokuapp.com/";
 //const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
