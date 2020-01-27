@@ -8,9 +8,9 @@ import { API_TOKENS } from "../data/storage";
 import { errorGettingUserInfoNotification, signINAgainNotification } from "./notifications";
 
 // const BASE_URL = "http://0.0.0.0:8000/";
-//const BASE_URL = "http://127.0.0.1:8000/"
+const BASE_URL = "http://127.0.0.1:8000/"
 //const BASE_URL = "http://10.5.50.94:8000/";
-const BASE_URL = "https://backend.yantraksh.com/";
+//const BASE_URL = "https://backend.yantraksh.com/";
 //const BASE_URL = "http://192.168.43.34:8000/";
 //const BASE_URL = "https://yantracloudbackend.herokuapp.com/";
 //const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
@@ -85,6 +85,12 @@ export const REPORT_TRACKING_VS_LR = 'TrackingvsLr/';
 //SupplierMasters
 export const MASTER_ITEMS = 'suppliers/supplieritems/';
 export const MASTER_CUSTOMERS = 'suppliers/suppliercustomer/';
+
+
+//ShipperMAsters
+export const SHIPPER_MASTER_ITEMS = 'shipper/shipperitems/';
+//export const SHIPPER_MASTER_CUSTOMERS = 'shipper/suppliercustomer/';
+
 
 //Supplier Invoice
 export const SUPPLIER_INVOICE = 'suppliers/supplierinvoice/';
@@ -460,6 +466,31 @@ export const editMasterCustomer = (id, data) => loadSecureUrl(`${MASTER_CUSTOMER
 export const deleteMasterCustomer = id => loadSecureUrl(`${MASTER_CUSTOMERS}${id}/`, {
     method: 'delete',
 })
+
+
+
+//Shipper ITEMS Master
+
+export const fetchShipperMasterItems = () => loadSecureUrl(SHIPPER_MASTER_ITEMS);
+
+export const createShipperMasterItem = data => loadSecureUrl(SHIPPER_MASTER_ITEMS, {
+    data: data,
+    method: 'post',
+})
+
+export const fetchShipperMasterItem = id => loadSecureUrl(`${SHIPPER_MASTER_ITEMS}${id}/`, {
+    method: 'get',
+})
+
+export const editShipperMasterItem = (id, data) => loadSecureUrl(`${SHIPPER_MASTER_ITEMS}${id}/`, {
+    data: data,
+    method: 'patch',
+})
+
+export const deleteShipperMasterItem = id => loadSecureUrl(`${SHIPPER_MASTER_ITEMS}${id}/`, {
+    method: 'delete',
+})
+
 
 //Supplier Invoice
 

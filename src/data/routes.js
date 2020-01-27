@@ -81,6 +81,27 @@ const shipperNavigation = [
         },
     },
     {
+        name: 'Masters',
+        url: '/masters',
+        icon: 'icon-layers',
+        component: lazy(() => import('../screens/supplier/masters/items')),
+        children: [
+            {
+                name: 'Items',
+                component: lazy(() => import('../screens/shipper/masters/items')),
+                url: '/masters/items',
+                icon: 'icon-list',
+            }, {
+                name: 'Customers',
+                component: lazy(() => import('../screens/supplier/masters/customers')),
+                url: '/masters/customers',
+                icon: 'fa fa-users',
+            }, {
+                divider: true
+            }
+        ],
+    },
+    {
         name: 'Items Management',
         url: '/orders',
         icon: 'icon-layers',
@@ -228,6 +249,18 @@ const reportPath = [
     },
 ];
 const shipperExtraRoutes = [
+    {
+        name: 'Add Item',
+        path: '/masters/items/add',
+        component: lazy(() => import('../screens/shipper/forms/addMastersItem')),
+        exact: true
+    },
+    {
+        name: 'Edit Item',
+        path: '/masters/items/edit/:id',
+        component: lazy(() => import('../screens/shipper/forms/addMastersItem')),
+        exact: true
+    },
     {
         path: '/freight/request-for-quotation/bids/:id',
         component: lazy(() => import('../screens/shipper/freightManagement/bids')),
