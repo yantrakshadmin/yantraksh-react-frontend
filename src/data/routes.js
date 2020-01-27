@@ -84,7 +84,7 @@ const shipperNavigation = [
         name: 'Masters',
         url: '/masters',
         icon: 'icon-layers',
-        component: lazy(() => import('../screens/supplier/masters/items')),
+        component: lazy(() => import('../screens/shipper/masters/items')),
         children: [
             {
                 name: 'Items',
@@ -92,9 +92,9 @@ const shipperNavigation = [
                 url: '/masters/items',
                 icon: 'icon-list',
             }, {
-                name: 'Customers',
-                component: lazy(() => import('../screens/supplier/masters/customers')),
-                url: '/masters/customers',
+                name: 'Vendors',
+                component: lazy(() => import('../screens/shipper/masters/vendors')),
+                url: '/masters/vendors',
                 icon: 'fa fa-users',
             }, {
                 divider: true
@@ -259,6 +259,18 @@ const shipperExtraRoutes = [
         name: 'Edit Item',
         path: '/masters/items/edit/:id',
         component: lazy(() => import('../screens/shipper/forms/addMastersItem')),
+        exact: true
+    },
+    {
+        name: 'Add Vendor',
+        path: '/masters/vendors/add',
+        component: lazy(() => import('../screens/shipper/forms/addMastersVendor')),
+        exact: true
+    },
+    {
+        name: 'Edit Vendor',
+        path: '/masters/vendors/edit/:id',
+        component: lazy(() => import('../screens/shipper/forms/addMastersVendor')),
         exact: true
     },
     {
