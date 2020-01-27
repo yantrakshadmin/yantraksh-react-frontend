@@ -97,6 +97,11 @@ const shipperNavigation = [
                 url: '/masters/vendors',
                 icon: 'fa fa-users',
             }, {
+                name: 'Vehicles',
+                component: lazy(() => import('../screens/shipper/masters/vehicles')),
+                url: '/masters/vehicles',
+                icon: 'fa fa-truck',
+            }, {
                 divider: true
             }
         ],
@@ -271,6 +276,18 @@ const shipperExtraRoutes = [
         name: 'Edit Vendor',
         path: '/masters/vendors/edit/:id',
         component: lazy(() => import('../screens/shipper/forms/addMastersVendor')),
+        exact: true
+    },
+    {
+        name: 'Add Vehicle',
+        path: '/masters/vehicles/add',
+        component: lazy(() => import('../screens/shipper/forms/addMastersVehicle')),
+        exact: true
+    },
+    {
+        name: 'Edit Vehicle',
+        path: '/masters/vehicles/edit/:id',
+        component: lazy(() => import('../screens/shipper/forms/addMastersVehicle')),
         exact: true
     },
     {

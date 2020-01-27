@@ -90,6 +90,7 @@ export const MASTER_CUSTOMERS = 'suppliers/suppliercustomer/';
 //ShipperMAsters
 export const SHIPPER_MASTER_ITEMS = 'shipper/shipperitems/';
 export const SHIPPER_MASTER_VENDORS = 'shipper/shippervendors/';
+export const SHIPPER_MASTER_VEHICLES = 'shipper/shippervehicles/';
 
 
 //Supplier Invoice
@@ -510,6 +511,28 @@ export const editShipperMasterVendor = (id, data) => loadSecureUrl(`${SHIPPER_MA
 })
 
 export const deleteShipperMasterVendor = id => loadSecureUrl(`${SHIPPER_MASTER_VENDORS}${id}/`, {
+    method: 'delete',
+})
+
+//Shipper VEHICLES Master
+
+export const fetchShipperMasterVehicles = () => loadSecureUrl(SHIPPER_MASTER_VEHICLES);
+
+export const createShipperMasterVehicle = data => loadSecureUrl(SHIPPER_MASTER_VEHICLES, {
+    data: data,
+    method: 'post',
+})
+
+export const fetchShipperMasterVehicle = id => loadSecureUrl(`${SHIPPER_MASTER_VEHICLES}${id}/`, {
+    method: 'get',
+})
+
+export const editShipperMasterVehicle = (id, data) => loadSecureUrl(`${SHIPPER_MASTER_VEHICLES}${id}/`, {
+    data: data,
+    method: 'patch',
+})
+
+export const deleteShipperMasterVehicle = id => loadSecureUrl(`${SHIPPER_MASTER_VEHICLES}${id}/`, {
     method: 'delete',
 })
 
