@@ -3,34 +3,32 @@ import { Card, CardHeader, CardBody, Form, FormGroup, Row, Col, Label, Input, Bu
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { createShipperMasterVehicle, fetchShipperMasterVehicle, editShipperMasterVehicle } from '../../../helpers/api';
+import { createShipperMasterWarehouse, fetchShipperMasterWarehouse, editShipperMasterWarehouse } from '../../../helpers/api';
 import history from '../../../history';
 
 
 const AddMastersItem = props => {
 
-    const optionsData = {
-        category: [
-            'Open',
-            'Container',
-            'Trailer',
-        ],
-    }
+    const optionsData = {}
 
     const [form, setForm] = useState({
-        name: '',
-        category: '',
-        length: 0,
-        breadth: 0,
-        height: 0,
-        volume: 0,
-        weight: 0,
+        warehouse_name: '',
+        warehouse_email: '',
+
+        warehouse_contact: '',
+        warehouse_address: '',
+        warehouse_city: '',
+        warehouse_pincode: 0,
+        warehouse_state: '',
+
+        warehouse_pan: '',
+        warehouse_gst: '',
     })
 
     useEffect(() => {
         if (props.match.params.id) {
             const fetchItemData = async () => {
-                const itemData = await fetchShipperMasterVehicle(props.match.params.id);
+                const itemData = await fetchShipperMasterWarehouse(props.match.params.id);
                 setForm(itemData);
             }
             fetchItemData();
@@ -82,14 +80,14 @@ const AddMastersItem = props => {
             setPhase(1);
             try {
                 if (props.match.params.id) {
-                    await editShipperMasterVehicle(props.match.params.id, form);
+                    await editShipperMasterWarehouse(props.match.params.id, form);
                     setPhase(0);
-                    toast.success('Vehicle Updated Successfully');
+                    toast.success('Warehouse Updated Successfully');
                 } else {
-                    await createShipperMasterVehicle(form);
+                    await createShipperMasterWarehouse(form);
                     setPhase(0);
-                    toast.success('Vehicle Created Successfully');
-                    history.push('/dashboard/masters/vehicles');
+                    toast.success('Warehouse Created Successfully');
+                    history.push('/dashboard/masters/warehouses');
                 }
 
             } catch (err) {
@@ -104,7 +102,7 @@ const AddMastersItem = props => {
         <div className="animated fadeIn">
             <Card>
                 <CardHeader>
-                    {props.match.params.id ? <b>Edit Vehicle</b> : <b>Add Vehicle</b>}
+                    {props.match.params.id ? <b>Edit Warehouse</b> : <b>Add Warehouse</b>}
                 </CardHeader>
                 <CardBody>
                     <Form method="post" onSubmit={handleSubmit}>
@@ -112,8 +110,8 @@ const AddMastersItem = props => {
                         <Row>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="name">Name*</Label>
-                                    <Input type="text" name="name" id="name" value={form.name}
+                                    <Label htmlFor="warehouse_name">Name*</Label>
+                                    <Input type="text" name="warehouse_name" id="warehouse_name" value={form.warehouse_name}
                                         onChange={handleInputChange} required />
                                 </FormGroup>
                             </Col>
@@ -121,15 +119,9 @@ const AddMastersItem = props => {
                         <Row>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="category">Category</Label>
-                                    <Input type="select" id="category"
-                                        name={"category"}
-                                        value={form.category}
-                                        onChange={handleInputChange}
-                                    >
-                                        <option value={""} defaultValue>Select Category</option>
-                                        {renderOptions(optionsData.category)}
-                                    </Input>
+                                    <Label htmlFor="warehouse_email">Email</Label>
+                                    <Input type="email" name="warehouse_email" id="warehouse_email" value={form.warehouse_email}
+                                        onChange={handleInputChange} />
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -139,36 +131,59 @@ const AddMastersItem = props => {
                         <Row>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="length">Length</Label>
-                                    <Input type="number" name="length" id="length" value={form.length}
+                                    <Label htmlFor="warehouse_contact">Contact</Label>
+                                    <Input type="text" name="warehouse_contact" id="warehouse_contact" value={form.warehouse_contact}
+                                        onChange={handleInputChange} />
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={12}>
+                                <FormGroup>
+                                    <Label htmlFor="warehouse_address">Address</Label>
+                                    <Input type="text" name="warehouse_address" id="warehouse_address" value={form.warehouse_address}
+                                        onChange={handleInputChange} />
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={4}>
+                                <FormGroup>
+                                    <Label htmlFor="warehouse_city">City</Label>
+                                    <Input type="text" name="warehouse_city" id="warehouse_city" value={form.warehouse_city}
                                         onChange={handleInputChange} />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="breadth">Breadth</Label>
-                                    <Input type="number" name="breadth" id="breadth" value={form.breadth}
+                                    <Label htmlFor="warehouse_state">State</Label>
+                                    <Input type="text" name="warehouse_state" id="warehouse_state" value={form.warehouse_state}
                                         onChange={handleInputChange} />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="height">Height</Label>
-                                    <Input type="number" name="height" id="height" value={form.height}
+                                    <Label htmlFor="warehouse_pincode">PIN Code</Label>
+                                    <Input type="number" name="warehouse_pincode" id="warehouse_pincode" value={form.warehouse_pincode}
+                                        onChange={handleInputChange} />
+                                </FormGroup>
+                            </Col>
+                        </Row>
+
+                        <hr />
+
+                        <Row>
+                            <Col md={4}>
+                                <FormGroup>
+                                    <Label htmlFor="warehouse_pan">PAN</Label>
+                                    <Input type="text" name="warehouse_pan" id="warehouse_pan" value={form.warehouse_pan}
                                         onChange={handleInputChange} />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="volume">Volume</Label>
-                                    <Input type="number" name="volume" id="volume" value={form.volume}
-                                        onChange={handleInputChange} />
-                                </FormGroup>
-                            </Col>
-                            <Col md={4}>
-                                <FormGroup>
-                                    <Label htmlFor="weight">Weight</Label>
-                                    <Input type="number" name="weight" id="weight" value={form.weight}
+                                    <Label htmlFor="warehouse_gst">GST</Label>
+                                    <Input type="text" name="warehouse_gst" id="warehouse_gst" value={form.warehouse_gst}
                                         onChange={handleInputChange} />
                                 </FormGroup>
                             </Col>
@@ -178,7 +193,7 @@ const AddMastersItem = props => {
 
                         {btnLoader()}
                         {' '}
-                        <Link to="/masters/vehicles">
+                        <Link to="/masters/warehouses">
                             <Button type="button" color="link" size="lg">Cancel</Button>
                         </Link>
                     </Form>

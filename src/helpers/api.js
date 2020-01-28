@@ -87,10 +87,12 @@ export const MASTER_ITEMS = 'suppliers/supplieritems/';
 export const MASTER_CUSTOMERS = 'suppliers/suppliercustomer/';
 
 
-//ShipperMAsters
+//ShipperMasters
 export const SHIPPER_MASTER_ITEMS = 'shipper/shipperitems/';
 export const SHIPPER_MASTER_VENDORS = 'shipper/shippervendors/';
 export const SHIPPER_MASTER_VEHICLES = 'shipper/shippervehicles/';
+export const SHIPPER_MASTER_WAREHOUSE = 'shipper/shipperwarehouse/';
+export const SHIPPER_MASTER_CLIENTS = 'shipper/shipperclients/'
 
 
 //Supplier Invoice
@@ -533,6 +535,52 @@ export const editShipperMasterVehicle = (id, data) => loadSecureUrl(`${SHIPPER_M
 })
 
 export const deleteShipperMasterVehicle = id => loadSecureUrl(`${SHIPPER_MASTER_VEHICLES}${id}/`, {
+    method: 'delete',
+})
+
+
+//Shipper WAREHOUSE Master
+
+export const fetchShipperMasterWarehouses = () => loadSecureUrl(SHIPPER_MASTER_WAREHOUSE);
+
+export const createShipperMasterWarehouse = data => loadSecureUrl(SHIPPER_MASTER_WAREHOUSE, {
+    data: data,
+    method: 'post',
+})
+
+export const fetchShipperMasterWarehouse = id => loadSecureUrl(`${SHIPPER_MASTER_WAREHOUSE}${id}/`, {
+    method: 'get',
+})
+
+export const editShipperMasterWarehouse = (id, data) => loadSecureUrl(`${SHIPPER_MASTER_WAREHOUSE}${id}/`, {
+    data: data,
+    method: 'patch',
+})
+
+export const deleteShipperMasterWarehouse = id => loadSecureUrl(`${SHIPPER_MASTER_WAREHOUSE}${id}/`, {
+    method: 'delete',
+})
+
+
+//Shipper CLIENTS Master
+
+export const fetchShipperMasterClients = () => loadSecureUrl(SHIPPER_MASTER_CLIENTS);
+
+export const createShipperMasterClient = data => loadSecureUrl(SHIPPER_MASTER_CLIENTS, {
+    data: data,
+    method: 'post',
+})
+
+export const fetchShipperMasterClient = id => loadSecureUrl(`${SHIPPER_MASTER_CLIENTS}${id}/`, {
+    method: 'get',
+})
+
+export const editShipperMasterClient = (id, data) => loadSecureUrl(`${SHIPPER_MASTER_CLIENTS}${id}/`, {
+    data: data,
+    method: 'patch',
+})
+
+export const deleteShipperMasterClient = id => loadSecureUrl(`${SHIPPER_MASTER_CLIENTS}${id}/`, {
     method: 'delete',
 })
 

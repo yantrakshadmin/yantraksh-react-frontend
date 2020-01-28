@@ -102,6 +102,16 @@ const shipperNavigation = [
                 url: '/masters/vehicles',
                 icon: 'fa fa-truck',
             }, {
+                name: 'Warehouses',
+                component: lazy(() => import('../screens/shipper/masters/warehouses')),
+                url: '/masters/warehouses',
+                icon: 'fa fa-home',
+            }, {
+                name: 'Clients',
+                component: lazy(() => import('../screens/shipper/masters/clients')),
+                url: '/masters/clients',
+                icon: 'fa fa-user',
+            }, {
                 divider: true
             }
         ],
@@ -288,6 +298,30 @@ const shipperExtraRoutes = [
         name: 'Edit Vehicle',
         path: '/masters/vehicles/edit/:id',
         component: lazy(() => import('../screens/shipper/forms/addMastersVehicle')),
+        exact: true
+    },
+    {
+        name: 'Add Warehouse',
+        path: '/masters/warehouses/add',
+        component: lazy(() => import('../screens/shipper/forms/addMasterWarehouse')),
+        exact: true
+    },
+    {
+        name: 'Edit Warehouse',
+        path: '/masters/warehouses/edit/:id',
+        component: lazy(() => import('../screens/shipper/forms/addMasterWarehouse')),
+        exact: true
+    },
+    {
+        name: 'Add Client',
+        path: '/masters/clients/add',
+        component: lazy(() => import('../screens/shipper/forms/addMasterClient')),
+        exact: true
+    },
+    {
+        name: 'Edit Cleint',
+        path: '/masters/clients/edit/:id',
+        component: lazy(() => import('../screens/shipper/forms/addMasterClient')),
         exact: true
     },
     {

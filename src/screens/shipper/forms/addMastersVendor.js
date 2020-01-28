@@ -112,11 +112,11 @@ const AddMastersItem = props => {
                 if (props.match.params.id) {
                     await editShipperMasterVendor(props.match.params.id, form);
                     setPhase(0);
-                    toast.success('Item Updated Successfully');
+                    toast.success('Vendor Updated Successfully');
                 } else {
                     await createShipperMasterVendor(form);
                     setPhase(0);
-                    toast.success('Item Created Successfully');
+                    toast.success('Vendor Created Successfully');
                     history.push('/dashboard/masters/vendors');
                 }
 
