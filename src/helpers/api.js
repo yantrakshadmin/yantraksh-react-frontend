@@ -94,6 +94,9 @@ export const SHIPPER_MASTER_VEHICLES = 'shipper/shippervehicles/';
 export const SHIPPER_MASTER_WAREHOUSE = 'shipper/shipperwarehouse/';
 export const SHIPPER_MASTER_CLIENTS = 'shipper/shipperclients/'
 
+//Shipper SALES ORDER
+export const SHIPPER_SALES_ORDER = 'shipper/salesorders/';
+
 
 //Supplier Invoice
 export const SUPPLIER_INVOICE = 'suppliers/supplierinvoice/';
@@ -585,6 +588,15 @@ export const deleteShipperMasterClient = id => loadSecureUrl(`${SHIPPER_MASTER_C
 })
 
 
+//Shipper Sales Order
+export const fetchSalesOrders = () => loadSecureUrl(SHIPPER_SALES_ORDER);
+
+export const createSalesOrder = data => loadSecureUrl(SHIPPER_SALES_ORDER, {
+    data: data,
+    method: 'post',
+})
+
+
 //Supplier Invoice
 
 export const fetchSupplierInvoices = () => loadSecureUrl(SUPPLIER_INVOICE);
@@ -606,6 +618,10 @@ export const editSupplierInvoice = (id, data) => loadSecureUrl(`${SUPPLIER_INVOI
 export const deleteSupplierInvoice = id => loadSecureUrl(`${SUPPLIER_INVOICE}${id}/`, {
     method: 'delete',
 })
+
+
+
+
 
 //Shipper Invoice
 export const fetchShipperInvoices = () => loadSecureUrl(SHIPPER_INVOICE);

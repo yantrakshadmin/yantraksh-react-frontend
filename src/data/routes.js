@@ -117,40 +117,46 @@ const shipperNavigation = [
         ],
     },
     {
-        name: 'Items Management',
+        name: 'Sales Orders',
         url: '/orders',
         icon: 'icon-layers',
-        component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
-        children: [
-            {
-                name: 'All Items',
-                component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
-
-                url: '/orders/all',
-                icon: 'icon-list',
-            }, {
-                name: 'Items on hold',
-                component: lazy(() => import('../screens/shipper/orderManagement/holdOrders')),
-
-                url: '/orders/on-hold',
-                icon: 'fa fa-pause-circle',
-            }, {
-                name: 'Ready to Dispatch',
-                component: lazy(() => import('../screens/shipper/orderManagement/rtdOrders')),
-
-                url: '/orders/ready-to-dispatch',
-                icon: 'fa fa-play-circle',
-            }, {
-                name: 'Dispatched Items',
-                component: lazy(() => import('../screens/shipper/orderManagement/dispatchedOrders')),
-
-                url: '/orders/dispatched',
-                icon: 'fa fa-rocket',
-            }, {
-                divider: true
-            }
-        ],
+        component: lazy(() => import('../screens/shipper/salesOrderManagement/main')),
     },
+    // {
+    //     name: 'Items Management',
+    //     url: '/orders',
+    //     icon: 'icon-layers',
+    //     component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
+    //     children: [
+    //         {
+    //             name: 'All Items',
+    //             component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
+
+    //             url: '/orders/all',
+    //             icon: 'icon-list',
+    //         }, {
+    //             name: 'Items on hold',
+    //             component: lazy(() => import('../screens/shipper/orderManagement/holdOrders')),
+
+    //             url: '/orders/on-hold',
+    //             icon: 'fa fa-pause-circle',
+    //         }, {
+    //             name: 'Ready to Dispatch',
+    //             component: lazy(() => import('../screens/shipper/orderManagement/rtdOrders')),
+
+    //             url: '/orders/ready-to-dispatch',
+    //             icon: 'fa fa-play-circle',
+    //         }, {
+    //             name: 'Dispatched Items',
+    //             component: lazy(() => import('../screens/shipper/orderManagement/dispatchedOrders')),
+
+    //             url: '/orders/dispatched',
+    //             icon: 'fa fa-rocket',
+    //         }, {
+    //             divider: true
+    //         }
+    //     ],
+    // },
     {
         name: 'Dispatch Plans',
         url: '/dispatcher',
