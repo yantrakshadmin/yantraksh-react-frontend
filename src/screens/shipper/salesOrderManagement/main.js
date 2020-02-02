@@ -56,12 +56,12 @@ const Action = ({ item, items, setItems }) => {
     );
 }
 
-const ItemsTable = ({ items, setItems }) => {
+const ItemsTable = ({ salesOrders, setSalesOrders }) => {
 
     const renderItemsRows = useCallback(
         () => {
-            if (items.length > 0) {
-                return items.map(i => {
+            if (salesOrders.length > 0) {
+                return salesOrders.map(i => {
                     return (
                         <tr key={i.id}>
                             <td>{i.reference_no}</td>
@@ -74,7 +74,7 @@ const ItemsTable = ({ items, setItems }) => {
             }
             return <div>No Data</div>;
         },
-        [items, setItems]
+        [salesOrders, setSalesOrders]
     )
 
     return (
@@ -96,7 +96,7 @@ const ItemsTable = ({ items, setItems }) => {
 
 const Items = () => {
 
-    const [items, setItems] = useState([]);
+    const [salesOrders, setSalesOrders] = useState([]);
 
     const [activeTab, setActiveTab] = useState('1');
 
@@ -110,10 +110,10 @@ const Items = () => {
     useEffect(() => {
         const loadItemsData = async () => {
             const itemsData = await fetchSalesOrders();
-            setItems(itemsData);
+            setSalesOrders(itemsData);
         }
         loadItemsData();
-    }, [setItems,])
+    }, [setSalesOrders,])
 
     return (
         <div className="animated fadeIn">
@@ -124,7 +124,7 @@ const Items = () => {
                             <h3>Sales Orders</h3>
                         </Col>
                         <Col sm={6} className="text-right">
-                            <AddSalesOrderForm />
+                            <AddSalesOrderForm fetchSalesOrders={fetchSalesOrders} setSalesOrders={setSalesOrders} />
                         </Col>
                     </Row>
 
@@ -151,7 +151,7 @@ const Items = () => {
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="1">
 
-                            <ItemsTable items={items} setItems={setItems} />
+                            <ItemsTable salesOrders={salesOrders} setSalesOrders={setSalesOrders} />
 
                         </TabPane>
                         <TabPane tabId="2">

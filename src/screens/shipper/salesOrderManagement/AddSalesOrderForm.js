@@ -151,6 +151,8 @@ const AddOrderModal = props => {
             setPhase(1);
             try {
                 await createSalesOrder(form);
+                const data = await props.fetchSalesOrders();
+                props.setSalesOrders(data);
                 setPhase(0);
                 toast.success('Sales Order Created');
                 toggle();
@@ -159,7 +161,7 @@ const AddOrderModal = props => {
                 setPhase(0);
             }
         },
-        [form, setPhase, toggle]
+        [form, setPhase, toggle, props,]
     )
 
     return (
