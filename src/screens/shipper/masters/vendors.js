@@ -61,8 +61,13 @@ const ItemsTable = ({ items, setItems }) => {
                 return items.map(i => {
                     return (
                         <tr key={i.id}>
+                            <td>{i.id}</td>
                             <td>{i.vendor_name}</td>
-                            <td>{i.vendor_type}</td>
+                            <td>{i.vendor_city}</td>
+                            <td>{i.vendor_state}</td>
+                            <td>{i.vendor_email}</td>
+                            <td>{i.vendor_contact_person_name}</td>
+                            <td>{i.vendor_contact_person_no}</td>
                             <td><Action item={i} items={items} setItems={setItems} /></td>
                         </tr>
                     )
@@ -77,8 +82,13 @@ const ItemsTable = ({ items, setItems }) => {
         <Table hover className="mt-3">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Name</th>
-                    <th>Type</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Email</th>
+                    <th>Contact Person Name</th>
+                    <th>Contact Person No.</th>
                     <th>Action</th>
                 </tr>
             </thead>

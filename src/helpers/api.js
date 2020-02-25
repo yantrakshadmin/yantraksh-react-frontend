@@ -26,6 +26,7 @@ const GET_TOKEN_PAIR = '/auth/token/';
 export const CREATE_ACCOUNT_SHIPPER = 'shippercreateapi/';
 export const CREATE_ACCOUNT_SUPPLIER = 'suppliercreateapi/';
 export const CREATE_ACCOUNT_COMPANY = 'companycreateapi/';
+
 const USER_DETAILS = "/auth/user/meta/";
 const USERNAME_AVAILABLE = '/auth/username/available/';
 const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
