@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { fetchShipperMasterVendors, deleteShipperMasterVendor } from '../../../helpers/api';
 import { toast } from 'react-toastify';
+import BootstrapTable from 'react-bootstrap-table-next';
 
 
 const Action = ({ item, items, setItems }) => {
@@ -40,9 +41,9 @@ const Action = ({ item, items, setItems }) => {
             </Link>
             <Button onClick={toggle} color="danger"><FontAwesomeIcon icon={faTrashAlt} /></Button>{" "}
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Delete {item.name}?</ModalHeader>
+                <ModalHeader toggle={toggle}>Delete {item.vendor_name}?</ModalHeader>
                 <ModalBody>
-                    Are you sure you want to permanently delete {item.name}?
+                    Are you sure you want to permanently delete {item.vendor_name}?
             </ModalBody>
                 <ModalFooter>
                     <Button color="danger" onClick={deleteItem}>Delete</Button>{' '}
@@ -55,47 +56,54 @@ const Action = ({ item, items, setItems }) => {
 
 const ItemsTable = ({ items, setItems }) => {
 
-    const renderItemsRows = useCallback(
-        () => {
-            if (items.length > 0) {
-                return items.map(i => {
-                    return (
-                        <tr key={i.id}>
-                            <td>{i.id}</td>
-                            <td>{i.vendor_name}</td>
-                            <td>{i.vendor_city}</td>
-                            <td>{i.vendor_state}</td>
-                            <td>{i.vendor_email}</td>
-                            <td>{i.vendor_contact_person_name}</td>
-                            <td>{i.vendor_contact_person_no}</td>
-                            <td><Action item={i} items={items} setItems={setItems} /></td>
-                        </tr>
-                    )
-                })
-            }
-            return <div>No Data</div>;
+
+    const columns = [
+        {
+            dataField: 'id',
+            text: 'ID',
+            sort: true,
         },
-        [items, setItems]
-    )
+        {
+            dataField: 'vendor_name',
+            text: 'Name',
+            sort: true,
+        },
+        {
+            dataField: 'vendor_city',
+            text: 'City',
+            sort: true
+        },
+        {
+            dataField: 'vendor_state',
+            text: 'State',
+            sort: true
+        },
+        {
+            dataField: 'vendor_email',
+            text: 'Email',
+            sort: true
+        },
+        {
+            dataField: 'vendor_contact_person_name',
+            text: 'Contact Person Name',
+            sort: true
+        },
+        {
+            dataField: 'vendor_contact_person_no',
+            text: 'Contact Person No.',
+            sort: true
+        },
+        {
+            text: 'Action',
+            formatExtraData: { items, setItems },
+            formatter: (cell, row, rowIndex, formatExtraData) => {
+                return <Action item={row} items={formatExtraData.items} setItems={formatExtraData.setItems} />
+            },
+        },
+    ];
 
     return (
-        <Table hover className="mt-3">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Email</th>
-                    <th>Contact Person Name</th>
-                    <th>Contact Person No.</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {renderItemsRows()}
-            </tbody>
-        </Table>
+        <BootstrapTable keyField='id' data={items} columns={columns} />
     );
 }
 
@@ -125,6 +133,8 @@ const Items = () => {
                             </Link>
                         </Col>
                     </Row>
+
+                    <hr />
 
                     <ItemsTable items={items} setItems={setItems} />
 

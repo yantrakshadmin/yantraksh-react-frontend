@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { fetchShipperMasterClients, deleteShipperMasterItem, fetchSalesOrders } from '../../../helpers/api';
 import { toast } from 'react-toastify';
+import BootstrapTable from 'react-bootstrap-table-next';
 import _ from 'lodash';
 
 
@@ -58,47 +59,51 @@ const Action = ({ item, items, setItems }) => {
     );
 }
 
-const ItemsTable = ({ clients, salesOrders, setSalesOrders }) => {
+const ItemsTable = props => {
 
-    const renderItemsRows = useCallback(
-        () => {
-            if (salesOrders.length > 0) {
-                return salesOrders.map(i => {
-                    return (
-                        <tr key={i.id}>
-                            <td>{i.reference_no}</td>
-                            <td>{(_.find(clients, { id: i.client })).client_name}</td>
-                            <td>{i.shipment_date}</td>
-                            <td>{i.origin}</td>
-                            <td>{i.destination}</td>
-                            <td>{i.delivery_method}</td>
-                            <td>{i.status}</td>
-                        </tr>
-                    )
-                })
-            }
-            return <div>No Data</div>;
+    const columns = [
+        {
+            dataField: 'reference_no',
+            text: 'Reference No',
+            sort: true,
         },
-        [salesOrders, setSalesOrders]
-    )
+        {
+            dataField: 'client',
+            text: 'Client',
+            sort: true,
+            formatter: (cell, row) => {
+                return (_.find(props.clients, { id: parseInt(row.client) })).client_name
+            }
+        },
+        {
+            dataField: 'shipment_date',
+            text: 'Shipment Date',
+            sort: true
+        },
+        {
+            dataField: 'origin',
+            text: 'Origin',
+            sort: true
+        },
+        {
+            dataField: 'destination',
+            text: 'Destination',
+            sort: true
+        },
+        {
+            dataField: 'delivery_method',
+            text: 'Delivery Method',
+            sort: true
+        },
+        {
+            dataField: 'status',
+            text: 'Status',
+            sort: true
+        },
+    ];
 
     return (
-        <Table hover className="mt-3">
-            <thead>
-                <tr>
-                    <th>Reference No</th>
-                    <th>Client</th>
-                    <th>Shipment Date</th>
-                    <th>Origin</th>
-                    <th>Destination</th>
-                    <th>Delivery Method</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {renderItemsRows()}
-            </tbody>
-        </Table>
+        <BootstrapTable keyField='id' data={props.salesOrders} columns={columns} />
     );
 }
 
@@ -166,7 +171,7 @@ const Items = () => {
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="1">
 
-                            <ItemsTable clients={clients} salesOrders={salesOrders} setSalesOrders={setSalesOrders} />
+                            <ItemsTable clients={clients} salesOrders={salesOrders} />
 
                         </TabPane>
                         <TabPane tabId="2">

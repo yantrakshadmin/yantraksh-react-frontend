@@ -51,7 +51,7 @@ const AddMastersItem = props => {
     }
 
     const [form, setForm] = useState({
-      
+
         name: '',
         sku_id: '',
         unit: '',
@@ -367,21 +367,21 @@ const AddMastersItem = props => {
                         <Row>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="length">Length</Label>
+                                    <Label htmlFor="length">Length (m)</Label>
                                     <Input type="number" name="length" id="length" value={form.length}
                                         onChange={handleInputChange} />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="breadth">Breadth</Label>
+                                    <Label htmlFor="breadth">Breadth (m)</Label>
                                     <Input type="number" name="breadth" id="breadth" value={form.breadth}
                                         onChange={handleInputChange} />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="height">Height</Label>
+                                    <Label htmlFor="height">Height (m)</Label>
                                     <Input type="number" name="height" id="height" value={form.height}
                                         onChange={handleInputChange} />
                                 </FormGroup>
@@ -395,7 +395,7 @@ const AddMastersItem = props => {
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="weight">Weight</Label>
+                                    <Label htmlFor="weight">Weight (Kg)</Label>
                                     <Input type="number" name="weight" id="weight" value={form.weight}
                                         onChange={handleInputChange} />
                                 </FormGroup>
@@ -405,7 +405,7 @@ const AddMastersItem = props => {
                         <hr />
 
                         <Row>
-                        <Col md={4}>
+                            <Col md={4}>
                                 <FormGroup>
                                     <Label htmlFor="material_type">Material Type</Label>
                                     <Input type="select" id="material_type"

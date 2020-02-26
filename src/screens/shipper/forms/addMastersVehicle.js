@@ -139,21 +139,21 @@ const AddMastersItem = props => {
                         <Row>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="length">Length</Label>
+                                    <Label htmlFor="length">Length (Ft)</Label>
                                     <Input type="number" name="length" id="length" value={form.length}
                                         onChange={handleInputChange} />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="breadth">Breadth</Label>
+                                    <Label htmlFor="breadth">Breadth (Ft)</Label>
                                     <Input type="number" name="breadth" id="breadth" value={form.breadth}
                                         onChange={handleInputChange} />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="height">Height</Label>
+                                    <Label htmlFor="height">Height (Ft)</Label>
                                     <Input type="number" name="height" id="height" value={form.height}
                                         onChange={handleInputChange} />
                                 </FormGroup>
@@ -167,7 +167,7 @@ const AddMastersItem = props => {
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="weight">Weight</Label>
+                                    <Label htmlFor="weight">Weight (Tn)</Label>
                                     <Input type="number" name="weight" id="weight" value={form.weight}
                                         onChange={handleInputChange} />
                                 </FormGroup>

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { fetchShipperMasterClients, deleteShipperMasterClient } from '../../../helpers/api';
 import { toast } from 'react-toastify';
+import BootstrapTable from 'react-bootstrap-table-next';
 
 
 const Action = ({ item, items, setItems }) => {
@@ -40,9 +41,9 @@ const Action = ({ item, items, setItems }) => {
             </Link>
             <Button onClick={toggle} color="danger"><FontAwesomeIcon icon={faTrashAlt} /></Button>{" "}
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Delete {item.name}?</ModalHeader>
+                <ModalHeader toggle={toggle}>Delete {item.client_name}?</ModalHeader>
                 <ModalBody>
-                    Are you sure you want to permanently delete {item.name}?
+                    Are you sure you want to permanently delete {item.client_name}?
             </ModalBody>
                 <ModalFooter>
                     <Button color="danger" onClick={deleteItem}>Delete</Button>{' '}
@@ -55,49 +56,58 @@ const Action = ({ item, items, setItems }) => {
 
 const ItemsTable = ({ items, setItems }) => {
 
-    const renderItemsRows = useCallback(
-        () => {
-            if (items.length > 0) {
-                return items.map(i => {
-                    return (
-                        <tr key={i.id}>
-                            <td>{i.id}</td>
-                            <td>{i.client_name}</td>
-                            <td>{i.client_city}</td>
-                            <td>{i.client_state}</td>
-                            <td>{i.client_email}</td>
-                            <td>{i.client_contact_no}</td>
-                            <td>{i.client_category}</td>
-                            <td>{i.client_code}</td>
-                            <td><Action item={i} items={items} setItems={setItems} /></td>
-                        </tr>
-                    )
-                })
-            }
-            return <div>No Data</div>;
+    const columns = [
+        {
+            dataField: 'id',
+            text: 'ID',
+            sort: true,
         },
-        [items, setItems]
-    )
+        {
+            dataField: 'client_name',
+            text: 'Name',
+            sort: true,
+        },
+        {
+            dataField: 'client_city',
+            text: 'City',
+            sort: true
+        },
+        {
+            dataField: 'client_state',
+            text: 'State',
+            sort: true
+        },
+        {
+            dataField: 'client_email',
+            text: 'Email',
+            sort: true
+        },
+        {
+            dataField: 'client_contact_no',
+            text: 'Contact No.',
+            sort: true
+        },
+        {
+            dataField: 'client_category',
+            text: 'Category',
+            sort: true
+        },
+        {
+            dataField: 'client_code',
+            text: 'Code',
+            sort: true
+        },
+        {
+            text: 'Action',
+            formatExtraData: { items, setItems },
+            formatter: (cell, row, rowIndex, formatExtraData) => {
+                return <Action item={row} items={formatExtraData.items} setItems={formatExtraData.setItems} />
+            },
+        },
+    ];
 
     return (
-        <Table hover className="mt-3">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Email</th>
-                    <th>Contact No</th>
-                    <th>Caregory</th>
-                    <th>Code</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {renderItemsRows()}
-            </tbody>
-        </Table>
+        <BootstrapTable keyField='id' data={items} columns={columns} />
     );
 }
 
@@ -127,6 +137,8 @@ const Items = () => {
                             </Link>
                         </Col>
                     </Row>
+
+                    <hr />
 
                     <ItemsTable items={items} setItems={setItems} />
 

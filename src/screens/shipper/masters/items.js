@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { fetchShipperMasterItems, deleteShipperMasterItem } from '../../../helpers/api';
 import { toast } from 'react-toastify';
+import BootstrapTable from 'react-bootstrap-table-next';
 
 
 const Action = ({ item, items, setItems }) => {
@@ -55,47 +56,59 @@ const Action = ({ item, items, setItems }) => {
 
 const ItemsTable = ({ items, setItems }) => {
 
-    const renderItemsRows = useCallback(
-        () => {
-            if (items.length > 0) {
-                return items.map(i => {
-                    return (
-                        <tr key={i.id}>
-                            <td>{i.id}</td>
-                            <td>{i.sku_id}</td>
-                            <td>{i.name}</td>
-                            <td>{`${i.length} x ${i.breadth} x ${i.height}`}</td>
-                            <td>{i.volume}</td>
-                            <td>{i.cost_price}</td>
-                            <td>{i.hsn_sac_code}</td>
-                            <td><Action item={i} items={items} setItems={setItems} /></td>
-                        </tr>
-                    )
-                })
-            }
-            return <div>No Data</div>;
+    const columns = [
+        {
+            dataField: 'id',
+            text: 'ID',
+            sort: true,
         },
-        [items, setItems]
-    )
+        {
+            dataField: 'sku_id',
+            text: 'SKU',
+            sort: true,
+        },
+        {
+            dataField: 'name',
+            text: 'Name',
+            sort: true
+        },
+        {
+            text: 'L x B x H (m)',
+            formatter: (cell, row) => {
+                return `${row.length} x ${row.breadth} x ${row.height}`
+            },
+        },
+        {
+            dataField: 'volume',
+            text: 'Volume',
+            sort: true
+        },
+        {
+            dataField: 'weight',
+            text: 'Weight (Kg)',
+            sort: true
+        },
+        {
+            dataField: 'cost_price',
+            text: 'Cost Price',
+            sort: true
+        },
+        {
+            dataField: 'hsn_sac_code',
+            text: 'HSN/SAC',
+            sort: true
+        },
+        {
+            text: 'Action',
+            formatExtraData: { items, setItems },
+            formatter: (cell, row, rowIndex, formatExtraData) => {
+                return <Action item={row} items={formatExtraData.items} setItems={formatExtraData.setItems} />
+            },
+        },
+    ];
 
     return (
-        <Table hover className="mt-3">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>SKU</th>
-                    <th>Name</th>
-                    <th>L x B x H</th>
-                    <th>Volume</th>
-                    <th>Cost Price</th>
-                    <th>HSN/SAC</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {renderItemsRows()}
-            </tbody>
-        </Table>
+        <BootstrapTable keyField='id' data={items} columns={columns} />
     );
 }
 
@@ -125,6 +138,8 @@ const Items = () => {
                             </Link>
                         </Col>
                     </Row>
+
+                    <hr />
 
                     <ItemsTable items={items} setItems={setItems} />
 
