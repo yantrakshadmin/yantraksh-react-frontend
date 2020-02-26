@@ -64,7 +64,8 @@ const ItemsTable = ({ items, setItems }) => {
                             <td>{i.id}</td>
                             <td>{i.sku_id}</td>
                             <td>{i.name}</td>
-                            <td>{i.length * i.breadth * i.height}</td>
+                            <td>{`${i.length} x ${i.breadth} x ${i.height}`}</td>
+                            <td>{i.volume}</td>
                             <td>{i.cost_price}</td>
                             <td>{i.hsn_sac_code}</td>
                             <td><Action item={i} items={items} setItems={setItems} /></td>
@@ -85,6 +86,7 @@ const ItemsTable = ({ items, setItems }) => {
                     <th>SKU</th>
                     <th>Name</th>
                     <th>L x B x H</th>
+                    <th>Volume</th>
                     <th>Cost Price</th>
                     <th>HSN/SAC</th>
                     <th>Action</th>

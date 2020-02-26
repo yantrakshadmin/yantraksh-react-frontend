@@ -2,8 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import { fetchShipperMasterItems, fetchShipperMasterClients, createSalesOrder } from '../../../helpers/api';
+import { fetchShipperMasterItems, createSalesOrder } from '../../../helpers/api';
 import { toast } from 'react-toastify';
+import _ from 'lodash';
 
 
 const AddOrderModal = props => {
@@ -17,20 +18,13 @@ const AddOrderModal = props => {
 
     const [items, setItems] = useState([]);
 
-    const [clients, setCleints] = useState([]);
-
     const [selectedItem, setSelectedItem] = useState({ item: "", item_quantity: 0 });
 
     useEffect(() => {
-        const loadClients = async () => {
-            const clientsData = await fetchShipperMasterClients();
-            setCleints(clientsData);
-        }
         const loadItemsData = async () => {
             const itemsData = await fetchShipperMasterItems();
             setItems(itemsData);
         }
-        loadClients();
         loadItemsData();
     }, [])
 
@@ -76,8 +70,8 @@ const AddOrderModal = props => {
 
     const renderClientOptions = useCallback(
         () => {
-            if (clients.length > 0) {
-                return clients.map(i => {
+            if (props.clients.length > 0) {
+                return props.clients.map(i => {
                     return <option key={i.id} value={i.id}>{i.client_name}</option>;
                 })
             }
@@ -117,7 +111,7 @@ const AddOrderModal = props => {
                     return (
                         <FormGroup key={idx}>
                             <InputGroup>
-                                <Input size="sm" value={i.item} disabled />
+                                <Input size="sm" value={(_.find(items, { id: parseInt(i.item) })).name} disabled />
                                 <Input size="sm" value={i.item_quantity} disabled />
                                 <InputGroupAddon addonType="append">
                                     <Button type="button" title="Add" color="danger" onClick={() => removeFormItems(i.item, i.item_quantity)} size="sm"><FontAwesomeIcon icon={faMinus} /></Button>
@@ -229,7 +223,7 @@ const AddOrderModal = props => {
                                             value={selectedItem.item}
                                             onChange={ev => setSelectedItem({ ...selectedItem, item: ev.target.value })}
                                         >
-                                            <option value={""} defaultValue>Select a Item</option>
+                                            <option value={""} defaultValue>Select an Item</option>
                                             {renderItemOptions()}
                                         </Input>
                                         <Input type="number" id="select_item_quantity"

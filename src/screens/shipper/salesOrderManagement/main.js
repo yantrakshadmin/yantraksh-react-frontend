@@ -4,8 +4,10 @@ import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { fetchShipperMasterItems, deleteShipperMasterItem, fetchSalesOrders } from '../../../helpers/api';
+import { fetchShipperMasterClients, deleteShipperMasterItem, fetchSalesOrders } from '../../../helpers/api';
 import { toast } from 'react-toastify';
+import _ from 'lodash';
+
 
 import AddSalesOrderForm from './AddSalesOrderForm';
 
@@ -56,7 +58,7 @@ const Action = ({ item, items, setItems }) => {
     );
 }
 
-const ItemsTable = ({ salesOrders, setSalesOrders }) => {
+const ItemsTable = ({ clients, salesOrders, setSalesOrders }) => {
 
     const renderItemsRows = useCallback(
         () => {
@@ -65,8 +67,11 @@ const ItemsTable = ({ salesOrders, setSalesOrders }) => {
                     return (
                         <tr key={i.id}>
                             <td>{i.reference_no}</td>
+                            <td>{(_.find(clients, { id: i.client })).client_name}</td>
+                            <td>{i.shipment_date}</td>
                             <td>{i.origin}</td>
                             <td>{i.destination}</td>
+                            <td>{i.delivery_method}</td>
                             <td>{i.status}</td>
                         </tr>
                     )
@@ -82,8 +87,11 @@ const ItemsTable = ({ salesOrders, setSalesOrders }) => {
             <thead>
                 <tr>
                     <th>Reference No</th>
+                    <th>Client</th>
+                    <th>Shipment Date</th>
                     <th>Origin</th>
                     <th>Destination</th>
+                    <th>Delivery Method</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -97,6 +105,8 @@ const ItemsTable = ({ salesOrders, setSalesOrders }) => {
 const Items = () => {
 
     const [salesOrders, setSalesOrders] = useState([]);
+
+    const [clients, setCleints] = useState([]);
 
     const [activeTab, setActiveTab] = useState('1');
 
@@ -112,8 +122,13 @@ const Items = () => {
             const itemsData = await fetchSalesOrders();
             setSalesOrders(itemsData);
         }
+        const loadClients = async () => {
+            const clientsData = await fetchShipperMasterClients();
+            setCleints(clientsData);
+        }
         loadItemsData();
-    }, [setSalesOrders,])
+        loadClients();
+    }, [])
 
     return (
         <div className="animated fadeIn">
@@ -124,7 +139,7 @@ const Items = () => {
                             <h3>Sales Orders</h3>
                         </Col>
                         <Col sm={6} className="text-right">
-                            <AddSalesOrderForm fetchSalesOrders={fetchSalesOrders} setSalesOrders={setSalesOrders} />
+                            <AddSalesOrderForm clients={clients} fetchSalesOrders={fetchSalesOrders} setSalesOrders={setSalesOrders} />
                         </Col>
                     </Row>
 
@@ -144,14 +159,14 @@ const Items = () => {
                                 className={classnames({ active: activeTab === '2' })}
                                 onClick={() => { toggle('2'); }}
                             >
-                                Moar Tabs
+                                More Tabs
                             </NavLink>
                         </NavItem>
                     </Nav>
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="1">
 
-                            <ItemsTable salesOrders={salesOrders} setSalesOrders={setSalesOrders} />
+                            <ItemsTable clients={clients} salesOrders={salesOrders} setSalesOrders={setSalesOrders} />
 
                         </TabPane>
                         <TabPane tabId="2">

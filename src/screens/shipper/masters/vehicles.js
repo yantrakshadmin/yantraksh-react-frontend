@@ -64,7 +64,7 @@ const ItemsTable = ({ items, setItems }) => {
                             <td>{i.id}</td>
                             <td>{i.name}</td>
                             <td>{i.category}</td>
-                            <td>{i.length * i.breadth * i.height}</td>
+                            <td>{`${i.length} x ${i.breadth} x ${i.height}`}</td>
                             <td>{i.volume}</td>
                             <td>{i.weight}</td>
                             <td><Action item={i} items={items} setItems={setItems} /></td>
