@@ -597,6 +597,11 @@ export const createSalesOrder = data => loadSecureUrl(SHIPPER_SALES_ORDER, {
     method: 'post',
 })
 
+export const editSalesOrder = (id, data) => loadSecureUrl(`${SHIPPER_SALES_ORDER}${id}/`, {
+    data: data,
+    method: 'patch',
+})
+
 
 //Supplier Invoice
 
