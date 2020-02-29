@@ -3,6 +3,17 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import _ from 'lodash';
 
 
+const expandRow = {
+    renderer: (row, rowIndex) => (
+        <div>
+            {console.log(row)}
+            <p>{`This Expand row is belong to rowKey ${row.id}`}</p>
+            <p>You can render anything here, also you can add additional data on every row object</p>
+            <p>expandRow.renderer callback will pass the origin row object to you</p>
+        </div>
+    )
+};
+
 const AllSalesOrders = props => {
 
     const columns = [
@@ -15,9 +26,10 @@ const AllSalesOrders = props => {
             dataField: 'client',
             text: 'Client',
             sort: true,
-            formatter: (cell, row) => {
+            formatExtraData: { props, },
+            formatter: (cell, row, rowIndex, formatExtraData) => {
                 if (props.clients.length > 0)
-                    return (_.find(props.clients, { id: parseInt(row.client) })).client_name;
+                    return (_.find(formatExtraData.props.clients, { id: parseInt(row.client) })).client_name;
                 else
                     return "...";
             }
@@ -50,7 +62,7 @@ const AllSalesOrders = props => {
     ];
 
     return (
-        <BootstrapTable keyField='id' data={props.salesOrders} columns={columns} />
+        <BootstrapTable keyField='id' data={props.salesOrders} columns={columns} expandRow={expandRow} />
     );
 }
 
