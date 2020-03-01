@@ -24,6 +24,8 @@ const Main = () => {
 
     const [selectedForRTD, setSelectedForRTD] = useState([]);
 
+    const [selectedForDispatch, setSelectedForDispatch] = useState([]);
+
     const [activeTab, setActiveTab] = useState('1');
 
     const toggle = useCallback(
@@ -79,15 +81,28 @@ const Main = () => {
 
             } else if (activeTab === '3') {
 
-                return (
-                    <ButtonGroup>
-                        <Button color="success">Auto Dispatch</Button>
-                        <Button color="primary">Manual Dispatch</Button>
-                    </ButtonGroup>
-                );
+                if (selectedForDispatch.length > 0) {
+
+                    return (
+                        <ButtonGroup>
+                            <Button color="success">Auto Dispatch</Button>
+                            <Button color="primary">Manual Dispatch</Button>
+                        </ButtonGroup>
+                    );
+
+                } else {
+
+                    return (
+                        <ButtonGroup>
+                            <Button color="success" disabled>Auto Dispatch</Button>
+                            <Button color="primary" disabled>Manual Dispatch</Button>
+                        </ButtonGroup>
+                    );
+
+                }
 
             }
-        }, [activeTab, selectedForRTD,]
+        }, [activeTab, selectedForRTD, selectedForDispatch]
     )
 
     return (
@@ -101,7 +116,7 @@ const Main = () => {
                         </Col>
                         <Col sm={4}>
                             {renderButtons()}
-                            {console.log(selectedForRTD)}
+                            {console.log(selectedForDispatch)}
                         </Col>
                         <Col sm={4} className="text-right">
                             <AddSalesOrderForm items={items} clients={clients} fetchSalesOrders={fetchSalesOrders} setSalesOrders={setSalesOrders} />
@@ -139,7 +154,7 @@ const Main = () => {
                         </TabPane>
 
                         <TabPane tabId="3">
-                            <ReadyToDispatch clients={clients} salesOrders={_.filter(salesOrders, o => o.status === "Ready to Dispatch")} selectedForRTD={selectedForRTD} setSelectedForRTD={setSelectedForRTD} />
+                            <ReadyToDispatch clients={clients} salesOrders={_.filter(salesOrders, o => o.status === "Ready to Dispatch")} selectedForDispatch={selectedForDispatch} setSelectedForDispatch={setSelectedForDispatch} />
                         </TabPane>
 
                     </TabContent>

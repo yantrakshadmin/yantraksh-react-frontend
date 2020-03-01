@@ -9,9 +9,9 @@ const ReadyToDispatch = props => {
     const handleCheck = useCallback(
         (ev, row) => {
             if (ev.target.checked === true) {
-                props.setSelectedForRTD([...props.selectedForRTD, row.id]);
+                props.setSelectedForDispatch([...props.selectedForDispatch, row.id]);
             } else if (ev.target.checked === false) {
-                props.setSelectedForRTD((props.selectedForRTD).filter(el => el !== row.id));
+                props.setSelectedForDispatch((props.selectedForDispatch).filter(el => el !== row.id));
             }
         }, [props,]
     )
@@ -23,7 +23,7 @@ const ReadyToDispatch = props => {
             formatter: (cell, row, rowIndex, formatExtraData) => {
                 return (
                     <FormGroup check>
-                        <Input checked={formatExtraData.props.selectedForRTD.includes(row.id)} type="checkbox" onChange={ev => formatExtraData.handleCheck(ev, row)} id={`checkbox${row.id}`} />
+                        <Input checked={formatExtraData.props.selectedForDispatch.includes(row.id)} type="checkbox" onChange={ev => formatExtraData.handleCheck(ev, row)} id={`checkbox${row.id}`} />
                     </FormGroup>
                 )
             }
