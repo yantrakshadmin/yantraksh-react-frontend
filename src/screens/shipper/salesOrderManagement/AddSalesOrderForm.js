@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import { fetchShipperMasterItems, createSalesOrder } from '../../../helpers/api';
+import { createSalesOrder } from '../../../helpers/api';
 import { toast } from 'react-toastify';
 import _ from 'lodash';
 
@@ -16,17 +16,7 @@ const AddOrderModal = props => {
         ],
     }
 
-    const [items, setItems] = useState([]);
-
     const [selectedItem, setSelectedItem] = useState({ item: "", item_quantity: 0 });
-
-    useEffect(() => {
-        const loadItemsData = async () => {
-            const itemsData = await fetchShipperMasterItems();
-            setItems(itemsData);
-        }
-        loadItemsData();
-    }, [])
 
     const [phase, setPhase] = useState(0);
 
@@ -81,8 +71,8 @@ const AddOrderModal = props => {
 
     const renderItemOptions = useCallback(
         () => {
-            if (items.length > 0) {
-                return items.map(i => {
+            if (props.items.length > 0) {
+                return props.items.map(i => {
                     return <option key={i.id} value={i.id}>{i.name}</option>;
                 })
             }
@@ -111,7 +101,7 @@ const AddOrderModal = props => {
                     return (
                         <FormGroup key={idx}>
                             <InputGroup>
-                                <Input size="sm" value={(_.find(items, { id: parseInt(i.item) })).name} disabled />
+                                <Input size="sm" value={(_.find(props.items, { id: parseInt(i.item) })).name} disabled />
                                 <Input size="sm" value={i.item_quantity} disabled />
                                 <InputGroupAddon addonType="append">
                                     <Button type="button" title="Add" color="danger" onClick={() => removeFormItems(i.item, i.item_quantity)} size="sm"><FontAwesomeIcon icon={faMinus} /></Button>

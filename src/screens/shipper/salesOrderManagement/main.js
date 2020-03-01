@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardBody, Button, Table, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, TabContent, TabPane, Nav, NavItem, NavLink, CardTitle, CardText } from 'reactstrap';
 import classnames from 'classnames';
-import { fetchShipperMasterClients, fetchSalesOrders, editSalesOrder } from '../../../helpers/api';
+import { fetchShipperMasterItems, fetchShipperMasterClients, fetchSalesOrders, editSalesOrder } from '../../../helpers/api';
 import _ from 'lodash';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,6 +18,8 @@ const Main = () => {
 
     const [salesOrders, setSalesOrders] = useState([]);
 
+    const [items, setItems] = useState([]);
+
     const [clients, setCleints] = useState([]);
 
     const [selectedForRTD, setSelectedForRTD] = useState([]);
@@ -32,16 +34,21 @@ const Main = () => {
     )
 
     useEffect(() => {
-        const loadItemsData = async () => {
-            const itemsData = await fetchSalesOrders();
-            setSalesOrders(itemsData);
+        const loadSalesOrders = async () => {
+            const salesOrdersData = await fetchSalesOrders();
+            setSalesOrders(salesOrdersData);
         }
         const loadClients = async () => {
             const clientsData = await fetchShipperMasterClients();
             setCleints(clientsData);
         }
-        loadItemsData();
+        const loadItemsData = async () => {
+            const itemsData = await fetchShipperMasterItems();
+            setItems(itemsData);
+        }
+        loadSalesOrders();
         loadClients();
+        loadItemsData();
     }, [])
 
     const changeStatustoRTD = useCallback(
@@ -90,7 +97,7 @@ const Main = () => {
                             {console.log(selectedForRTD)}
                         </Col>
                         <Col sm={4} className="text-right">
-                            <AddSalesOrderForm clients={clients} fetchSalesOrders={fetchSalesOrders} setSalesOrders={setSalesOrders} />
+                            <AddSalesOrderForm items={items} clients={clients} fetchSalesOrders={fetchSalesOrders} setSalesOrders={setSalesOrders} />
                         </Col>
                     </Row>
 
@@ -117,7 +124,7 @@ const Main = () => {
                     <TabContent activeTab={activeTab}>
 
                         <TabPane tabId="1">
-                            <AllSalesOrders clients={clients} salesOrders={salesOrders} />
+                            <AllSalesOrders items={items} clients={clients} salesOrders={salesOrders} />
                         </TabPane>
 
                         <TabPane tabId="2">
