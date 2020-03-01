@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Card, CardBody, Button, Table, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, TabContent, TabPane, Nav, NavItem, NavLink, CardTitle, CardText } from 'reactstrap';
+import { Card, CardBody, Button, ButtonGroup, Table, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, TabContent, TabPane, Nav, NavItem, NavLink, CardTitle, CardText } from 'reactstrap';
 import classnames from 'classnames';
 import { fetchShipperMasterItems, fetchShipperMasterClients, fetchSalesOrders, editSalesOrder } from '../../../helpers/api';
 import _ from 'lodash';
@@ -77,7 +77,14 @@ const Main = () => {
                     return <Button color="primary" disabled><FontAwesomeIcon icon={faShare} /> Ready to Dispatch</Button>;
                 }
 
-            } else {
+            } else if (activeTab === '3') {
+
+                return (
+                    <ButtonGroup>
+                        <Button color="success">Auto Dispatch</Button>
+                        <Button color="primary">Manual Dispatch</Button>
+                    </ButtonGroup>
+                );
 
             }
         }, [activeTab, selectedForRTD,]
