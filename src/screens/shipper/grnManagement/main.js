@@ -96,6 +96,13 @@ const GRN = props => {
 
     const columns = [
         {
+            text: 'Sr. No.',
+            sort: true,
+            formatter: (cell, row, rowIndex) => {
+                return rowIndex+1
+            }
+        },
+        {
             dataField: 'warehouse',
             text: 'Warehouse',
             sort: true,
@@ -132,6 +139,11 @@ const GRN = props => {
         {
             dataField: 'vehicle_type',
             text: 'Vehicle Type',
+            sort: true
+        },
+        {
+            dataField: 'vehicle_number',
+            text: 'Vehicle No',
             sort: true
         },
         {

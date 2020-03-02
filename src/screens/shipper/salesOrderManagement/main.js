@@ -12,6 +12,7 @@ import AllSalesOrders from './AllSalesOrders';
 import OnHold from './OnHold';
 import ReadyToDispatch from './ReadyToDispatch';
 import ManualDispatchModal from './ManualDispatchModal';
+import Dispatched from './Dispatched';
 
 
 const Main = () => {
@@ -77,6 +78,22 @@ const Main = () => {
         }, [selectedForRTD, setSelectedForRTD, salesOrders, setSalesOrders, toggle]
     )
 
+    const changeStatustoDispatched = useCallback(
+        async () => {
+            for (const i of selectedForDispatch) {
+                try {
+                    await editSalesOrder(i, { "status": "Dispatched" });
+                } catch (e) { }
+            }
+
+            const newSO = await fetchSalesOrders();
+            setSalesOrders(newSO);
+            setSelectedForDispatch([]);
+
+            toggle("4");
+        }, [selectedForDispatch, setSelectedForDispatch, salesOrders, setSalesOrders, toggle]
+    )
+
     const renderButtons = useCallback(
         () => {
             if (activeTab === '2') {
@@ -95,7 +112,7 @@ const Main = () => {
                         <ButtonGroup>
                             <Button color="success">Auto Dispatch</Button>
                             <Button color="primary" onClick={toggleMD}>Manual Dispatch</Button>
-                            <ManualDispatchModal modal={modalMD} toggle={toggleMD} />
+                            <ManualDispatchModal changeStatustoDispatched={changeStatustoDispatched} modal={modalMD} toggle={toggleMD} />
                         </ButtonGroup>
                     );
 
@@ -150,6 +167,11 @@ const Main = () => {
                                 Ready to Dispatch
                             </NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink className={classnames({ active: activeTab === '4' })} onClick={() => { toggle('4'); }}>
+                                Dispatched
+                            </NavLink>
+                        </NavItem>
                     </Nav>
 
                     <TabContent activeTab={activeTab}>
@@ -164,6 +186,10 @@ const Main = () => {
 
                         <TabPane tabId="3">
                             <ReadyToDispatch items={items} clients={clients} salesOrders={_.filter(salesOrders, o => o.status === "Ready to Dispatch")} selectedForDispatch={selectedForDispatch} setSelectedForDispatch={setSelectedForDispatch} />
+                        </TabPane>
+
+                        <TabPane tabId="4">
+                            <Dispatched items={items} clients={clients} salesOrders={_.filter(salesOrders, o => o.status === "Dispatched")} selectedForDispatch={selectedForDispatch} setSelectedForDispatch={setSelectedForDispatch} />
                         </TabPane>
 
                     </TabContent>
