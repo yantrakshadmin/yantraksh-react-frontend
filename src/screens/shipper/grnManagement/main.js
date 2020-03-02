@@ -2,12 +2,11 @@ import React,{useState, useEffect, useCallback} from 'react';
 import { Card,CardBody,Row,Col,Button, Table, Container,Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPencilAlt, faTrashAlt,faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import BootstrapTable from 'react-bootstrap-table-next';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
 
-import Barcode from 'react-barcode';
 
 import { fetchGrns,deleteGrn , fetchShipperMasterItems, fetchShipperMasterWarehouses, fetchShipperMasterVendors, } from '../../../helpers/api';
 
@@ -160,16 +159,6 @@ const GRN = props => {
         },
     ];
 
-    const generateBarcode = useCallback(
-        row => {
-            let final = "";
-            row.items.forEach(i => {
-                final = final + `${i.item}-${i.item_quantity} `;
-            });
-            return _.trimEnd(final);
-        }, []
-    )
-
     const expandRowItemsList = useCallback(
         row => {
             if (row.items.length > 0) {
@@ -178,6 +167,11 @@ const GRN = props => {
                         <tr key={i.id}>
                             <td>{(_.find(items, { id: parseInt(i.item) })).name}</td>
                             <td>{i.item_quantity}</td>
+                            <td>
+                                <Link to={`/grn/${row.id}/${i.item}/${(_.find(items, { id: parseInt(i.item) })).name}/${i.item_quantity}`}>
+                                    <Button color="danger" size="sm"><FontAwesomeIcon icon={faFilePdf} /></Button>
+                                </Link>
+                            </td>
                         </tr>
                     );
                 })
@@ -189,22 +183,20 @@ const GRN = props => {
         renderer: (row, rowIndex) => {
             return (
                 <Container fluid>
-                    <Row className="justify-content-around align-items-center">
+                    <Row>
                         <Col sm={4}>
                             <Table bordered className="mt-3" size="sm">
                                 <thead>
                                     <tr>
                                         <th>Item Name</th>
                                         <th>Qty</th>
+                                        <th>Barcodes</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {expandRowItemsList(row)}
                                 </tbody>
                             </Table>
-                        </Col>
-                        <Col style={{textAlign:"center"}} sm={8}>
-                            <Barcode displayValue={true} height="70%" width="2" value={generateBarcode(row)} />
                         </Col>
                     </Row>
                 </Container>

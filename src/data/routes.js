@@ -349,6 +349,12 @@ const shipperExtraRoutes = [
         exact: true
     },
     {
+        name: 'Print GRN',
+        path: '/grn/:grnid/:itembatchid/:itemname/:itemqty',
+        component: lazy(() => import('../screens/shipper/grnManagement/PrintGrn')),
+        exact: true
+    },
+    {
         path: '/freight/request-for-quotation/bids/:id',
         component: lazy(() => import('../screens/shipper/freightManagement/bids')),
         name: 'View Bids',
