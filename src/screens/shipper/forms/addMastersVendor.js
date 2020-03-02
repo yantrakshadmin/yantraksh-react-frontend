@@ -222,9 +222,9 @@ const AddMastersItem = props => {
                         <Row>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="vendor_code">Vendor Code</Label>
+                                    <Label htmlFor="vendor_code">Vendor Code*</Label>
                                     <Input type="text" name="vendor_code" id="vendor_code" value={form.vendor_code}
-                                        onChange={handleInputChange} />
+                                        onChange={handleInputChange} required />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>

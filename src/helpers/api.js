@@ -614,11 +614,18 @@ export const createGrn = data => loadSecureUrl(SHIPPER_GRN, {
     method: 'post',
 })
 
+export const fetchGrn = id => loadSecureUrl(`${SHIPPER_GRN}${id}/`, {
+    method: 'get',
+})
+
 export const editGrn = (id, data) => loadSecureUrl(`${SHIPPER_GRN}${id}/`, {
     data: data,
     method: 'patch',
 })
 
+export const deleteGrn = id => loadSecureUrl(`${SHIPPER_GRN}${id}/`, {
+    method: 'delete',
+})
 
 //Supplier Invoice
 

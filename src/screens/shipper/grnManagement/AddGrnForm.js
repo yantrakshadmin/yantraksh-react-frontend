@@ -7,7 +7,7 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import _ from 'lodash';
 import history from '../../../history';
 
-import { fetchShipperMasterItems, fetchShipperMasterWarehouses, fetchShipperMasterVendors, createGrn } from '../../../helpers/api';
+import { fetchGrn, editGrn, fetchShipperMasterItems, fetchShipperMasterWarehouses, fetchShipperMasterVendors, createGrn } from '../../../helpers/api';
 
 
 const AddGrnForm = props => {
@@ -53,13 +53,6 @@ const AddGrnForm = props => {
     });
 
     useEffect(() => {
-        // if (props.match.params.id) {
-        //     const fetchItemData = async () => {
-        //         const itemData = await fetchShipperMasterItem(props.match.params.id);
-        //         setForm(itemData);
-        //     }
-        //     fetchItemData();
-        // }
         const fetchItems = async () => {
             const itemData = await fetchShipperMasterItems();
             setItems(itemData);
@@ -72,9 +65,16 @@ const AddGrnForm = props => {
             const itemData = await fetchShipperMasterVendors();
             setVendors(itemData);
         }
+        const fetchThisGrn = async () => {
+            if (props.match.params.id) {
+                const itemData = await fetchGrn(props.match.params.id);
+                setForm(itemData);
+            }
+        }
         fetchItems();
         fetchWarehouses();
         fetchVendors();
+        fetchThisGrn();
     }, [setItems, setWarehouses, setVendors])
 
     const [phase, setPhase] = useState(0);
@@ -181,7 +181,7 @@ const AddGrnForm = props => {
 
     const renderItemsList = useCallback(
         () => {
-            if (form.items) {
+            if (form.items.length>0 && items.length>0) {
                 return form.items.map((i, idx) => {
                     return (
                         <tr key={idx}>
@@ -197,7 +197,7 @@ const AddGrnForm = props => {
                 })
             }
         },
-        [form]
+        [form, items]
     )
 
     const btnLoader = useCallback(
@@ -220,9 +220,9 @@ const AddGrnForm = props => {
             setPhase(1);
             try {
                 if (props.match.params.id) {
-                    // await editShipperMasterItem(props.match.params.id, form);
-                    // setPhase(0);
-                    // toast.success('Item Updated Successfully');
+                    await editGrn(props.match.params.id, form);
+                    setPhase(0);
+                    toast.success('Item Updated Successfully');
                 } else {
                     await createGrn(form);
                     setPhase(0);
