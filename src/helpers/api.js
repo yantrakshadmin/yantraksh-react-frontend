@@ -605,6 +605,12 @@ export const editSalesOrder = (id, data) => loadSecureUrl(`${SHIPPER_SALES_ORDER
     method: 'patch',
 })
 
+//Manual Dispatch
+export const manualDispatch = (data) => loadSecureUrl(PLAN_VEHICLE_MANUALLY, {
+    data: data,
+    method: 'post',
+})
+
 
 //Shipper GRN
 export const fetchGrns = () => loadSecureUrl(SHIPPER_GRN);

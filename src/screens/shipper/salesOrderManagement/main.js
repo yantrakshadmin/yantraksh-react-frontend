@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardBody, Button, ButtonGroup, Table, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, TabContent, TabPane, Nav, NavItem, NavLink, CardTitle, CardText } from 'reactstrap';
 import classnames from 'classnames';
-import { fetchShipperMasterItems, fetchShipperMasterClients, fetchSalesOrders, editSalesOrder } from '../../../helpers/api';
+import { fetchShipperMasterItems, fetchShipperMasterClients, fetchSalesOrders, editSalesOrder, manualDispatch } from '../../../helpers/api';
 import _ from 'lodash';
+import { toast } from 'react-toastify';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
@@ -78,19 +79,26 @@ const Main = () => {
         }, [selectedForRTD, setSelectedForRTD, salesOrders, setSalesOrders, toggle]
     )
 
-    const changeStatustoDispatched = useCallback(
-        async () => {
-            for (const i of selectedForDispatch) {
-                try {
-                    await editSalesOrder(i, { "status": "Dispatched" });
-                } catch (e) { }
+    const manualDispatchData = useCallback(
+        async data => {
+            // for (const i of selectedForDispatch) {
+            //     try {
+            //         await editSalesOrder(i, { "status": "Dispatched" });
+            //     } catch (e) { }
+            // }
+            try {
+                await manualDispatch({ ...data,sales_orders:selectedForDispatch });
+
+                const newSO = await fetchSalesOrders();
+                setSalesOrders(newSO);
+                setSelectedForDispatch([]);
+                toast.success("Success!")
+                toggle("4");
+
+            } catch (e) {
+                toast.error("Something went Wrong!")
             }
-
-            const newSO = await fetchSalesOrders();
-            setSalesOrders(newSO);
-            setSelectedForDispatch([]);
-
-            toggle("4");
+            
         }, [selectedForDispatch, setSelectedForDispatch, salesOrders, setSalesOrders, toggle]
     )
 
@@ -112,7 +120,7 @@ const Main = () => {
                         <ButtonGroup>
                             <Button color="success">Auto Dispatch</Button>
                             <Button color="primary" onClick={toggleMD}>Manual Dispatch</Button>
-                            <ManualDispatchModal changeStatustoDispatched={changeStatustoDispatched} modal={modalMD} toggle={toggleMD} />
+                            <ManualDispatchModal manualDispatchData={manualDispatchData} modal={modalMD} toggle={toggleMD} />
                         </ButtonGroup>
                     );
 

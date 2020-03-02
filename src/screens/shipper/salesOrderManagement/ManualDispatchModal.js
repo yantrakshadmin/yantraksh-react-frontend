@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, FormGroup, Label, Input, Form } from 'reactstrap';
+import { Button, ButtonGroup, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, FormGroup, Label, Input, Form } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus,faMinus } from '@fortawesome/free-solid-svg-icons';
 
-const ManualDispatchModal = ({ changeStatustoDispatched,modal,toggle }) => {
+
+const ManualDispatchModal = ({ manualDispatchData,modal,toggle }) => {
 
   const optionsData = {
     truck_type: [
@@ -34,7 +37,7 @@ const ManualDispatchModal = ({ changeStatustoDispatched,modal,toggle }) => {
   const [form,setForm] = useState({
     truck_type: "",
     truck: "",
-    no_of_trucks: "",
+    no_of_trucks: 1,
   })
 
   const handleInputChange = useCallback(
@@ -64,12 +67,12 @@ const ManualDispatchModal = ({ changeStatustoDispatched,modal,toggle }) => {
     event => {
       event.preventDefault();
       toggle();
-      changeStatustoDispatched();
-    },[]
+      manualDispatchData(form);
+    },[form,manualDispatchData,toggle]
   )
 
   return (
-      <Modal isOpen={modal} toggle={toggle}>
+      <Modal size={"lg"} isOpen={modal} toggle={toggle}>
         <Form onSubmit={handleSubmit}>
         <ModalHeader toggle={toggle}>Manual Dispatch</ModalHeader>
         <ModalBody>
@@ -110,11 +113,21 @@ const ManualDispatchModal = ({ changeStatustoDispatched,modal,toggle }) => {
 
             <Row>
                 <Col md={12}>
-                  <FormGroup>
-                      <Label htmlFor="no_of_trucks">No. of Trucks</Label>
-                      <Input type="number" name="no_of_trucks" id="no_of_trucks" value={form.no_of_trucks}
-                          onChange={handleInputChange} required />
-                  </FormGroup>
+                    <label>No of Trucks</label><br />
+                    <ButtonGroup>
+                        <Button color="primary" onClick={() => {
+                            if (form.no_of_trucks > 1)
+                                setForm({ ...form, no_of_trucks:form.no_of_trucks - 1 })
+                        }}>
+                            <FontAwesomeIcon icon={faMinus} />
+                        </Button>
+                        <Button color="light">{form.no_of_trucks}</Button>
+                        <Button color="primary" onClick={() => {
+                            setForm({ ...form, no_of_trucks:form.no_of_trucks + 1 })
+                        }}>
+                            <FontAwesomeIcon icon={faPlus} />
+                        </Button>
+                    </ButtonGroup>
                 </Col>
             </Row>
 
