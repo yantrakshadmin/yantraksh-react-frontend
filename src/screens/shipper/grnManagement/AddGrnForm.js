@@ -5,8 +5,9 @@ import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import _ from 'lodash';
+import history from '../../../history';
 
-import { fetchShipperMasterItems, fetchShipperMasterWarehouses, fetchShipperMasterVendors } from '../../../helpers/api';
+import { fetchShipperMasterItems, fetchShipperMasterWarehouses, fetchShipperMasterVendors, createGrn } from '../../../helpers/api';
 
 
 const AddGrnForm = props => {
@@ -216,24 +217,23 @@ const AddGrnForm = props => {
     const handleSubmit = useCallback(
         async event => {
             event.preventDefault();
-            console.log(form);
-            //setPhase(1);
-            // try {
-            //     if (props.match.params.id) {
-            //         await editShipperMasterItem(props.match.params.id, form);
-            //         setPhase(0);
-            //         toast.success('Item Updated Successfully');
-            //     } else {
-            //         await createShipperMasterItem(form);
-            //         setPhase(0);
-            //         toast.success('Item Created Successfully');
-            //         history.push('/dashboard/masters/items');
-            //     }
+            setPhase(1);
+            try {
+                if (props.match.params.id) {
+                    // await editShipperMasterItem(props.match.params.id, form);
+                    // setPhase(0);
+                    // toast.success('Item Updated Successfully');
+                } else {
+                    await createGrn(form);
+                    setPhase(0);
+                    toast.success('Grn Created Successfully');
+                    history.push('/dashboard/grn');
+                }
 
-            // } catch (err) {
-            //     toast.error('Something went wrong!');
-            //     setPhase(0);
-            // }
+            } catch (err) {
+                toast.error('Something went wrong!');
+                setPhase(0);
+            }
         },
         [form, setPhase,]
     )
@@ -311,7 +311,7 @@ const AddGrnForm = props => {
                                 <FormGroup>
                                     <Label htmlFor="inward_date">Inward Date</Label>
                                     <Input type="date" name="inward_date" id="inward_date" value={form.inward_date}
-                                        onChange={handleInputChange} />
+                                        onChange={handleInputChange} required />
                                 </FormGroup>
                             </Col>
                         </Row>

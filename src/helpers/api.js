@@ -98,6 +98,9 @@ export const SHIPPER_MASTER_CLIENTS = 'shipper/shipperclients/'
 //Shipper SALES ORDER
 export const SHIPPER_SALES_ORDER = 'shipper/salesorders/';
 
+//Shipper GRN
+export const SHIPPER_GRN = 'shipper/grn/';
+
 
 //Supplier Invoice
 export const SUPPLIER_INVOICE = 'suppliers/supplierinvoice/';
@@ -598,6 +601,20 @@ export const createSalesOrder = data => loadSecureUrl(SHIPPER_SALES_ORDER, {
 })
 
 export const editSalesOrder = (id, data) => loadSecureUrl(`${SHIPPER_SALES_ORDER}${id}/`, {
+    data: data,
+    method: 'patch',
+})
+
+
+//Shipper GRN
+export const fetchGrns = () => loadSecureUrl(SHIPPER_GRN);
+
+export const createGrn = data => loadSecureUrl(SHIPPER_GRN, {
+    data: data,
+    method: 'post',
+})
+
+export const editGrn = (id, data) => loadSecureUrl(`${SHIPPER_GRN}${id}/`, {
     data: data,
     method: 'patch',
 })
