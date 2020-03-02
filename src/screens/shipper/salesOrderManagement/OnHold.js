@@ -72,7 +72,7 @@ const OnHold = props => {
     ];
 
     return (
-        <BootstrapTable keyField='id' data={props.salesOrders} columns={columns} />
+        <BootstrapTable classes={"table-hover"} bordered={ false } keyField='id' data={props.salesOrders} columns={columns} />
     );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Table, Row, Col } from 'reactstrap';
+import { Table, Row, Col, Container } from 'reactstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import _ from 'lodash';
 
@@ -69,27 +69,29 @@ const AllSalesOrders = props => {
     const expandRow = {
         renderer: (row, rowIndex) => {
             return (
-                <Row className="justify-content-center">
-                    <Col xs={8}>
-                        <Table className="mt-3">
-                            <thead>
-                                <tr>
-                                    <th>Item Name</th>
-                                    <th>Qty</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {expandRowItemsList(row)}
-                            </tbody>
-                        </Table>
-                    </Col>
-                </Row>
+                <Container fluid>
+                    <Row>
+                        <Col xs={4}>
+                            <Table bordered className="mt-3" size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Qty</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {expandRowItemsList(row)}
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                </Container>
             );
         }
     };
 
     return (
-        <BootstrapTable keyField='id' data={props.salesOrders} columns={columns} expandRow={expandRow} />
+        <BootstrapTable keyField='id' classes={"table-hover"} bordered={ false } data={props.salesOrders} columns={columns} expandRow={expandRow} />
     );
 }
 

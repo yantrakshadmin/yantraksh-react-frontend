@@ -11,7 +11,7 @@ import AddSalesOrderForm from './AddSalesOrderForm';
 import AllSalesOrders from './AllSalesOrders';
 import OnHold from './OnHold';
 import ReadyToDispatch from './ReadyToDispatch';
-
+import ManualDispatchModal from './ManualDispatchModal';
 
 
 const Main = () => {
@@ -33,6 +33,14 @@ const Main = () => {
             if (activeTab !== tab) setActiveTab(tab);
         },
         [activeTab, setActiveTab]
+    )
+
+    const [modalMD, setModalMD] = useState(false);
+
+    const toggleMD = useCallback(
+        () => {
+            setModalMD(!modalMD);
+        }, [modalMD, setModalMD]
     )
 
     useEffect(() => {
@@ -86,7 +94,8 @@ const Main = () => {
                     return (
                         <ButtonGroup>
                             <Button color="success">Auto Dispatch</Button>
-                            <Button color="primary">Manual Dispatch</Button>
+                            <Button color="primary" onClick={toggleMD}>Manual Dispatch</Button>
+                            <ManualDispatchModal modal={modalMD} toggle={toggleMD} />
                         </ButtonGroup>
                     );
 
@@ -102,7 +111,7 @@ const Main = () => {
                 }
 
             }
-        }, [activeTab, selectedForRTD, selectedForDispatch]
+        }, [activeTab, selectedForRTD, selectedForDispatch, modalMD,toggleMD]
     )
 
     return (
