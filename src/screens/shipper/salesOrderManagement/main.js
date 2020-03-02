@@ -159,11 +159,11 @@ const Main = () => {
                         </TabPane>
 
                         <TabPane tabId="2">
-                            <OnHold clients={clients} salesOrders={_.filter(salesOrders, o => o.status === "On Hold")} selectedForRTD={selectedForRTD} setSelectedForRTD={setSelectedForRTD} />
+                            <OnHold items={items} clients={clients} salesOrders={_.filter(salesOrders, o => o.status === "On Hold")} selectedForRTD={selectedForRTD} setSelectedForRTD={setSelectedForRTD} />
                         </TabPane>
 
                         <TabPane tabId="3">
-                            <ReadyToDispatch clients={clients} salesOrders={_.filter(salesOrders, o => o.status === "Ready to Dispatch")} selectedForDispatch={selectedForDispatch} setSelectedForDispatch={setSelectedForDispatch} />
+                            <ReadyToDispatch items={items} clients={clients} salesOrders={_.filter(salesOrders, o => o.status === "Ready to Dispatch")} selectedForDispatch={selectedForDispatch} setSelectedForDispatch={setSelectedForDispatch} />
                         </TabPane>
 
                     </TabContent>

@@ -107,7 +107,7 @@ const ItemsTable = ({ items, setItems }) => {
     ];
 
     return (
-        <BootstrapTable keyField='id' data={items} columns={columns} />
+        <BootstrapTable classes={"table-hover"} bordered={ false } keyField='id' data={items} columns={columns} />
     );
 }
 
