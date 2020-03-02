@@ -2,7 +2,7 @@ import React,{useState, useEffect, useCallback} from 'react';
 import { Card,CardBody,Row,Col,Button, Table, Container,Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPencilAlt, faTrashAlt,faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPencilAlt, faTrashAlt,faDownload, faPrint } from '@fortawesome/free-solid-svg-icons';
 import BootstrapTable from 'react-bootstrap-table-next';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
@@ -169,8 +169,9 @@ const GRN = props => {
                             <td>{i.item_quantity}</td>
                             <td>
                                 <Link to={`/grn/${row.id}/${i.item}/${(_.find(items, { id: parseInt(i.item) })).name}/${i.item_quantity}`}>
-                                    <Button color="danger" size="sm"><FontAwesomeIcon icon={faFilePdf} /></Button>
-                                </Link>
+                                    <Button color="success" size="sm"><FontAwesomeIcon icon={faDownload} /></Button>
+                                </Link>{" "}
+                                <Button onClick={() => toast.error("Printer not Found!")} color="primary" size="sm"><FontAwesomeIcon icon={faPrint} /></Button>
                             </td>
                         </tr>
                     );
