@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[85],{519:function(n,e,t){"use strict";t.r(e);var c=t(0),i=t.n(c),o=t(48),r=t(17),u=t(60);e.default=Object(r.b)(function(){return{}},function(n){return{setRedirectTo:function(e){return n(Object(u.b)(e))}}})(function(n){return n.setRedirectTo(window.location.hash),i.a.createElement("div",null,i.a.createElement(o.a,{to:"/sign-in/"}))})}}]);
-//# sourceMappingURL=85.d1bc959d.chunk.js.map
