@@ -122,6 +122,12 @@ const shipperNavigation = [
         icon: 'icon-layers',
         component: lazy(() => import('../screens/shipper/salesOrderManagement/main')),
     },
+    {
+        name: 'GRN',
+        url: '/grn',
+        icon: 'fa fa-align-justify',
+        component: lazy(() => import('../screens/shipper/grnManagement/main')),
+    },
     // {
     //     name: 'Items Management',
     //     url: '/orders',
@@ -328,6 +334,18 @@ const shipperExtraRoutes = [
         name: 'Edit Cleint',
         path: '/masters/clients/edit/:id',
         component: lazy(() => import('../screens/shipper/forms/addMasterClient')),
+        exact: true
+    },
+    {
+        name: 'Add GRN',
+        path: '/grn/add',
+        component: lazy(() => import('../screens/shipper/grnManagement/AddGrnForm')),
+        exact: true
+    },
+    {
+        name: 'Edit GRN',
+        path: '/grn/edit/:id',
+        component: lazy(() => import('../screens/shipper/grnManagement/AddGrnForm')),
         exact: true
     },
     {
