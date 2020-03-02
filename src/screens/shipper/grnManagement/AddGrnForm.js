@@ -235,7 +235,7 @@ const AddGrnForm = props => {
                 setPhase(0);
             }
         },
-        [form, setPhase,]
+        [form, setPhase,props,]
     )
 
     return (

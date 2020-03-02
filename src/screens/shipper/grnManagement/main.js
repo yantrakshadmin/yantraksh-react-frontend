@@ -7,6 +7,8 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
 
+import Barcode from 'react-barcode';
+
 import { fetchGrns,deleteGrn , fetchShipperMasterItems, fetchShipperMasterWarehouses, fetchShipperMasterVendors, } from '../../../helpers/api';
 
 
@@ -146,6 +148,16 @@ const GRN = props => {
         },
     ];
 
+    const generateBarcode = useCallback(
+        row => {
+            let final = "";
+            row.items.forEach(i => {
+                final = final + `${i.item}-${i.item_quantity} `;
+            });
+            return _.trimEnd(final);
+        }, []
+    )
+
     const expandRowItemsList = useCallback(
         row => {
             if (row.items.length > 0) {
@@ -165,8 +177,8 @@ const GRN = props => {
         renderer: (row, rowIndex) => {
             return (
                 <Container fluid>
-                    <Row>
-                        <Col xs={4}>
+                    <Row className="justify-content-around align-items-center">
+                        <Col sm={4}>
                             <Table bordered className="mt-3" size="sm">
                                 <thead>
                                     <tr>
@@ -178,6 +190,9 @@ const GRN = props => {
                                     {expandRowItemsList(row)}
                                 </tbody>
                             </Table>
+                        </Col>
+                        <Col style={{textAlign:"center"}} sm={8}>
+                            <Barcode displayValue={true} height="70%" width="2" value={generateBarcode(row)} />
                         </Col>
                     </Row>
                 </Container>

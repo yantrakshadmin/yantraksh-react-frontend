@@ -29,6 +29,7 @@
     "prismic-reactjs": "^1.1.1",
     "rc-form": "^2.4.8",
     "react": "^16.8.6",
+    "react-barcode": "^1.4.0",
     "react-bootstrap-table-next": "^3.1.8",
     "react-bootstrap-table2-paginator": "^2.0.8",
     "react-bootstrap-table2-toolkit": "^2.0.1",
