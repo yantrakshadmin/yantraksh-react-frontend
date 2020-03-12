@@ -17,7 +17,6 @@ const ForgetPassword = lazy(() => import('./screens/forgetPassword'));
 const ConfirmPassword = lazy(() => import('./screens/confirmPassword'));
 const DashboardScreen = lazy(() => import('./screens/dashboard'));
 const NotFound404Screen = lazy(() => import('./screens/notFound404'));
-const BetaTest = lazy(() => import('./screens/beta'));
 
 
 const Main = (props) => {
@@ -40,7 +39,6 @@ const Main = (props) => {
                         <Route exact path="/sign-up/supplier/" component={SupplierSignUpScreen}/>
                         <Route exact path="/sign-up/company/" component={CompanySignUpScreen}/>
                         <Route exact path="/forget-password/" component={ForgetPassword}/>
-                        <Route exact path="/beta-test/" component={BetaTest}/>
 
                         <Route component={NotFound404Screen}/>
                     </Switch>
