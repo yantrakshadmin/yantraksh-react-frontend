@@ -128,41 +128,6 @@ const shipperNavigation = [
         icon: 'fa fa-align-justify',
         component: lazy(() => import('../screens/shipper/grnManagement/main')),
     },
-    // {
-    //     name: 'Items Management',
-    //     url: '/orders',
-    //     icon: 'icon-layers',
-    //     component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
-    //     children: [
-    //         {
-    //             name: 'All Items',
-    //             component: lazy(() => import('../screens/shipper/orderManagement/allOrders')),
-
-    //             url: '/orders/all',
-    //             icon: 'icon-list',
-    //         }, {
-    //             name: 'Items on hold',
-    //             component: lazy(() => import('../screens/shipper/orderManagement/holdOrders')),
-
-    //             url: '/orders/on-hold',
-    //             icon: 'fa fa-pause-circle',
-    //         }, {
-    //             name: 'Ready to Dispatch',
-    //             component: lazy(() => import('../screens/shipper/orderManagement/rtdOrders')),
-
-    //             url: '/orders/ready-to-dispatch',
-    //             icon: 'fa fa-play-circle',
-    //         }, {
-    //             name: 'Dispatched Items',
-    //             component: lazy(() => import('../screens/shipper/orderManagement/dispatchedOrders')),
-
-    //             url: '/orders/dispatched',
-    //             icon: 'fa fa-rocket',
-    //         }, {
-    //             divider: true
-    //         }
-    //     ],
-    // },
     {
         name: 'Dispatch Plans',
         url: '/dispatcher',
@@ -202,12 +167,6 @@ const shipperNavigation = [
         icon: 'fa fa-compass',
         component: lazy(() => import('../screens/shipper/shipping/tracking')),
     },
-    // {
-    //     name: 'Finance',
-    //     url: '/finances',
-    //     icon: 'fa fa-clipboard',
-    //     component: lazy(() => import('../screens/shipper/finances/financials')),
-    // },
     {
         name: 'Invoices',
         url: '/shipper/invoices',
