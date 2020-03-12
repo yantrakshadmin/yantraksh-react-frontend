@@ -1,23 +1,23 @@
 /*
     Contains all URLs and ApiFunctions
  */
-import axios from "axios";
-import { reactLocalStorage } from "reactjs-localstorage";
+import axios from 'axios';
+import {reactLocalStorage} from 'reactjs-localstorage';
 
-import { API_TOKENS } from "../data/storage";
-import { errorGettingUserInfoNotification, signINAgainNotification } from "./notifications";
+import {API_TOKENS} from '../data/storage';
+import {errorGettingUserInfoNotification, signINAgainNotification} from './notifications';
 
 // const BASE_URL = "http://0.0.0.0:8000/";
-const BASE_URL = "http://127.0.0.1:8000/"
+// const BASE_URL = "http://127.0.0.1:8000/"
 //const BASE_URL = "http://10.5.50.94:8000/";
-//const BASE_URL = "https://backend.yantraksh.com/";
+const BASE_URL = 'https://backend.yantraksh.com/';
 //const BASE_URL = "http://192.168.43.34:8000/";
 //const BASE_URL = "https://yantracloudbackend.herokuapp.com/";
 //const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // const BASE_URL = "http://yantra-cloud.ap-south-1.elasticbeanstalk.com/";
 // sajkhciuab
 
-export const GOOGLE_API_KEY = "AIzaSyDtuu39wICY-BsPDVIGS27FA9Sf0BQZggo";
+export const GOOGLE_API_KEY = 'AIzaSyDtuu39wICY-BsPDVIGS27FA9Sf0BQZggo';
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-urlencoded';
@@ -27,7 +27,7 @@ export const CREATE_ACCOUNT_SHIPPER = 'shippercreateapi/';
 export const CREATE_ACCOUNT_SUPPLIER = 'suppliercreateapi/';
 export const CREATE_ACCOUNT_COMPANY = 'companycreateapi/';
 
-const USER_DETAILS = "/auth/user/meta/";
+const USER_DETAILS = '/auth/user/meta/';
 const USERNAME_AVAILABLE = '/auth/username/available/';
 const REFRESH_ACCESS_TOKEN = '/auth/token/refresh/';
 
@@ -110,7 +110,7 @@ export const VERIFY_OTP = 'verifyotp/';
 export const RESEND_OTP = 'resendotp/';
 
 //Shipper Invoice
-export const SHIPPER_INVOICE = "shipper/shipperinvoice/";
+export const SHIPPER_INVOICE = 'shipper/shipperinvoice/';
 
 
 const getAccessToken = () => {
@@ -147,7 +147,7 @@ const getAccessToken = () => {
 
             } catch (e) {
                 try {
-                    if (e.data.code === "token_not_valid")
+                    if (e.data.code === 'token_not_valid')
                         signINAgainNotification();
                     else
                         errorGettingUserInfoNotification();
@@ -189,7 +189,7 @@ export const getAPITokens = async (username, password) => {
             username: username,
             password: password
         },
-        method: "post"
+        method: 'post'
     })
 };
 export const getUserDetails = () => {
@@ -214,7 +214,7 @@ export const isUsernameAvailable = async (username) => {
     }
 };
 export const getReportsShipper = async (url, obj) => {
-    return getReports(url, { 'date_from': obj.date_from, 'date_to': obj.date_to, 'c_name': obj.c_name })
+    return getReports(url, {'date_from': obj.date_from, 'date_to': obj.date_to, 'c_name': obj.c_name})
 };
 
 export const getCompanyShipper = async (url) => {
@@ -384,9 +384,6 @@ export const trackNow = (id) => loadSecureUrl(`${TRACK_NOW}${id}/`);
 // export const trackNow = () => loadSecureUrl(`track/96`);
 
 
-
-
-
 export const editLR = (data, id) => loadSecureUrl(`${EDIT_LR}${id}/`, {
     data: data,
     method: 'patch'
@@ -429,7 +426,6 @@ export const uploadPOD = () => loadSecureUrl('api/pod/');
 export const getMap = () => loadSecureUrl('map/');
 export const allAvailableTrucks = () => loadSecureUrl(ALL_AVAILABLE_TRUCKS);
 //takequiz/<int pk>
-
 
 
 //Supplier ITEMS Master
@@ -476,7 +472,6 @@ export const editMasterCustomer = (id, data) => loadSecureUrl(`${MASTER_CUSTOMER
 export const deleteMasterCustomer = id => loadSecureUrl(`${MASTER_CUSTOMERS}${id}/`, {
     method: 'delete',
 })
-
 
 
 //Shipper ITEMS Master
@@ -654,9 +649,6 @@ export const editSupplierInvoice = (id, data) => loadSecureUrl(`${SUPPLIER_INVOI
 export const deleteSupplierInvoice = id => loadSecureUrl(`${SUPPLIER_INVOICE}${id}/`, {
     method: 'delete',
 })
-
-
-
 
 
 //Shipper Invoice
