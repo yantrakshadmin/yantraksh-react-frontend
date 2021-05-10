@@ -23,7 +23,7 @@
     "gh-pages": "^2.1.1",
     "google-maps-react": "^2.0.2",
     "history": "^4.9.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "multi-select-react": "^0.1.8",
     "node-sass": "^4.13.0",
     "prismic-reactjs": "^1.1.1",
