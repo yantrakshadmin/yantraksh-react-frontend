@@ -25,7 +25,7 @@
     "history": "^4.9.0",
     "lodash": "^4.17.15",
     "multi-select-react": "^0.1.8",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "prismic-reactjs": "^1.1.1",
     "rc-form": "^2.4.8",
     "react": "^16.8.6",
