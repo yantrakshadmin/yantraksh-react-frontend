@@ -2,7 +2,7 @@
   "name": "yantraksh",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://cloud.yantraksh.com",
+  "homepage": "https://cloud.trakkia.com",
   "dependencies": {
     "@coreui/coreui": "^2.1.12",
     "@coreui/react": "^2.5.2",
@@ -58,7 +58,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build && node ./deployCopy.js",
-    "deploy": "gh-pages -d build -m"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
