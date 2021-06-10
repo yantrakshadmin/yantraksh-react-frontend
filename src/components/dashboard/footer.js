@@ -12,7 +12,7 @@ class DefaultFooter extends Component {
             <React.Fragment >
                 <div className={'d-flex flex-row align-items-center justify-content-end w-100'}>
                 <span><a
-                    href="https://yantraksh.com">Yantraksh Logistics Pvt. Ltd</a> &copy; All rights reserved </span>
+                    href="https://trakkia.com">Trakkia</a> &copy; All rights reserved </span>
                 </div>
             </React.Fragment>
         );

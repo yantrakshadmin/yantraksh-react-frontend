@@ -7,7 +7,7 @@ import {
     Col,
 } from 'reactstrap';
 import { fetchShipperInvoice } from '../../helpers/api';
-
+import logo from '../../assets/img/brand/Yantraksh Logo.png'
 
 function formatDate(text) {
 
@@ -91,7 +91,7 @@ const PrintInvoice = props => {
                     <tbody>
                         <tr className="d-flex">
                             <td className="col-6">
-                                <img height="44px" className="mb-2" src="https://res.cloudinary.com/rumeetsingh/image/upload/v1577341732/yantraksh/home-logo.png" />
+                                <img height="44px" className="mb-2" src={logo} />
                             </td>
                             <td className="col-6">
                                 TAX INVOICE
